@@ -210,7 +210,13 @@ export default function CardsScreen() {
                       الحسابات
                     </p>
                   </div>
-                  <div className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line py-2.5 pl-[58px] pr-3">
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => navigate('/cards/manage')}
+                    onKeyDown={(e) => e.key === 'Enter' && navigate('/cards/manage')}
+                    className="relative flex min-w-px flex-[1_0_0] cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line py-2.5 pl-[58px] pr-3"
+                  >
                     <div className="relative size-6 shrink-0">
                       <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
                     </div>

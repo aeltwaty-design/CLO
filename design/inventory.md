@@ -16,26 +16,26 @@ Reference renders: `design/refs/<node-id>.png` (from `get_screenshot`).
 
 | # | Node | Name | H | Classification | Route | Status |
 |---|------|------|---|----------------|-------|--------|
-| 1 | 1:7750 | Cashback | 1034 | Market hub · before link · cashback-only | `/market` (unlinked) | pending |
-| 2 | 1:8098 | Cashback | 958 | Market hub · after link | `/market` (linked) | pending |
-| 3 | 1:8525 | Store details | 1014 | before · cashback-only | `/store/:id` | pending |
-| 4 | 1:8748 | Store details | 1014 | before · cashback-only, alt state (verify diff at build) | `/store/:id` state | pending |
-| 5 | 1:9029 | Store details | 848 | after · cashback-only | `/store/:id` (linked) | pending |
-| 6 | 1:9221 | Store details | 1004 | before · +offers | `/store/:id` variant | pending |
-| 7 | 1:9399 | Store details | 968 | before · +offers+vouchers | `/store/:id` variant | pending |
-| 8 | 1:9603 | Store details | 968 | after · +offers+vouchers | `/store/:id` variant | pending |
-| 9 | 1:9807 | Store details | 968 | after · +offers | `/store/:id` variant | pending |
-| 10 | 1:9993 | Purchase offer | 812 | sheet `تسوّق واربح` · before | sheet over store | pending |
-| 11 | 1:10105 | Purchase offer | 812 | sheet · after | sheet over store | pending |
-| 12 | 1:10239 | onboarding | 1190 | card-link intro | `/cashback/intro` | pending |
-| 13 | 1:10416 | linking card | 812 | add-card form (PCI iframe area drawn in design) | `/cashback/add-card` | pending |
-| 14 | 1:10469 | success | 812 | link success | `/cashback/success` | pending |
-| 15 | 1:10520 | all cards | 812 | cards list · state A | `/cards` | pending |
-| 16 | 1:10563 | all cards | 1006 | cards list · long/scrolled state | `/cards` state | pending |
-| 17 | 1:10736 | all cards | 812 | cards list · state C | `/cards` state | pending |
-| 18 | 1:10838 | all cards | 812 | cards list · state D | `/cards` state | pending |
-| 19 | 1:10931 | all transactions | 812 | grouped list + filter chips | `/transactions` | pending |
-| 20 | 1:11098 | transaction details | 717 | detail sheet | sheet over transactions | pending |
+| 1 | 1:7750 | Cashback | 1034 | Market hub · before link · cashback-only | `/market` (unlinked) | done |
+| 2 | 1:8098 | Cashback | 958 | Market hub · after link | `/market` (linked) | done |
+| 3 | 1:8525 | Store details | 1014 | before · cashback-only | `/store/:id` | done |
+| 4 | 1:8748 | Store details | 1014 | before · cashback-only, alt state (verify diff at build) | `/store/:id` state | done |
+| 5 | 1:9029 | Store details | 848 | after · cashback-only | `/store/:id` (linked) | done |
+| 6 | 1:9221 | Store details | 1004 | before · +offers | `/store/:id` variant | done |
+| 7 | 1:9399 | Store details | 968 | before · +offers+vouchers | `/store/:id` variant | done |
+| 8 | 1:9603 | Store details | 968 | after · +offers+vouchers | `/store/:id` variant | done |
+| 9 | 1:9807 | Store details | 968 | after · +offers | `/store/:id` variant | done |
+| 10 | 1:9993 | Purchase offer | 812 | sheet `تسوّق واربح` · before | sheet over store | done |
+| 11 | 1:10105 | Purchase offer | 812 | sheet · after | sheet over store | done |
+| 12 | 1:10239 | onboarding | 1190 | card-link intro | `/cashback/intro` | done |
+| 13 | 1:10416 | linking card | 812 | add-card form (PCI iframe area drawn in design) | `/cashback/add-card` | done |
+| 14 | 1:10469 | success | 812 | link success | `/cashback/success` | done |
+| 15 | 1:10520 | all cards | 812 | cards list · state A | `/cards` | done |
+| 16 | 1:10563 | all cards | 1006 | cards list · long/scrolled state | `/cards` state | done |
+| 17 | 1:10736 | all cards | 812 | cards list · state C | `/cards` state | done |
+| 18 | 1:10838 | all cards | 812 | cards list · state D | `/cards` state | done |
+| 19 | 1:10931 | all transactions | 812 | grouped list + filter chips | `/transactions` | done |
+| 20 | 1:11098 | transaction details | 717 | detail sheet | sheet over transactions | done |
 
 ## Proposed interactive flow (clickable prototype)
 

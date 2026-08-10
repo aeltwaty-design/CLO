@@ -19,10 +19,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - `/market` — السوق hub (cashback tab). Before linking: promo banner → `ابدأ`.
 - `/cashback/intro` → `/cashback/add-card` → `/cashback/success` — linking journey;
   success flips the app to the after-link state.
-- Merchant cards → `/store/:id` (H&M/others = cashback variant; IKEA opens the
-  تسوّق واربح offer sheet from its CTA).
-- Tab bar المحفظة → `/cards` → `الكل` → `/transactions` → row tap opens the
-  transaction-details sheet.
+- Merchant cards → `/store/:id`, dispatched by variant × link state to the six
+  store designs (H&M etc. = cashback; IKEA = offers; Zara = vouchers). Offer
+  rows and voucher tiles open the تسوّق واربح sheet (its copy/CTA switch after
+  linking); the cashback page's tier card expands/collapses via its chevron.
+- Tab bar المحفظة → `/cards` (zero-balance wallet before linking, populated
+  after) → `الكل` → `/transactions` → row tap opens the details sheet.
+- `/cards/manage` — «البطاقات المضافة» (from the wallet's البطاقات tile or the
+  sheet's إدارة البطاقات); `?cards=3` demos the three-card cap state.
+- `?linked=` is read once at page load (a full reload applies it).
 
 ## Design-sync toolchain
 

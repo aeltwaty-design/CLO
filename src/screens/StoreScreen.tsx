@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import PurchaseOfferSheet from '../components/PurchaseOfferSheet';
-import { merchants } from '../data/merchants';
+import { useNavigate } from 'react-router-dom';
 import chevronStroke from '../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -20,6 +18,9 @@ import iconCards from '../assets/figma/7829263638c55bcb9dddbbe8eec00ec0e4075ca2.
 import emojiTierLow from '../assets/figma/080c4083e4543452fb07d15565275044df9f7b4e.svg';
 import emojiTierMid from '../assets/figma/d11b139800133c7d0499e0b1759c17c2e3953749.svg';
 import emojiTierTop from '../assets/figma/a46ad780ca561487da54526ddda1e0c201794ccc.svg';
+import emojiRowLow from '../assets/figma/c257410ac970cbbc3d509f57fd4106e3306b5af8.svg';
+import emojiRowMid from '../assets/figma/a4f7ec8f9a3327e560a17bcc376d76336c8d11ab.svg';
+import emojiRowTop from '../assets/figma/d62d733202950660ca5ccd08970301dd6c8858ca.svg';
 import chevronDoubleStroke from '../assets/figma/f0a7d89f034347502883d1deb07e4bb180e33c08.svg';
 import homeIndicator from '../assets/figma/5f04cb4b716a42ba11ba59a4acef8da61bbe12e9.svg';
 import iconGlobal from '../assets/figma/fbf3e34826645b91917a0aea937094cb92634861.svg';
@@ -39,6 +40,26 @@ function ChevronLeftMini() {
           <div className="relative size-full">
             <div className="absolute inset-[-4.17%_-2.5%]">
               <img alt="" className="block size-full max-w-none" src={chevronStroke} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** chevron-double-down_mini (16px) inside the tiers pill; flipped via -scale-y-100 when expanded. */
+function ChevronDoubleDownMini() {
+  return (
+    <div className="relative size-4 shrink-0 overflow-clip">
+      <div
+        className="absolute bottom-[20%] left-1/4 right-1/4 top-[20%] flex items-center justify-center"
+        style={{ containerType: 'size' }}
+      >
+        <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
+          <div className="relative size-full">
+            <div className="absolute inset-[-3.13%_-2.6%_-3.12%_-2.6%]">
+              <img alt="" className="block size-full max-w-none" src={chevronDoubleStroke} />
             </div>
           </div>
         </div>
@@ -157,11 +178,10 @@ function SimilarStoreCard({
 /** Store details — cashback-only, before card link (Figma 1:8525, هنقرسيتشن/إيكيا content). */
 export default function StoreScreen() {
   const navigate = useNavigate();
-  // The store design is the same for every merchant; offers-variant merchants
-  // (e.g. IKEA) open the تسوّق واربح sheet from the CTA instead of the intro.
-  const { id } = useParams();
-  const isOfferStore = id ? merchants[id]?.variant === 'offers' : false;
-  const [offerOpen, setOfferOpen] = useState(false);
+  // Variant/link-state routing lives in StoreRouter; this screen is always the
+  // cashback-only before-link design.
+  // Tiers card collapsed (1:8525) ⇄ expanded with the per-tier list (1:8748).
+  const [tiersExpanded, setTiersExpanded] = useState(false);
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
@@ -320,24 +340,80 @@ export default function StoreScreen() {
                       <span className="text-xs leading-[1.5]">{' 3,000 ﷼'}</span>
                     </p>
                   </div>
-                  <div className="flex h-[27px] w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-lg bg-surface p-2">
-                    <div className="flex shrink-0 items-center justify-center">
-                      <div className="relative size-4 shrink-0 overflow-clip">
-                        <div
-                          className="absolute bottom-[20%] left-1/4 right-1/4 top-[20%] flex items-center justify-center"
-                          style={{ containerType: 'size' }}
-                        >
-                          <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
-                            <div className="relative size-full">
-                              <div className="absolute inset-[-3.13%_-2.6%_-3.12%_-2.6%]">
-                                <img alt="" className="block size-full max-w-none" src={chevronDoubleStroke} />
-                              </div>
+                  <button
+                    type="button"
+                    aria-expanded={tiersExpanded}
+                    aria-label="تفاصيل الشرائح"
+                    onClick={() => setTiersExpanded((v) => !v)}
+                    className={
+                      tiersExpanded
+                        ? 'flex w-full shrink-0 flex-col items-center justify-center gap-2 overflow-clip rounded-lg bg-surface p-2'
+                        : 'flex h-[27px] w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-lg bg-surface p-2'
+                    }
+                  >
+                    {tiersExpanded && (
+                      <div className="flex w-full shrink-0 flex-col items-end gap-3">
+                        <div className="flex shrink-0 items-center gap-2.5">
+                          <div className="flex shrink-0 flex-col items-end">
+                            <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
+                              <span className="text-xs leading-[1.5]">{'من '}</span>
+                              <span className="font-en text-xs not-italic leading-[1.5]">{'500 لــ 999 '}</span>
+                              <span className="text-xs leading-[1.5]">{'﷼ يرجع لك '}</span>
+                              <span className="font-en text-xs font-semibold not-italic leading-[1.5]">10%</span>
+                            </p>
+                          </div>
+                          <div className="relative size-[25px] shrink-0">
+                            <div className="absolute inset-[0_0_0_-5.13%]">
+                              <img alt="" className="block size-full max-w-none" src={emojiRowLow} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex shrink-0 items-center gap-2.5">
+                          <div className="flex shrink-0 flex-col items-end">
+                            <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
+                              <span className="text-xs leading-[1.5]">{'من '}</span>
+                              <span className="font-en text-xs not-italic leading-[1.5]">{'1,000 لــ 2,999 '}</span>
+                              <span className="text-xs leading-[1.5]">{'﷼ يرجع لك '}</span>
+                              <span className="font-en text-xs font-semibold not-italic leading-[1.5]">15%</span>
+                            </p>
+                          </div>
+                          <div className="relative size-[25px] shrink-0">
+                            <div className="absolute inset-[0_0_0_-5.13%]">
+                              <img alt="" className="block size-full max-w-none" src={emojiRowMid} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex shrink-0 items-center gap-2.5">
+                          <div className="flex shrink-0 flex-col items-end">
+                            <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
+                              <span className="text-xs leading-[1.5]">{'فوق '}</span>
+                              <span className="font-en text-xs not-italic leading-[1.5]">3,000</span>
+                              <span className="text-xs leading-[1.5]">{' ﷼ يرجع لك '}</span>
+                              <span className="font-en text-xs font-semibold not-italic leading-[1.5]">20%</span>
+                            </p>
+                          </div>
+                          <div className="relative size-[25px] shrink-0">
+                            <div className="absolute inset-[0_0_0_-5.13%]">
+                              <img alt="" className="block size-full max-w-none" src={emojiRowTop} />
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    )}
+                    {tiersExpanded ? (
+                      <div className="relative flex shrink-0 items-center justify-center">
+                        <div className="flex-none -scale-y-100">
+                          <div className="relative flex items-center justify-center">
+                            <ChevronDoubleDownMini />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex shrink-0 items-center justify-center">
+                        <ChevronDoubleDownMini />
+                      </div>
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -398,7 +474,7 @@ export default function StoreScreen() {
           <div className="flex w-full shrink-0 items-center justify-center gap-3">
             <button
               type="button"
-              onClick={() => (isOfferStore ? setOfferOpen(true) : navigate('/cashback/intro'))}
+              onClick={() => navigate('/cashback/intro')}
               className="flex min-w-px flex-[1_0_0] items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
             >
               <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
@@ -414,7 +490,6 @@ export default function StoreScreen() {
           <img alt="" className="absolute inset-0 block size-full max-w-none" src={homeIndicator} />
         </div>
       </div>
-      <PurchaseOfferSheet open={offerOpen} onClose={() => setOfferOpen(false)} />
     </div>
   );
 }

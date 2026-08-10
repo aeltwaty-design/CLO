@@ -34,7 +34,7 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
       return;
     }
     onClose();
-    navigate(cardLinked ? '/cards' : '/cashback/intro');
+    navigate(cardLinked ? '/cards/manage' : '/cashback/intro');
   };
 
   return (
