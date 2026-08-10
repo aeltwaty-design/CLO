@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PurchaseOfferSheet from '../components/PurchaseOfferSheet';
+import { merchants } from '../data/merchants';
 import chevronStroke from '../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -154,8 +157,11 @@ function SimilarStoreCard({
 /** Store details — cashback-only, before card link (Figma 1:8525, هنقرسيتشن/إيكيا content). */
 export default function StoreScreen() {
   const navigate = useNavigate();
-  // Route param :id is accepted, but the prototype renders the same store design regardless.
-  useParams();
+  // The store design is the same for every merchant; offers-variant merchants
+  // (e.g. IKEA) open the تسوّق واربح sheet from the CTA instead of the intro.
+  const { id } = useParams();
+  const isOfferStore = id ? merchants[id]?.variant === 'offers' : false;
+  const [offerOpen, setOfferOpen] = useState(false);
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
@@ -392,7 +398,7 @@ export default function StoreScreen() {
           <div className="flex w-full shrink-0 items-center justify-center gap-3">
             <button
               type="button"
-              onClick={() => navigate('/cashback/intro')}
+              onClick={() => (isOfferStore ? setOfferOpen(true) : navigate('/cashback/intro'))}
               className="flex min-w-px flex-[1_0_0] items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
             >
               <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
@@ -408,6 +414,7 @@ export default function StoreScreen() {
           <img alt="" className="absolute inset-0 block size-full max-w-none" src={homeIndicator} />
         </div>
       </div>
+      <PurchaseOfferSheet open={offerOpen} onClose={() => setOfferOpen(false)} />
     </div>
   );
 }

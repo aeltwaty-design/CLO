@@ -46,9 +46,9 @@ type Tx = {
 
 const timePlain = <span className="font-en">08:30</span>;
 
-const sections: { title: string; rows: Tx[] }[] = [
+const sections: { title: string; h: number; rows: Tx[] }[] = [
   {
-    title: 'اليوم',
+    title: 'اليوم', h: 118,
     rows: [
       {
         id: 'today-hm',
@@ -71,7 +71,7 @@ const sections: { title: string; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'أمس',
+    title: 'أمس', h: 230,
     rows: [
       {
         id: 'yd-withdraw',
@@ -110,7 +110,7 @@ const sections: { title: string; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الجمعة',
+    title: 'الجمعة', h: 110,
     rows: [
       {
         id: 'fri-ikea',
@@ -126,7 +126,7 @@ const sections: { title: string; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الخميس',
+    title: 'الخميس', h: 222,
     rows: [
       {
         id: 'thu-withdraw',
@@ -164,7 +164,7 @@ const sections: { title: string; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الأربعاء',
+    title: 'الأربعاء', h: 110,
     rows: [
       {
         id: 'wed-tamimi',
@@ -242,11 +242,14 @@ export default function TransactionsScreen() {
               </div>
             </div>
 
-            {/* Day sections */}
-            <div className="flex w-full shrink-0 flex-col items-start gap-2">
+            {/* Day sections — mt-[-3px] pins the list top to the design's
+                y185 (chip row renders 3px taller than the Figma stroke box) */}
+            <div className="mt-[-3px] flex w-full shrink-0 flex-col items-start gap-2">
               {sections.map((section) => (
-                <div key={section.title} className="flex w-full shrink-0 flex-col items-start">
-                  <div className="flex w-full shrink-0 flex-col items-end gap-2 py-2.5">
+                /* group height pinned to the design frame so per-row text
+                   rounding cannot accumulate down the list */
+                <div key={section.title} className="flex w-full shrink-0 flex-col items-start" style={{ height: section.h }}>
+                  <div className="flex h-[26px] w-full shrink-0 flex-col items-end">
                     <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
                       {section.title}
                     </p>
@@ -482,7 +485,7 @@ function TransactionDetailsSheet({ tx, onClose }: { tx: Tx; onClose: () => void 
               <SummaryRow
                 label="قيمة العملية"
                 value={
-                  <p className="font-en whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
+                  <p className="font-en whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="rtl">
                     200 ﷼
                   </p>
                 }

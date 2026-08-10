@@ -145,7 +145,7 @@ export default function CardsScreen() {
                 </div>
                 <div className="flex w-full shrink-0 items-center justify-end gap-2">
                   <div className="relative h-[38px] w-[25.333px] shrink-0">
-                    <p className="font-en absolute inset-0 whitespace-nowrap text-center text-[25.33px] font-normal leading-[1.5] text-ink-inverse" dir="auto">
+                    <p className="absolute inset-0 whitespace-nowrap text-center text-[25.33px] font-normal leading-[1.5] text-ink-inverse" dir="auto">
                       ﷼
                     </p>
                   </div>
@@ -169,7 +169,7 @@ export default function CardsScreen() {
                     </div>
                   </div>
                   <div className="flex shrink-0 items-center justify-end gap-0.5 whitespace-nowrap leading-[1.5] text-ink-inverse">
-                    <p className="font-en shrink-0 text-center text-xs font-normal" dir="auto">
+                    <p className="shrink-0 text-center text-xs font-normal" dir="auto">
                       ﷼
                     </p>
                     <p className="font-en shrink-0 text-xs font-normal" dir="auto">

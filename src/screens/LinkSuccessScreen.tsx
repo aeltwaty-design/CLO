@@ -38,7 +38,7 @@ export default function LinkSuccessScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <div className="h-full overflow-y-auto pb-[171px]">
+      <div className="h-full overflow-y-auto pb-[134px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
           <div className="absolute right-[17px] top-[17.33px] h-[11.333px] w-[22px]">
@@ -186,9 +186,10 @@ export default function LinkSuccessScreen() {
         </div>
       </div>
 
-      {/* ⛴️ Pinned dock + home indicator */}
+      {/* ⛴️ Pinned dock; home indicator overlays the dock, adding no height
+          (ref primary button rows measured at y704-744) */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start bg-surface">
-        <div className="flex w-full shrink-0 flex-col items-start gap-3 px-4 pb-4 pt-2.5">
+        <div className="flex w-full shrink-0 flex-col items-start gap-3 px-4 pb-3 pt-2.5">
           <button
             type="button"
             onClick={finish}
@@ -208,7 +209,7 @@ export default function LinkSuccessScreen() {
             </p>
           </button>
         </div>
-        <div className="relative h-[34px] w-full shrink-0">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34px]">
           <div className="absolute bottom-2 left-[calc(50%+0.5px)] h-[5px] w-[134px] -translate-x-1/2 rounded-full bg-ink" />
         </div>
       </div>
