@@ -4,3 +4,4 @@ scripts/.mcp-session
 *.local
 .DS_Store
 Thumbs.db
+public/refs

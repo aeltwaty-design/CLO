@@ -1,0 +1,38 @@
+/*
+ * FF Shamel Unique — the design's actual Arabic typeface (license provided
+ * by the user in Font/). Weights on disk: Light 300, Normal 400, Medium 500,
+ * Bold 700. There is no 600 — the design system maps its "Semi Bold" text
+ * styles to weight 500, so Arabic text must use font-medium, never
+ * font-semibold (which would synthesize).
+ */
+@font-face {
+  font-family: 'FF Shamel Unique';
+  src: url('../assets/fonts/FFShamelUnique-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Shamel Unique';
+  src: url('../assets/fonts/FFShamelUnique-Normal.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Shamel Unique';
+  src: url('../assets/fonts/FFShamelUnique-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Shamel Unique';
+  src: url('../assets/fonts/FFShamelUnique-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

@@ -8,9 +8,8 @@
  *   radius/050=4 → rounded-sm · /075=6 → rounded-md · /100=8 → rounded-lg
  *   /150=12 → rounded-xl · /200=16 → rounded-2xl · Full → rounded-full
  *
- * FONT CAVEAT: the file specifies "FF Shamel Unique" (commercial) for Arabic
- * and Poppins for Latin/digits. Substituted Arabic family: IBM Plex Sans Arabic.
- * Swap in FF Shamel via @font-face if license files are provided.
+ * Fonts: FF Shamel Unique (real license files, see fonts.css) for Arabic,
+ * Poppins for text the design explicitly sets in its English styles (font-en).
  */
 :root {
   --frame-w: 375px; /* Figma device frame 375×812 (screens taller → inner scroll) */
@@ -18,7 +17,8 @@
 }
 
 @theme {
-  --font-sans: 'Poppins', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-sans: 'FF Shamel Unique', 'Poppins', system-ui, sans-serif;
+  --font-en: 'Poppins', system-ui, sans-serif;
 
   /* Type scale — Figma Font Size/Text XS–XL, line-height 1.5 throughout */
   --text-xs: 12px;

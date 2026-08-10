@@ -55,5 +55,5 @@ StatusBar (per-screen variants: with/without time) · AppBar (title + back/close
 
 ## Fidelity caveats
 
-- **Font**: file uses commercial *FF Shamel Unique* (Arabic). Substituted with IBM Plex Sans Arabic (+ Poppins for Latin/digits, which the file itself specifies for English). If FF Shamel license files exist, drop woff2 into `src/assets/fonts/` and swap `--font-sans`.
+- **Font**: RESOLVED — real *FF Shamel Unique* files provided by the user (`Font/` → `src/assets/fonts/`). Arabic "Semi Bold" styles map to weight 500 (no 600 exists): use `font-medium`.
 - Map imagery on Market is a raster export from the design.

@@ -1,42 +1,47 @@
 @import 'tailwindcss';
 @import './tokens.css';
+@import './fonts.css';
 
-/* ── Global reset ── */
-* {
-  box-sizing: border-box;
-}
+/* ── Global reset ──
+   Inside @layer base so Tailwind utility classes (layered later) always win;
+   unlayered rules would override utilities like py-3 on buttons. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html,
-body,
-#root {
-  margin: 0;
-  width: 100%;
-  min-height: 100%;
-}
+  html,
+  body,
+  #root {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
 
-html {
-  font-family: var(--font-sans);
-}
+  html {
+    font-family: var(--font-sans);
+  }
 
-img {
-  display: block;
-  max-width: 100%;
-  -webkit-user-drag: none;
-}
+  img {
+    display: block;
+    max-width: 100%;
+    -webkit-user-drag: none;
+  }
 
-button {
-  font-family: inherit;
-  border: none;
-  background: none;
-  padding: 0;
-  color: inherit;
-  cursor: pointer;
-}
+  button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+  }
 
-input,
-textarea {
-  font-family: inherit;
-  user-select: text;
+  input,
+  textarea {
+    font-family: inherit;
+    user-select: text;
+  }
 }
 
 /* ── Mobile shell ──
