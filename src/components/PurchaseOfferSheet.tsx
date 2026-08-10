@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useAppState } from '../state/AppState';
 import photoIkea from '../assets/figma/6dedcd791b30b76750f5c949e275384ca26de5e0.png';
 import iconX from '../assets/figma/a95744528ae429ca2d55a9829b34c578849e04e2.svg';
 import iconShop from '../assets/figma/824cd0417cc698e6a27373434a2b83261ec0d57c.svg';
@@ -16,12 +17,15 @@ type PurchaseOfferSheetProps = {
 };
 
 /**
- * تسوق واربح — purchase-offer bottom sheet (Figma 1:9993 "Purchase offer",
- * 375×812, full-height). Slides up over a dimmed backdrop; X and backdrop
- * call onClose, the dock CTA «ضفها مرة وحدة» starts the card-link flow.
+ * تسوق واربح — purchase-offer bottom sheet (Figma 1:9993 before card link /
+ * 1:10105 after, 375×812 full-height). Slides up over a dimmed backdrop; X and
+ * backdrop call onClose. Before linking, a dock CTA «ضفها مرة وحدة» starts the
+ * card-link flow; after linking the dock disappears and the copy switches to
+ * the linked wording with a third step/term.
  */
 export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOfferSheetProps) {
   const navigate = useNavigate();
+  const { cardLinked } = useAppState();
   if (!open) return null;
 
   const handleCta = () => {
@@ -30,7 +34,7 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
       return;
     }
     onClose();
-    navigate('/cashback/intro');
+    navigate(cardLinked ? '/cards' : '/cashback/intro');
   };
 
   return (
@@ -104,16 +108,26 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
               <div className="flex w-full shrink-0 flex-col items-end">
                 <div className="flex w-full shrink-0 flex-col items-end">
                   <div className="flex shrink-0 items-center">
-                    <p className="w-[313px] text-right text-lg font-bold leading-[1.5] text-brand-400" dir="auto">
-                      {'حاسب ببطاقتك وخذ لك حتى '}
-                      <span className="font-en not-italic">[X]%</span>
-                      {' كاش باك'}
-                    </p>
+                    {cardLinked ? (
+                      <p className="w-[313px] text-right text-lg font-bold leading-[1.5] text-brand-400" dir="auto">
+                        {'استخدم بطاقتك واربح '}
+                        <span className="font-en not-italic">10%</span>
+                        {' كاش باك'}
+                      </p>
+                    ) : (
+                      <p className="w-[313px] text-right text-lg font-bold leading-[1.5] text-brand-400" dir="auto">
+                        {'حاسب ببطاقتك وخذ لك حتى '}
+                        <span className="font-en not-italic">[X]%</span>
+                        {' كاش باك'}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
               <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                ادفع مثل عادتك.. والكاش باك يرجع لك أول بأول على مشترياتك المؤهلة
+                {cardLinked
+                  ? 'ادفع ببطاقتك واربح الكاش باك مع كل عملية شراء تقوم بها'
+                  : 'ادفع مثل عادتك.. والكاش باك يرجع لك أول بأول على مشترياتك المؤهلة'}
               </p>
             </div>
 
@@ -149,6 +163,7 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
                   <div className="flex w-full shrink-0 flex-col items-start gap-3">
                     <StepItem index={1} text="اذهب للمتجر او تسوق اونلاين" />
                     <StepItem index={2} text="استخدم بطاقتك المربوطة في الدفع" />
+                    {cardLinked && <StepItem index={3} text="انتظر مدة اقصاها 15 يوم وستحصل على الكاش باك" />}
                   </div>
                 </div>
               </div>
@@ -164,13 +179,14 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
                   <div className="flex w-full shrink-0 flex-col items-start gap-3">
                     <StepItem index={1} text="يكتب هنا الشرط الأول كاملا" />
                     <StepItem index={2} text="يكتب هنا الشرط الثاني كاملا" />
+                    {cardLinked && <StepItem index={3} text="يكتب هنا الشرط الثالث كاملا" />}
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ⛴️ Dock */}
+          {/* ⛴️ Dock — CTA copy switches after linking (1:10105: «إدارة البطاقات») */}
           <div className="absolute bottom-[0.23px] left-[calc(50%+0.5px)] flex -translate-x-1/2 flex-col items-center bg-white">
             <div className="relative flex w-[376px] shrink-0 flex-col items-center gap-4 bg-white px-4 pb-4 pt-0">
               <div className="relative h-0 w-[376px] shrink-0">
@@ -185,7 +201,7 @@ export default function PurchaseOfferSheet({ open, onClose, onCta }: PurchaseOff
                   className="flex min-w-px flex-[1_0_0] items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
                 >
                   <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                    ضفها مرة وحدة
+                    {cardLinked ? 'إدارة البطاقات' : 'ضفها مرة وحدة'}
                   </p>
                   <div className="relative size-5 shrink-0">
                     <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCard} />
