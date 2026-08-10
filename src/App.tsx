@@ -1,13 +1,16 @@
+import { RouterProvider } from 'react-router-dom';
+import { AppStateProvider } from './state/AppState';
+import { router } from './navigation/routes';
+
 function App() {
   return (
-    <div className="app-shell">
-      <div className="phone-frame">
-        <div className="frame-placeholder">
-          <h1>كاش باك السويدي</h1>
-          <p>الهيكل جاهز — بانتظار شاشات فيغما</p>
+    <AppStateProvider>
+      <div className="app-shell">
+        <div className="phone-frame">
+          <RouterProvider router={router} />
         </div>
       </div>
-    </div>
+    </AppStateProvider>
   );
 }
 

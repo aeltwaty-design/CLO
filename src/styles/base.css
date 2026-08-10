@@ -83,25 +83,26 @@ textarea {
   display: none;
 }
 
-/* Temporary M1 placeholder — removed when the router lands (M3) */
-.frame-placeholder {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: #17172a;
+/* ── Screens ──
+   Each route renders into an absolutely-positioned layer that is its own
+   scroll container; the frame itself never scrolls. */
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  background: var(--color-surface);
 }
 
-.frame-placeholder h1 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+.screen-enter {
+  animation: screen-in 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.frame-placeholder p {
-  margin: 0;
-  font-size: 14px;
-  color: #7a7a90;
+/* RTL forward push: the new screen slides in from the left edge */
+@keyframes screen-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

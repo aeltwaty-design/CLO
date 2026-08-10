@@ -8,6 +8,7 @@
  *   node scripts/figma-mcp.mjs call <toolName> '<jsonArgs>' [--out file] [--images dir] [--preview N]
  */
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
+import { request as httpRequest } from 'node:http';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -16,24 +17,44 @@ const SESSION_FILE = join(dirname(fileURLToPath(import.meta.url)), '.mcp-session
 
 let nextId = (Date.now() % 100000) + 1;
 
+/* node:http instead of fetch — design-context calls on large nodes can run
+   past fetch/undici's default 5-minute connection timeouts. */
+function post(body, headers) {
+  return new Promise((resolvePromise, reject) => {
+    const req = httpRequest(ENDPOINT, { method: 'POST', headers }, (res) => {
+      const chunks = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () =>
+        resolvePromise({
+          status: res.statusCode ?? 0,
+          headers: res.headers,
+          text: Buffer.concat(chunks).toString('utf8'),
+        }),
+      );
+    });
+    req.on('error', reject);
+    req.setTimeout(0);
+    req.end(body);
+  });
+}
+
 async function rpc(method, params, { session, expectResult = true } = {}) {
   const id = expectResult ? nextId++ : undefined;
-  const res = await fetch(ENDPOINT, {
-    method: 'POST',
-    headers: {
+  const res = await post(
+    JSON.stringify({ jsonrpc: '2.0', method, params, ...(id !== undefined ? { id } : {}) }),
+    {
       'Content-Type': 'application/json',
       Accept: 'application/json, text/event-stream',
       ...(session ? { 'Mcp-Session-Id': session } : {}),
     },
-    body: JSON.stringify({ jsonrpc: '2.0', method, params, ...(id !== undefined ? { id } : {}) }),
-  });
-  const newSession = res.headers.get('mcp-session-id') || session;
-  const text = await res.text();
+  );
+  const newSession = res.headers['mcp-session-id'] || session;
+  const text = res.text;
   if (!expectResult) return { session: newSession };
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${text.slice(0, 300)}`);
+  if (res.status < 200 || res.status >= 300) throw new Error(`HTTP ${res.status}: ${text.slice(0, 300)}`);
 
   let payload = null;
-  if ((res.headers.get('content-type') || '').includes('text/event-stream')) {
+  if ((res.headers['content-type'] || '').includes('text/event-stream')) {
     for (const line of text.split('\n')) {
       if (!line.startsWith('data:')) continue;
       try {
