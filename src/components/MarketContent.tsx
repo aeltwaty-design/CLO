@@ -18,6 +18,7 @@ import iconSort from '../assets/figma/93bcf7aa79a8b96b6d35bc2268ae7f8da37bc559.s
 import iconSetting4 from '../assets/figma/56f665cc37df1dc4bd8183e41b481c8e896e1dfb.svg';
 import iconCardLinear from '../assets/figma/cfddfdc83575442fea5b41d4866b055c7e910f83.svg';
 import iconCardOutline from '../assets/figma/e07df267c11566d711b4257037ae3887e9bc32db.svg';
+import iconTickCircle from '../assets/figma/7d6f0d889568034a1bc416ccaf53f71b77fc8c92.svg';
 
 type CardData = {
   name: string;
@@ -25,31 +26,56 @@ type CardData = {
   category: string;
   photo: string;
   photoFit: 'cover' | 'contain';
-  /** neutral "كاش باك X%" pill; absent → mint "اربط البطاقة لكسب المال" pill */
+  /**
+   * neutral — gray "كاش باك X%" + card icon (before link)
+   * link — mint "اربط البطاقة لكسب المال" (before link)
+   * linked — lavender "كاش باك X%" + tick (after link)
+   * none — nothing in flow; the green استرداد pill shows through
+   */
+  pill: 'neutral' | 'link' | 'linked' | 'none';
   cashbackPct?: number;
   featured?: boolean;
+  /** gold ribbon position: before-link designs pin it bottom, after-link top */
+  ribbon?: 'bottom' | 'top';
   badges: ('shop' | 'global')[];
   storeId: string;
 };
 
 const beforeGrid: CardData[] = [
-  { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', cashbackPct: 5, featured: true, badges: ['shop', 'global'], storeId: 'hm' },
-  { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', cashbackPct: 10, badges: ['global'], storeId: 'ikea' },
-  { name: 'بنده', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', badges: [], storeId: 'panda' },
-  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', badges: [], storeId: 'zara' },
-  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'centrepoint' },
-  { name: 'دانكن دونتس', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'dunkin' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', badges: [], storeId: 'ikea' },
+  { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', pill: 'neutral', cashbackPct: 5, featured: true, ribbon: 'bottom', badges: ['shop', 'global'], storeId: 'hm' },
+  { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: ['global'], storeId: 'ikea' },
+  { name: 'بنده', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'link', badges: [], storeId: 'panda' },
+  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'link', badges: [], storeId: 'zara' },
+  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'centrepoint' },
+  { name: 'دانكن دونتس', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'dunkin' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
 ];
 
-/** Market screen scrollable content (Figma 1:7890), before-link state. */
-export default function MarketContent() {
+/** After-link grid (Figma 1:8238): 12 cards, lavender tick pills on the first four. */
+const afterGrid: CardData[] = [
+  { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', pill: 'linked', cashbackPct: 10, featured: true, ribbon: 'top', badges: ['shop', 'global'], storeId: 'hm' },
+  { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: ['global'], storeId: 'ikea' },
+  { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', pill: 'linked', cashbackPct: 10, featured: true, ribbon: 'top', badges: ['shop', 'global'], storeId: 'hm' },
+  { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: ['global'], storeId: 'ikea' },
+  { name: 'باندا', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'none', badges: [], storeId: 'panda' },
+  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'none', badges: [], storeId: 'zara' },
+  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'centrepoint' },
+  { name: 'إضافي', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'centrepoint' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
+];
+
+/** Market screen scrollable content (Figma 1:7890 before / 1:8238 after card link). */
+export default function MarketContent({ linked = false }: { linked?: boolean }) {
   const navigate = useNavigate();
+  const grid = linked ? afterGrid : beforeGrid;
   const rows: CardData[][] = [];
-  for (let i = 0; i < beforeGrid.length; i += 2) rows.push(beforeGrid.slice(i, i + 2));
+  for (let i = 0; i < grid.length; i += 2) rows.push(grid.slice(i, i + 2));
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 bg-surface px-4 py-2.5">
@@ -77,7 +103,8 @@ export default function MarketContent() {
         </div>
       </div>
 
-      {/* Promo banner */}
+      {/* Promo banner — before-link only */}
+      {!linked && (
       <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
         <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
           <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
@@ -113,6 +140,7 @@ export default function MarketContent() {
           </button>
         </div>
       </div>
+      )}
 
       {/* Category chips */}
       <div className="flex w-[375px] shrink-0 items-start justify-end gap-4 px-4">
@@ -230,7 +258,7 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
       onClick={onOpen}
       className={`relative flex h-[173px] w-[163.5px] shrink-0 flex-col items-center gap-2.5 rounded-2xl border border-solid ${border} bg-white px-4 py-3 text-start`}
     >
-      <div className="flex w-full shrink-0 flex-col items-center gap-2.5">
+      <div className="relative flex w-full shrink-0 flex-col items-center gap-2.5">
         <div className="flex shrink-0 flex-col items-center gap-1">
           <div className="flex shrink-0 flex-col items-center gap-2.5">
             <div className="relative size-16 shrink-0 rounded-[16.25px]">
@@ -263,7 +291,7 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
           </div>
         </div>
 
-        {data.cashbackPct !== undefined ? (
+        {data.pill === 'neutral' && (
           <div className="flex shrink-0 items-start justify-center">
             <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-surface-neutral py-0.5 pl-2 pr-1.5">
               <p className="whitespace-nowrap text-center text-[0px] font-medium leading-none text-ink" dir="auto">
@@ -275,7 +303,8 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
               </div>
             </div>
           </div>
-        ) : (
+        )}
+        {data.pill === 'link' && (
           <div className="flex w-full shrink-0 items-start justify-center">
             <div className="flex shrink-0 items-start justify-center">
               <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-brand-50 py-0.5 pl-1.5 pr-2">
@@ -285,6 +314,19 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
                 <p className="font-en whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-brand-400" dir="auto">
                   اربط البطاقة لكسب المال
                 </p>
+              </div>
+            </div>
+          </div>
+        )}
+        {data.pill === 'linked' && (
+          <div className="flex shrink-0 items-start justify-center">
+            <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-bravo-50 py-0.5 pl-2 pr-1.5">
+              <p className="whitespace-nowrap text-center text-[0px] font-medium leading-none text-bravo-500" dir="auto">
+                <span className="text-[12px] leading-[1.5]">{'كاش باك '}</span>
+                <span className="font-en text-[12px] font-medium not-italic leading-[1.5]">{data.cashbackPct}%</span>
+              </p>
+              <div className="relative size-3 shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconTickCircle} />
               </div>
             </div>
           </div>
@@ -310,11 +352,20 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
         </div>
       )}
 
-      {data.featured && (
+      {data.featured && data.ribbon === 'bottom' && (
         <div className="absolute bottom-[-1px] right-[-0.5px] flex items-start justify-end">
           <div className="flex shrink-0 items-center justify-center rounded-br-2xl rounded-tl-2xl bg-gold-700 px-2 py-0.5">
             <p className="whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
               لا يفوتك
+            </p>
+          </div>
+        </div>
+      )}
+      {data.featured && data.ribbon === 'top' && (
+        <div className="absolute right-[-0.5px] top-[-1px] flex items-start justify-end">
+          <div className="flex shrink-0 items-center justify-center rounded-bl-2xl rounded-tr-2xl bg-gold-700 px-2 py-0.5">
+            <p className="whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
+              ما يفوتك
             </p>
           </div>
         </div>
