@@ -5,3 +5,4 @@ scripts/.mcp-session
 .DS_Store
 Thumbs.db
 public/refs
+design/qa

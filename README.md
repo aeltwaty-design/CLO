@@ -45,6 +45,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `?onion=<refId>` gives a 50% onion skin. Size the window to the ref's exact
   frame (e.g. 375×1034 for the Market before-state) or the lower half compares
   the wrong rows. Dev builds only.
+- **QA gate**: `node scripts/qa-diff.mjs` (dev server running) captures all 20
+  screens/states/sheets with headless Chromium at true resolution and
+  pixelmatch-diffs them (AA-aware) against `design/refs`, writing heatmaps to
+  `design/qa/`. Accepted floor: ≤~4% glyph-stroke noise (browser vs Figma font
+  rasterization); the add-card screen reads ~63% by design — its reference
+  contains the IFRAME annotation wash we intentionally replace with real
+  fields. Note: Figma's `get_screenshot` caps exports at 1024px — the intro
+  ref is stitched from sub-node renders (`1_10239.orig-1024cap.png` kept), and
+  the script DPR-matches any ref still narrower than 375.
 
 ## Conventions (important before editing)
 
