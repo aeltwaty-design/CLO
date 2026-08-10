@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* ── Global reset ── */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  /* Arabic family is set from the Figma file's text styles in M2 */
+  font-family: system-ui, 'Segoe UI', sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  -webkit-user-drag: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  user-select: text;
+}
+
+/* ── Mobile shell ──
+   Full-bleed by default: at phone-sized viewports the frame IS the
+   viewport, so browser screenshots compare 1:1 against Figma renders.
+   The bezeled desktop look only kicks in at ≥768px. */
+.app-shell {
+  min-height: 100dvh;
+  background: #17172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-frame {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  background: #fff;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  overscroll-behavior: none;
+}
+
+@media (min-width: 768px) {
+  .phone-frame {
+    width: var(--frame-w);
+    height: min(var(--frame-h), calc(100dvh - 48px));
+    border-radius: 24px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* Hide scrollbars inside the frame (native-app feel) */
+.phone-frame,
+.phone-frame * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.phone-frame::-webkit-scrollbar,
+.phone-frame *::-webkit-scrollbar {
+  display: none;
+}
+
+/* Temporary M1 placeholder — removed when the router lands (M3) */
+.frame-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #17172a;
+}
+
+.frame-placeholder h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.frame-placeholder p {
+  margin: 0;
+  font-size: 14px;
+  color: #7a7a90;
+}

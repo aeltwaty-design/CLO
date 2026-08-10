@@ -1,0 +1,10 @@
+/*
+ * Design tokens — generated from the Figma file's variables (M2).
+ * Frame dimensions are placeholders until read from Figma metadata;
+ * after generation this file is written by the design-intake step,
+ * not edited by hand.
+ */
+:root {
+  --frame-w: 375px;
+  --frame-h: 812px;
+}
