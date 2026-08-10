@@ -1,10 +1,85 @@
 /*
- * Design tokens — generated from the Figma file's variables (M2).
- * Frame dimensions are placeholders until read from Figma metadata;
- * after generation this file is written by the design-intake step,
- * not edited by hand.
+ * Design tokens generated from Figma variables — section كاشباك (عربي),
+ * node 6779:45271 in "WalaPlus app (Revamp)", pulled via
+ * `node scripts/figma-mcp.mjs call get_variable_defs`.
+ *
+ * Spacing and radius match Tailwind defaults 1:1, so they are not overridden:
+ *   Space/100=8 → p-2 · Space/150=12 → p-3 · Space/200=16 → p-4 · Space/250=20 → p-5
+ *   radius/050=4 → rounded-sm · /075=6 → rounded-md · /100=8 → rounded-lg
+ *   /150=12 → rounded-xl · /200=16 → rounded-2xl · Full → rounded-full
+ *
+ * FONT CAVEAT: the file specifies "FF Shamel Unique" (commercial) for Arabic
+ * and Poppins for Latin/digits. Substituted Arabic family: IBM Plex Sans Arabic.
+ * Swap in FF Shamel via @font-face if license files are provided.
  */
 :root {
-  --frame-w: 375px;
+  --frame-w: 375px; /* Figma device frame 375×812 (screens taller → inner scroll) */
   --frame-h: 812px;
+}
+
+@theme {
+  --font-sans: 'Poppins', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+
+  /* Type scale — Figma Font Size/Text XS–XL, line-height 1.5 throughout */
+  --text-xs: 12px;
+  --text-xs--line-height: 1.5;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.5;
+  --text-base: 16px;
+  --text-base--line-height: 1.5;
+  --text-lg: 18px;
+  --text-lg--line-height: 1.5;
+  --text-xl: 20px;
+  --text-xl--line-height: 1.5;
+
+  /* text/* */
+  --color-ink: #111317; /* text/Primary */
+  --color-ink-secondary: #40444c;
+  --color-ink-tertiary: #626c83;
+  --color-ink-quadrant: #96a0b6; /* text/Quadrant */
+  --color-ink-inverse: #ffffff;
+  --color-ink-warning: #8c3804;
+  --color-ink-danger: #941722;
+  --color-ink-100: #d8dce4; /* Text/100 (placeholders/disabled) */
+
+  /* brand — Primary scale; 400 doubles as bg/highlight, border/selected, text/selected */
+  --color-brand-50: #e6faf3;
+  --color-brand-100: #b0f0db;
+  --color-brand-300: #54deb1;
+  --color-brand-400: #00ce8b;
+  --color-brand-500: #00b97d;
+  --color-brand-800: #00714c;
+  --color-brand-900: #00573a;
+
+  /* backgrounds */
+  --color-surface: #ffffff; /* bg/standard/default */
+  --color-surface-neutral: #f4f6fc; /* bg/neutral/Primary */
+  --color-surface-subtle: #96a0b633; /* bg/neutral/subtler */
+  --color-surface-input: #f9fafb; /* bg/input */
+  --color-surface-disabled: #f1f3f9; /* bg/disabled */
+
+  /* borders */
+  --color-line-subtle: #f1f3f9; /* border/subtle */
+  --color-line: #e2e6ee; /* border/default + border/interact */
+
+  /* status */
+  --color-red-500: #d12030;
+  --color-danger-50: #fae9ea; /* bg/danger/light */
+  --color-warning-300: #ffbe62;
+  --color-warning-50: #fff0e6; /* bg/warning/Light + Orange/50 */
+
+  /* secondary palettes */
+  --color-bravo-50: #eeedf7; /* Bravo/50 */
+  --color-bravo-400: #766bc2; /* WalaPlus/Bravo/400 */
+  --color-bravo-500: #5446b3; /* Bravo/500 */
+  --color-gold-600: #e4b12e; /* WalaOne/S/600 */
+  --color-gold-700: #b28a24; /* WalaOne/S/700 */
+  --color-viola-100: #d4ccf3; /* WalaOne/P/100 */
+  --color-viola-300: #a391e5;
+  --color-viola-500: #755bd8;
+  --color-viola-700: #534199;
+  --color-offer-400: #ff8539; /* WalaPlus/Offer/400 */
+
+  /* effects — Light/Shadow/X Small */
+  --shadow-xs: 0 1px 2px 0 #1018280d;
 }

@@ -1,5 +1,6 @@
 node_modules
 dist
+scripts/.mcp-session
 *.local
 .DS_Store
 Thumbs.db

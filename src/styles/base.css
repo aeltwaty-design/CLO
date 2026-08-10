@@ -15,8 +15,7 @@ body,
 }
 
 html {
-  /* Arabic family is set from the Figma file's text styles in M2 */
-  font-family: system-ui, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
 }
 
 img {
