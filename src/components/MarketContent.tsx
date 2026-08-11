@@ -74,7 +74,7 @@ const afterGrid: CardData[] = [
 ];
 
 /** Market screen scrollable content (Figma 1:7890 before / 1:8238 after card link). */
-export default function MarketContent({ linked = false }: { linked?: boolean }) {
+export default function MarketContent({ linked = false, onStart }: { linked?: boolean; onStart?: () => void }) {
   const navigate = useNavigate();
   const grid = linked ? afterGrid : beforeGrid;
   const rows: CardData[][] = [];
@@ -131,7 +131,7 @@ export default function MarketContent({ linked = false }: { linked?: boolean }) 
         <div className="flex w-full shrink-0 items-center justify-center gap-3">
           <button
             type="button"
-            onClick={() => navigate('/cashback/intro')}
+            onClick={() => (onStart ? onStart() : navigate('/cashback/intro'))}
             className="flex h-[30px] min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-surface px-2"
           >
             <div className="relative size-4 shrink-0">

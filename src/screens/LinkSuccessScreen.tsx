@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import type { ReactNode } from 'react';
 import { useAppState } from '../state/AppState';
 import statusBattery from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import statusBatteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -16,10 +15,7 @@ import sparkleX from '../assets/figma/5fb6b6aa9f0da4e3c65ce176dd4b57f6dda4d039.s
 import iconCheckSmall from '../assets/figma/13630e13d14a434e57428d6290c8a96611dffb48.svg';
 import visaMask from '../assets/figma/8c19cdc6c340655ee715e5c0e021047e5e537124.svg';
 import visaLogo from '../assets/figma/7cde00b8a4c1cec2de1c941b422f78393310b2b5.svg';
-import iconStar from '../assets/figma/ea9ee2885e4b168140d55cd31ec9eeb394c36f52.svg';
-import iconCards from '../assets/figma/42372c28fe16ac8b86bcba01cf8135de843594b7.svg';
-import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.svg';
-import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
+import iconClock from '../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
 
 /**
  * تم! بطاقتك جاهزة — card linked successfully (Figma 1:10469 "success",
@@ -38,6 +34,7 @@ export default function LinkSuccessScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
+      <style>{'@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}'}</style>
       <div className="h-full overflow-y-auto pb-[134px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
@@ -67,32 +64,32 @@ export default function LinkSuccessScreen() {
             <div className="absolute left-[20.6px] top-[15.35px] size-[111.807px]">
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={haloEllipse} />
             </div>
-            <div className="absolute left-[33.84px] top-[28.59px] size-[85.326px] overflow-clip">
+            <div className="absolute left-[33.84px] top-[28.59px] size-[85.326px] overflow-clip" style={{ animation: 'pop-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={successBadge} />
-              <div className="absolute inset-[27.34%_24.22%_27.54%_24.22%]">
+              <div className="absolute inset-[27.34%_24.22%_27.54%_24.22%]" style={{ animation: 'check-in 300ms ease-out 250ms both' }}>
                 <img alt="" className="absolute inset-0 block size-full max-w-none" src={successCheck} />
               </div>
             </div>
-            <div className="absolute left-[104.45px] top-[3.58px] size-[5.885px]">
+            <div className="absolute left-[104.45px] top-[3.58px] size-[5.885px]" style={{ animation: 'spark-in 400ms ease-out 350ms both' }}>
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={dotSolid} />
             </div>
-            <div className="absolute left-[147.12px] top-[62.42px] size-[5.885px]">
+            <div className="absolute left-[147.12px] top-[62.42px] size-[5.885px]" style={{ animation: 'spark-in 400ms ease-out 420ms both' }}>
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={dotOutline} />
             </div>
-            <div className="absolute left-[20.6px] top-[121.27px] size-[5.885px]">
+            <div className="absolute left-[20.6px] top-[121.27px] size-[5.885px]" style={{ animation: 'spark-in 400ms ease-out 490ms both' }}>
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={dotOutline} />
             </div>
-            <div className="absolute left-0 top-[62.42px] size-[5.885px]">
+            <div className="absolute left-0 top-[62.42px] size-[5.885px]" style={{ animation: 'spark-in 400ms ease-out 560ms both' }}>
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={dotSolid} />
             </div>
-            <div className="absolute left-[19.13px] top-[7.99px] size-[8.827px]">
+            <div className="absolute left-[19.13px] top-[7.99px] size-[8.827px]" style={{ animation: 'spark-in 400ms ease-out 630ms both' }}>
               <div className="absolute inset-1/4">
                 <div className="absolute inset-[-20%]">
                   <img alt="" className="block size-full max-w-none" src={sparkleX} />
                 </div>
               </div>
             </div>
-            <div className="absolute left-[114.75px] top-[118.33px] size-[8.827px]">
+            <div className="absolute left-[114.75px] top-[118.33px] size-[8.827px]" style={{ animation: 'spark-in 400ms ease-out 700ms both' }}>
               <div className="absolute inset-1/4">
                 <div className="absolute inset-[-20%]">
                   <img alt="" className="block size-full max-w-none" src={sparkleX} />
@@ -158,30 +155,16 @@ export default function LinkSuccessScreen() {
             </div>
           </div>
 
-          {/* ✨ Feature list */}
-          <div className="flex w-[343px] shrink-0 flex-col items-end gap-0.5 overflow-clip rounded-2xl border border-solid border-line">
-            <FeatureRow icon={iconStar}>
-              <p className="w-full text-right text-[0px] font-medium leading-none text-ink" dir="auto">
-                <span className="text-[14px] leading-[1.5]">{'يرجع لك حتى '}</span>
-                <span className="font-en text-[14px] font-semibold not-italic leading-[1.5]">[X]%</span>
-                <span className="text-[14px] leading-[1.5]">.. بدون سقف</span>
-              </p>
-            </FeatureRow>
-            <FeatureRow icon={iconCards} tall>
-              <p className="w-full text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                ما عليك شي جديد _ ادفع مثل عادتك، بالبطاقة أو من جوالك
-              </p>
-            </FeatureRow>
-            <FeatureRow icon={iconCoin}>
-              <p className="w-full text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                فوق مكافآت بنكك
-              </p>
-            </FeatureRow>
-            <FeatureRow icon={iconShieldTick}>
-              <p className="w-full text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                بياناتك في أمان
-              </p>
-            </FeatureRow>
+          {/* ⏳ What happens next (replaces the repeated benefits list) */}
+          <div className="flex w-[343px] shrink-0 items-center justify-end gap-2.5 rounded-2xl bg-brand-50 px-4 py-3">
+            <p className="min-w-px flex-[1_0_0] text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
+              ادفع في أي متجر مشارك.. والكاش باك يوصلك لمحفظتك خلال <span className="font-en">15</span> يوم
+            </p>
+            <div className="flex shrink-0 items-center justify-center rounded-full bg-brand-400 p-2 shadow-xs">
+              <div className="relative size-5 shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconClock} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -190,22 +173,27 @@ export default function LinkSuccessScreen() {
           (ref primary button rows measured at y704-744) */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start bg-surface">
         <div className="flex w-full shrink-0 flex-col items-start gap-3 px-4 pb-3 pt-2.5">
+          {/* primary CTA points at the money: the Market flips to its after-link
+              state the moment we land (UX redesign; wallet is still one tap away) */}
           <button
             type="button"
             onClick={finish}
             className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
           >
             <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-              روح لمحفظتك
+              اكتشف المتاجر
             </p>
           </button>
           <button
             type="button"
-            onClick={finish}
+            onClick={() => {
+              setCardLinked(true);
+              navigate('/cards');
+            }}
             className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl border border-solid border-line bg-surface px-4 py-2.5"
           >
             <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-              أضف بطاقة أخرى
+              روح لمحفظتك
             </p>
           </button>
         </div>
@@ -217,34 +205,3 @@ export default function LinkSuccessScreen() {
   );
 }
 
-/**
- * Bordered feature row, identical to the intro screen's list. The design
- * mirrors each row (rotate-180 + -scale-y-100 on row and again on content)
- * so the icon lands on the physical right.
- */
-function FeatureRow({ icon, tall, children }: { icon: string; tall?: boolean; children: ReactNode }) {
-  return (
-    <div className="relative flex w-full shrink-0 items-center justify-center">
-      <div className="w-full flex-none rotate-180 -scale-y-100">
-        <div className={`flex w-full items-center justify-end gap-3 overflow-clip border-b border-solid border-line bg-white px-4 ${tall ? 'py-4' : 'py-3'}`}>
-          <div className="relative flex shrink-0 items-center justify-center">
-            <div className="flex-none rotate-180 -scale-y-100">
-              <div className="relative flex flex-col items-center justify-center gap-2">
-                <div className="relative flex shrink-0 items-center justify-center rounded-full bg-brand-50 p-2.5">
-                  <div className="relative size-5 shrink-0">
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={icon} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="relative flex min-w-px flex-[1_0_0] flex-col items-start gap-0.5">
-            <div className="relative flex w-full shrink-0 items-center justify-center">
-              <div className="w-full flex-none rotate-180 -scale-y-100">{children}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}

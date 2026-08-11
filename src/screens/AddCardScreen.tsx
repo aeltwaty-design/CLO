@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import statusBattery from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import statusBatteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -15,19 +16,70 @@ import iconBack from '../assets/figma/fd6f26534a87f4d8bbe62b710db8bf509383bda4.s
 import iconLock from '../assets/figma/bfb1520ddc4c6ae04b6d2745b97951abb1225429.svg';
 import visaMask from '../assets/figma/8c19cdc6c340655ee715e5c0e021047e5e537124.svg';
 import visaLogo from '../assets/figma/7cde00b8a4c1cec2de1c941b422f78393310b2b5.svg';
+import iconTick from '../assets/figma/7d6f0d889568034a1bc416ccaf53f71b77fc8c92.svg';
+import mcLeft from '../assets/figma/84efa261a92f472ca4a430de051b4ad5331aeb74.svg';
+import mcRight from '../assets/figma/0b6592b92012268404532c0c0c7429b794e1a004.svg';
+import scanGlyph from '../assets/icons/nav-scan.svg';
 
 /**
- * إضافة بطاقة — card-linking form (Figma 1:10416 "linking card", 375×812).
- * The Figma frame stamps an "IFRAME" overlay across the form region; the
- * fields underneath are built here exactly as drawn, as static inputs.
- * Dock + home indicator are pinned at the bottom as drawn (101px block).
+ * إضافة بطاقة — card-linking form (Figma 1:10416 "linking card", 375×812),
+ * UX-upgraded: live card preview that fills in as the user types, inline
+ * validation ticks, 4-4-4-4 grouping, expiry auto-advance, collapsed optional
+ * nickname, and a CTA that explains what's missing. The design marks this
+ * region as a PCI iframe in production — validation here is prototype-side.
  */
 export default function AddCardScreen() {
   const navigate = useNavigate();
 
+  const [name, setName] = useState('');
+  const [digits, setDigits] = useState(''); // card number, digits only
+  const [expiry, setExpiry] = useState(''); // MM/YY progressive
+  const [cvv, setCvv] = useState('');
+  const [nickOpen, setNickOpen] = useState(false);
+  const [hint, setHint] = useState('');
+  const [shakeKey, setShakeKey] = useState(0);
+  const cvvRef = useRef<HTMLInputElement>(null);
+
+  const nameOk = name.trim().length >= 3;
+  const numOk = digits.length === 16;
+  const expOk = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry);
+  const cvvOk = /^\d{3}$/.test(cvv);
+  const allOk = nameOk && numOk && expOk && cvvOk;
+
+  const scheme = digits.startsWith('4') ? 'visa' : digits.startsWith('5') ? 'mc' : null;
+  const groupedPreview = digits
+    .padEnd(16, '•')
+    .replace(/(.{4})/g, '$1 ')
+    .trim();
+  const groupedInput = digits.replace(/(.{4})/g, '$1 ').trim();
+
+  const onNumber = (v: string) => setDigits(v.replace(/\D/g, '').slice(0, 16));
+  const onExpiry = (v: string) => {
+    const raw = v.replace(/\D/g, '').slice(0, 4);
+    setExpiry(raw.length >= 3 ? `${raw.slice(0, 2)}/${raw.slice(2)}` : raw);
+    if (raw.length === 4) cvvRef.current?.focus();
+  };
+  const submit = () => {
+    if (allOk) {
+      navigate('/cashback/success');
+      return;
+    }
+    setHint(
+      !nameOk
+        ? 'اكتب اسم حامل البطاقة'
+        : !numOk
+          ? 'أكمل رقم البطاقة (16 رقم)'
+          : !expOk
+            ? 'أدخل تاريخ انتهاء صحيح MM/YY'
+            : 'أدخل رمز CVV (3 أرقام)',
+    );
+    setShakeKey((k) => k + 1);
+  };
+
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <div className="h-full overflow-y-auto pb-[101px]">
+      <style>{'@keyframes field-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}'}</style>
+      <div className="h-full overflow-y-auto pb-[121px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
           <div className="absolute right-[17px] top-[17.33px] h-[11.333px] w-[22px]">
@@ -103,8 +155,14 @@ export default function AddCardScreen() {
           </div>
         </div>
 
+        {/* flow step dots (sheet = 1, form = 2) */}
+        <div className="flex w-full items-center justify-center gap-1.5 pt-2" aria-hidden>
+          <div className="size-1.5 rounded-full bg-line" />
+          <div className="h-1.5 w-4 rounded-full bg-brand-400" />
+        </div>
+
         {/* Content */}
-        <div className="flex w-[375px] flex-col items-center gap-6 bg-surface px-4 py-5">
+        <div className="flex w-[375px] flex-col items-center gap-5 bg-surface px-4 py-4">
           {/* 🔒 Security note */}
           <div className="flex w-full shrink-0 items-start justify-end gap-2.5 overflow-clip rounded-2xl bg-brand-50 px-4 py-3">
             <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2 leading-[1.5]">
@@ -126,16 +184,71 @@ export default function AddCardScreen() {
             </div>
           </div>
 
-          {/* 🎹 Form fields (static inputs) */}
+          {/* 💳 Live card preview — fills in as the user types */}
+          <div
+            className="relative flex h-[176px] w-full shrink-0 flex-col justify-between overflow-clip rounded-2xl p-4"
+            style={{ backgroundImage: 'linear-gradient(129.55deg, rgb(0, 206, 139) 3.0145%, rgb(0, 104, 70) 71.253%)' }}
+            data-testid="card-preview"
+          >
+            <div className="flex w-full items-start justify-between">
+              <div
+                className={`flex h-7 items-center rounded-md bg-white px-1.5 transition-opacity duration-300 ${scheme ? 'opacity-100' : 'opacity-0'}`}
+              >
+                {scheme === 'visa' && (
+                  <div className="relative flex shrink-0 items-center justify-center leading-none">
+                    <div className="flex-none -scale-y-100">
+                      <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start">
+                        <div
+                          className="relative col-1 row-1 ml-[-3.35px] mt-[-10.39px] h-[31.137px] w-[38.702px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[3.351px_10.393px] mask-size-[32px_10.35px]"
+                          style={{ maskImage: `url("${visaMask}")` }}
+                        >
+                          <img alt="VISA" className="absolute inset-0 block size-full max-w-none" src={visaLogo} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {scheme === 'mc' && (
+                  <div className="flex items-center">
+                    <div className="relative size-5">
+                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={mcLeft} />
+                    </div>
+                    <div className="relative -ml-2 size-5">
+                      <img alt="Mastercard" className="absolute inset-0 block size-full max-w-none" src={mcRight} />
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="h-[26px] w-[34px] rounded-md bg-white/25" aria-hidden />
+            </div>
+            <p className="font-en w-full text-center text-lg font-medium tracking-[0.14em] text-ink-inverse" dir="ltr">
+              {groupedPreview}
+            </p>
+            <div className="flex w-full items-end justify-between">
+              <p className={`font-en text-xs font-medium leading-[1.5] text-ink-inverse ${expiry ? '' : 'opacity-60'}`} dir="ltr">
+                {expiry || 'MM/YY'}
+              </p>
+              <p className={`max-w-[200px] truncate text-xs font-medium leading-[1.5] text-ink-inverse ${name ? '' : 'opacity-60'}`} dir="auto">
+                {name || 'اسم حامل البطاقة'}
+              </p>
+            </div>
+          </div>
+
+          {/* 🎹 Form fields */}
           <div className="flex w-full shrink-0 flex-col items-end justify-center gap-[18px]">
             <div className="flex w-full shrink-0 flex-col items-end gap-2">
               <p className="shrink-0 whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
                 اسم حامل البطاقة
               </p>
-              <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-line bg-surface px-4 py-2">
+              <div
+                className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${nameOk ? 'border-brand-400' : 'border-line'}`}
+              >
+                <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${nameOk ? 'opacity-100' : 'opacity-0'}`} />
                 <input
                   type="text"
                   dir="auto"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="الاسم كما هو موجود على البطاقة"
                   className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
                 />
@@ -146,7 +259,9 @@ export default function AddCardScreen() {
               <p className="shrink-0 whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
                 رقم البطاقة
               </p>
-              <div className="flex h-9 w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-line bg-surface px-4 py-2">
+              <div
+                className={`flex h-9 w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${numOk ? 'border-brand-400' : 'border-line'}`}
+              >
                 <div className="relative flex shrink-0 items-center justify-center leading-none">
                   <div className="flex-none -scale-y-100">
                     <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start">
@@ -161,10 +276,17 @@ export default function AddCardScreen() {
                 </div>
                 <input
                   type="text"
-                  dir="auto"
+                  inputMode="numeric"
+                  dir="ltr"
+                  value={groupedInput}
+                  onChange={(e) => onNumber(e.target.value)}
                   placeholder="****   ****   ****   ****"
                   className="font-en min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
                 />
+                {/* scan affordance — placeholder glyph (tab-bar scan icon), inert in the prototype */}
+                <button type="button" aria-label="مسح البطاقة بالكاميرا" className="shrink-0 opacity-40">
+                  <img alt="" src={scanGlyph} className="size-4" />
+                </button>
               </div>
             </div>
 
@@ -173,10 +295,17 @@ export default function AddCardScreen() {
                 <p className="font-en shrink-0 whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
                   CVV
                 </p>
-                <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-[#ccd2e0] bg-surface px-4 py-2">
+                <div
+                  className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${cvvOk ? 'border-brand-400' : 'border-line'}`}
+                >
+                  <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${cvvOk ? 'opacity-100' : 'opacity-0'}`} />
                   <input
+                    ref={cvvRef}
                     type="text"
-                    dir="auto"
+                    inputMode="numeric"
+                    dir="ltr"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
                     placeholder="***"
                     className="font-en min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
                   />
@@ -186,10 +315,16 @@ export default function AddCardScreen() {
                 <p className="shrink-0 whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
                   تاريخ الإنتهاء
                 </p>
-                <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-[#ccd2e0] bg-surface px-4 py-2">
+                <div
+                  className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${expOk ? 'border-brand-400' : 'border-line'}`}
+                >
+                  <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${expOk ? 'opacity-100' : 'opacity-0'}`} />
                   <input
                     type="text"
-                    dir="auto"
+                    inputMode="numeric"
+                    dir="ltr"
+                    value={expiry}
+                    onChange={(e) => onExpiry(e.target.value)}
                     placeholder="MM/YY"
                     className="font-en min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
                   />
@@ -197,36 +332,60 @@ export default function AddCardScreen() {
               </div>
             </div>
 
-            <div className="flex w-full shrink-0 flex-col items-end gap-2">
-              <p className="shrink-0 whitespace-nowrap text-right text-[0px] font-medium leading-none text-ink" dir="auto">
-                <span className="text-[12px] leading-[1.5]">{'اسم مستعار '}</span>
-                <span className="text-[12px] font-normal not-italic leading-[1.5] text-ink-tertiary">(إختياري)</span>
-              </p>
-              <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-line bg-surface px-4 py-2">
-                <input
-                  type="text"
-                  dir="auto"
-                  placeholder="مثل ”البطاقة الأساسية“"
-                  className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
-                />
+            {/* optional nickname — collapsed behind a link */}
+            {nickOpen ? (
+              <div className="flex w-full shrink-0 flex-col items-end gap-2">
+                <p className="shrink-0 whitespace-nowrap text-right text-[0px] font-medium leading-none text-ink" dir="auto">
+                  <span className="text-[12px] leading-[1.5]">{'اسم مستعار '}</span>
+                  <span className="text-[12px] font-normal not-italic leading-[1.5] text-ink-tertiary">(إختياري)</span>
+                </p>
+                <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-line bg-surface px-4 py-2">
+                  <input
+                    type="text"
+                    dir="auto"
+                    placeholder="مثل ”البطاقة الأساسية“"
+                    className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
+                  />
+                </div>
               </div>
-            </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setNickOpen(true)}
+                className="w-full text-right text-xs font-medium leading-[1.5] text-brand-400"
+                dir="auto"
+              >
+                + إضافة اسم مستعار (إختياري)
+              </button>
+            )}
           </div>
         </div>
       </div>
 
-      {/* ⛴️ Pinned dock + home indicator (button drawn disabled-style, still tappable) */}
+      {/* ⛴️ Pinned dock + home indicator */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start bg-surface">
-        <div className="flex w-full shrink-0 flex-col items-start gap-3 px-4 pb-4 pt-2.5">
+        <div className="flex w-full shrink-0 flex-col items-start gap-2 px-4 pb-4 pt-2.5">
           <button
+            key={shakeKey}
             type="button"
-            onClick={() => navigate('/cashback/success')}
-            className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-surface-disabled px-4 py-2.5"
+            onClick={submit}
+            className={`flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl px-4 py-2.5 transition-colors ${
+              allOk ? 'bg-brand-400' : 'bg-surface-disabled'
+            }`}
+            style={hint && !allOk ? { animation: 'field-shake 300ms ease' } : undefined}
           >
-            <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-quadrant" dir="auto">
+            <p
+              className={`shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] ${allOk ? 'text-ink-inverse' : 'text-ink-quadrant'}`}
+              dir="auto"
+            >
               أضف البطاقة
             </p>
           </button>
+          {hint && !allOk && (
+            <p role="status" className="w-full text-center text-xs font-normal leading-[1.5] text-ink-danger" dir="auto">
+              {hint}
+            </p>
+          )}
         </div>
         <div className="relative h-[34px] w-full shrink-0">
           <div className="absolute bottom-2 left-[calc(50%+0.5px)] h-[5px] w-[134px] -translate-x-1/2 rounded-full bg-ink" />

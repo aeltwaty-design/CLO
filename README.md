@@ -16,9 +16,18 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 
 ## The clickable flow
 
-- `/market` — السوق hub (cashback tab). Before linking: promo banner → `ابدأ`.
-- `/cashback/intro` → `/cashback/add-card` → `/cashback/success` — linking journey;
-  success flips the app to the after-link state.
+- `/market` — السوق hub (cashback tab). Before linking, the promo banner's
+  `ابدأ` opens the **intro bottom sheet** over the market (headline,
+  auto-advancing 3-step stepper, trust chips, CTA) — a UX redesign of the
+  full-screen onboarding; `/cashback/intro` still serves the original
+  full-screen version for deep links and the QA gate.
+- `/cashback/add-card` — UX-upgraded form: **live card preview** that fills in
+  as you type (scheme detected from the first digit), 4-4-4-4 grouping, expiry
+  auto-advance, inline validation ticks, collapsed optional nickname, and a
+  CTA that names the missing field. Production note: this region is a PCI
+  iframe in the real app; validation here is prototype-side.
+- `/cashback/success` — animated confirmation; primary CTA `اكتشف المتاجر`
+  lands on the flipped after-link market, secondary goes to the wallet.
 - Merchant cards → `/store/:id`, dispatched by variant × link state to the six
   store designs (H&M etc. = cashback; IKEA = offers; Zara = vouchers). Offer
   rows and voucher tiles open the تسوّق واربح sheet (its copy/CTA switch after
@@ -58,7 +67,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   the script DPR-matches any ref still narrower than 375. The Market screens
   also read a few points higher than the floor by design: per user direction
   every merchant card uses the same tag look (1:7980 before / 1:8338 after),
-  while the reference frames mix in link-CTA and underlay tags.
+  while the reference frames mix in link-CTA and underlay tags. The linking
+  flow's redesign shifts two more baselines: add-card ≈60.6% (annotation wash
+  + live-preview redesign) and success ≈3.2% (next-step row + CTA swap
+  replace the drawn benefits list).
 
 ## Conventions (important before editing)
 
