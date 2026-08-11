@@ -12,7 +12,7 @@ npm run dev
 
 Phone-sized viewport (375×812) renders full-bleed; desktop windows get a centered
 phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
-(otherwise it persists in sessionStorage and flips when the linking flow completes).
+(otherwise every load starts before linking, and completing the flow flips it live).
 
 ## The clickable flow
 
@@ -27,7 +27,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   after) → `الكل` → `/transactions` → row tap opens the details sheet.
 - `/cards/manage` — «البطاقات المضافة» (from the wallet's البطاقات tile or the
   sheet's إدارة البطاقات); `?cards=3` demos the three-card cap state.
-- `?linked=` is read once at page load (a full reload applies it).
+- Fresh loads always start **before linking** (scenario 1); the linking journey
+  flips the app to the after state live, and a reload restarts the demo.
+  `?linked=1` deep-links straight to the after state (used by the QA gate).
 
 ## Design-sync toolchain
 
