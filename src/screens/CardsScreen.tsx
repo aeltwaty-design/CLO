@@ -171,7 +171,7 @@ export default function CardsScreen() {
               {/* ⏳ Expiring cashback — compact nudge with a direct transfer CTA
                   (user direction: moved out of the balance card) */}
               <div
-                className="flex w-[343px] shrink-0 items-center justify-between gap-3 rounded-2xl bg-warning-50 px-4 py-3"
+                className="flex w-[343px] shrink-0 items-center justify-between gap-3 rounded-2xl bg-bravo-50 px-4 py-3"
                 data-testid="expiring-section"
               >
                 <button
