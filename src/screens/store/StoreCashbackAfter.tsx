@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import TiersCard from '../../components/store/TiersCard';
 import chevronStroke from '../../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -278,6 +279,11 @@ export default function StoreCashbackAfter() {
                 </div>
               </div>
 
+              {/* Spend tiers — kept after linking by user direction (the Figma
+                  after-frame 1:9029 drops it; the earning schedule matters more
+                  once the card is active) */}
+              <TiersCard />
+
               {/* كيف يتم؟ */}
               <div className="flex w-full shrink-0 flex-col items-start gap-3">
                 <p className="w-full shrink-0 text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
@@ -303,8 +309,9 @@ export default function StoreCashbackAfter() {
               </div>
             </div>
 
-            {/* متاجر مشابهة — below the fold (Figma y=1031) */}
-            <div className="mt-[285px] flex flex-col items-start gap-4">
+            {/* متاجر مشابهة — below the fold; natural rhythm now that the tiers
+                card extends the flow past the Figma y=1031 anchor */}
+            <div className="mt-5 flex flex-col items-start gap-4">
               <div className="flex w-[343px] shrink-0 items-center justify-between whitespace-nowrap text-right">
                 <p className="shrink-0 font-en text-[0px] font-normal leading-[0] text-ink-secondary opacity-0" dir="auto">
                   <span className="text-xs leading-[1.5]">{'4 '}</span>

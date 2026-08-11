@@ -69,8 +69,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   every merchant card uses the same tag look (1:7980 before / 1:8338 after),
   while the reference frames mix in link-CTA and underlay tags. The linking
   flow's redesign shifts two more baselines: add-card ≈60.6% (annotation wash
-  + live-preview redesign) and success ≈3.2% (next-step row + CTA swap
-  replace the drawn benefits list).
+  + live-preview redesign) and success ≈3% (next-step timeline + CTA swap
+  replace the drawn benefits list). The after-link cashback store (1:9029,
+  ≈3.8%) also deviates by user direction: the spend-tiers card is kept after
+  linking (shared `TiersCard`), though the Figma after-frame drops it.
 
 ## Conventions (important before editing)
 
