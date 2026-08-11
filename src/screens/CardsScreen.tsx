@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useWithdraw } from '../state/WithdrawState';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -106,6 +107,10 @@ const recentRows: RecentTx[] = [
 /** الكاش باك — wallet home, populated state (Figma 1:10563 "all cards", 375×1006). */
 export default function CardsScreen() {
   const navigate = useNavigate();
+  // repeat-withdrawal shortcut: once an account is on file (completed or
+  // seeded withdrawal), the transfer tile skips straight to the amount step
+  const { account } = useWithdraw();
+  const withdrawTo = account ? '/withdraw/amount' : '/withdraw/account';
   return (
     <div className="relative h-full overflow-hidden">
       <div className="h-full overflow-y-auto bg-surface">
@@ -196,8 +201,8 @@ export default function CardsScreen() {
                 <div
                   role="button"
                   tabIndex={0}
-                  onClick={() => navigate('/withdraw/account')}
-                  onKeyDown={(e) => e.key === 'Enter' && navigate('/withdraw/account')}
+                  onClick={() => navigate(withdrawTo)}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate(withdrawTo)}
                   className="flex w-full shrink-0 cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5"
                 >
                   <div className="relative size-6 shrink-0">

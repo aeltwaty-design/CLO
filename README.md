@@ -42,9 +42,20 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `/withdraw/amount` (quick chips, «أقصى مبلغ» = balance − fee = 559.5, daily
   limit 1,000) → `/withdraw/summary` (fee 1 + VAT 0.15; info popovers) →
   `/withdraw/pin` (6 digits; the fingerprint key opens the Touch ID overlay,
-  `?touchid=1` deep-links it) → `/withdraw/status?ok=1/0`. Demo rule: PIN
-  `000000` shows the failure status, anything else succeeds. State seeds:
-  `?waccount=1`, `?wamount=50`.
+  `?touchid=1` deep-links it) → `/withdraw/status?ok=1/0`. Demo rules: PIN
+  `000000` = wrong PIN handled inline (dots shake + «باقي محاولتين/محاولة»
+  counter; the third try lands on the failure status), `999999` = instant
+  transfer-failure, anything else succeeds. State seeds: `?waccount=1`,
+  `?wamount=50`.
+- **Withdrawal UX enhancements** — they render only when live state exists, so
+  unseeded captures still match the Figma frames: a fee-transparency line under
+  the amount card («المخصوم من رصيدك» = amount + fee + VAT), a success receipt
+  (amount + masked account + animated «خلال يوم عمل» arrival timeline +
+  remaining balance), a context line above the PIN dots, IBAN validation with
+  beneficiary-bank auto-detect (`SA` + 22 digits; the two digits after SA pick
+  the bank — 80 الراجحي / 05 الإنماء / 15 البلاد / 60 الجزيرة), and a
+  repeat-withdrawal shortcut (the wallet's transfer tile skips straight to the
+  amount step once an account is on file).
 - Fresh loads always start **before linking** (scenario 1); the linking journey
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).
@@ -81,7 +92,11 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   + live-preview redesign) and success ≈3% (next-step timeline + CTA swap
   replace the drawn benefits list). The after-link cashback store (1:9029,
   ≈3.8%) also deviates by user direction: the spend-tiers card is kept after
-  linking (shared `TiersCard`), though the Figma after-frame drops it.
+  linking (shared `TiersCard`), though the Figma after-frame drops it. The
+  withdrawal fee-transparency line nudges the two filled amount captures
+  (`27_10685`/`27_10836`) a few tenths above their old floor, and the extra
+  seeded success capture (`27_11148-receipt`, ≈14%) intentionally deviates:
+  it renders the receipt block over the plain drawn frame.
 
 ## Conventions (important before editing)
 

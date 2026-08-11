@@ -1,4 +1,11 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  useWithdraw,
+  REGISTERED_ACCOUNT,
+  WITHDRAW_BALANCE,
+  WITHDRAW_FEE,
+  WITHDRAW_VAT,
+} from '../../state/WithdrawState';
 import statusBarMask from '../../assets/figma/863c90e2bcf523e5186af44ac3700298ea5b0759.svg';
 import successHalo from '../../assets/figma/c86d0ccdbe4f6abff26435432e86ed008852d86b.svg';
 import successBadge from '../../assets/figma/a70622922533649e4fca73589acc38f85c06d0cd.svg';
@@ -10,6 +17,31 @@ import errorBlob from '../../assets/figma/cc57845c5c19e1bfc901e04b4d3537110ab784
 import errorArtBase from '../../assets/figma/0ec834c2169338f0d0f9788fd647ae8f0b24368b.svg';
 import errorArtLines from '../../assets/figma/0eb2c7d292b6b2ea56ce7f3cac83e3ab2894091f.svg';
 import errorArtMark from '../../assets/figma/fc70a4b56612114c9ed26104c675624cf4ced5fb.svg';
+import iconExport from '../../assets/figma/a495e8b4f8c794ab58d35158625e671abac5391a.svg';
+import iconBank from '../../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
+
+/** Amounts in Poppins digits, thousands-separated (house rule). */
+const fmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+/** Glyph painted in brand green through its alpha mask (ValidTick precedent). */
+function MaskIcon({ src, size }: { src: string; size: number }) {
+  return (
+    <div
+      aria-hidden
+      className="bg-brand-400"
+      style={{
+        width: size,
+        height: size,
+        maskImage: `url("${src}")`,
+        WebkitMaskImage: `url("${src}")`,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+      }}
+    />
+  );
+}
 
 /** 12:30 status bar drawn as one alpha-masked shape (Figma "Blur Evenly"). */
 function MaskStatusBar() {
@@ -110,12 +142,18 @@ export default function WithdrawStatusScreen() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const failed = params.get('ok') === '0';
+  // Success receipt (UX enhancement): specifics render only when live state
+  // exists (amount > 0), so an unseeded visit still matches 27:11148 exactly.
+  const { amount, account } = useWithdraw();
+  const recipient = account ?? REGISTERED_ACCOUNT;
+  const showReceipt = !failed && amount > 0;
+  const remaining = Math.max(0, WITHDRAW_BALANCE - amount - WITHDRAW_FEE - WITHDRAW_VAT);
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <style>
         {
-          '@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}'
+          '@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes dash-flow{to{background-position:-12px 0}}'
         }
       </style>
       <div className="flex h-full w-full flex-col items-center overflow-y-auto">
@@ -137,10 +175,77 @@ export default function WithdrawStatusScreen() {
                 {failed ? '4000154' : '25.05.203, 05:30'}
               </span>
             </p>
-            <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-tertiary" dir="auto">
-              {failed ? 'جرب مره ثانية وتأكد من بياناتك واتصالك بالنت' : 'سيصل المبلغ للحساب قريبا'}
-            </p>
+            {showReceipt ? (
+              <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-tertiary" dir="rtl" data-testid="receipt-line">
+                {'تم سحب '}
+                <span className="font-en font-medium text-ink">{fmt(amount)}</span>
+                {' ﷼ إلى حساب '}
+                <span className="font-en text-ink" dir="ltr">
+                  {recipient.masked}
+                </span>
+              </p>
+            ) : (
+              <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-tertiary" dir="auto">
+                {failed ? 'جرب مره ثانية وتأكد من بياناتك واتصالك بالنت' : 'سيصل المبلغ للحساب قريبا'}
+              </p>
+            )}
           </div>
+
+          {showReceipt && (
+            <>
+              {/* ⏱️ Arrival mini-timeline — سحبت اليوم ← (خلال يوم عمل) ← حسابك البنكي */}
+              <div
+                className="flex w-full shrink-0 flex-col rounded-2xl border border-solid border-line bg-white px-4 pb-3 pt-4"
+                style={{ animation: 'rise-in 300ms ease-out 450ms both' }}
+                data-testid="arrival-timeline"
+              >
+                <div className="relative flex w-full flex-row-reverse items-start justify-between">
+                  <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
+                    <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                      <MaskIcon src={iconExport} size={18} />
+                    </div>
+                    <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                      سحبت اليوم
+                    </p>
+                  </div>
+                  <div className="relative mx-1 mt-[17px] h-0.5 min-w-px flex-1">
+                    <div
+                      className="absolute inset-0 rounded-full"
+                      data-testid="timeline-connector"
+                      style={{
+                        backgroundImage: 'repeating-linear-gradient(to left, #00ce8b 0 6px, transparent 6px 12px)',
+                        animation: 'dash-flow 600ms linear infinite',
+                      }}
+                    />
+                    <p
+                      className="absolute left-1/2 top-[-13px] -translate-x-1/2 whitespace-nowrap rounded-full bg-brand-400 px-2 py-0.5 text-[10px] font-medium leading-[1.4] text-ink-inverse"
+                      dir="auto"
+                    >
+                      خلال يوم عمل
+                    </p>
+                  </div>
+                  <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
+                    <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                      <MaskIcon src={iconBank} size={18} />
+                    </div>
+                    <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                      في حسابك البنكي
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <p
+                className="shrink-0 text-xs font-normal leading-[1.5] text-ink-tertiary"
+                style={{ animation: 'rise-in 300ms ease-out 600ms both' }}
+                dir="rtl"
+                data-testid="balance-after"
+              >
+                {'رصيدك بعد السحب: '}
+                <span className="font-en font-medium text-ink">{fmt(remaining)}</span>
+                {' ﷼'}
+              </p>
+            </>
+          )}
 
           {/* ⛴️ Dock */}
           <div className={`flex w-[375px] shrink-0 flex-col items-start gap-3 px-4 ${failed ? 'py-2.5' : 'pb-4 pt-2.5'}`}>

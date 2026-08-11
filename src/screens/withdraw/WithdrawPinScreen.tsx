@@ -8,12 +8,16 @@ import statusSignal from '../../assets/figma/f192404e6429d17169474171bdc045888f5
 import statusTime from '../../assets/figma/0df437cb81db5679e48b4bd0954f6de88d23f868.svg';
 import iconFingerprint from '../../assets/figma/8370fb142b4eb35213caa1af694be0784a8b2fc3.svg';
 import touchIdSheet from '../../assets/figma/68e6eda014aecbfa361d59ca1f31505c7c011d41.svg';
+import { useWithdraw, REGISTERED_ACCOUNT } from '../../state/WithdrawState';
 
 /** The design draws six PIN indicators (Figma 27:11216-27:11221). */
 const PIN_LENGTH = 6;
 
-/** All-zeros demos the failure status; anything else succeeds. */
-const FAILURE_PIN = '0'.repeat(PIN_LENGTH);
+/** Demo rules: all-zeros = wrong PIN (inline retry, 3 attempts then the
+    failure status); all-nines = instant transfer-failure; else success. */
+const WRONG_PIN = '0'.repeat(PIN_LENGTH);
+const TRANSFER_FAIL_PIN = '9'.repeat(PIN_LENGTH);
+const MAX_ATTEMPTS = 3;
 
 const SF_PRO = "'SF Pro', -apple-system, 'Helvetica Neue', 'Segoe UI', sans-serif";
 
@@ -70,8 +74,12 @@ function DigitKey({ digit, onPress }: { digit: number; onPress: (d: string) => v
 export default function WithdrawPinScreen() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
+  const { amount, account } = useWithdraw();
+  const recipient = account ?? REGISTERED_ACCOUNT;
   const [pin, setPin] = useState('');
   const [touchId, setTouchId] = useState(() => params.has('touchid'));
+  const [attempts, setAttempts] = useState(0);
+  const [wrong, setWrong] = useState(false);
 
   const append = (d: string) => setPin((p) => (p.length >= PIN_LENGTH ? p : p + d));
   const erase = () => setPin((p) => p.slice(0, -1));
@@ -79,10 +87,27 @@ export default function WithdrawPinScreen() {
   useEffect(() => {
     if (pin.length !== PIN_LENGTH) return;
     const t = setTimeout(() => {
-      navigate('/withdraw/status?ok=' + (pin === FAILURE_PIN ? '0' : '1'));
+      if (pin === TRANSFER_FAIL_PIN) {
+        navigate('/withdraw/status?ok=0');
+        return;
+      }
+      if (pin === WRONG_PIN) {
+        // authentication failure is handled inline; the full failure screen
+        // is reserved for transfer failures (and the attempts lockout)
+        const n = attempts + 1;
+        if (n >= MAX_ATTEMPTS) {
+          navigate('/withdraw/status?ok=0');
+          return;
+        }
+        setAttempts(n);
+        setWrong(true);
+        setPin('');
+        return;
+      }
+      navigate('/withdraw/status?ok=1');
     }, 350);
     return () => clearTimeout(t);
-  }, [pin, navigate]);
+  }, [pin, attempts, navigate]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -100,6 +125,7 @@ export default function WithdrawPinScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
+      <style>{'@keyframes pin-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'}</style>
       <div className="h-full overflow-y-auto">
         <div className="relative h-full min-h-[812px] w-full">
           <IosStatusBar />
@@ -114,9 +140,22 @@ export default function WithdrawPinScreen() {
             </p>
           </div>
 
+          {/* context line — what is being confirmed (state-conditional) */}
+          {amount > 0 && (
+            <p
+              className="absolute left-1/2 top-[150px] -translate-x-1/2 whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-tertiary"
+              dir="auto"
+            >
+              {'سحب '}
+              <span className="font-en">{amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
+              {' ﷼ إلى '}
+              <span className="font-en">{recipient.masked}</span>
+            </p>
+          )}
+
           {/* 🔵 Indicators — mirrored as drawn, so dots fill right-to-left */}
           <div className="absolute left-[calc(50%+0.5px)] top-[180px] flex -translate-x-1/2 items-center justify-center">
-            <div className="flex-none rotate-180 -scale-y-100">
+            <div key={attempts} className="flex-none rotate-180 -scale-y-100" style={wrong ? { animation: 'pin-shake 300ms ease' } : undefined}>
               <div className="flex items-center justify-center gap-6">
                 {Array.from({ length: PIN_LENGTH }, (_, i) => (
                   <div
@@ -129,6 +168,17 @@ export default function WithdrawPinScreen() {
               </div>
             </div>
           </div>
+
+          {/* inline wrong-PIN feedback (auth errors stay on this screen) */}
+          {wrong && (
+            <p
+              role="status"
+              className="absolute left-1/2 top-[212px] -translate-x-1/2 whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-ink-danger"
+              dir="auto"
+            >
+              {MAX_ATTEMPTS - attempts === 2 ? 'رمز غير صحيح.. باقي محاولتين' : 'رمز غير صحيح.. باقي محاولة وحدة'}
+            </p>
+          )}
 
           {/* 🔢 Keypad */}
           <div className="absolute left-[44px] top-[386px] flex flex-col items-start gap-6">

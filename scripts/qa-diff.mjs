@@ -15,7 +15,7 @@ import pixelmatch from 'pixelmatch';
 
 const BASE = process.argv[2] || 'http://localhost:5173';
 
-/** [route, refId, viewportHeight, action?, cropBottom?] */
+/** [route, refId, viewportHeight, action?, cropBottom?, outName?] */
 const SCREENS = [
   ['/market?linked=0', '1_7750', 1034],
   ['/market?linked=1', '1_8098', 958],
@@ -53,6 +53,10 @@ const SCREENS = [
   ['/withdraw/pin?touchid=1', '27_11251', 812],
   ['/withdraw/status?ok=1', '27_11148', 812],
   ['/withdraw/status?ok=0', '27_11167', 812],
+  // seeded success — intentional deviation from 27:11148: the UX-enhancement
+  // receipt (specifics line + arrival timeline + remaining balance) renders
+  // because live withdraw state exists
+  ['/withdraw/status?ok=1&waccount=1&wamount=50', '27_11148', 812, null, null, '27_11148-receipt'],
 ];
 
 const ACTIONS = {
@@ -86,7 +90,8 @@ mkdirSync('design/qa', { recursive: true });
 const browser = await chromium.launch();
 const results = [];
 
-for (const [route, refId, height, action, cropBottom] of SCREENS) {
+for (const [route, refId, height, action, cropBottom, outName] of SCREENS) {
+  const out = outName ?? refId;
   // Some Figma renders were downscaled by the 1024px export cap; capture at a
   // matching devicePixelRatio so both sides lose the same high frequencies.
   const refPeek = PNG.sync.read(readFileSync(`design/refs/${refId}.png`));
@@ -124,13 +129,13 @@ for (const [route, refId, height, action, cropBottom] of SCREENS) {
     const diff = new PNG({ width: w, height: h });
     const bad = pixelmatch(a.data, b.data, diff.data, w, h, { threshold: 0.16, includeAA: false });
     const pct = ((100 * bad) / (w * h)).toFixed(2);
-    writeFileSync(`design/qa/${refId}-diff.png`, PNG.sync.write(diff));
-    writeFileSync(`design/qa/${refId}-shot.png`, PNG.sync.write(shot));
-    results.push({ refId, route: route + (action ? ` +${action}` : ''), bad, pct: Number(pct) });
-    console.log(`${refId}  ${pct}%  (${bad}px)  ${route}${action ? ' +' + action : ''}`);
+    writeFileSync(`design/qa/${out}-diff.png`, PNG.sync.write(diff));
+    writeFileSync(`design/qa/${out}-shot.png`, PNG.sync.write(shot));
+    results.push({ refId: out, route: route + (action ? ` +${action}` : ''), bad, pct: Number(pct) });
+    console.log(`${out}  ${pct}%  (${bad}px)  ${route}${action ? ' +' + action : ''}`);
   } catch (err) {
-    results.push({ refId, route, error: String(err).slice(0, 120) });
-    console.log(`${refId}  FAILED  ${String(err).slice(0, 120)}`);
+    results.push({ refId: out, route, error: String(err).slice(0, 120) });
+    console.log(`${out}  FAILED  ${String(err).slice(0, 120)}`);
   } finally {
     await page.close();
   }

@@ -33,6 +33,34 @@ function ModeRadio({ checked }: { checked: boolean }) {
   );
 }
 
+/** Prototype IBAN rule: SA followed by 22 digits (24 chars). The two digits
+    right after SA pick the beneficiary bank (demo map; default الراجحي). */
+const IBAN_RE = /^SA\d{22}$/;
+const IBAN_BANK_CODES: Record<string, string> = {
+  '80': 'مصرف الراجحي',
+  '05': 'مصرف الإنماء',
+  '15': 'بنك البلاد',
+  '60': 'بنك الجزيرة',
+};
+
+/** Valid-field tick masked in brand green (ValidTick precedent). */
+function GreenTick({ show }: { show: boolean }) {
+  return (
+    <div
+      aria-hidden
+      className={`size-4 shrink-0 bg-brand-400 transition-opacity ${show ? 'opacity-100' : 'opacity-0'}`}
+      style={{
+        maskImage: `url("${iconCheckBox}")`,
+        WebkitMaskImage: `url("${iconCheckBox}")`,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+      }}
+    />
+  );
+}
+
 export default function WithdrawNewAccountScreen() {
   const navigate = useNavigate();
   const { setAccount } = useWithdraw();
@@ -47,6 +75,14 @@ export default function WithdrawNewAccountScreen() {
   // CTA is disabled only in the pristine default frame (27:10059); every other
   // drawn state — IBAN mode or anything entered — shows it enabled.
   const enabled = mode === 'iban' || number !== '' || name !== '' || bank !== null || save;
+
+  // IBAN validation + bank auto-detect (UX enhancement) — pristine IBAN mode
+  // renders exactly as 27:10288; feedback appears only once something is typed
+  const iban = number.replace(/\s/g, '').toUpperCase();
+  const ibanValid = mode === 'iban' && IBAN_RE.test(iban);
+  const detectedBank = ibanValid
+    ? (WITHDRAW_BANKS.find((b) => b.name === (IBAN_BANK_CODES[iban.slice(2, 4)] ?? 'مصرف الراجحي')) ?? WITHDRAW_BANKS[0])
+    : null;
 
   const switchMode = (m: 'account' | 'iban') => {
     if (m === mode) return;
@@ -65,6 +101,7 @@ export default function WithdrawNewAccountScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
+      <style>{'@keyframes fade-rise{from{opacity:0;transform:translateY(-2px)}to{opacity:1;transform:translateY(0)}}'}</style>
       <div className="h-full overflow-y-auto pb-[75px]">
         {/* 🧭 App bar */}
         <div className="flex w-full shrink-0 items-center justify-between border-b border-solid border-line-subtle px-4 pb-3.5 pt-6">
@@ -133,7 +170,12 @@ export default function WithdrawNewAccountScreen() {
                   <ModeRadio checked={mode === 'iban'} />
                 </button>
               </div>
-              <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-[#ccd2e0] bg-surface px-4 py-3">
+              <div
+                className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-3 ${
+                  ibanValid ? 'border-brand-400' : 'border-[#ccd2e0]'
+                }`}
+              >
+                {mode === 'iban' && <GreenTick show={ibanValid} />}
                 <input
                   type="text"
                   dir="rtl"
@@ -143,6 +185,34 @@ export default function WithdrawNewAccountScreen() {
                   className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink outline-none placeholder:text-ink-tertiary"
                 />
               </div>
+              {mode === 'iban' &&
+                number !== '' &&
+                (detectedBank ? (
+                  <div
+                    className="flex w-full shrink-0 items-center justify-end gap-1.5"
+                    style={{ animation: 'fade-rise 200ms ease-out both' }}
+                    data-testid="iban-bank"
+                  >
+                    <GreenTick show />
+                    <BankLogo bank={detectedBank} />
+                    <p className="text-right text-xs font-normal leading-[1.5] text-ink" dir="rtl">
+                      {'بنك المستفيد: '}
+                      <span className="font-medium">{detectedBank.name}</span>
+                    </p>
+                  </div>
+                ) : (
+                  <p
+                    className="w-full text-right text-xs font-normal leading-[1.5] text-ink-tertiary"
+                    dir="rtl"
+                    data-testid="iban-hint"
+                  >
+                    {'الآيبان يبدأ بـ '}
+                    <span className="font-en">SA</span>
+                    {' ويتبعها '}
+                    <span className="font-en">22</span>
+                    {' رقم'}
+                  </p>
+                ))}
             </div>
 
             {/* ⬇ Beneficiary bank dropdown — رقم الحساب mode only (27:10059/27:11293) */}

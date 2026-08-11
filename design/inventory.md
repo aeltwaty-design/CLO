@@ -45,11 +45,13 @@ Reference renders: `design/refs/<node-id>.png` (from `get_screenshot`).
 | 27:10059 / 10174 / 10288 / 11293 | new account ×4 | `/withdraw/new-account` | add-bank form states |
 | 27:10534 / 10685 / 10836 | enter amount ×3 | `/withdraw/amount` | empty / filled / limit states; chips 50-1,000; أقصى مبلغ |
 | 27:10987 | Summary | `/withdraw/summary` | fee 1 + VAT 0.15; info popovers 27:11484/11489 |
-| 27:11214 / 11251 | PIN ×2 | `/withdraw/pin` | demo: 0000 → failure, else success |
+| 27:11214 / 11251 | PIN ×2 | `/withdraw/pin` | demo: 000000 → wrong-PIN inline (×3 → failure), 999999 → instant failure, else success |
 | 27:11148 / 11167 | status ×2 | `/withdraw/status?ok=1/0` | success → /cards; failure → retry PIN |
 | 27:11408 | choose (sheet) | AccountPickerSheet | from amount screen's edit affordance |
 
-Entry: wallet tile «تحويل لحساب بنكي» → `/withdraw/account`. State seeds for QA/deep links: `?waccount=1`, `?wamount=50`.
+Entry: wallet tile «تحويل لحساب بنكي» → `/withdraw/account` (or straight to `/withdraw/amount` once an account is on file — repeat shortcut). State seeds for QA/deep links: `?waccount=1`, `?wamount=50`.
+
+UX-enhancement layer (renders only with live state, so unseeded captures still match the frames): fee-transparency line on the amount screen, success receipt (specifics + arrival timeline + remaining balance), PIN context line, inline wrong-PIN attempts, IBAN validation + beneficiary-bank auto-detect on the new-account form.
 
 ## Proposed interactive flow (clickable prototype)
 

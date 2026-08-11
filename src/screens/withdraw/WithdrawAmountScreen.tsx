@@ -16,6 +16,7 @@ import {
   WITHDRAW_BALANCE,
   WITHDRAW_DAILY_LIMIT,
   WITHDRAW_FEE,
+  WITHDRAW_VAT,
 } from '../../state/WithdrawState';
 
 /**
@@ -61,6 +62,7 @@ export default function WithdrawAmountScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
+      <style>{'@keyframes fade-rise{from{opacity:0;transform:translateY(-2px)}to{opacity:1;transform:translateY(0)}}'}</style>
       <div className="flex h-full w-full flex-col items-center justify-between overflow-y-auto">
         <div className="flex w-full shrink-0 flex-col items-center">
           {/* 🧭 App bar */}
@@ -209,6 +211,21 @@ export default function WithdrawAmountScreen() {
                   </div>
                 </div>
               </div>
+
+              {/* fee transparency (UX enhancement) — appears only once an
+                  amount is set, so the empty 27:10534 capture stays stable */}
+              {amount > 0 && (
+                <p
+                  className="-mt-4 w-[343px] text-right text-xs font-normal leading-[1.5] text-ink-tertiary"
+                  style={{ animation: 'fade-rise 200ms ease-out both' }}
+                  dir="rtl"
+                  data-testid="fee-line"
+                >
+                  {'المخصوم من رصيدك: '}
+                  <span className="font-en font-medium text-ink">{fmt(amount + WITHDRAW_FEE + WITHDRAW_VAT)}</span>
+                  {' ﷼ (رسوم التحويل + الضريبة)'}
+                </p>
+              )}
             </div>
 
             {/* الحد اليومي للسحب — mint info bar */}
