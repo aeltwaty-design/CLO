@@ -15,7 +15,28 @@ import sparkleX from '../assets/figma/5fb6b6aa9f0da4e3c65ce176dd4b57f6dda4d039.s
 import iconCheckSmall from '../assets/figma/13630e13d14a434e57428d6290c8a96611dffb48.svg';
 import visaMask from '../assets/figma/8c19cdc6c340655ee715e5c0e021047e5e537124.svg';
 import visaLogo from '../assets/figma/7cde00b8a4c1cec2de1c941b422f78393310b2b5.svg';
-import iconClock from '../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
+import iconCardGlyph from '../assets/figma/f118aa45e9460e6771ffbe8564d9b17f5ed465b3.svg';
+import iconWalletGlyph from '../assets/icons/nav-wallet.svg';
+
+/** Glyph painted in brand green through its alpha mask (ValidTick precedent). */
+function MaskIcon({ src, size }: { src: string; size: number }) {
+  return (
+    <div
+      aria-hidden
+      className="bg-brand-400"
+      style={{
+        width: size,
+        height: size,
+        maskImage: `url("${src}")`,
+        WebkitMaskImage: `url("${src}")`,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+      }}
+    />
+  );
+}
 
 /**
  * تم! بطاقتك جاهزة — card linked successfully (Figma 1:10469 "success",
@@ -34,7 +55,7 @@ export default function LinkSuccessScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <style>{'@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}'}</style>
+      <style>{'@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes dash-flow{to{background-position:-12px 0}}'}</style>
       <div className="h-full overflow-y-auto pb-[134px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
@@ -111,7 +132,10 @@ export default function LinkSuccessScreen() {
           </div>
 
           {/* 💳 Linked card */}
-          <div className="flex w-full shrink-0 flex-col items-end gap-3 rounded-2xl border border-solid border-brand-400 bg-brand-50 p-4">
+          <div
+            className="flex w-full shrink-0 flex-col items-end gap-3 rounded-2xl border border-solid border-brand-400 bg-brand-50 p-4"
+            style={{ animation: 'rise-in 300ms ease-out 450ms both' }}
+          >
             <div className="flex w-full shrink-0 items-center justify-between rounded-2xl">
               <div className="flex shrink-0 items-start">
                 <div className="flex shrink-0 items-center justify-center gap-1 rounded-2xl bg-brand-400 py-0.5 pl-2 pr-1.5">
@@ -155,14 +179,46 @@ export default function LinkSuccessScreen() {
             </div>
           </div>
 
-          {/* ⏳ What happens next (replaces the repeated benefits list) */}
-          <div className="flex w-[343px] shrink-0 items-center justify-end gap-2.5 rounded-2xl bg-brand-50 px-4 py-3">
-            <p className="min-w-px flex-[1_0_0] text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-              ادفع في أي متجر مشارك.. والكاش باك يوصلك لمحفظتك خلال <span className="font-en">15</span> يوم
-            </p>
-            <div className="flex shrink-0 items-center justify-center rounded-full bg-brand-400 p-2 shadow-xs">
-              <div className="relative size-5 shrink-0">
-                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconClock} />
+          {/* ⏱️ Cashback journey timeline — card → (15 days) → wallet, flowing right→left */}
+          <div
+            className="flex w-[343px] shrink-0 flex-col rounded-2xl border border-solid border-line bg-white px-4 pb-3 pt-4"
+            style={{ animation: 'rise-in 300ms ease-out 700ms both' }}
+            data-testid="cashback-timeline"
+          >
+            <div className="relative flex w-full flex-row-reverse items-start justify-between">
+              <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
+                <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                  <MaskIcon src={iconCardGlyph} size={18} />
+                </div>
+                <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                  ادفع بالبطاقة
+                </p>
+              </div>
+              <div className="relative mx-1 mt-[17px] h-0.5 min-w-px flex-1">
+                <div
+                  className="absolute inset-0 rounded-full"
+                  data-testid="timeline-connector"
+                  style={{
+                    backgroundImage: 'repeating-linear-gradient(to left, #00ce8b 0 6px, transparent 6px 12px)',
+                    animation: 'dash-flow 600ms linear infinite',
+                  }}
+                />
+                <p
+                  className="absolute left-1/2 top-[-13px] -translate-x-1/2 whitespace-nowrap rounded-full bg-brand-400 px-2 py-0.5 text-[10px] font-medium leading-[1.4] text-ink-inverse"
+                  dir="auto"
+                >
+                  {'خلال '}
+                  <span className="font-en">15</span>
+                  {' يوم'}
+                </p>
+              </div>
+              <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
+                <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                  <MaskIcon src={iconWalletGlyph} size={18} />
+                </div>
+                <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                  الكاش باك في محفظتك
+                </p>
               </div>
             </div>
           </div>
