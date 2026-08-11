@@ -59,7 +59,8 @@ export function CardsEmpty() {
         </div>
       </div>
 
-      <AddCardDock onAdd={() => navigate('/cashback/intro')} />
+      {/* user is already in the cards context — skip the intro, open the form directly */}
+      <AddCardDock onAdd={() => navigate('/cashback/add-card')} />
     </div>
   );
 }
