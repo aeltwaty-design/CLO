@@ -193,7 +193,13 @@ export default function CardsScreen() {
 
               {/* Action tiles */}
               <div className="flex shrink-0 flex-col items-start gap-2.5">
-                <div className="flex w-full shrink-0 flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => navigate('/withdraw/account')}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate('/withdraw/account')}
+                  className="flex w-full shrink-0 cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5"
+                >
                   <div className="relative size-6 shrink-0">
                     <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconExport} />
                   </div>

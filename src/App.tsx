@@ -1,5 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
 import { AppStateProvider } from './state/AppState';
+import { WithdrawProvider } from './state/WithdrawState';
 import { router } from './navigation/routes';
 
 /**
@@ -26,12 +27,14 @@ function DiffOverlay() {
 function App() {
   return (
     <AppStateProvider>
-      <div className="app-shell">
-        <div className="phone-frame">
-          <RouterProvider router={router} />
-          <DiffOverlay />
+      <WithdrawProvider>
+        <div className="app-shell">
+          <div className="phone-frame">
+            <RouterProvider router={router} />
+            <DiffOverlay />
+          </div>
         </div>
-      </div>
+      </WithdrawProvider>
     </AppStateProvider>
   );
 }
