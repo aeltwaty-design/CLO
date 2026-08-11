@@ -161,6 +161,10 @@ export default function LinkIntroSheet({ open, onClose }: { open: boolean; onClo
           }}
           className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
         >
+          {/* icon BEFORE the text in RTL reading order = physically right of the label */}
+          <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+            أضف بطاقتك الأولى
+          </p>
           <div className="relative size-5 shrink-0 overflow-clip">
             <div className="absolute inset-[20.83%]">
               <div className="absolute inset-[-7.14%]">
@@ -168,9 +172,6 @@ export default function LinkIntroSheet({ open, onClose }: { open: boolean; onClo
               </div>
             </div>
           </div>
-          <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-            أضف بطاقتك الأولى
-          </p>
         </button>
       </div>
     </div>
