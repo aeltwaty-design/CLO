@@ -28,6 +28,25 @@ import scanGlyph from '../assets/icons/nav-scan.svg';
  * nickname, and a CTA that explains what's missing. The design marks this
  * region as a PCI iframe in production — validation here is prototype-side.
  */
+
+/** Valid-field tick — the tick-circle glyph masked in brand green
+    (the source asset is the bravo-purple pill variant). */
+function ValidTick({ show }: { show: boolean }) {
+  return (
+    <div
+      aria-hidden
+      className={`size-4 shrink-0 bg-brand-400 transition-opacity ${show ? 'opacity-100' : 'opacity-0'}`}
+      style={{
+        maskImage: `url("${iconTick}")`,
+        WebkitMaskImage: `url("${iconTick}")`,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+      }}
+    />
+  );
+}
 export default function AddCardScreen() {
   const navigate = useNavigate();
 
@@ -243,7 +262,7 @@ export default function AddCardScreen() {
               <div
                 className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${nameOk ? 'border-brand-400' : 'border-line'}`}
               >
-                <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${nameOk ? 'opacity-100' : 'opacity-0'}`} />
+                <ValidTick show={nameOk} />
                 <input
                   type="text"
                   dir="auto"
@@ -298,7 +317,7 @@ export default function AddCardScreen() {
                 <div
                   className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${cvvOk ? 'border-brand-400' : 'border-line'}`}
                 >
-                  <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${cvvOk ? 'opacity-100' : 'opacity-0'}`} />
+                  <ValidTick show={cvvOk} />
                   <input
                     ref={cvvRef}
                     type="text"
@@ -318,7 +337,7 @@ export default function AddCardScreen() {
                 <div
                   className={`flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${expOk ? 'border-brand-400' : 'border-line'}`}
                 >
-                  <img alt="" src={iconTick} className={`size-4 shrink-0 transition-opacity ${expOk ? 'opacity-100' : 'opacity-0'}`} />
+                  <ValidTick show={expOk} />
                   <input
                     type="text"
                     inputMode="numeric"
