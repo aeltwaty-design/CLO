@@ -55,15 +55,12 @@ export default function AddCardScreen() {
   const [expiry, setExpiry] = useState(''); // MM/YY progressive
   const [cvv, setCvv] = useState('');
   const [nickOpen, setNickOpen] = useState(false);
-  const [hint, setHint] = useState('');
-  const [shakeKey, setShakeKey] = useState(0);
   const cvvRef = useRef<HTMLInputElement>(null);
 
   const nameOk = name.trim().length >= 3;
   const numOk = digits.length === 16;
   const expOk = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry);
   const cvvOk = /^\d{3}$/.test(cvv);
-  const allOk = nameOk && numOk && expOk && cvvOk;
 
   const scheme = digits.startsWith('4') ? 'visa' : digits.startsWith('5') ? 'mc' : null;
   const groupedPreview = digits
@@ -78,26 +75,9 @@ export default function AddCardScreen() {
     setExpiry(raw.length >= 3 ? `${raw.slice(0, 2)}/${raw.slice(2)}` : raw);
     if (raw.length === 4) cvvRef.current?.focus();
   };
-  const submit = () => {
-    if (allOk) {
-      navigate('/cashback/success');
-      return;
-    }
-    setHint(
-      !nameOk
-        ? 'اكتب اسم حامل البطاقة'
-        : !numOk
-          ? 'أكمل رقم البطاقة (16 رقم)'
-          : !expOk
-            ? 'أدخل تاريخ انتهاء صحيح MM/YY'
-            : 'أدخل رمز CVV (3 أرقام)',
-    );
-    setShakeKey((k) => k + 1);
-  };
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <style>{'@keyframes field-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}'}</style>
       <div className="h-full overflow-y-auto pb-[121px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
@@ -281,18 +261,7 @@ export default function AddCardScreen() {
               <div
                 className={`flex h-9 w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid bg-surface px-4 py-2 transition-colors ${numOk ? 'border-brand-400' : 'border-line'}`}
               >
-                <div className="relative flex shrink-0 items-center justify-center leading-none">
-                  <div className="flex-none -scale-y-100">
-                    <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] place-items-start">
-                      <div
-                        className="relative col-1 row-1 ml-[-3.35px] mt-[-10.39px] h-[31.137px] w-[38.702px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[3.351px_10.393px] mask-size-[32px_10.35px]"
-                        style={{ maskImage: `url("${visaMask}")` }}
-                      >
-                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={visaLogo} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ValidTick show={numOk} />
                 <input
                   type="text"
                   inputMode="numeric"
@@ -384,27 +353,16 @@ export default function AddCardScreen() {
       {/* ⛴️ Pinned dock + home indicator */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start bg-surface">
         <div className="flex w-full shrink-0 flex-col items-start gap-2 px-4 pb-4 pt-2.5">
+          {/* demo mode: the CTA always proceeds — no data required */}
           <button
-            key={shakeKey}
             type="button"
-            onClick={submit}
-            className={`flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl px-4 py-2.5 transition-colors ${
-              allOk ? 'bg-brand-400' : 'bg-surface-disabled'
-            }`}
-            style={hint && !allOk ? { animation: 'field-shake 300ms ease' } : undefined}
+            onClick={() => navigate('/cashback/success')}
+            className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
           >
-            <p
-              className={`shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] ${allOk ? 'text-ink-inverse' : 'text-ink-quadrant'}`}
-              dir="auto"
-            >
+            <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
               أضف البطاقة
             </p>
           </button>
-          {hint && !allOk && (
-            <p role="status" className="w-full text-center text-xs font-normal leading-[1.5] text-ink-danger" dir="auto">
-              {hint}
-            </p>
-          )}
         </div>
         <div className="relative h-[34px] w-full shrink-0">
           <div className="absolute bottom-2 left-[calc(50%+0.5px)] h-[5px] w-[134px] -translate-x-1/2 rounded-full bg-ink" />
