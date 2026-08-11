@@ -155,10 +155,10 @@ export default function AddCardScreen() {
           </div>
         </div>
 
-        {/* flow step dots (sheet = 1, form = 2) */}
+        {/* flow step dots (RTL: step 1 rightmost, active step 2 to its left) */}
         <div className="flex w-full items-center justify-center gap-1.5 pt-2" aria-hidden>
-          <div className="size-1.5 rounded-full bg-line" />
           <div className="h-1.5 w-4 rounded-full bg-brand-400" />
+          <div className="size-1.5 rounded-full bg-line" />
         </div>
 
         {/* Content */}
