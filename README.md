@@ -33,7 +33,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   rows and voucher tiles open the تسوّق واربح sheet (its copy/CTA switch after
   linking); the cashback page's tier card expands/collapses via its chevron.
 - Tab bar المحفظة → `/cards` (zero-balance wallet before linking, populated
-  after) → `الكل` → `/transactions` → row tap opens the details sheet.
+  after) → `الكل` → `/transactions` → row tap opens the details sheet. The
+  populated wallet pulls the expiring-cashback note out of the balance card
+  into a compact nudge («عندك 50 ﷼ تنتهي 25 ديسمبر» + «حوّلها الحين») whose
+  CTA presets the 50 ﷼ and enters the withdrawal flow.
 - `/cards/manage` — «البطاقات المضافة» (from the wallet's البطاقات tile or the
   sheet's إدارة البطاقات); `?cards=3` demos the three-card cap state.
 - **Withdrawal «سحب الكاش باك»** — wallet tile «تحويل لحساب بنكي» →
@@ -96,7 +99,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   withdrawal fee-transparency line nudges the two filled amount captures
   (`27_10685`/`27_10836`) a few tenths above their old floor, and the extra
   seeded success capture (`27_11148-receipt`, ≈14%) intentionally deviates:
-  it renders the receipt block over the plain drawn frame.
+  it renders the receipt block over the plain drawn frame. The populated
+  wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
+  expiring-cashback line moved out of the balance card into the compact
+  nudge section, shifting the content below it.
 
 ## Conventions (important before editing)
 

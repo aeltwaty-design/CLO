@@ -109,8 +109,13 @@ export default function CardsScreen() {
   const navigate = useNavigate();
   // repeat-withdrawal shortcut: once an account is on file (completed or
   // seeded withdrawal), the transfer tile skips straight to the amount step
-  const { account } = useWithdraw();
+  const { account, setAmount } = useWithdraw();
   const withdrawTo = account ? '/withdraw/amount' : '/withdraw/account';
+  // expiring-cashback CTA: preset the drawn expiring 50 ﷼ and enter the flow
+  const sendExpiring = () => {
+    setAmount(50);
+    navigate(withdrawTo);
+  };
   return (
     <div className="relative h-full overflow-hidden">
       <div className="h-full overflow-y-auto bg-surface">
@@ -140,7 +145,7 @@ export default function CardsScreen() {
             <div className="flex shrink-0 flex-col items-start gap-3">
               {/* Total cashback card */}
               <div
-                className="relative flex h-[147px] w-[343px] shrink-0 flex-col items-start gap-2 rounded-2xl px-4 pb-12 pt-4"
+                className="relative flex w-[343px] shrink-0 flex-col items-start gap-2 rounded-2xl p-4"
                 style={{ backgroundImage: 'linear-gradient(129.55369715485523deg, rgb(0, 206, 139) 3.0145%, rgb(0, 104, 70) 71.253%)' }}
               >
                 <div className="flex w-full shrink-0 flex-col items-end">
@@ -156,42 +161,45 @@ export default function CardsScreen() {
                   </div>
                   <p className="font-en whitespace-nowrap text-[36px] font-bold not-italic leading-[54px] text-ink-inverse">560.50</p>
                 </div>
-                <div className="flex w-full shrink-0 items-center justify-end gap-px">
-                  <div className="relative flex h-[18.288px] w-[83.062px] shrink-0 items-center justify-center">
-                    <div className="flex-none rotate-[-0.2deg]">
-                      <p className="whitespace-nowrap text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
-                        .. لا تخليها تروح
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex h-[18.333px] w-[96.062px] shrink-0 items-center justify-center">
-                    <div className="flex-none rotate-[-0.2deg]">
-                      <p className="whitespace-nowrap text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
-                        {'تنتهي '}
-                        <span className="font-en">25</span>
-                        {' ديسمبر '}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 items-center justify-end gap-0.5 whitespace-nowrap leading-[1.5] text-ink-inverse">
-                    <p className="shrink-0 text-center text-xs font-normal" dir="auto">
-                      ﷼
-                    </p>
-                    <p className="font-en shrink-0 text-xs font-normal" dir="auto">
-                      50
-                    </p>
-                  </div>
-                  <div className="relative flex h-[18.107px] w-[31.062px] shrink-0 items-center justify-center">
-                    <div className="flex-none rotate-[-0.2deg]">
-                      <p className="whitespace-nowrap text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
-                        عندك
-                      </p>
-                    </div>
-                  </div>
-                </div>
                 <div className="absolute left-[13px] top-[13px] size-9 overflow-clip">
                   <div className="absolute inset-[9.38%]">
                     <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconQuestion} />
+                  </div>
+                </div>
+              </div>
+
+              {/* ⏳ Expiring cashback — compact nudge with a direct transfer CTA
+                  (user direction: moved out of the balance card) */}
+              <div
+                className="flex w-[343px] shrink-0 items-center justify-between gap-3 rounded-2xl bg-warning-50 px-4 py-3"
+                data-testid="expiring-section"
+              >
+                <button
+                  type="button"
+                  onClick={sendExpiring}
+                  className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg bg-brand-400 px-3 py-2"
+                >
+                  <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
+                    حوّلها الحين
+                  </p>
+                </button>
+                <div className="flex min-w-px flex-[1_0_0] items-center justify-end gap-2">
+                  <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-0.5 text-right leading-[1.5]">
+                    <p className="w-full text-xs font-medium text-ink" dir="rtl">
+                      {'عندك '}
+                      <span className="font-en">50</span>
+                      {' ﷼ تنتهي '}
+                      <span className="font-en">25</span>
+                      {' ديسمبر'}
+                    </p>
+                    <p className="w-full text-xs font-normal text-ink-tertiary" dir="auto">
+                      لا تخليها تروح
+                    </p>
+                  </div>
+                  <div className="relative size-5 shrink-0 overflow-clip">
+                    <div className="absolute inset-[10%]">
+                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconClock} />
+                    </div>
                   </div>
                 </div>
               </div>
