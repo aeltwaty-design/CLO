@@ -292,7 +292,7 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
         </div>
 
         {data.pill === 'neutral' && (
-          <div className="flex shrink-0 items-start justify-center">
+          <div className="relative flex shrink-0 items-start justify-center">
             <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-surface-neutral py-0.5 pl-2 pr-1.5">
               <p className="whitespace-nowrap text-center text-[0px] font-medium leading-none text-ink" dir="auto">
                 <span className="text-[12px] leading-[1.5]">{'كاش باك '}</span>
@@ -306,7 +306,7 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
         )}
         {data.pill === 'link' && (
           <div className="flex w-full shrink-0 items-start justify-center">
-            <div className="flex shrink-0 items-start justify-center">
+            <div className="relative flex shrink-0 items-start justify-center">
               <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-brand-50 py-0.5 pl-1.5 pr-2">
                 <div className="relative size-3 shrink-0">
                   <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCardOutline} />
@@ -319,7 +319,7 @@ function MerchantCard({ data, onOpen }: { data: CardData; onOpen: () => void }) 
           </div>
         )}
         {data.pill === 'linked' && (
-          <div className="flex shrink-0 items-start justify-center">
+          <div className="relative flex shrink-0 items-start justify-center">
             <div className="flex shrink-0 items-center justify-center gap-1 rounded-sm bg-bravo-50 py-0.5 pl-2 pr-1.5">
               <p className="whitespace-nowrap text-center text-[0px] font-medium leading-none text-bravo-500" dir="auto">
                 <span className="text-[12px] leading-[1.5]">{'كاش باك '}</span>
