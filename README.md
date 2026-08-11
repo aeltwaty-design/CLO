@@ -36,6 +36,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   after) → `الكل` → `/transactions` → row tap opens the details sheet.
 - `/cards/manage` — «البطاقات المضافة» (from the wallet's البطاقات tile or the
   sheet's إدارة البطاقات); `?cards=3` demos the three-card cap state.
+- **Withdrawal «سحب الكاش باك»** — wallet tile «تحويل لحساب بنكي» →
+  `/withdraw/account` (radio enables the CTA; «حساب بنكي جديد» → the add-bank
+  form with رقم الحساب/IBAN modes and the beneficiary-bank sheet) →
+  `/withdraw/amount` (quick chips, «أقصى مبلغ» = balance − fee = 559.5, daily
+  limit 1,000) → `/withdraw/summary` (fee 1 + VAT 0.15; info popovers) →
+  `/withdraw/pin` (6 digits; the fingerprint key opens the Touch ID overlay,
+  `?touchid=1` deep-links it) → `/withdraw/status?ok=1/0`. Demo rule: PIN
+  `000000` shows the failure status, anything else succeeds. State seeds:
+  `?waccount=1`, `?wamount=50`.
 - Fresh loads always start **before linking** (scenario 1); the linking journey
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).

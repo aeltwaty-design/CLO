@@ -37,11 +37,42 @@ const SCREENS = [
   ['/transactions?linked=1', '1_11098', 812, 'openTxSheet', 717],
   ['/store/ikea?linked=0', '1_9993', 812, 'openOfferSheet'],
   ['/store/ikea?linked=1', '1_10105', 812, 'openOfferSheet'],
+  // سحب الكاش باك — withdrawal flow (section 27:9923). The two fully-filled
+  // new-account frames (27_10174, 27_11293) are interaction-verified but not
+  // auto-gated: their captures would need the exact drawn form values.
+  ['/withdraw/account', '27_9927', 812],
+  ['/withdraw/account', '27_10402', 812, 'selectAccount'],
+  ['/withdraw/new-account', '27_10059', 812],
+  ['/withdraw/new-account', '27_10288', 812, 'ibanMode'],
+  ['/withdraw/new-account', '27_11408', 812, 'openBankSheet', 754],
+  ['/withdraw/amount?waccount=1', '27_10534', 812],
+  ['/withdraw/amount?waccount=1', '27_10685', 812, 'amount50'],
+  ['/withdraw/amount?waccount=1', '27_10836', 812, 'amountMax'],
+  ['/withdraw/summary?waccount=1&wamount=50', '27_10987', 812],
+  ['/withdraw/pin', '27_11214', 812],
+  ['/withdraw/pin?touchid=1', '27_11251', 812],
+  ['/withdraw/status?ok=1', '27_11148', 812],
+  ['/withdraw/status?ok=0', '27_11167', 812],
 ];
 
 const ACTIONS = {
   async expandTiers(page) {
     await page.click('button[aria-expanded]');
+  },
+  async selectAccount(page) {
+    await page.locator('button', { hasText: 'حمود الخضر' }).first().click();
+  },
+  async ibanMode(page) {
+    await page.locator('text=IBAN').first().click();
+  },
+  async openBankSheet(page) {
+    await page.locator('text=بنك المستفيد').first().click();
+  },
+  async amount50(page) {
+    await page.locator('button', { hasText: /^50$/ }).click();
+  },
+  async amountMax(page) {
+    await page.locator('button', { hasText: 'أقصى مبلغ' }).click();
   },
   async openTxSheet(page) {
     await page.locator('button', { hasText: '08:30' }).first().click();

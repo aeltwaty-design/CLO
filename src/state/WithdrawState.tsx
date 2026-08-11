@@ -26,8 +26,12 @@ type WithdrawState = {
 const Ctx = createContext<WithdrawState | null>(null);
 
 export function WithdrawProvider({ children }: { children: ReactNode }) {
-  const [account, setAccount] = useState<BankAccount | null>(null);
-  const [amount, setAmount] = useState(0);
+  // ?waccount=1 / ?wamount=50 seed the state for deep links + the QA gate
+  const params = new URLSearchParams(window.location.search);
+  const [account, setAccount] = useState<BankAccount | null>(
+    params.get('waccount') === '1' ? REGISTERED_ACCOUNT : null,
+  );
+  const [amount, setAmount] = useState(Number(params.get('wamount')) || 0);
   return <Ctx.Provider value={{ account, setAccount, amount, setAmount }}>{children}</Ctx.Provider>;
 }
 
