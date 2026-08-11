@@ -55,7 +55,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   contains the IFRAME annotation wash we intentionally replace with real
   fields. Note: Figma's `get_screenshot` caps exports at 1024px — the intro
   ref is stitched from sub-node renders (`1_10239.orig-1024cap.png` kept), and
-  the script DPR-matches any ref still narrower than 375.
+  the script DPR-matches any ref still narrower than 375. The Market screens
+  also read a few points higher than the floor by design: per user direction
+  every merchant card uses the same tag look (1:7980 before / 1:8338 after),
+  while the reference frames mix in link-CTA and underlay tags.
 
 ## Conventions (important before editing)
 

@@ -41,17 +41,20 @@ type CardData = {
   storeId: string;
 };
 
+/* Per user direction (2026-08-11): every card uses the same tag look —
+   neutral «كاش باك X%» before linking (1:7980), lavender tick after (1:8338) —
+   instead of the frames' mixed link-CTA/underlay tags. */
 const beforeGrid: CardData[] = [
   { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', pill: 'neutral', cashbackPct: 5, featured: true, ribbon: 'bottom', badges: ['shop', 'global'], storeId: 'hm' },
   { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: ['global'], storeId: 'ikea' },
-  { name: 'بنده', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'link', badges: [], storeId: 'panda' },
-  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'link', badges: [], storeId: 'zara' },
-  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'centrepoint' },
-  { name: 'دانكن دونتس', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'dunkin' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'link', badges: [], storeId: 'ikea' },
+  { name: 'بنده', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'panda' },
+  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'neutral', cashbackPct: 5, badges: [], storeId: 'zara' },
+  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'centrepoint' },
+  { name: 'دانكن دونتس', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 5, badges: [], storeId: 'dunkin' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'neutral', cashbackPct: 10, badges: [], storeId: 'ikea' },
 ];
 
 /** After-link grid (Figma 1:8238): 12 cards, lavender tick pills on the first four. */
@@ -60,14 +63,14 @@ const afterGrid: CardData[] = [
   { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: ['global'], storeId: 'ikea' },
   { name: 'إتش آند إم', category: 'الأزياء والملابس', photo: photoHm, photoFit: 'cover', pill: 'linked', cashbackPct: 10, featured: true, ribbon: 'top', badges: ['shop', 'global'], storeId: 'hm' },
   { name: 'إيكيا', category: 'المنزل والأثاث', photo: photoIkea, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: ['global'], storeId: 'ikea' },
-  { name: 'باندا', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'none', badges: [], storeId: 'panda' },
-  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'none', badges: [], storeId: 'zara' },
-  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'centrepoint' },
-  { name: 'إضافي', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'centrepoint' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
-  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'none', badges: [], storeId: 'ikea' },
+  { name: 'باندا', nameEn: true, category: 'المنزل والأثاث', photo: photoPanda, photoFit: 'contain', pill: 'linked', cashbackPct: 10, badges: [], storeId: 'panda' },
+  { name: 'زارا', nameEn: true, category: 'الأزياء والملابس', photo: photoZara, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'zara' },
+  { name: 'سنتربوينت', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 10, badges: [], storeId: 'centrepoint' },
+  { name: 'إضافي', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 10, badges: [], storeId: 'centrepoint' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'ikea' },
+  { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'ikea' },
 ];
 
 /** Market screen scrollable content (Figma 1:7890 before / 1:8238 after card link). */
