@@ -1,10 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppState } from '../state/AppState';
+import { usePhase } from '../state/PhaseState';
 import iconClose from '../assets/figma/77832851b14d0014584c317e4f6da6aaba991b57.svg';
 import heroCards from '../assets/figma/b4ee0f8753c19b40ccfa4d1d2ab5f3fd3d853273.svg';
 import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.svg';
 import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
 import iconPlus from '../assets/figma/1782ca329908717a3751d66c5fff07ae32e411f5.svg';
+
+/** Entry-point gate: in Phase 2 the FIRST «add card» tap opens the intro
+    sheet over the screen it was tapped on (and marks it seen); later taps —
+    and all of Phase 1 — go straight to the form. Consumers wire their CTA to
+    `startLinking` and render `<LinkIntroSheet open={introOpen}
+    onClose={closeIntro} />` at the screen root (the sheet's default CTA then
+    navigates to the form). */
+export function useLinkIntroGate() {
+  const navigate = useNavigate();
+  const phase = usePhase();
+  const { introSeen, setIntroSeen } = useAppState();
+  const [introOpen, setIntroOpen] = useState(false);
+  const startLinking = () => {
+    if (phase === 2 && !introSeen) {
+      setIntroSeen(true);
+      setIntroOpen(true);
+      return;
+    }
+    navigate('/cashback/add-card');
+  };
+  return { introOpen, startLinking, closeIntro: () => setIntroOpen(false) };
+}
 
 const STEPS = [
   { title: 'ضفها مرة وحدة', desc: 'إضافة آمنة لبطاقتك' },

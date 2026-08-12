@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TabBar from '../../components/TabBar';
+import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import { useAppState } from '../../state/AppState';
 // ── status bar ──
 import statusBarMask from '../../assets/figma/863c90e2bcf523e5186af44ac3700298ea5b0759.svg';
@@ -685,6 +686,8 @@ function WalaOneBar() {
 export default function WalletScreen() {
   const navigate = useNavigate();
   const { cardLinked } = useAppState();
+  // first-time add-card gate: the intro sheet rises over the wallet itself
+  const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-y-auto">
@@ -698,7 +701,7 @@ export default function WalletScreen() {
             </div>
           ) : (
             <>
-              <LinkPromoBanner onLink={() => navigate('/cashback/add-card')} />
+              <LinkPromoBanner onLink={startLinking} />
               <div className="flex w-full shrink-0 flex-col items-start">
                 <TransactionsBlock />
               </div>
@@ -708,6 +711,7 @@ export default function WalletScreen() {
         {cardLinked && <WalaOneBar />}
       </div>
       <TabBar active="wallet" />
+      <LinkIntroSheet open={introOpen} onClose={closeIntro} />
     </div>
   );
 }

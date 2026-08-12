@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../../components/Riyal';
 import { useAppState } from '../../state/AppState';
+import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 // cashback-strip assets (shared with the Points Wallet's after state)
 import stripBackArrow from '../../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
 import stripCardIcon from '../../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
@@ -199,6 +200,8 @@ import svVector77 from '../../assets/figma/b0d7de10fd04001395971932bd6a1ab65f4ac
  * opacity-0 in the design and is skipped.
  */
 export default function HomeScreen() {
+  // first-time add-card gate: the intro sheet rises over Home itself
+  const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-x-hidden overflow-y-auto">
@@ -208,7 +211,7 @@ export default function HomeScreen() {
         <div className="relative flex w-full flex-col items-start gap-7 px-4 pb-[104px] pt-6">
           <SavingsCard />
           <DailyOffersSection />
-          <AddCardPromo />
+          <AddCardPromo onStart={startLinking} />
           <FavoriteStoresEmpty />
           <GroceryBanner />
           <FoodOffersSection />
@@ -219,6 +222,7 @@ export default function HomeScreen() {
         </div>
       </div>
       <TabBar active="home" />
+      <LinkIntroSheet open={introOpen} onClose={closeIntro} />
     </div>
   );
 }
@@ -1268,9 +1272,10 @@ function HomeCashbackStrip({ onOpen }: { onOpen: () => void }) {
   );
 }
 
-/** Add-card promo (47:4067) — CTA enters the add-card flow; once the card is
-    linked the slot renders the cashback strip instead. */
-function AddCardPromo() {
+/** Add-card promo (47:4067) — CTA enters the add-card flow (first time via
+    the intro sheet over Home); once the card is linked the slot renders the
+    cashback strip instead. */
+function AddCardPromo({ onStart }: { onStart: () => void }) {
   const navigate = useNavigate();
   const { cardLinked } = useAppState();
   if (cardLinked) return <HomeCashbackStrip onOpen={() => navigate('/cards')} />;
@@ -1295,7 +1300,7 @@ function AddCardPromo() {
       <div className="flex w-full shrink-0 items-center justify-center gap-3">
         <button
           type="button"
-          onClick={() => navigate('/cashback/add-card')}
+          onClick={onStart}
           className="flex h-[30px] min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-surface px-2"
         >
           <div className="relative size-4 shrink-0">

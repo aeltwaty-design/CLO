@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../components/Riyal';
+import LinkIntroSheet, { useLinkIntroGate } from '../components/LinkIntroSheet';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -43,7 +44,9 @@ import promoCoinLeft from '../assets/figma/60106800a3373f468a41e5dcae3c98300cd4f
 
 /** البطاقات المضافة — one linked card, no cashback yet (Figma 1:10520). */
 export function CardsEmpty() {
-  const navigate = useNavigate();
+  // Phase 1 keeps the direct-to-form behavior (user direction); Phase 2 gates
+  // the first tap behind the intro sheet over this screen
+  const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
   return (
     <div className="relative h-full overflow-hidden">
       {/* pb = dock block (12 + 41 CTA + 34 indicator) so content can scroll clear */}
@@ -60,8 +63,8 @@ export function CardsEmpty() {
         </div>
       </div>
 
-      {/* user is already in the cards context — skip the intro, open the form directly */}
-      <AddCardDock onAdd={() => navigate('/cashback/add-card')} />
+      <AddCardDock onAdd={startLinking} />
+      <LinkIntroSheet open={introOpen} onClose={closeIntro} />
     </div>
   );
 }
