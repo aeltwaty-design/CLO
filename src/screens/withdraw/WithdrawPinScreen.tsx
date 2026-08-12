@@ -9,6 +9,7 @@ import statusTime from '../../assets/figma/0df437cb81db5679e48b4bd0954f6de88d23f
 import iconFingerprint from '../../assets/figma/8370fb142b4eb35213caa1af694be0784a8b2fc3.svg';
 import touchIdSheet from '../../assets/figma/68e6eda014aecbfa361d59ca1f31505c7c011d41.svg';
 import { useWithdraw, REGISTERED_ACCOUNT } from '../../state/WithdrawState';
+import Riyal from '../../components/Riyal';
 
 /** The design draws six PIN indicators (Figma 27:11216-27:11221). */
 const PIN_LENGTH = 6;

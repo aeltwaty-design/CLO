@@ -76,10 +76,12 @@
   }
 }
 
-/* ── Phase tabs (demo chrome) ──
-   Desktop shell only: Phase 1 / Phase 2 switcher above the phone frame.
-   Hidden at phone-sized viewports so full-bleed captures stay 1:1. */
-.phase-tabs {
+/* ── Phase tabs + demo controls (demo chrome) ──
+   Desktop shell only: Phase switcher and the demo control panel above the
+   phone frame. Hidden at phone-sized viewports so full-bleed captures stay
+   1:1 with the refs. */
+.phase-tabs,
+.demo-controls {
   display: none;
 }
 
@@ -90,7 +92,96 @@
   }
 
   .phone-frame {
-    height: min(var(--frame-h), calc(100dvh - 96px));
+    height: min(var(--frame-h), calc(100dvh - 160px));
+  }
+
+  .demo-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    max-width: 720px;
+  }
+
+  .demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .demo-label {
+    margin-right: 2px;
+    font: 500 11px/1.5 var(--font-en);
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .demo-sep {
+    width: 1px;
+    height: 16px;
+    margin: 0 4px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .demo-row button,
+  .demo-row select {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    border: none;
+    font: 500 12px/1.5 var(--font-en);
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+  }
+
+  .demo-row select {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .demo-row button[aria-pressed='true'] {
+    background: #fff;
+    color: #17172a;
+  }
+
+  .demo-row .demo-reset {
+    background: rgba(255, 99, 99, 0.15);
+    color: #ffb4b4;
+  }
+
+  .demo-cheats {
+    text-align: center;
+    font: 400 11px/1.6 var(--font-en);
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .demo-cheats summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .demo-cheats summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .demo-cheats[open] summary {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .demo-cheats p {
+    max-width: 620px;
+    margin-top: 6px;
+  }
+
+  .demo-cheats code {
+    padding: 0 4px;
+    border-radius: 4px;
+    font-family: var(--font-en);
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
   }
 
   .phase-tabs {

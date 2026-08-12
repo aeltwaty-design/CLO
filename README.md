@@ -62,6 +62,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - Fresh loads always start **before linking** (scenario 1); the linking journey
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).
+- **Prototype controls** — under the Phase tabs the desktop shell carries a
+  demo panel (hidden at phone widths, so the QA gate never sees it):
+  a live **Before card / After card** toggle (`setCardLinked`, no reload — the
+  current screen re-renders in the other state), a **Withdraw demo** shortcut
+  (seeds account + 50 ﷼ and lands mid-flow), a **3 cards** cap shortcut, a
+  **Jump to screen…** menu of every seeded deep link, a collapsible **Demo
+  rules** cheat-sheet (PIN codes + seed params), and **↺ Reset** — a full
+  factory reset (clears the per-tab state and returns to Phase 2, before
+  linking, Home).
 - **Phase tabs** — the desktop shell shows a Phase 2 / Phase 1 switcher above
   the phone frame; **Phase 2 is the default tab**. Screens branch on
   `usePhase()` (`src/state/PhaseState.tsx`); Phase 1 stays the frozen
@@ -157,6 +166,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   padding app-wide.
 - Figma strokes are inside the frame box; where a bordered element's design
   height is known, pin `h-[Npx]` instead of relying on padding+border math.
+- **Type-check with `npx tsc -b`** (what `npm run build` runs). The root
+  `tsconfig.json` is solution-style (`"files": []`), so a bare
+  `npx tsc --noEmit` checks nothing and always exits 0.
 
 ## Known fidelity notes
 
