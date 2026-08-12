@@ -128,6 +128,15 @@ function DemoControls() {
           ))}
         </select>
       </div>
+      <div className="demo-group">
+        <span className="demo-label">Cashback wallet</span>
+        <button type="button" onClick={() => jump('/cards?linked=0')}>
+          Empty state
+        </button>
+        <button type="button" onClick={() => jump('/cards?linked=1')}>
+          Filled state
+        </button>
+      </div>
       <button
         type="button"
         className="demo-reset"
