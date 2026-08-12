@@ -5,10 +5,10 @@ type AppState = {
   /** Drives the before/after card-link variants of Market and Store details. */
   cardLinked: boolean;
   setCardLinked: (v: boolean) => void;
-  /** Phase 2: the linking intro sheet has been shown once this demo run —
-      any first "add card" entry shows it before the form, later ones skip it. */
-  introSeen: boolean;
-  setIntroSeen: (v: boolean) => void;
+  /** Phase 2: `?intro=0` suppresses the recurring linking-intro sheet (QA /
+      deep links). The sheet otherwise shows on every add-card entry until
+      the first card is linked. */
+  introSuppressed: boolean;
 };
 
 const Ctx = createContext<AppState | null>(null);
@@ -23,13 +23,13 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     return override === '1';
   });
 
-  // ?intro=0 marks the intro as already seen (deep links / QA)
-  const [introSeen, setIntroSeen] = useState(
+  // ?intro=0 suppresses the linking-intro sheet (deep links / QA)
+  const [introSuppressed] = useState(
     () => new URLSearchParams(window.location.search).get('intro') === '0',
   );
 
   return (
-    <Ctx.Provider value={{ cardLinked, setCardLinked, introSeen, setIntroSeen }}>{children}</Ctx.Provider>
+    <Ctx.Provider value={{ cardLinked, setCardLinked, introSuppressed }}>{children}</Ctx.Provider>
   );
 }
 

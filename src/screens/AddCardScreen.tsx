@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import statusBattery from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import statusBatteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import statusBatteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -53,14 +53,16 @@ function ValidTick({ show }: { show: boolean }) {
 export default function AddCardScreen() {
   const navigate = useNavigate();
   const phase = usePhase();
-  const { introSeen, setIntroSeen } = useAppState();
-  // Phase 2: whatever entry point led here, the FIRST time shows the intro
-  // sheet over the form; dismissing it (CTA or backdrop) marks it seen
-  const [introOpen, setIntroOpen] = useState(phase === 2 && !introSeen);
-  const dismissIntro = () => {
-    setIntroSeen(true);
-    setIntroOpen(false);
-  };
+  const location = useLocation();
+  const { cardLinked, introSuppressed } = useAppState();
+  // Phase 2 fallback for COLD arrivals only (direct deep link — no origin
+  // screen carried the sheet): location.key is 'default' on the session's
+  // first history entry. In-app entries get the sheet over their origin
+  // screen instead, so no double-show here.
+  const [introOpen, setIntroOpen] = useState(
+    phase === 2 && !cardLinked && !introSuppressed && location.key === 'default',
+  );
+  const dismissIntro = () => setIntroOpen(false);
 
   const [name, setName] = useState('');
   const [digits, setDigits] = useState(''); // card number, digits only

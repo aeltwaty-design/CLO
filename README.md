@@ -97,14 +97,14 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `File:Saudi_Riyal_Symbol.svg` masked in `currentColor`, so all 21 sites
   inherit their surrounding text size/color; Phase-1 rendering is
   byte-identical).
-- **Phase 2: first-time linking intro** — the **first** «add card» tap per
-  demo run opens the intro bottom sheet **over the screen it was tapped on**
-  (Home promo → over Home, Points-Wallet promo → over the wallet, manage
-  cards → over that list; `useLinkIntroGate` in `LinkIntroSheet.tsx`); its
-  CTA then continues to the form. Dismissing any way marks it seen — later
-  entries go straight to the form. The Market's «ابدأ» sheet counts as the
-  intro (no double-sheet), a direct form deep link shows it over the form
-  itself, `?intro=0` seeds "already seen", and Phase 1 keeps its original
+- **Phase 2: linking intro until the first card** — every «add card» tap
+  opens the intro bottom sheet **over the screen it was tapped on** (Home
+  promo → over Home, Points-Wallet promo → over the wallet, manage cards →
+  over that list; `useLinkIntroGate` in `LinkIntroSheet.tsx`) for as long as
+  **no card has been added yet**; its CTA continues to the form. Once the
+  first card is linked, every entry goes straight to the form. A cold form
+  deep link shows the sheet over the form itself (in-app arrivals never
+  double-show), `?intro=0` suppresses it, and Phase 1 keeps its original
   flows.
 - **Phase 2: المحفظة Points Wallet** (Figma 54:10152 before / 54:10497 after
   linking) — the app's main wallet is **points**; cashback is the second

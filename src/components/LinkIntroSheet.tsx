@@ -8,20 +8,19 @@ import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.s
 import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
 import iconPlus from '../assets/figma/1782ca329908717a3751d66c5fff07ae32e411f5.svg';
 
-/** Entry-point gate: in Phase 2 the FIRST «add card» tap opens the intro
-    sheet over the screen it was tapped on (and marks it seen); later taps —
-    and all of Phase 1 — go straight to the form. Consumers wire their CTA to
-    `startLinking` and render `<LinkIntroSheet open={introOpen}
-    onClose={closeIntro} />` at the screen root (the sheet's default CTA then
-    navigates to the form). */
+/** Entry-point gate: in Phase 2, EVERY «add card» tap opens the intro sheet
+    over the screen it was tapped on for as long as no card has been added
+    yet; once the first card is linked — and in all of Phase 1 — taps go
+    straight to the form. Consumers wire their CTA to `startLinking` and
+    render `<LinkIntroSheet open={introOpen} onClose={closeIntro} />` at the
+    screen root (the sheet's default CTA then navigates to the form). */
 export function useLinkIntroGate() {
   const navigate = useNavigate();
   const phase = usePhase();
-  const { introSeen, setIntroSeen } = useAppState();
+  const { cardLinked, introSuppressed } = useAppState();
   const [introOpen, setIntroOpen] = useState(false);
   const startLinking = () => {
-    if (phase === 2 && !introSeen) {
-      setIntroSeen(true);
+    if (phase === 2 && !cardLinked && !introSuppressed) {
       setIntroOpen(true);
       return;
     }
