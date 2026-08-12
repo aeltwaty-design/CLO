@@ -76,6 +76,44 @@
   }
 }
 
+/* ── Phase tabs (demo chrome) ──
+   Desktop shell only: Phase 1 / Phase 2 switcher above the phone frame.
+   Hidden at phone-sized viewports so full-bleed captures stay 1:1. */
+.phase-tabs {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .phone-frame {
+    height: min(var(--frame-h), calc(100dvh - 96px));
+  }
+
+  .phase-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .phase-tabs button {
+    padding: 5px 18px;
+    border-radius: 9999px;
+    font: 500 13px/1.5 var(--font-en);
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .phase-tabs button[aria-selected='true'] {
+    background: #fff;
+    color: #17172a;
+  }
+}
+
 /* Hide scrollbars inside the frame (native-app feel) */
 .phone-frame,
 .phone-frame * {

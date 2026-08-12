@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { AppStateProvider } from './state/AppState';
 import { WithdrawProvider } from './state/WithdrawState';
+import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 
 /**
@@ -24,18 +25,41 @@ function DiffOverlay() {
   );
 }
 
+/** Demo chrome (desktop shell only): switch between the two prototype
+    versions. A switch hard-navigates so each phase starts at scenario 1. */
+function PhaseTabs() {
+  const phase = usePhase();
+  const go = (p: Phase) => {
+    if (p === phase) return;
+    sessionStorage.setItem('cashback-phase', String(p));
+    window.location.href = `/market?phase=${p}`;
+  };
+  return (
+    <div className="phase-tabs" role="tablist" aria-label="Prototype version">
+      {([1, 2] as const).map((p) => (
+        <button key={p} type="button" role="tab" aria-selected={phase === p} onClick={() => go(p)}>
+          Phase {p}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function App() {
   return (
-    <AppStateProvider>
-      <WithdrawProvider>
-        <div className="app-shell">
-          <div className="phone-frame">
-            <RouterProvider router={router} />
-            <DiffOverlay />
+    <PhaseProvider>
+      <AppStateProvider>
+        <WithdrawProvider>
+          <div className="app-shell">
+            <PhaseTabs />
+            <div className="phone-frame">
+              <RouterProvider router={router} />
+              <DiffOverlay />
+            </div>
           </div>
-        </div>
-      </WithdrawProvider>
-    </AppStateProvider>
+        </WithdrawProvider>
+      </AppStateProvider>
+    </PhaseProvider>
   );
 }
 
