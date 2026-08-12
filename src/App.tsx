@@ -104,6 +104,9 @@ function DemoControls() {
       </div>
       <div className="demo-group">
         <span className="demo-label">Shortcuts</span>
+        <button type="button" onClick={() => jump('/home', 2)}>
+          Home
+        </button>
         <button type="button" onClick={() => jump('/withdraw/amount?linked=1&waccount=1&wamount=50')}>
           Withdraw demo
         </button>
