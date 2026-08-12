@@ -92,66 +92,74 @@
   }
 
   .phone-frame {
-    height: min(var(--frame-h), calc(100dvh - 160px));
+    height: min(var(--frame-h), calc(100dvh - 96px));
+  }
+
+  /* frame + demo sidebar side by side */
+  .stage {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 
   .demo-controls {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    max-width: 720px;
+    align-items: stretch;
+    gap: 16px;
+    width: 200px;
   }
 
-  .demo-row {
+  .demo-group {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     gap: 6px;
   }
 
   .demo-label {
-    margin-right: 2px;
+    margin-bottom: 2px;
     font: 500 11px/1.5 var(--font-en);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: rgba(255, 255, 255, 0.35);
   }
 
-  .demo-sep {
-    width: 1px;
-    height: 16px;
-    margin: 0 4px;
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .demo-row button,
-  .demo-row select {
-    padding: 4px 12px;
+  .demo-controls button,
+  .demo-controls select {
+    padding: 6px 14px;
     border-radius: 9999px;
     border: none;
     font: 500 12px/1.5 var(--font-en);
     color: rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.08);
     cursor: pointer;
+    text-align: center;
   }
 
-  .demo-row select {
+  .demo-controls select {
     appearance: none;
     -webkit-appearance: none;
+    /* dark native popup so the option list is legible */
+    color-scheme: dark;
   }
 
-  .demo-row button[aria-pressed='true'] {
+  .demo-controls select option {
+    background: #17172a;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .demo-controls button[aria-pressed='true'] {
     background: #fff;
     color: #17172a;
   }
 
-  .demo-row .demo-reset {
+  .demo-controls .demo-reset {
     background: rgba(255, 99, 99, 0.15);
     color: #ffb4b4;
   }
 
   .demo-cheats {
-    text-align: center;
+    text-align: left;
     font: 400 11px/1.6 var(--font-en);
     color: rgba(255, 255, 255, 0.45);
   }
@@ -172,7 +180,6 @@
   }
 
   .demo-cheats p {
-    max-width: 620px;
     margin-top: 6px;
   }
 

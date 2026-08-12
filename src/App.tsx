@@ -93,15 +93,17 @@ function DemoControls() {
 
   return (
     <div className="demo-controls">
-      <div className="demo-row">
-        <span className="demo-label">Card</span>
+      <div className="demo-group">
+        <span className="demo-label">Card state</span>
         <button type="button" aria-pressed={!cardLinked} onClick={() => setCardLinked(false)}>
           Before card
         </button>
         <button type="button" aria-pressed={cardLinked} onClick={() => setCardLinked(true)}>
           After card
         </button>
-        <span className="demo-sep" aria-hidden />
+      </div>
+      <div className="demo-group">
+        <span className="demo-label">Shortcuts</span>
         <button type="button" onClick={() => jump('/withdraw/amount?linked=1&waccount=1&wamount=50')}>
           Withdraw demo
         </button>
@@ -125,18 +127,17 @@ function DemoControls() {
             </option>
           ))}
         </select>
-        <span className="demo-sep" aria-hidden />
-        <button
-          type="button"
-          className="demo-reset"
-          onClick={() => {
-            sessionStorage.clear();
-            window.location.href = '/';
-          }}
-        >
-          ↺ Reset
-        </button>
       </div>
+      <button
+        type="button"
+        className="demo-reset"
+        onClick={() => {
+          sessionStorage.clear();
+          window.location.href = '/';
+        }}
+      >
+        ↺ Reset
+      </button>
       <details className="demo-cheats">
         <summary>Demo rules</summary>
         <p>
@@ -157,10 +158,12 @@ function App() {
         <WithdrawProvider>
           <div className="app-shell">
             <PhaseTabs />
-            <DemoControls />
-            <div className="phone-frame">
-              <RouterProvider router={router} />
-              <DiffOverlay />
+            <div className="stage">
+              <div className="phone-frame">
+                <RouterProvider router={router} />
+                <DiffOverlay />
+              </div>
+              <DemoControls />
             </div>
           </div>
         </WithdrawProvider>
