@@ -95,14 +95,17 @@
     height: min(var(--frame-h), calc(100dvh - 96px));
   }
 
-  /* frame + demo sidebar side by side */
+  /* The sidebar hangs off the frame's right edge (absolute) so the frame —
+     and the Phase tabs above it — stay exactly centered in the viewport. */
   .stage {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    position: relative;
   }
 
   .demo-controls {
+    position: absolute;
+    left: calc(100% + 48px);
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: stretch;
