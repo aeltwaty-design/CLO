@@ -20,6 +20,9 @@ import iconTick from '../assets/figma/7d6f0d889568034a1bc416ccaf53f71b77fc8c92.s
 import mcLeft from '../assets/figma/84efa261a92f472ca4a430de051b4ad5331aeb74.svg';
 import mcRight from '../assets/figma/0b6592b92012268404532c0c0c7429b794e1a004.svg';
 import scanGlyph from '../assets/icons/nav-scan.svg';
+import LinkIntroSheet from '../components/LinkIntroSheet';
+import { useAppState } from '../state/AppState';
+import { usePhase } from '../state/PhaseState';
 
 /**
  * إضافة بطاقة — card-linking form (Figma 1:10416 "linking card", 375×812),
@@ -49,6 +52,15 @@ function ValidTick({ show }: { show: boolean }) {
 }
 export default function AddCardScreen() {
   const navigate = useNavigate();
+  const phase = usePhase();
+  const { introSeen, setIntroSeen } = useAppState();
+  // Phase 2: whatever entry point led here, the FIRST time shows the intro
+  // sheet over the form; dismissing it (CTA or backdrop) marks it seen
+  const [introOpen, setIntroOpen] = useState(phase === 2 && !introSeen);
+  const dismissIntro = () => {
+    setIntroSeen(true);
+    setIntroOpen(false);
+  };
 
   const [name, setName] = useState('');
   const [digits, setDigits] = useState(''); // card number, digits only
@@ -368,6 +380,8 @@ export default function AddCardScreen() {
           <div className="absolute bottom-2 left-[calc(50%+0.5px)] h-[5px] w-[134px] -translate-x-1/2 rounded-full bg-ink" />
         </div>
       </div>
+
+      <LinkIntroSheet open={introOpen} onClose={dismissIntro} onStart={dismissIntro} />
     </div>
   );
 }

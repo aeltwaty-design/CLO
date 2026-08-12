@@ -19,7 +19,17 @@ const STEPS = [
  * step 1 sits rightmost), trust chips, terms, one CTA.
  * The /cashback/intro route still serves the full-screen original.
  */
-export default function LinkIntroSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function LinkIntroSheet({
+  open,
+  onClose,
+  onStart,
+}: {
+  open: boolean;
+  onClose: () => void;
+  /** Overrides the CTA: when the sheet is already shown over the add-card
+      form (Phase-2 first-time gate), starting just dismisses it. */
+  onStart?: () => void;
+}) {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
 
@@ -156,6 +166,10 @@ export default function LinkIntroSheet({ open, onClose }: { open: boolean; onClo
         <button
           type="button"
           onClick={() => {
+            if (onStart) {
+              onStart();
+              return;
+            }
             onClose();
             navigate('/cashback/add-card');
           }}
