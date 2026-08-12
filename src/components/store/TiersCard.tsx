@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Riyal from '../Riyal';
 import emojiTierLow from '../../assets/figma/080c4083e4543452fb07d15565275044df9f7b4e.svg';
 import emojiTierMid from '../../assets/figma/d11b139800133c7d0499e0b1759c17c2e3953749.svg';
 import emojiTierTop from '../../assets/figma/a46ad780ca561487da54526ddda1e0c201794ccc.svg';
@@ -67,20 +68,25 @@ export default function TiersCard() {
             10%
           </p>
           <p className="absolute right-[53px] top-[57px] translate-x-1/2 whitespace-nowrap text-center font-en text-xs font-normal leading-[1.5] text-ink-tertiary" dir="auto">
-            500 - 999 ﷼
+            {'500 - 999 '}
+            <Riyal />
           </p>
           <p className="absolute right-[154.5px] top-[39px] translate-x-1/2 whitespace-nowrap text-center font-en text-xs font-semibold leading-[1.5] text-ink" dir="rtl">
             15%
           </p>
           <p className="absolute right-[155px] top-[57px] translate-x-1/2 whitespace-nowrap text-center font-en text-xs font-normal leading-[1.5] text-ink-tertiary" dir="auto">
-            1,000 - 2,999 ﷼
+            {'1,000 - 2,999 '}
+            <Riyal />
           </p>
           <p className="absolute right-[259.5px] top-[39px] translate-x-1/2 whitespace-nowrap text-center font-en text-xs font-semibold leading-[1.5] text-ink" dir="rtl">
             20%
           </p>
           <p className="absolute right-[259.5px] top-[57px] translate-x-1/2 whitespace-nowrap text-center font-en text-[0px] font-normal leading-[0] text-ink-tertiary" dir="auto">
             <span className="font-sans text-xs not-italic leading-[1.5]">+</span>
-            <span className="text-xs leading-[1.5]">{' 3,000 ﷼'}</span>
+            <span className="text-xs leading-[1.5]">
+              {' 3,000 '}
+              <Riyal />
+            </span>
           </p>
         </div>
         <button
@@ -101,7 +107,10 @@ export default function TiersCard() {
                   <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
                     <span className="text-xs leading-[1.5]">{'من '}</span>
                     <span className="font-en text-xs not-italic leading-[1.5]">{'500 لــ 999 '}</span>
-                    <span className="text-xs leading-[1.5]">{'﷼ يرجع لك '}</span>
+                    <span className="text-xs leading-[1.5]">
+                      <Riyal />
+                      {' يرجع لك '}
+                    </span>
                     <span className="font-en text-xs font-semibold not-italic leading-[1.5]">10%</span>
                   </p>
                 </div>
@@ -116,7 +125,10 @@ export default function TiersCard() {
                   <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
                     <span className="text-xs leading-[1.5]">{'من '}</span>
                     <span className="font-en text-xs not-italic leading-[1.5]">{'1,000 لــ 2,999 '}</span>
-                    <span className="text-xs leading-[1.5]">{'﷼ يرجع لك '}</span>
+                    <span className="text-xs leading-[1.5]">
+                      <Riyal />
+                      {' يرجع لك '}
+                    </span>
                     <span className="font-en text-xs font-semibold not-italic leading-[1.5]">15%</span>
                   </p>
                 </div>
@@ -131,7 +143,11 @@ export default function TiersCard() {
                   <p className="whitespace-nowrap text-right text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
                     <span className="text-xs leading-[1.5]">{'فوق '}</span>
                     <span className="font-en text-xs not-italic leading-[1.5]">3,000</span>
-                    <span className="text-xs leading-[1.5]">{' ﷼ يرجع لك '}</span>
+                    <span className="text-xs leading-[1.5]">
+                      {' '}
+                      <Riyal />
+                      {' يرجع لك '}
+                    </span>
                     <span className="font-en text-xs font-semibold not-italic leading-[1.5]">20%</span>
                   </p>
                 </div>

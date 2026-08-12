@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Riyal from '../components/Riyal';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -486,7 +487,8 @@ function TransactionDetailsSheet({ tx, onClose }: { tx: Tx; onClose: () => void 
                 label="قيمة العملية"
                 value={
                   <p className="font-en whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="rtl">
-                    200 ﷼
+                    {'200 '}
+                    <Riyal />
                   </p>
                 }
               />

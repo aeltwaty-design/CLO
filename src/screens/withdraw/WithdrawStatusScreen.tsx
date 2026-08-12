@@ -7,6 +7,7 @@ import {
   WITHDRAW_VAT,
 } from '../../state/WithdrawState';
 import statusBarMask from '../../assets/figma/863c90e2bcf523e5186af44ac3700298ea5b0759.svg';
+import Riyal from '../../components/Riyal';
 import successHalo from '../../assets/figma/c86d0ccdbe4f6abff26435432e86ed008852d86b.svg';
 import successBadge from '../../assets/figma/a70622922533649e4fca73589acc38f85c06d0cd.svg';
 import successCheck from '../../assets/figma/f3e5d497d8cb9c79e2027f7fa9e62de66f4b9492.svg';
@@ -179,7 +180,9 @@ export default function WithdrawStatusScreen() {
               <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-tertiary" dir="rtl" data-testid="receipt-line">
                 {'تم سحب '}
                 <span className="font-en font-medium text-ink">{fmt(amount)}</span>
-                {' ﷼ إلى حساب '}
+                {' '}
+                <Riyal />
+                {' إلى حساب '}
                 <span className="font-en text-ink" dir="ltr">
                   {recipient.masked}
                 </span>
@@ -242,7 +245,8 @@ export default function WithdrawStatusScreen() {
               >
                 {'رصيدك بعد السحب: '}
                 <span className="font-en font-medium text-ink">{fmt(remaining)}</span>
-                {' ﷼'}
+                {' '}
+                <Riyal />
               </p>
             </>
           )}

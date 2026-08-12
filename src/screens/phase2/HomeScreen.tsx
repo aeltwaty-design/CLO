@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Riyal from '../../components/Riyal';
 import TabBar from '../../components/TabBar';
 // ── header assets ──
 import chip3dServices from '../../assets/figma/c36caeba00fb8eb98e69d0d6753d5fec74a8e0ab.png';
@@ -267,7 +268,7 @@ function HomeHeader() {
           >
             <div className="flex w-full items-center gap-1 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink">
               <p className="relative shrink-0" dir="auto">
-                ﷼
+                <Riyal />
               </p>
               <p className="font-en relative shrink-0" dir="auto">
                 0
@@ -366,7 +367,10 @@ function CategoryTile({ icon, label, badge }: { icon: string; label: string; bad
         <div className="absolute left-[calc(50%+0.15px)] top-[-7px] flex w-[41.961px] -translate-x-1/2 flex-col items-center">
           <div className="flex shrink-0 items-start justify-center gap-0.5 overflow-clip whitespace-nowrap rounded-full bg-brand-400 px-2 py-[0.5px] text-center text-[9px] text-ink-inverse shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
             <div className="flex shrink-0 items-center font-bold">
-              <p className="whitespace-pre leading-[13.5px]" dir="ltr">{`﷼  `}</p>
+              <p className="whitespace-pre leading-[13.5px]" dir="ltr">
+                <Riyal />
+                {'  '}
+              </p>
               <p className="font-en leading-[13.5px]" dir="ltr">
                 50
               </p>
@@ -610,12 +614,13 @@ function SavingsCard() {
           </p>
           <div className="relative h-[30px] w-5 shrink-0">
             <p className="absolute inset-0 whitespace-nowrap text-center text-[24px] font-bold leading-[1.4] text-[#e85d07]" dir="auto">
-              ﷼
+              <Riyal />
             </p>
           </div>
         </div>
         <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-tertiary" dir="ltr">
-          {'هذا الشهر: ﷼ '}
+          {'هذا الشهر: '}
+          <Riyal />{' '}
           <span className="font-en">50</span>
         </p>
       </div>

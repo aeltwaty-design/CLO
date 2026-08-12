@@ -148,7 +148,9 @@ export default function WithdrawPinScreen() {
             >
               {'سحب '}
               <span className="font-en">{amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
-              {' ﷼ إلى '}
+              {' '}
+              <Riyal />
+              {' إلى '}
               <span className="font-en">{recipient.masked}</span>
             </p>
           )}

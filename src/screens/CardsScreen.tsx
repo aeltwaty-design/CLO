@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWithdraw } from '../state/WithdrawState';
+import Riyal from '../components/Riyal';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -156,7 +157,7 @@ export default function CardsScreen() {
                 <div className="flex w-full shrink-0 items-center justify-end gap-2">
                   <div className="relative h-[38px] w-[25.333px] shrink-0">
                     <p className="absolute inset-0 whitespace-nowrap text-center text-[25.33px] font-normal leading-[1.5] text-ink-inverse" dir="auto">
-                      ﷼
+                      <Riyal />
                     </p>
                   </div>
                   <p className="font-en whitespace-nowrap text-[36px] font-bold not-italic leading-[54px] text-ink-inverse">560.50</p>
@@ -188,7 +189,9 @@ export default function CardsScreen() {
                     <p className="w-full text-xs font-medium text-ink" dir="rtl">
                       {'عندك '}
                       <span className="font-en">50</span>
-                      {' ﷼ تنتهي '}
+                      {' '}
+                      <Riyal />
+                      {' تنتهي '}
                       <span className="font-en">25</span>
                       {' ديسمبر'}
                     </p>
@@ -271,7 +274,7 @@ export default function CardsScreen() {
               <div className="flex w-full shrink-0 flex-col items-start gap-2 text-right leading-[1.5]">
                 <div className="flex w-full shrink-0 items-center justify-end gap-2 whitespace-nowrap text-xl text-ink">
                   <p className="shrink-0 font-bold" dir="rtl">
-                    ﷼
+                    <Riyal />
                   </p>
                   <p className="font-en shrink-0 font-bold" dir="rtl">
                     120.00

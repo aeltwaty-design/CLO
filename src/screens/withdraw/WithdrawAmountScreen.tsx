@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Riyal from '../../components/Riyal';
 import iconBack from '../../assets/figma/fd6f26534a87f4d8bbe62b710db8bf509383bda4.svg';
 import iconEdit from '../../assets/figma/30a8a7af34a2a4266156e3e7d5cbeb76da909206.svg';
 import iconInfoCircle from '../../assets/figma/624fb13967c449288b47a1c491ebbe53f0d2eead.svg';
@@ -148,7 +149,7 @@ export default function WithdrawAmountScreen() {
                       <div className="flex shrink-0 items-center justify-center gap-0.5">
                         <div className="relative h-4 w-[10.667px] shrink-0">
                           <p className="absolute inset-0 whitespace-nowrap text-center text-[10.67px] font-normal leading-[1.5] text-brand-400" dir="auto">
-                            ﷼
+                            <Riyal />
                           </p>
                         </div>
                         <p className="whitespace-nowrap text-center text-[0px] font-medium leading-none" dir="auto">
@@ -223,7 +224,9 @@ export default function WithdrawAmountScreen() {
                 >
                   {'المخصوم من رصيدك: '}
                   <span className="font-en font-medium text-ink">{fmt(amount + WITHDRAW_FEE + WITHDRAW_VAT)}</span>
-                  {' ﷼ (رسوم التحويل + الضريبة)'}
+                  {' '}
+                  <Riyal />
+                  {' (رسوم التحويل + الضريبة)'}
                 </p>
               )}
             </div>
