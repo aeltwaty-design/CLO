@@ -97,6 +97,19 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `File:Saudi_Riyal_Symbol.svg` masked in `currentColor`, so all 21 sites
   inherit their surrounding text size/color; Phase-1 rendering is
   byte-identical).
+- **Phase 2 · transition phase 1 (points → cashback)** — the wallet begins
+  its migration toward cashback-only. Balances are **live app state**
+  (`AppState`: 5,000 pts / 560.50 ﷼ defaults, `?pts=` seed): the Points
+  Wallet's «حول نقاطك» action and «استخدمها» pill open the **converter**
+  (10 pts = 1 ﷼, preset chips ربع/نص/كل with live preview and an in-sheet
+  success); after linking, the wallet carries a full green **cashback card**
+  (live balance, «هذا الشهر +120», expiring chip) whose **«استخدمها»** opens
+  the **redemption hub** — تحويل بنكي (the real withdrawal flow), شراء قسائم
+  and إهداء لصديق as live demo redemptions that move the balance, plus شحن
+  جوال and تبرع as «قريباً» tiles. Home's savings counter becomes the live
+  cashback counter after linking (→ cashback wallet) and the expiring nudge
+  surfaces on Home. The withdrawal flow itself keeps its pixel-pinned drawn
+  values (560.50 world) regardless of conversions.
 - **Phase 2: linking intro until the first card** — every «add card» tap
   opens the intro bottom sheet **over the screen it was tapped on** (Home
   promo → over Home, Points-Wallet promo → over the wallet, manage cards →
@@ -156,8 +169,11 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   capture (`47_3538`, ≈9.6%) is a coarse smoke diff, not a fine gate: its
   reference is the full-node export downscaled ~0.4× by the 1024px cap and
   cropped out of the padded canvas, so glyph/photo resampling dominates. Its
-  linked sibling (`47_3538-linked`, ≈12%) additionally carries the derived
-  after-state (560.50 pill + cashback strip) against the before-only ref. The populated
+  linked sibling (`47_3538-linked`, ≈18%) additionally carries the derived
+  after-state (live pill + cashback strip + cashback counter + expiring
+  nudge) against the before-only ref. Transition phase 1 also moves the two
+  wallet captures by design: `54_10152` ≈4% (points rebased to 5,000) and
+  `54_10497` ≈20% (the drawn viola strip becomes the green cashback card). The populated
   wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
   nudge section, shifting the content below it.

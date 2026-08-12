@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Riyal from '../../components/Riyal';
 import { useAppState } from '../../state/AppState';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
+import { useWithdraw } from '../../state/WithdrawState';
+import iconClockNudge from '../../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
+
+const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 // cashback-strip assets (shared with the Points Wallet's after state)
 import stripBackArrow from '../../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
 import stripCardIcon from '../../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
@@ -202,6 +206,7 @@ import svVector77 from '../../assets/figma/b0d7de10fd04001395971932bd6a1ab65f4ac
 export default function HomeScreen() {
   // first-time add-card gate: the intro sheet rises over Home itself
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
+  const { cardLinked } = useAppState();
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-x-hidden overflow-y-auto">
@@ -212,6 +217,7 @@ export default function HomeScreen() {
           <SavingsCard />
           <DailyOffersSection />
           <AddCardPromo onStart={startLinking} />
+          {cardLinked && <ExpiringNudge />}
           <FavoriteStoresEmpty />
           <GroceryBanner />
           <FoodOffersSection />
@@ -247,7 +253,7 @@ function useRestScroll(align: 'end' | 'center' = 'end') {
     promo banner + dots, category tiles, white sheet with search + chips. */
 function HomeHeader() {
   const navigate = useNavigate();
-  const { cardLinked } = useAppState();
+  const { cardLinked, cashback } = useAppState();
   const chipsRef = useRestScroll();
   return (
     <div className="relative h-[585px] w-full shrink-0 rounded-bl-[40px] rounded-br-[40px] bg-[#daebe4]">
@@ -284,7 +290,7 @@ function HomeHeader() {
                 <Riyal />
               </p>
               <p className="font-en relative shrink-0" dir="auto">
-                {cardLinked ? '560.50' : '0'}
+                {cardLinked ? fmtSar(cashback) : '0'}
               </p>
             </div>
           </button>
@@ -610,20 +616,31 @@ function DotsSmall() {
 
 /** ctg_01 (47:3726): total-savings card with the money-pot illustration. */
 function SavingsCard() {
+  const navigate = useNavigate();
+  const { cardLinked, cashback } = useAppState();
   return (
     <button
       type="button"
-      className="relative h-[90px] w-full shrink-0 overflow-clip rounded-2xl bg-surface-neutral text-start"
+      data-testid="home-cashback-counter"
+      onClick={cardLinked ? () => navigate('/cards') : undefined}
+      className={`relative h-[90px] w-full shrink-0 overflow-clip rounded-2xl bg-surface-neutral text-start ${
+        cardLinked ? 'cursor-pointer' : ''
+      }`}
     >
       <div className="absolute left-[126px] top-1/2 flex -translate-y-1/2 flex-col items-end justify-center">
         <div className="mb-[-1px] flex w-[78px] shrink-0 items-center justify-end">
           <p className="whitespace-nowrap text-right text-sm font-normal leading-[1.5] text-ink" dir="auto">
-            إجمالي المدخرات حتى الآن
+            {cardLinked ? 'كاش باك جمعته حتى الآن' : 'إجمالي المدخرات حتى الآن'}
           </p>
         </div>
         <div className="mb-[-1px] flex h-[35px] shrink-0 items-center gap-1">
-          <p className="font-en w-[85px] whitespace-nowrap text-right text-[24px] font-bold leading-[1.4] text-[#e85d07]" dir="auto">
-            15,000
+          <p
+            className={`font-en whitespace-nowrap text-right text-[24px] font-bold leading-[1.4] text-[#e85d07] ${
+              cardLinked ? '' : 'w-[85px]'
+            }`}
+            dir="auto"
+          >
+            {cardLinked ? fmtSar(cashback) : '15,000'}
           </p>
           <div className="relative h-[30px] w-5 shrink-0">
             <p className="absolute inset-0 whitespace-nowrap text-center text-[24px] font-bold leading-[1.4] text-[#e85d07]" dir="auto">
@@ -634,7 +651,7 @@ function SavingsCard() {
         <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-tertiary" dir="ltr">
           {'هذا الشهر: '}
           <Riyal />{' '}
-          <span className="font-en">50</span>
+          <span className="font-en">{cardLinked ? '120+' : '50'}</span>
         </p>
       </div>
       <div className="absolute right-[300.77px] top-[calc(50%+0.12px)] flex size-[26.233px] -translate-y-1/2 items-center justify-center">
@@ -1212,10 +1229,57 @@ function DailyOffersSection() {
   );
 }
 
+/** Expiring-cashback nudge surfaced on Home after linking (CardsScreen
+    pattern): «حوّلها الحين» presets the expiring 50 ﷼ into the withdrawal. */
+function ExpiringNudge() {
+  const navigate = useNavigate();
+  const { account, setAmount } = useWithdraw();
+  const send = () => {
+    setAmount(50);
+    navigate(account ? '/withdraw/amount' : '/withdraw/account');
+  };
+  return (
+    <div
+      className="flex w-full shrink-0 items-center justify-between gap-3 rounded-2xl bg-bravo-50 px-4 py-3"
+      data-testid="home-expiring-nudge"
+    >
+      <button
+        type="button"
+        onClick={send}
+        className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg bg-brand-400 px-3 py-2"
+      >
+        <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
+          حوّلها الحين
+        </p>
+      </button>
+      <div className="flex min-w-px flex-[1_0_0] items-center justify-end gap-2">
+        <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-0.5 text-right leading-[1.5]">
+          <p className="w-full text-xs font-medium text-ink" dir="rtl">
+            {'عندك '}
+            <span className="font-en">50</span> <Riyal />
+            {' تنتهي '}
+            <span className="font-en">25</span>
+            {' ديسمبر'}
+          </p>
+          <p className="w-full text-xs font-normal text-ink-tertiary" dir="auto">
+            لا تخليها تروح
+          </p>
+        </div>
+        <div className="relative size-5 shrink-0 overflow-clip">
+          <div className="absolute inset-[10%]">
+            <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconClockNudge} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** After linking, the promo slot becomes the cashback-total strip (derived
-    after-state — the Points Wallet idiom; 560.50 matches the cashback wallet
-    it opens, unlike the Wallet screen's strip which keeps its drawn 500). */
+    after-state — the Points Wallet idiom; live balance, matching the cashback
+    wallet it opens). */
 function HomeCashbackStrip({ onOpen }: { onOpen: () => void }) {
+  const { cashback } = useAppState();
   return (
     <button
       type="button"
@@ -1264,7 +1328,7 @@ function HomeCashbackStrip({ onOpen }: { onOpen: () => void }) {
             <span className="text-[17px] font-normal leading-none">
               <Riyal />
             </span>
-            <span className="font-en">560.50</span>
+            <span className="font-en">{fmtSar(cashback)}</span>
           </p>
         </div>
       </div>

@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TabBar from '../../components/TabBar';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
+import ConvertSheet from '../../components/ConvertSheet';
+import RedeemSheet from '../../components/RedeemSheet';
+import Riyal from '../../components/Riyal';
+
+const fmtPts = (n: number) => n.toLocaleString('en-US');
+const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 import { useAppState } from '../../state/AppState';
 // ── status bar ──
 import statusBarMask from '../../assets/figma/863c90e2bcf523e5186af44ac3700298ea5b0759.svg';
@@ -20,11 +27,9 @@ import iconFlash16 from '../../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8
 import iconSecurity16 from '../../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import promoWalletArt from '../../assets/figma/1f42f68b61fe6d35e616fc68f2a5baad32c33423.svg';
-// ── cashback strip (after linking) ──
-import backArrowStroke from '../../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
+// ── cashback card (after linking) ──
 import iconCard24 from '../../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
 import iconTrendUp from '../../assets/figma/a48ef43dadbf020f3a6c615ef0070de2a02b33be.svg';
-import sarSymbol from '../../assets/figma/89d423664289419e813c21ab700a25db3ff0144f.svg';
 // ── tabs + chips ──
 import iconCart20 from '../../assets/figma/dc54c8c0c41664277ae4d981d87b010f6a84ba2b.svg';
 import iconReceipt20 from '../../assets/figma/4302f8a12f0957461edfe25791837c13cc5a1a26.svg';
@@ -82,15 +87,17 @@ function PointsAction({
   ellipse,
   label,
   col,
+  onClick,
   children,
 }: {
   ellipse: string;
   label: string;
   col?: string;
+  onClick?: () => void;
   children: ReactNode;
 }) {
   return (
-    <button type="button" className={`flex shrink-0 flex-col items-center gap-1 ${col ?? ''}`}>
+    <button type="button" onClick={onClick} className={`flex shrink-0 flex-col items-center gap-1 ${col ?? ''}`}>
       <div className="relative flex size-10 shrink-0 items-center justify-center gap-2.5 overflow-clip rounded-full px-[17px] py-4 shadow-[0px_2px_8px_2px_rgba(0,0,0,0.1)]">
         <div aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-[rgba(255,255,255,0.1)] backdrop-blur-[6px]" />
         <div className="absolute left-[calc(50%+0.25px)] top-0 size-10 -translate-x-1/2">
@@ -108,9 +115,11 @@ function PointsAction({
   );
 }
 
-/** Green gradient points card (54:10247): WP coin + 500,000, «استخدمها» pill,
-    three circular actions. Blurred color blobs paint under the content. */
-function PointsCard() {
+/** Green gradient points card (54:10247): WP coin + live points balance
+    (transition phase 1 rebases the drawn 500,000 to 5,000), «استخدمها» pill,
+    three circular actions — «حول نقاطك» and the pill open the converter. */
+function PointsCard({ onConvert }: { onConvert: () => void }) {
+  const { points } = useAppState();
   return (
     <div className="relative flex w-full shrink-0 flex-col items-center justify-center gap-4 overflow-clip rounded-2xl bg-gradient-to-b from-[#002015] to-brand-400 px-4 py-6">
       <div className="absolute contents left-[-95px] top-[70px]">
@@ -122,16 +131,20 @@ function PointsCard() {
       <div className="relative flex h-11 w-[343px] shrink-0 flex-col items-center gap-0.5 px-[17px] py-px">
         <div className="flex shrink-0 items-center justify-center gap-2.5">
           <WpCoin size={38} src={coinLg} />
-          <p className="font-en whitespace-nowrap text-center text-[32px] font-semibold leading-[1.3] text-ink-inverse">
-            500,000
+          <p
+            className="font-en whitespace-nowrap text-center text-[32px] font-semibold leading-[1.3] text-ink-inverse"
+            data-testid="wallet-points-balance"
+          >
+            {fmtPts(points)}
           </p>
         </div>
       </div>
 
-      {/* «استخدمها» pill with the expiring-points note */}
+      {/* «استخدمها» pill with the expiring-points note — opens the converter */}
       <button
         type="button"
-        className="relative flex h-[61px] w-[299px] shrink-0 items-center justify-center gap-2.5 rounded-full px-[17px] py-3 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)]"
+        onClick={onConvert}
+        className="relative flex h-[61px] w-[299px] shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full px-[17px] py-3 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)]"
       >
         <div aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-[rgba(83,65,153,0.1)] backdrop-blur-[6px]" />
         <div className="relative flex shrink-0 items-start">
@@ -176,7 +189,7 @@ function PointsCard() {
 
       {/* circular actions — physical order حول / استبدل / اشحن */}
       <div className="relative flex w-[343px] shrink-0 items-start justify-center gap-5">
-        <PointsAction ellipse={ellipseGreen} label="حول نقاطك" col="w-[77.5px] px-[15px]">
+        <PointsAction ellipse={ellipseGreen} label="حول نقاطك" col="w-[77.5px] px-[15px]" onClick={onConvert}>
           <div className="relative size-6 shrink-0">
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSwap} />
           </div>
@@ -265,72 +278,100 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
   );
 }
 
-/** AFTER linking — viola «إجمالي الكاش باك» strip (54:10646). The whole strip
-    opens the cashback wallet. */
-function CashbackStrip({ onOpen }: { onOpen: () => void }) {
+/** Glyph painted white through its alpha mask (house mask-recolor pattern). */
+function WhiteGlyph({ src, size }: { src: string; size: number }) {
   return (
-    <button
-      type="button"
-      onClick={onOpen}
-      data-testid="cashback-strip"
-      className="relative flex w-full shrink-0 flex-col items-start gap-3 rounded-2xl bg-bravo-50 px-4 py-3"
+    <div
+      aria-hidden
+      className="shrink-0 bg-white"
+      style={{
+        width: size,
+        height: size,
+        maskImage: `url("${src}")`,
+        WebkitMaskImage: `url("${src}")`,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskSize: '100% 100%',
+        WebkitMaskSize: '100% 100%',
+      }}
+    />
+  );
+}
+
+/** Transition phase 1 — the cashback CARD (derived; grows out of the drawn
+    54:10646 strip): real-money identity below the points card. Live balance,
+    month delta, expiring chip, and the two actions «استخدمها» (redemption
+    hub) and «عملياتها» (cashback wallet). */
+function CashbackCard({
+  balance,
+  onRedeem,
+  onOps,
+}: {
+  balance: number;
+  onRedeem: () => void;
+  onOps: () => void;
+}) {
+  return (
+    <div
+      className="relative flex w-full shrink-0 flex-col gap-3 overflow-clip rounded-2xl p-4"
+      style={{ backgroundImage: 'linear-gradient(129.55deg, rgb(0, 206, 139) 3.01%, rgb(0, 104, 70) 71.25%)' }}
+      data-testid="wallet-cashback-card"
     >
-      <div className="absolute left-0 top-0 h-[49px] w-[343px] rounded-tl-2xl rounded-tr-2xl bg-[#cac6e7]" />
-      <div className="relative flex w-full shrink-0 flex-col items-end gap-[18px]">
-        {/* header band row: ← back + title + card icon */}
-        <div className="flex w-full items-center justify-between">
-          <div className="shrink-0 rounded-lg">
-            <div className="flex items-center justify-center gap-1 overflow-clip py-1.5">
-              <div className="relative size-4 shrink-0 overflow-clip">
-                <div className="absolute inset-[20%_15%] flex items-center justify-center" style={{ containerType: 'size' }}>
-                  <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
-                    <div className="relative size-full">
-                      <div className="absolute inset-[-2.23%_-2.6%]">
-                        <img alt="" className="block size-full max-w-none" src={backArrowStroke} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-[214px] shrink-0">
-            <div className="flex w-full items-center justify-end gap-2">
-              <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                إجمالي الكاش باك
-              </p>
-              <div className="relative size-6 shrink-0">
-                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCard24} />
-              </div>
-            </div>
-          </div>
+      {/* header: title right + card glyph */}
+      <div className="flex w-full items-center justify-between">
+        <WhiteGlyph src={iconCard24} size={24} />
+        <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+          الكاش باك
+        </p>
+      </div>
+      {/* balance */}
+      <div className="flex w-full items-center justify-end gap-1.5 text-ink-inverse">
+        <p className="text-[17px] font-normal leading-none">
+          <Riyal />
+        </p>
+        <p className="font-en whitespace-nowrap text-[28px] font-bold leading-[1.3]" data-testid="wallet-cashback-balance">
+          {fmtSar(balance)}
+        </p>
+      </div>
+      {/* month delta + expiring chip */}
+      <div className="flex w-full items-center justify-between">
+        <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1">
+          <p className="whitespace-nowrap text-[10px] font-medium leading-[1.5] text-ink-inverse" dir="rtl">
+            {'تنتهي 25 ديسمبر · '}
+            <span className="font-en">50</span> <Riyal />
+          </p>
         </div>
-        {/* figures row: هذا الشهر +120 ↗ · 500 ﷼ */}
-        <div className="flex w-full items-center justify-between">
-          <div className="flex shrink-0 flex-col items-start justify-center">
-            <p className="mb-[-1px] whitespace-nowrap text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              هذا الشهر
-            </p>
-            <div className="flex w-full items-center gap-0.5">
-              <p className="font-en whitespace-nowrap text-sm font-semibold leading-[1.5] text-bravo-500">120+</p>
-              <div className="relative size-[17px] shrink-0">
-                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconTrendUp} />
-              </div>
-            </div>
-          </div>
-          <div className="flex h-[34px] w-[67.97px] shrink-0 flex-col items-end">
-            <div className="flex w-full items-center justify-end gap-1">
-              <div className="relative size-[16.97px] shrink-0 overflow-clip">
-                <div className="absolute inset-[5.15%_11.13%_5.15%_9.6%]">
-                  <img alt="" className="absolute inset-0 block size-full max-w-none" src={sarSymbol} />
-                </div>
-              </div>
-              <p className="font-en whitespace-nowrap text-[24px] font-semibold leading-[1.4] text-ink">500</p>
-            </div>
-          </div>
+        <div className="flex shrink-0 items-center gap-1 text-ink-inverse">
+          <WhiteGlyph src={iconTrendUp} size={15} />
+          <p className="font-en whitespace-nowrap text-sm font-semibold leading-[1.5]">120+</p>
+          <p className="whitespace-nowrap text-xs font-normal leading-[1.5]" dir="auto">
+            هذا الشهر
+          </p>
         </div>
       </div>
-    </button>
+      {/* actions: عملياتها (left) · استخدمها (right, primary) */}
+      <div className="flex w-full items-stretch gap-2">
+        <button
+          type="button"
+          onClick={onOps}
+          className="flex h-9 min-w-px flex-[1_0_0] cursor-pointer items-center justify-center rounded-full border border-solid border-white/50"
+        >
+          <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
+            عملياتها
+          </p>
+        </button>
+        <button
+          type="button"
+          onClick={onRedeem}
+          data-testid="wallet-redeem-cta"
+          className="flex h-9 min-w-px flex-[1_0_0] cursor-pointer items-center justify-center rounded-full bg-white"
+        >
+          <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
+            استخدمها
+          </p>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -685,18 +726,25 @@ function WalaOneBar() {
  */
 export default function WalletScreen() {
   const navigate = useNavigate();
-  const { cardLinked } = useAppState();
+  const { cardLinked, cashback } = useAppState();
   // first-time add-card gate: the intro sheet rises over the wallet itself
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
+  // transition phase 1: converter + redemption hub
+  const [convertOpen, setConvertOpen] = useState(false);
+  const [redeemOpen, setRedeemOpen] = useState(false);
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-y-auto">
         <MaskStatusBar />
         <div className="flex w-full flex-col items-center gap-6 bg-surface px-4 py-5">
-          <PointsCard />
+          <PointsCard onConvert={() => setConvertOpen(true)} />
           {cardLinked ? (
             <div className="flex w-full shrink-0 flex-col items-start gap-[18px]">
-              <CashbackStrip onOpen={() => navigate('/cards')} />
+              <CashbackCard
+                balance={cashback}
+                onRedeem={() => setRedeemOpen(true)}
+                onOps={() => navigate('/cards')}
+              />
               <TransactionsBlock />
             </div>
           ) : (
@@ -712,6 +760,8 @@ export default function WalletScreen() {
       </div>
       <TabBar active="wallet" />
       <LinkIntroSheet open={introOpen} onClose={closeIntro} />
+      <ConvertSheet open={convertOpen} onClose={() => setConvertOpen(false)} />
+      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} />
     </div>
   );
 }

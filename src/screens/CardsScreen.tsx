@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWithdraw } from '../state/WithdrawState';
+import { useAppState } from '../state/AppState';
 import Riyal from '../components/Riyal';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -111,6 +112,9 @@ export default function CardsScreen() {
   // repeat-withdrawal shortcut: once an account is on file (completed or
   // seeded withdrawal), the transfer tile skips straight to the amount step
   const { account, setAmount } = useWithdraw();
+  // transition phase 1: live balance (default 560.50 = the drawn frame)
+  const { cashback } = useAppState();
+  const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const withdrawTo = account ? '/withdraw/amount' : '/withdraw/account';
   // expiring-cashback CTA: preset the drawn expiring 50 ﷼ and enter the flow
   const sendExpiring = () => {
@@ -160,7 +164,9 @@ export default function CardsScreen() {
                       <Riyal />
                     </p>
                   </div>
-                  <p className="font-en whitespace-nowrap text-[36px] font-bold not-italic leading-[54px] text-ink-inverse">560.50</p>
+                  <p className="font-en whitespace-nowrap text-[36px] font-bold not-italic leading-[54px] text-ink-inverse">
+                    {fmtSar(cashback)}
+                  </p>
                 </div>
                 <div className="absolute left-[13px] top-[13px] size-9 overflow-clip">
                   <div className="absolute inset-[9.38%]">
