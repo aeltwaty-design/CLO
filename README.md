@@ -86,7 +86,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   favorites empty state, grocery banner, food offers, «قسائم حصرية»,
   flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
   H&M/IKEA cards deep-link to their store pages. The shared `TabBar` gained
-  an `active` prop ('market' default, byte-identical for Phase 1).
+  an `active` prop ('market' default, byte-identical for Phase 1). **After
+  linking a card** Home reacts (derived state — no drawn after-frame): the
+  header pill reads the live 560.50 balance and the add-card promo becomes
+  the «إجمالي الكاش باك» strip (Wallet idiom) opening the cashback wallet.
 - **Phase 2: the new Saudi Riyal symbol** — everywhere Phase 1 renders the ﷼
   character (FF Shamel draws it as the «ريال» word ligature), Phase 2 renders
   the official new SAR symbol instead, via the shared phase-aware `<Riyal />`
@@ -143,7 +146,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   it renders the receipt block over the plain drawn frame. The Phase-2 Home
   capture (`47_3538`, ≈9.6%) is a coarse smoke diff, not a fine gate: its
   reference is the full-node export downscaled ~0.4× by the 1024px cap and
-  cropped out of the padded canvas, so glyph/photo resampling dominates. The populated
+  cropped out of the padded canvas, so glyph/photo resampling dominates. Its
+  linked sibling (`47_3538-linked`, ≈12%) additionally carries the derived
+  after-state (560.50 pill + cashback strip) against the before-only ref. The populated
   wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
   nudge section, shifting the content below it.

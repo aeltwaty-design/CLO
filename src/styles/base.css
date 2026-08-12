@@ -85,6 +85,14 @@
   display: none;
 }
 
+/* Full-bleed by default: the screens inside the frame are absolutely
+   positioned, so the stage must take the viewport width itself or the
+   frame collapses to zero at phone sizes. */
+.stage {
+  position: relative;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .app-shell {
     flex-direction: column;
@@ -98,7 +106,7 @@
   /* The sidebar hangs off the frame's right edge (absolute) so the frame —
      and the Phase tabs above it — stay exactly centered in the viewport. */
   .stage {
-    position: relative;
+    width: auto;
   }
 
   .demo-controls {

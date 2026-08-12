@@ -2,6 +2,11 @@ import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../../components/Riyal';
+import { useAppState } from '../../state/AppState';
+// cashback-strip assets (shared with the Points Wallet's after state)
+import stripBackArrow from '../../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
+import stripCardIcon from '../../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
+import stripTrendUp from '../../assets/figma/a48ef43dadbf020f3a6c615ef0070de2a02b33be.svg';
 import TabBar from '../../components/TabBar';
 // ── header assets ──
 import chip3dServices from '../../assets/figma/c36caeba00fb8eb98e69d0d6753d5fec74a8e0ab.png';
@@ -238,6 +243,7 @@ function useRestScroll(align: 'end' | 'center' = 'end') {
     promo banner + dots, category tiles, white sheet with search + chips. */
 function HomeHeader() {
   const navigate = useNavigate();
+  const { cardLinked } = useAppState();
   const chipsRef = useRestScroll();
   return (
     <div className="relative h-[585px] w-full shrink-0 rounded-bl-[40px] rounded-br-[40px] bg-[#daebe4]">
@@ -259,19 +265,22 @@ function HomeHeader() {
               </div>
             </div>
           </button>
-          {/* cashback pill — opens the cashback wallet (user direction) */}
+          {/* cashback pill — opens the cashback wallet; shows the live balance
+              once a card is linked (drawn 53px width kept for the 0 state) */}
           <button
             type="button"
             onClick={() => navigate('/cards')}
             aria-label="الكاش باك"
-            className="flex h-10 w-[53px] shrink-0 cursor-pointer flex-col items-start justify-center overflow-clip rounded-[100px] border border-solid border-[rgba(255,255,255,0.74)] bg-[rgba(246,246,246,0.74)] px-3"
+            className={`flex h-10 ${
+              cardLinked ? '' : 'w-[53px] '
+            }shrink-0 cursor-pointer flex-col items-start justify-center overflow-clip rounded-[100px] border border-solid border-[rgba(255,255,255,0.74)] bg-[rgba(246,246,246,0.74)] px-3`}
           >
             <div className="flex w-full items-center gap-1 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink">
               <p className="relative shrink-0" dir="auto">
                 <Riyal />
               </p>
               <p className="font-en relative shrink-0" dir="auto">
-                0
+                {cardLinked ? '560.50' : '0'}
               </p>
             </div>
           </button>
@@ -1199,9 +1208,72 @@ function DailyOffersSection() {
   );
 }
 
-/** Add-card promo (47:4067) — CTA enters the add-card flow. */
+/** After linking, the promo slot becomes the cashback-total strip (derived
+    after-state — the Points Wallet idiom; 560.50 matches the cashback wallet
+    it opens, unlike the Wallet screen's strip which keeps its drawn 500). */
+function HomeCashbackStrip({ onOpen }: { onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      data-testid="home-cashback-strip"
+      className="relative flex w-full shrink-0 cursor-pointer flex-col items-start gap-3 overflow-clip rounded-2xl bg-bravo-50 px-4 py-3"
+    >
+      <div className="absolute left-0 top-0 h-[49px] w-full rounded-tl-2xl rounded-tr-2xl bg-[#cac6e7]" />
+      <div className="relative flex w-full shrink-0 flex-col items-end gap-[18px]">
+        {/* header band: ← back glyph + title + card icon */}
+        <div className="flex w-full items-center justify-between">
+          <div className="relative size-4 shrink-0 overflow-clip">
+            <div className="absolute inset-[20%_15%] flex items-center justify-center" style={{ containerType: 'size' }}>
+              <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
+                <div className="relative size-full">
+                  <div className="absolute inset-[-2.23%_-2.6%]">
+                    <img alt="" className="block size-full max-w-none" src={stripBackArrow} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex shrink-0 items-center justify-end gap-2">
+            <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="auto">
+              إجمالي الكاش باك
+            </p>
+            <div className="relative size-6 shrink-0">
+              <img alt="" className="absolute inset-0 block size-full max-w-none" src={stripCardIcon} />
+            </div>
+          </div>
+        </div>
+        {/* figures: هذا الشهر +120 ↗ · 560.50 ﷼ */}
+        <div className="flex w-full items-center justify-between">
+          <div className="flex shrink-0 flex-col items-start justify-center">
+            <p className="mb-[-1px] whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+              هذا الشهر
+            </p>
+            <div className="flex w-full items-center gap-0.5">
+              <p className="font-en whitespace-nowrap text-sm font-semibold leading-[1.5] text-bravo-500">120+</p>
+              <div className="relative size-[17px] shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={stripTrendUp} />
+              </div>
+            </div>
+          </div>
+          <p className="flex items-center gap-1 whitespace-nowrap text-[24px] font-semibold leading-[1.4] text-ink">
+            <span className="text-[17px] font-normal leading-none">
+              <Riyal />
+            </span>
+            <span className="font-en">560.50</span>
+          </p>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+/** Add-card promo (47:4067) — CTA enters the add-card flow; once the card is
+    linked the slot renders the cashback strip instead. */
 function AddCardPromo() {
   const navigate = useNavigate();
+  const { cardLinked } = useAppState();
+  if (cardLinked) return <HomeCashbackStrip onOpen={() => navigate('/cards')} />;
   return (
     <section className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
       <div className="flex w-full shrink-0 items-center gap-2.5">
