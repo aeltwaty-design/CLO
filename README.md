@@ -62,13 +62,14 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - Fresh loads always start **before linking** (scenario 1); the linking journey
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).
-- **Phase tabs** — the desktop shell shows a Phase 1 / Phase 2 switcher above
-  the phone frame (`?phase=2` deep-links; the choice sticks per browser tab
-  via sessionStorage). Phase 2 is currently an exact duplicate of the
-  experience and is the divergence point for upcoming iterations — screens
-  branch on `usePhase()` (`src/state/PhaseState.tsx`). Switching restarts the
-  demo at scenario 1. Phone-sized viewports (and therefore the QA gate) hide
-  the switcher and resolve to Phase 1 unless seeded.
+- **Phase tabs** — the desktop shell shows a Phase 2 / Phase 1 switcher above
+  the phone frame; **Phase 2 is the default tab**. Phase 2 is currently an
+  exact duplicate of the experience and is the divergence point for upcoming
+  iterations — screens branch on `usePhase()` (`src/state/PhaseState.tsx`);
+  Phase 1 stays the frozen approved version. `?phase=` deep-links and the
+  choice sticks per browser tab via sessionStorage; switching restarts the
+  demo at scenario 1. The switcher is hidden at phone-sized viewports, and
+  the QA gate pins itself to Phase 1 via an init script.
 
 ## Design-sync toolchain
 

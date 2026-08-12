@@ -36,7 +36,7 @@ function PhaseTabs() {
   };
   return (
     <div className="phase-tabs" role="tablist" aria-label="Prototype version">
-      {([1, 2] as const).map((p) => (
+      {([2, 1] as const).map((p) => (
         <button key={p} type="button" role="tab" aria-selected={phase === p} onClick={() => go(p)}>
           Phase {p}
         </button>

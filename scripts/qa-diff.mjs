@@ -98,6 +98,9 @@ for (const [route, refId, height, action, cropBottom, outName] of SCREENS) {
   const dpr = refPeek.width < 374 ? refPeek.width / 375 : 1;
   const page = await browser.newPage({ viewport: { width: 375, height }, deviceScaleFactor: dpr });
   try {
+    // the gate always audits Phase 1 (the frozen approved experience);
+    // the app otherwise defaults to Phase 2, the working copy
+    await page.addInitScript(() => sessionStorage.setItem('cashback-phase', '1'));
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
     await page.evaluate(async () => {
       await document.fonts.ready;
