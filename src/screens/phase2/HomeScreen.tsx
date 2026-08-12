@@ -236,6 +236,7 @@ function useRestScroll(align: 'end' | 'center' = 'end') {
 /** Immersive header background (47:3620): mint block, greeting row, hero
     promo banner + dots, category tiles, white sheet with search + chips. */
 function HomeHeader() {
+  const navigate = useNavigate();
   const chipsRef = useRestScroll();
   return (
     <div className="relative h-[585px] w-full shrink-0 rounded-bl-[40px] rounded-br-[40px] bg-[#daebe4]">
@@ -257,9 +258,12 @@ function HomeHeader() {
               </div>
             </div>
           </button>
+          {/* cashback pill — opens the cashback wallet (user direction) */}
           <button
             type="button"
-            className="flex h-10 w-[53px] shrink-0 flex-col items-start justify-center overflow-clip rounded-[100px] border border-solid border-[rgba(255,255,255,0.74)] bg-[rgba(246,246,246,0.74)] px-3"
+            onClick={() => navigate('/cards')}
+            aria-label="الكاش باك"
+            className="flex h-10 w-[53px] shrink-0 cursor-pointer flex-col items-start justify-center overflow-clip rounded-[100px] border border-solid border-[rgba(255,255,255,0.74)] bg-[rgba(246,246,246,0.74)] px-3"
           >
             <div className="flex w-full items-center gap-1 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink">
               <p className="relative shrink-0" dir="auto">

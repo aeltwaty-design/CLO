@@ -78,6 +78,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
   H&M/IKEA cards deep-link to their store pages. The shared `TabBar` gained
   an `active` prop ('market' default, byte-identical for Phase 1).
+- **Phase 2: المحفظة Points Wallet** (Figma 54:10152 before / 54:10497 after
+  linking) — the app's main wallet is **points**; cashback is the second
+  wallet. In Phase 2 the tab bar's المحفظة opens `/wallet` (points): green
+  «500,000» points card with glass actions, then — before linking — the
+  «اربط بطاقتك» promo (CTA → the card form), or — after — the viola
+  «إجمالي الكاش باك 500 ﷼» strip, plus tabs/filters and the grouped points
+  transactions. The **cashback wallet** (`/cards`) is reached from that
+  strip and from the ﷼ pill in the Home header. Phase 1 keeps المحفظة →
+  `/cards` directly.
 
 ## Design-sync toolchain
 

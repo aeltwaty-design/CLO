@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import ScreenTransition from './ScreenTransition';
 import { PHASE } from '../state/PhaseState';
 import HomeScreen from '../screens/phase2/HomeScreen';
+import WalletScreen from '../screens/phase2/WalletScreen';
 import MarketScreen from '../screens/MarketScreen';
 import StoreRouter from '../screens/store/StoreRouter';
 import CashbackIntroScreen from '../screens/CashbackIntroScreen';
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       // Phase 2 lands on the Home tab; Phase 1 keeps the market entry
       { path: '/', element: <Navigate to={PHASE === 2 ? '/home' : '/market'} replace /> },
       { path: '/home', element: <HomeScreen /> },
+      { path: '/wallet', element: <WalletScreen /> },
       { path: '/market', element: <MarketScreen /> },
       { path: '/store/:id', element: <StoreRouter /> },
       { path: '/cashback/intro', element: <CashbackIntroScreen /> },

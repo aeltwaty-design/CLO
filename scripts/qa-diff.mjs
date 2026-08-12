@@ -60,6 +60,10 @@ const SCREENS = [
   // Phase 2 Home (47:3538, 375×2443). Ref is the capped full-node export
   // (~157px wide) so this runs as a DPR-matched smoke diff, not a fine gate.
   ['/home?phase=2', '47_3538', 2443],
+  // Phase 2 Wallet (points) — before 54:10152 (full 1685, capped ref → DPR
+  // smoke) / after 54:10497 (true 375×812 viewport frame)
+  ['/wallet?phase=2&linked=0', '54_10152', 1685],
+  ['/wallet?phase=2&linked=1', '54_10497', 812],
 ];
 
 const ACTIONS = {

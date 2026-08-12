@@ -1,0 +1,919 @@
+const imgWoCoin = "http://localhost:3845/assets/d471e0ac23e6ef4c0309ed841dcec76098fd8c8f.svg";
+const imgWoCoin1 = "http://localhost:3845/assets/1fc63f5f61f3f22b61f4543f37dec854ea9f0818.svg";
+const imgWoCoin = "http://localhost:3845/assets/d471e0ac23e6ef4c0309ed841dcec76098fd8c8f.svg";
+const imgWoCoin1 = "http://localhost:3845/assets/1fc63f5f61f3f22b61f4543f37dec854ea9f0818.svg";
+const imgMedia = "http://localhost:3845/assets/6dedcd791b30b76750f5c949e275384ca26de5e0.png";
+const imgEllipse2977 = "http://localhost:3845/assets/fbc7f3ce06113005d0e39cdc99820760ef452381.png";
+const imgAvatar = "http://localhost:3845/assets/932e7b4602f1cc673079f43957f538f27d65cec7.png";
+const imgEllipse2979 = "http://localhost:3845/assets/dc6c00fea95e48e04fd052616502079664381b14.png";
+const imgMedia1 = "http://localhost:3845/assets/ed7a3c23092808422fbfc30dfd4f7b5bdf0e5159.png";
+const imgAvatar1 = "http://localhost:3845/assets/fd1c21afe12f77e67e0b4b08bb72091f2ed8f233.png";
+const imgMedia2 = "http://localhost:3845/assets/9707750f1378407cddae96a725789148538ef210.png";
+const imgDiv = "http://localhost:3845/assets/dd4a3adad978f80c4ff16fb2f52a4d5543742f4c.png";
+const imgMedia3 = "http://localhost:3845/assets/0c6d191dd1ade215c4e588f984b1e2a7d881ae15.png";
+const imgWoCoin2 = "http://localhost:3845/assets/0f48dfe840fac9c35481a311895b2dd54a2580f9.svg";
+const imgVectorStroke = "http://localhost:3845/assets/c27ef403c630aa9b072d1b2bb88a934a6b692437.svg";
+const imgEllipse1 = "http://localhost:3845/assets/0e1559e739afd9e82a2b44c1d16782eb658a719d.svg";
+const imgVuesaxLinearArrowSwapHorizontal = "http://localhost:3845/assets/deefd6b77894536589cb50f767e7a9c50d68ba82.svg";
+const imgCoin = "http://localhost:3845/assets/a27fa6b604fa9efcfe3a83817d43b2c495574690.svg";
+const imgEllipse2 = "http://localhost:3845/assets/801bfe6575903f6eacc63597843a5f838ab43c19.svg";
+const imgUnion = "http://localhost:3845/assets/484d463f82d7c82740fd72674eb91804123c7aca.svg";
+const imgVectorStroke1 = "http://localhost:3845/assets/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg";
+const imgVuesaxTwotoneCard = "http://localhost:3845/assets/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg";
+const imgVuesaxLinearTrendUp = "http://localhost:3845/assets/a48ef43dadbf020f3a6c615ef0070de2a02b33be.svg";
+const imgGroup = "http://localhost:3845/assets/89d423664289419e813c21ab700a25db3ff0144f.svg";
+const imgVuesaxOutlineShoppingCart = "http://localhost:3845/assets/dc54c8c0c41664277ae4d981d87b010f6a84ba2b.svg";
+const imgInkBar = "http://localhost:3845/assets/5ffb5daa4f7717307a3ff760e4385942741dc99c.svg";
+const imgReceiptItem = "http://localhost:3845/assets/4302f8a12f0957461edfe25791837c13cc5a1a26.svg";
+const imgVectorStroke2 = "http://localhost:3845/assets/77c6ee8bdf9a8b9349b5a4993bf58b2938f73310.svg";
+const imgVector = "http://localhost:3845/assets/93bcf7aa79a8b96b6d35bc2268ae7f8da37bc559.svg";
+const imgUnion1 = "http://localhost:3845/assets/20f6536c1e817822a6e89239b9dd635ccaa7b2f5.svg";
+const imgVectorStroke3 = "http://localhost:3845/assets/519d696982209f8e1ed4e0fbfbbb14f2e9c2839a.svg";
+type WpCoinProps = {
+  className?: string;
+  size?: "16" | "20";
+};
+
+function WpCoin({ className, size = "16" }: WpCoinProps) {
+  const is20 = size === "20";
+  return (
+    <div className={className || `relative ${is20 ? "size-[20px]" : "size-[16px]"}`} id={is20 ? "node-54_9876" : "node-54_9867"}>
+      <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]" id={is20 ? "node-54_9878" : "node-54_9869"} data-name="WO Coin">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={is20 ? imgWoCoin1 : imgWoCoin} />
+      </div>
+    </div>
+  );
+}
+type WpCoin1Props = {
+  className?: string;
+  size?: "16" | "20";
+};
+
+function WpCoin1({ className, size = "16" }: WpCoin1Props) {
+  const is20 = size === "20";
+  return (
+    <div className={className || `relative ${is20 ? "size-[20px]" : "size-[16px]"}`} id={is20 ? "node-1_2388" : "node-1_2379"}>
+      <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]" id={is20 ? "node-1_2390" : "node-1_2381"} data-name="WO Coin">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={is20 ? imgWoCoin1 : imgWoCoin} />
+      </div>
+    </div>
+  );
+}
+
+export default function Content() {
+  return (
+    <div className="bg-[var(--bg\/standard\/default,white)] content-stretch flex flex-col gap-[24px] items-center justify-center px-[16px] py-[20px] relative size-full" data-node-id="54:10591" data-name="content">
+      <div className="bg-gradient-to-b content-stretch flex flex-col from-[#002015] gap-[16px] items-center justify-center overflow-clip px-[16px] py-[24px] relative rounded-[var(--radius\/200,16px)] shrink-0 to-[#00ce8b] w-full" data-node-id="54:10592" data-name="div">
+        <div className="absolute contents left-[-95px] top-[70px]" data-node-id="54:10593">
+          <div className="absolute bg-[var(--offer\/700,#b54806)] blur-[57px] h-[203px] left-[142px] opacity-50 rounded-[500px] top-[70px] w-[296px]" data-node-id="54:10594" />
+          <div className="absolute bg-[var(--primary\/700,#009263)] blur-[57px] h-[203px] left-[-95px] opacity-50 rounded-[500px] top-[70px] w-[275px]" data-node-id="54:10595" />
+        </div>
+        <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex flex-col gap-[2px] items-center px-[17px] py-px relative shrink-0 w-[343px]" data-node-id="54:10596" data-name="div">
+          <div className="content-stretch flex gap-[10px] items-center justify-center relative shrink-0" data-node-id="54:10597">
+            <div className="relative shrink-0 size-[38px]" data-node-id="54:10598" data-name="WP Coin">
+              <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]" data-node-id="I54:10598;38:26571" data-name="WO Coin">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgWoCoin2} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Semibold')] font-[var(--font-weight\/600,normal)] leading-[1.3] relative shrink-0 text-[length:var(--font-size\/headings\/s,32px)] text-center text-white whitespace-nowrap" data-node-id="54:10599">
+              500,000
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[10px] items-center justify-center px-[17px] py-[var(--space\/150,12px)] relative rounded-[9999px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)] shrink-0 w-[299px]" data-node-id="54:10625" data-name="List item">
+          <div aria-hidden className="absolute backdrop-blur-[6px] bg-[rgba(83,65,153,0.1)] inset-0 pointer-events-none rounded-[9999px]" />
+          <div className="content-stretch flex items-start px-[var(--space\/0,0px)] relative shrink-0" data-node-id="54:10626" data-name="🏷️ Tag">
+            <div className="content-stretch flex gap-[var(--space\/050,4px)] items-center justify-center px-[var(--space\/0,0px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/200,16px)] shrink-0" data-node-id="I54:10626;7793:443810" data-name="#Tag base">
+              <div className="overflow-clip relative shrink-0 size-[12px]" data-node-id="I54:10626;7793:443811" data-name="chevron-left_mini">
+                <div className="absolute bottom-1/4 flex items-center justify-center left-[35%] right-[35%] top-1/4" data-node-id="I54:10626;7793:443811;6990:347929" style={{ containerType: "size" }}>
+                  <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+                    <div className="relative size-full" data-name="Vector (Stroke)">
+                      <div className="absolute inset-[-6.94%_-4.17%]">
+                        <img alt="" className="block max-w-none size-full" src={imgVectorStroke} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/alwayslight\/primary,white)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I54:10626;7793:443813" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                استخدمها
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10627">
+            <div className="-scale-y-100 flex-none w-full">
+              <div className="content-stretch flex flex-col items-end justify-center relative w-full" data-name="Section title">
+                <div className="flex items-center justify-center relative shrink-0" data-node-id="54:10628">
+                  <div className="-scale-y-100 flex-none">
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:SemiBold')] font-[var(--font-weight\/600,normal)] justify-end leading-[0] relative text-[0px] text-[color:var(--text\/primary,#111317)] text-right whitespace-nowrap">
+                      <p dir="rtl">
+                        <span className="[word-break:break-word] font-['Poppins:SemiBold'] leading-[1.5] not-italic text-[#fac333] text-[12px]">2,500</span>
+                        <span className="leading-[1.2] text-[#fac333] text-[12px]">{` `}</span>
+                        <span className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] leading-[1.5] not-italic text-[#fac333] text-[12px]">نقطة</span>
+                        <span className="leading-[1.2] text-[12px]">
+                          <br aria-hidden />
+                        </span>
+                        <span className="[word-break:break-word] font-['FF_Shamel_Unique:Normal'] leading-[1.5] not-italic text-[10px] text-white">تنتهي خلال 30 يوم. أقربها بعد 5 أيام</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+        </div>
+        <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex gap-[20px] items-start justify-center relative shrink-0 w-[343px]" data-node-id="54:10629" data-name="div">
+          <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex flex-col gap-[4px] items-center px-[15px] relative shrink-0 w-[77.5px]" data-node-id="54:10630" data-name="div">
+            <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[17px] py-[16px] relative rounded-[9999px] shadow-[0px_2px_8px_2px_rgba(0,0,0,0.1)] shrink-0 size-[40px]" data-node-id="54:10631" data-name="div">
+              <div aria-hidden className="absolute backdrop-blur-[6px] bg-[rgba(255,255,255,0.1)] inset-0 pointer-events-none rounded-[9999px]" />
+              <div className="-translate-x-1/2 absolute left-[calc(50%+0.25px)] size-[40px] top-0" data-node-id="54:10632">
+                <div className="absolute inset-[-25%]">
+                  <img alt="" className="block max-w-none size-full" src={imgEllipse1} />
+                </div>
+              </div>
+              <div className="relative shrink-0 size-[24px]" data-node-id="54:10633" data-name="arrow-swap-horizontal">
+                <div className="absolute contents inset-0" data-node-id="I54:10633;17:61349" data-name="vuesax/linear/arrow-swap-horizontal">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearArrowSwapHorizontal} />
+                </div>
+              </div>
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_2px_2px_0.5px_-2px_rgba(255,255,255,0.5),inset_-2px_-2px_0.5px_-2px_rgba(255,255,255,0.5),inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+            </div>
+            <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--base\/white,white)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="54:10634" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              حول نقاطك
+            </p>
+          </div>
+          <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex flex-col gap-[4px] items-center relative shrink-0" data-node-id="54:10635" data-name="div">
+            <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[17px] py-[16px] relative rounded-[9999px] shadow-[0px_2px_8px_2px_rgba(0,0,0,0.1)] shrink-0 size-[40px]" data-node-id="54:10636" data-name="div">
+              <div aria-hidden className="absolute backdrop-blur-[6px] bg-[rgba(255,255,255,0.1)] inset-0 pointer-events-none rounded-[9999px]" />
+              <div className="-translate-x-1/2 absolute left-[calc(50%+0.25px)] size-[40px] top-0" data-node-id="54:10637">
+                <div className="absolute inset-[-25%]">
+                  <img alt="" className="block max-w-none size-full" src={imgEllipse1} />
+                </div>
+              </div>
+              <div className="relative shrink-0 size-[24px]" data-node-id="54:10638" data-name="coin">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCoin} />
+              </div>
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_2px_2px_0.5px_-2px_rgba(255,255,255,0.5),inset_-2px_-2px_0.5px_-2px_rgba(255,255,255,0.5),inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+            </div>
+            <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--base\/white,white)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-[87px]" dir="auto" data-node-id="54:10639" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              استبدل نقاطك
+            </p>
+          </div>
+          <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex flex-col gap-[4px] items-center px-[15px] relative shrink-0 w-[77.5px]" data-node-id="54:10640" data-name="div">
+            <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[17px] py-[16px] relative rounded-[9999px] shadow-[0px_2px_8px_2px_rgba(0,0,0,0.1)] shrink-0 size-[40px]" data-node-id="54:10641" data-name="div">
+              <div aria-hidden className="absolute backdrop-blur-[6px] bg-[rgba(255,255,255,0.1)] inset-0 pointer-events-none rounded-[9999px]" />
+              <div className="-translate-x-1/2 absolute left-[calc(50%+0.25px)] size-[40px] top-0" data-node-id="54:10642">
+                <div className="absolute inset-[-25%]">
+                  <img alt="" className="block max-w-none size-full" src={imgEllipse2} />
+                </div>
+              </div>
+              <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="54:10643" data-name="plus_mini">
+                <div className="absolute inset-[20%]" data-node-id="I54:10643;6990:350770" data-name="Union">
+                  <div className="absolute inset-[-2.08%]">
+                    <img alt="" className="block max-w-none size-full" src={imgUnion} />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_2px_2px_0.5px_-2px_rgba(255,255,255,0.5),inset_-2px_-2px_0.5px_-2px_rgba(255,255,255,0.5),inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+            </div>
+            <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--base\/white,white)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="54:10644" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              اشحن نقاطك
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[18px] items-start relative shrink-0 w-full" data-node-id="54:10645">
+        <div className="bg-[var(--bravo\/50,#eeedf7)] content-stretch flex flex-col gap-[12px] items-start px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[16px] shrink-0 w-full" data-node-id="54:10646" data-name="Container">
+          <div className="absolute bg-[var(--bravo\/100,#cac6e7)] h-[49px] left-0 rounded-tl-[16px] rounded-tr-[16px] top-0 w-[343px]" data-node-id="54:10647" />
+          <div className="content-stretch flex flex-col gap-[18px] items-end relative shrink-0 w-full" data-node-id="54:10648">
+            <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-node-id="54:10649" data-name="Container">
+              <div className="relative rounded-[var(--radius\/100,8px)] shrink-0" data-node-id="54:10650" data-name="🆗 Button">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--space\/050,4px)] items-center justify-center overflow-clip px-[var(--space\/0,0px)] py-[var(--space\/075,6px)] relative rounded-[inherit] size-full">
+                  <div className="overflow-clip relative shrink-0 size-[16px]" data-node-id="I54:10650;14878:23352" data-name="arrow-left-mini">
+                    <div className="absolute flex inset-[20%_15%] items-center justify-center" data-node-id="I54:10650;14878:23352;6990:346383" style={{ containerType: "size" }}>
+                      <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+                        <div className="relative size-full" data-name="Vector (Stroke)">
+                          <div className="absolute inset-[-2.23%_-2.6%]">
+                            <img alt="" className="block max-w-none size-full" src={imgVectorStroke1} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative shrink-0 w-[214px]" data-node-id="54:10651">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center justify-end relative size-full">
+                  <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/s,14px)] whitespace-nowrap" dir="auto" data-node-id="54:10652" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    إجمالي الكاش باك
+                  </p>
+                  <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="54:10653" data-name="⚙️ Icon resizer">
+                    <div className="relative shrink-0 size-[24px]" data-node-id="I54:10653;14878:19626" data-name="Property 1=twotone">
+                      <div className="absolute contents inset-0" data-node-id="I54:10653;14878:19626;5145:5943" data-name="vuesax/twotone/card">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxTwotoneCard} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-node-id="54:10654">
+              <div className="content-stretch flex flex-col items-start justify-center relative shrink-0" data-node-id="54:10655" data-name="Paragraph">
+                <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] mb-[-1px] relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" dir="auto" data-node-id="54:10656" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  هذا الشهر
+                </p>
+                <div className="content-stretch flex gap-[2px] items-center relative shrink-0 w-full" data-node-id="54:10657" data-name="Container">
+                  <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Semibold')] font-[var(--font-weight\/600,normal)] leading-[1.5] relative shrink-0 text-[color:var(--bravo\/500,#5446b3)] text-[length:var(--font-size\/text\/s,14px)] whitespace-nowrap" data-node-id="54:10658">
+                    120+
+                  </p>
+                  <div className="relative shrink-0 size-[17px]" data-node-id="54:10659" data-name="trend-up">
+                    <div className="absolute contents inset-0" data-node-id="I54:10659;5145:22437" data-name="vuesax/linear/trend-up">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearTrendUp} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[34px] items-end relative shrink-0 w-[67.97px]" data-node-id="54:10660">
+                <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0 w-full" data-node-id="54:10661" data-name="Container">
+                  <div className="overflow-clip relative shrink-0 size-[16.97px]" data-node-id="54:10662" data-name="SAR">
+                    <div className="absolute inset-[5.15%_11.13%_5.15%_9.6%]" data-node-id="I54:10662;3681:1601" data-name="Group">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Semibold')] font-[var(--font-weight\/600,normal)] leading-[1.4] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/headings\/xs,24px)] whitespace-nowrap" data-node-id="54:10663">
+                    500
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[var(--space\/150,12px)] items-end relative shrink-0 w-full" data-node-id="54:10664">
+          <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-node-id="54:10665">
+            <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-node-id="54:10666">
+              <div className="bg-[var(--bg\/standard\/default,white)] border-[var(--border\/default,#e2e6ee)] border-b border-solid content-stretch flex items-end justify-between py-[var(--space\/0,0px)] relative shrink-0 w-[375px]" data-node-id="54:10667" data-name="🗂️ Tabs">
+                <div className="flex flex-[1_0_0] flex-row items-end self-stretch" data-node-id="I54:10667;8553:301334">
+                  <div className="content-stretch flex flex-[1_0_0] gap-[var(--space\/150,12px)] h-full items-center justify-center min-w-px overflow-clip relative" data-name="#Tabs Base">
+                    <div className="content-stretch flex gap-[var(--space\/150,12px)] items-center justify-center relative shrink-0" data-node-id="I54:10667;8553:301334;8490:280951" data-name="tab">
+                      <div className="content-stretch flex gap-[var(--space\/050,4px)] items-center relative shrink-0" data-node-id="I54:10667;8553:301334;8490:280953" data-name="wrap">
+                        <div className="content-stretch flex gap-[var(--space\/125,10px)] items-center justify-center overflow-clip py-[var(--space\/100,8px)] relative shrink-0" data-node-id="I54:10667;8553:301334;8490:280954" data-name="wrapper">
+                          <div className="content-stretch flex flex-col gap-[var(--space\/125,10px)] items-center justify-center overflow-clip relative shrink-0" data-node-id="I54:10667;8553:301334;8490:292124" data-name="title">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/m,14px)] text-right whitespace-nowrap" data-node-id="I54:10667;8553:301334;8490:292125" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                مشترياتي
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="relative shrink-0 size-[20px]" data-node-id="I54:10667;8553:301334;8490:280952" data-name="shopping-cart">
+                        <div className="absolute contents inset-0" data-node-id="I54:10667;8553:301334;8490:280952;5145:19277" data-name="vuesax/outline/shopping-cart">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxOutlineShoppingCart} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col items-end justify-center min-w-px overflow-clip relative" data-node-id="I54:10667;8553:301335" data-name="#Tabs Base">
+                  <div className="absolute bottom-0 h-0 left-0 right-0" data-node-id="I54:10667;8553:301335;8490:280965" data-name="ink-bar">
+                    <div className="absolute inset-[-2px_0_0_0]">
+                      <img alt="" className="block max-w-none size-full" src={imgInkBar} />
+                    </div>
+                  </div>
+                  <div className="content-stretch flex gap-[var(--space\/150,12px)] items-center justify-center py-[4px] relative shrink-0 w-full" data-node-id="I54:10667;8553:301335;8490:280966" data-name="tab">
+                    <div className="content-stretch flex gap-[var(--space\/050,4px)] items-center relative shrink-0" data-node-id="I54:10667;8553:301335;8490:280968" data-name="wrap">
+                      <div className="content-stretch flex gap-[var(--space\/125,10px)] items-center justify-center overflow-clip py-[var(--space\/100,8px)] relative shrink-0" data-node-id="I54:10667;8553:301335;8490:280969" data-name="wrapper">
+                        <div className="content-stretch flex flex-col items-start justify-center overflow-clip relative shrink-0" data-node-id="I54:10667;8553:301335;8490:292140" data-name="title">
+                          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/m,14px)] text-right whitespace-nowrap" data-node-id="I54:10667;8553:301335;8490:292141" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                            <p className="leading-[1.5]" dir="auto">
+                              العمليات
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 size-[20px]" data-node-id="I54:10667;8553:301335;8490:280967" data-name="receipt-item">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgReceiptItem} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end relative shrink-0 w-full" data-node-id="54:10668">
+              <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex items-center justify-center px-[var(--space\/125,10px)] py-[var(--space\/075,6px)] relative rounded-[var(--radius\/200,16px)] shrink-0" data-node-id="54:10670" data-name="#Tag base">
+                <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="54:10673" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  نقاط فقدتها
+                </p>
+              </div>
+              <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex items-center justify-center px-[var(--space\/125,10px)] py-[var(--space\/075,6px)] relative rounded-[var(--radius\/200,16px)] shrink-0" data-node-id="54:10674" data-name="#Tag base">
+                <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="54:10677" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  نقاط كسبتها
+                </p>
+              </div>
+              <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[var(--space\/125,10px)] py-[var(--space\/075,6px)] relative rounded-[var(--radius\/200,16px)] shrink-0" data-node-id="54:10678" data-name="#Tag base">
+                <div className="content-stretch flex items-center relative shrink-0" data-node-id="54:10681">
+                  <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="54:10682" data-name="chevron-down_mini">
+                    <div className="absolute bottom-[35%] left-1/4 right-1/4 top-[35%]" data-node-id="I54:10682;6990:348063" data-name="Vector (Stroke)">
+                      <div className="absolute inset-[-4.17%_-2.5%]">
+                        <img alt="" className="block max-w-none size-full" src={imgVectorStroke2} />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="54:10683" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    رتبها
+                  </p>
+                </div>
+                <div className="overflow-clip relative shrink-0 size-[16px]" data-node-id="54:10684" data-name="arrows-up-down_outline">
+                  <div className="absolute inset-[12.5%]" data-node-id="I54:10684;6990:346255" data-name="Vector">
+                    <div className="absolute inset-[-6.25%]">
+                      <img alt="" className="block max-w-none size-full" src={imgVector} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[var(--space\/100,8px)] items-start relative shrink-0 w-full" data-node-id="54:10685">
+            <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="54:10686">
+              <div className="content-stretch flex flex-col gap-[var(--space\/100,8px)] items-end px-[var(--space\/0,0px)] py-[var(--space\/125,10px)] relative shrink-0 w-full" data-node-id="54:10687" data-name="Section header">
+                <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] items-end relative shrink-0 w-full" data-node-id="I54:10687;14916:290457" data-name="Content">
+                  <div className="content-stretch flex gap-[var(--space\/100,8px)] items-center relative shrink-0 w-full" data-node-id="I54:10687;14916:290458" data-name="Title">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--space\/075,6px)] items-center justify-end min-w-px relative" data-node-id="I54:10687;14916:290461" data-name="Title">
+                      <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/s,12px)] text-right whitespace-nowrap" dir="auto" data-node-id="I54:10687;14916:290463" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        اليوم
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[var(--space\/050,4px)] items-start relative shrink-0" data-node-id="54:10688">
+                <div className="bg-[var(--bg\/highlight\/light\/default,#e6faf3)] border border-[var(--border\/selected,#00ce8b)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10689" data-name="List item">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-[52px]" data-node-id="54:10690">
+                    <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0 w-full" data-node-id="54:10691" data-name="Text">
+                      <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                      <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10694">
+                        +500
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10699">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10700">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10701">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                كسب نقاط من إيكيا
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10702" data-name="Media">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[500px]">
+                      <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgMedia} />
+                    </div>
+                    <div className="flex h-[480.001px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10702;6885:324012">
+                      <div className="-rotate-45 flex-none w-full">
+                        <div className="content-stretch flex h-[480px] items-start relative w-full" data-name="Aspect ratio keeper # Additionally 45º rotated Auto Layout">
+                          <div className="flex h-full items-center justify-center relative shrink-0 w-[198.824px]" data-node-id="I54:10702;6885:324013">
+                            <div className="flex-none h-full rotate-[24.47deg]">
+                              <div className="h-full relative w-0" data-name="Aspect ratio keeper # Rotated Auto Layout" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10703" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10704" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10707">
+                      -500
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10709">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10710">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10711">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                حولت إلى اشرف القاسم
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] overflow-clip relative rounded-[var(--radius\/full,500px)] shrink-0 size-[40px]" data-node-id="54:10712" data-name="👨🏻 Avatar">
+                    <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Poppins:Medium'] font-[var(--font-weight\/500,normal)] leading-[1.5] left-1/2 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/m,16px)] text-center top-[calc(50%-12px)] w-[40px]" data-node-id="I54:10712;7804:450990">
+                      AQ
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10713" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10714" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10717">
+                      -500
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10719">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10720">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10721">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                حولت إلى زوجتك
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0 size-[40px]" data-node-id="54:10722">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" height="40" src={imgEllipse2977} width="40" />
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10723" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10724" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10727">
+                      -5,000
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10729">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10730">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10731">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                حولت إلى حساب آرامكو ..
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative rounded-[var(--radius\/400,32px)] shrink-0 size-[40px]" data-node-id="54:10732" data-name="👨🏻 Avatar">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[var(--radius\/400,32px)] size-full" src={imgAvatar} />
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10743" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10744" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10747">
+                      +1,000
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10749">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10750">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10751">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                استلمت من فايز القحط..
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0 size-[40px]" data-node-id="54:10752">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" height="40" src={imgEllipse2979} width="40" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="54:10753">
+              <div className="content-stretch flex flex-col gap-[var(--space\/100,8px)] items-end px-[var(--space\/0,0px)] py-[var(--space\/125,10px)] relative shrink-0 w-full" data-node-id="54:10754" data-name="Section header">
+                <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] items-end relative shrink-0 w-full" data-node-id="I54:10754;14916:290457" data-name="Content">
+                  <div className="content-stretch flex gap-[var(--space\/100,8px)] items-center relative shrink-0 w-full" data-node-id="I54:10754;14916:290458" data-name="Title">
+                    <div className="content-stretch flex flex-[1_0_0] gap-[var(--space\/075,6px)] items-center justify-end min-w-px relative" data-node-id="I54:10754;14916:290461" data-name="Title">
+                      <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/s,12px)] text-right whitespace-nowrap" dir="auto" data-node-id="I54:10754;14916:290463" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        أمس
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[var(--space\/050,4px)] items-start relative shrink-0" data-node-id="54:10755">
+                <div className="bg-[var(--bg\/success\/light\/default,#e6faf3)] border border-[var(--border\/selected,#00ce8b)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10756" data-name="List item">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-[52px]" data-node-id="54:10757">
+                    <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0 w-full" data-node-id="54:10758" data-name="Text">
+                      <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                      <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10761">
+                        +500
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10766">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10767">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10768">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                كسب نقاط من إتش اند ..
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10769" data-name="Media">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[500px]">
+                      <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgMedia1} />
+                    </div>
+                    <div className="flex h-[480.001px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10769;6885:324012">
+                      <div className="-rotate-45 flex-none w-full">
+                        <div className="content-stretch flex h-[480px] items-start relative w-full" data-name="Aspect ratio keeper # Additionally 45º rotated Auto Layout">
+                          <div className="flex h-full items-center justify-center relative shrink-0 w-[198.824px]" data-node-id="I54:10769;6885:324013">
+                            <div className="flex-none h-full rotate-[24.47deg]">
+                              <div className="h-full relative w-0" data-name="Aspect ratio keeper # Rotated Auto Layout" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10770" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10771" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10774">
+                      +200,000
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10776">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10777">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10778">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                شحن نقاط
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[var(--space\/100,8px)] items-center justify-center relative shrink-0" data-node-id="54:10779" data-name="🟦 Icon container">
+                    <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center p-[var(--space\/125,10px)] relative rounded-[var(--radius\/full,500px)] shrink-0" data-node-id="I54:10779;8657:341831" data-name="Container">
+                      <div className="relative shrink-0 size-[20px]" data-node-id="I54:10779;8657:341832" data-name="plus_mini">
+                        <div className="absolute inset-[20%]" data-node-id="I54:10779;8657:341832;6990:350770" data-name="Union">
+                          <div className="absolute inset-[-2.08%]">
+                            <img alt="" className="block max-w-none size-full" src={imgUnion1} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10780" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10781" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10784">
+                      +10,000
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10786">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10787">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10788">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                نقاط من شركتك
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative rounded-[var(--radius\/400,32px)] shrink-0 size-[40px]" data-node-id="54:10789" data-name="👨🏻 Avatar">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[var(--radius\/400,32px)] size-full" src={imgAvatar1} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="54:10790">
+              <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="54:10791">
+                <div className="content-stretch flex flex-col gap-[var(--space\/100,8px)] items-end px-[var(--space\/0,0px)] py-[var(--space\/125,10px)] relative shrink-0 w-full" data-node-id="54:10792" data-name="Section header">
+                  <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] items-end relative shrink-0 w-full" data-node-id="I54:10792;14916:290457" data-name="Content">
+                    <div className="content-stretch flex gap-[var(--space\/100,8px)] items-center relative shrink-0 w-full" data-node-id="I54:10792;14916:290458" data-name="Title">
+                      <div className="content-stretch flex flex-[1_0_0] gap-[var(--space\/075,6px)] items-center justify-end min-w-px relative" data-node-id="I54:10792;14916:290461" data-name="Title">
+                        <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/s,12px)] text-right whitespace-nowrap" dir="auto" data-node-id="I54:10792;14916:290463" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                          30 يونيو
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[var(--space\/050,4px)] items-start relative shrink-0" data-node-id="54:10793">
+                <div className="bg-[var(--bg\/success\/light\/default,#e6faf3)] border border-[var(--border\/selected,#00ce8b)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10794" data-name="List item">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-[52px]" data-node-id="54:10795">
+                    <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0 w-full" data-node-id="54:10796" data-name="Text">
+                      <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                      <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/highlight\/primary,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10799">
+                        +500
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10804">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10805">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10806">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                كسب نقاط من إتش اند إم
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10807" data-name="Media">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[500px]">
+                      <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgMedia1} />
+                    </div>
+                    <div className="flex h-[480.001px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10807;6885:324012">
+                      <div className="-rotate-45 flex-none w-full">
+                        <div className="content-stretch flex h-[480px] items-start relative w-full" data-name="Aspect ratio keeper # Additionally 45º rotated Auto Layout">
+                          <div className="flex h-full items-center justify-center relative shrink-0 w-[198.824px]" data-node-id="I54:10807;6885:324013">
+                            <div className="flex-none h-full rotate-[24.47deg]">
+                              <div className="h-full relative w-0" data-name="Aspect ratio keeper # Rotated Auto Layout" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10808" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10809" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10812">
+                      -50,000
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10814">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10815">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10816">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                شراء قسيمة
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10817" data-name="Media">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[500px]">
+                      <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgMedia2} />
+                    </div>
+                    <div className="flex h-[480.001px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10817;6885:324012">
+                      <div className="-rotate-45 flex-none w-full">
+                        <div className="content-stretch flex h-[480px] items-start relative w-full" data-name="Aspect ratio keeper # Additionally 45º rotated Auto Layout">
+                          <div className="flex h-full items-center justify-center relative shrink-0 w-[198.824px]" data-node-id="I54:10817;6885:324013">
+                            <div className="flex-none h-full rotate-[24.47deg]">
+                              <div className="h-full relative w-0" data-name="Aspect ratio keeper # Rotated Auto Layout" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10820" data-name="List item">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10821" data-name="Text">
+                    <WpCoin1 className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="rtl" data-node-id="54:10824">
+                      -500
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10826">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10827">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10828">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                شراء عرض
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10831" data-name="div">
+                    <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[500px] size-full" src={imgDiv} />
+                  </div>
+                </div>
+                <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/subtle,#f1f3f9)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-[344px]" data-node-id="54:10832" data-name="List item">
+                  <div className="content-stretch flex gap-[4px] items-center justify-center overflow-clip relative shrink-0" data-node-id="54:10833" data-name="Text">
+                    <WpCoin className="relative shrink-0 size-[20px]" size="20" />
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" dir="ltr" data-node-id="54:10836">
+                      100,000-
+                    </p>
+                  </div>
+                  <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="54:10838">
+                    <div className="-scale-y-100 flex-none w-full">
+                      <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10839">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="rtl">
+                                08:30
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="54:10840">
+                          <div className="-scale-y-100 flex-none w-full">
+                            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                              <p className="leading-[1.5]" dir="auto">
+                                إهداء قسيمة
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[500px] shrink-0 size-[40px]" data-node-id="54:10841" data-name="Media">
+                    <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none rounded-[500px] size-full" src={imgMedia3} />
+                    <div className="flex h-[480.001px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10841;6885:324012">
+                      <div className="-rotate-45 flex-none w-full">
+                        <div className="content-stretch flex h-[480px] items-start relative w-full" data-name="Aspect ratio keeper # Additionally 45º rotated Auto Layout">
+                          <div className="flex h-full items-center justify-center relative shrink-0 w-[198.824px]" data-node-id="I54:10841;6885:324013">
+                            <div className="flex-none h-full rotate-[24.47deg]">
+                              <div className="h-full relative w-0" data-name="Aspect ratio keeper # Rotated Auto Layout" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute bg-[var(--bg\/primary\/default,#111317)] border-2 border-solid border-white content-stretch flex flex-col items-center justify-center left-[312.5px] overflow-clip px-[5px] rounded-[625px] size-[20px] top-[33px]" data-node-id="54:10842">
+                    <div className="overflow-clip relative shrink-0 size-[9.649px]" data-node-id="54:10843" data-name="arrow-right_mini">
+                      <div className="absolute flex inset-[20%_15%] items-center justify-center" data-node-id="I54:10843;6990:346175" style={{ containerType: "size" }}>
+                        <div className="-rotate-90 flex-none h-[100cqw] w-[100cqh]">
+                          <div className="relative size-full" data-name="Vector (Stroke)">
+                            <div className="absolute inset-[-1.79%_-2.08%]">
+                              <img alt="" className="block max-w-none size-full" src={imgVectorStroke3} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: English/Heading/H4: Font(family: "Font Family", style: Font Weight/600, size: Font Size/Headings/S, weight: 600, lineHeight: 1.2999999523162842, letterSpacing: 0), Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/XS, weight: 400, lineHeight: 1.5, letterSpacing: 0), Liqquid Glass L2: Effect(type: GRAIN, radius: 10); Effect(type: BACKGROUND_BLUR, radius: 3), Liquid Glass L1: Effect(type: BACKGROUND_BLUR, radius: 12); Effect(type: DROP_SHADOW, color: #0000001A, offset: (0, 2), radius: 8, spread: 2); Effect(type: INNER_SHADOW, color: #A0A0A080, offset: (0, 0), radius: 8, spread: 0); Effect(type: INNER_SHADOW, color: #FFFFFF80, offset: (-2, -2), radius: 0.5, spread: -2); Effect(type: INNER_SHADOW, color: #FFFFFF80, offset: (2, 2), radius: 0.5, spread: -2), WPgrad: , Arabic/Text/Small/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/S, weight: 500, lineHeight: 1.5, letterSpacing: 0), English/Text/Small/Semi Bold: Font(family: "Font Family", style: Font Weight/600, size: Font Size/Text/S, weight: 600, lineHeight: 1.5, letterSpacing: 0), English/Heading/H5: Font(family: "Font Family", style: Font Weight/600, size: Font Size/Headings/XS, weight: 600, lineHeight: 1.399999976158142, letterSpacing: 0), Arabic/Text/Small/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/S, weight: 400, lineHeight: 1.5, letterSpacing: 0), English/Text/Tiny/Medium: Font(family: "Font Family", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), English/Text/Regular/Medium: Font(family: "Font Family", style: Font Weight/500, size: Font Size/Text/M, weight: 500, lineHeight: 1.5, letterSpacing: 0), brands/Ikea: .
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## ⚙️ Icon resizer
+**Node ID:** 1:236
+
+🧰  Internal Figma component - Used to enable changing icon size when nested inside another component.
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

@@ -1,0 +1,103 @@
+const imgRectangle1 = "http://localhost:3845/assets/d80d73563d497feddf13013a8e9469865dba5ab8.svg";
+const imgRectangle2 = "http://localhost:3845/assets/6e802684a8c002fc81efdd83abc74bd1212f8e08.svg";
+const imgVuesaxLinearProfile = "http://localhost:3845/assets/913b16a49f888139daf47d27e4aa1afcea47fb70.svg";
+const imgCoin = "http://localhost:3845/assets/42d5884592d93afa401bd54e1619b3acd7f65dfe.svg";
+const imgVuesaxLinearTicket2 = "http://localhost:3845/assets/f22441bdc47a259412adf2c94f4d62a798ef1204.svg";
+const imgVuesaxLinearHome2 = "http://localhost:3845/assets/65daf7dc128edf6b8d475f5d7505282079ec3d79.svg";
+const imgVuesaxLinearScanning = "http://localhost:3845/assets/56dd8f91f43722021902758f8ca4276b1c10da4a.svg";
+
+export default function Group() {
+  return (
+    <div className="contents relative size-full" data-node-id="54:10844">
+      <div className="absolute h-[70px] left-0 top-[27px] w-[375px]" data-node-id="54:10845">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgRectangle1} />
+      </div>
+      <div className="absolute h-[70px] left-0 top-[27px] w-[375px]" data-node-id="54:10846">
+        <div className="absolute inset-[-8.57%_-2.13%_-14.29%_-2.13%]">
+          <img alt="" className="block max-w-none size-full" src={imgRectangle2} />
+        </div>
+      </div>
+      <div className="absolute content-stretch flex items-start left-[2px] top-[32px]" data-node-id="54:10847" data-name="Items">
+        <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] h-[56px] items-center justify-center overflow-clip p-[var(--space\/0,0px)] relative shrink-0 w-[75px]" data-node-id="54:10848" data-name="#TapBar base">
+          <div className="content-stretch flex flex-col gap-[var(--space\/025,2px)] h-[56px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10848;6882:325634" data-name="Navigation  /  Navbar / Icons/Home/Selected">
+            <div className="relative shrink-0 size-[24px]" data-node-id="I54:10848;6882:325635" data-name="Property 1=linear">
+              <div className="absolute contents inset-0" data-node-id="I54:10848;6882:325635;17:63596" data-name="vuesax/linear/profile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearProfile} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-center leading-[0] min-w-full relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-[min-content]" data-node-id="I54:10848;6882:325636" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                حسابي
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] h-[56px] items-center justify-center overflow-clip p-[var(--space\/0,0px)] relative shrink-0 w-[75px]" data-node-id="54:10849" data-name="#TapBar base">
+          <div className="content-stretch flex flex-col gap-[var(--space\/025,2px)] h-[56px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10849;6882:325638" data-name="Navigation  /  Navbar / Icons/Home/Selected">
+            <div className="relative shrink-0 size-[24px]" data-node-id="I54:10849;6882:325639" data-name="Property 1=bold">
+              <div className="absolute contents left-0 top-0" data-node-id="I54:10849;6882:325639;17:56467" data-name="vuesax/bold/coin">
+                <div className="absolute left-0 size-[24px] top-0" data-node-id="I54:10849;6882:325639;17:56468" data-name="coin">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCoin} />
+                </div>
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium justify-center leading-[0] min-w-full relative shrink-0 text-[color:var(--text\/highlight\/primary,#755bd8)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-[min-content]" data-node-id="I54:10849;6882:325640" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                محفظتي
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="h-[24px] relative shrink-0 w-[71px]" data-node-id="54:10850" data-name="Item" />
+        <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] h-[56px] items-center justify-center overflow-clip p-[var(--space\/0,0px)] relative shrink-0 w-[75px]" data-node-id="54:10851" data-name="#TapBar base">
+          <div className="content-stretch flex flex-col gap-[var(--space\/025,2px)] h-[56px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10851;6882:325634" data-name="Navigation  /  Navbar / Icons/Home/Selected">
+            <div className="relative shrink-0 size-[24px]" data-node-id="I54:10851;6882:325635" data-name="Property 1=linear">
+              <div className="absolute contents inset-0" data-node-id="I54:10851;6882:325635;17:57576" data-name="vuesax/linear/ticket-2">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearTicket2} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-center leading-[0] min-w-full relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-[min-content]" data-node-id="I54:10851;6882:325636" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                السوق
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[var(--space\/0,0px)] h-[56px] items-center justify-center overflow-clip p-[var(--space\/0,0px)] relative shrink-0 w-[75px]" data-node-id="54:10852" data-name="#TapBar base">
+          <div className="content-stretch flex flex-col gap-[var(--space\/025,2px)] h-[56px] items-center justify-center relative shrink-0 w-full" data-node-id="I54:10852;6882:325638" data-name="Navigation  /  Navbar / Icons/Home/Selected">
+            <div className="relative shrink-0 size-[24px]" data-node-id="I54:10852;6882:325639" data-name="Property 1=linear">
+              <div className="absolute contents inset-0" data-node-id="I54:10852;6882:325639;17:79435" data-name="vuesax/linear/home-2">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearHome2} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-center leading-[0] min-w-full relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-[min-content]" data-node-id="I54:10852;6882:325640" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                الرئيسية
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-[157px] overflow-clip rounded-[369.048px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)] size-[62px] top-0" data-node-id="54:10853">
+        <div aria-hidden className="absolute backdrop-blur-[6px] bg-gradient-to-t from-[rgba(52,34,123,0.9)] inset-0 pointer-events-none rounded-[369.048px] to-[rgba(98,72,195,0.9)]" />
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute left-[calc(50%-0.12px)] size-[23.759px] top-[calc(50%-0.12px)]" data-node-id="54:10854" data-name="scanning">
+          <div className="absolute contents inset-0" data-node-id="I54:10854;17:88916" data-name="vuesax/linear/scanning">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearScanning} />
+          </div>
+        </div>
+        <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_1px_1px_0.5px_0px_var(--walaone\/p\/400,#917ce0),inset_-1px_-1px_0.5px_0px_var(--walaone\/p\/400,#917ce0),inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Level0: Effect(type: GRAIN, radius: 0); Effect(type: BACKGROUND_BLUR, radius: 3), Level1: Effect(type: BACKGROUND_BLUR, radius: 12); Effect(type: DROP_SHADOW, color: #0000001A, offset: (0, 2), radius: 8, spread: 0); Effect(type: INNER_SHADOW, color: #A0A0A066, offset: (0, 0), radius: 8, spread: 0); Effect(type: INNER_SHADOW, color: #FFFFFF80, offset: (-1, -1), radius: 0.5, spread: 0); Effect(type: INNER_SHADOW, color: #FFFFFF80, offset: (1, 1), radius: 0.5, spread: 0), Arabic/Text/Tiny/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/XS, weight: 400, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), scan grad: , scan effects: Effect(type: BACKGROUND_BLUR, radius: 12); Effect(type: DROP_SHADOW, color: #0000001A, offset: (0, 2), radius: 8, spread: 0); Effect(type: INNER_SHADOW, color: #A0A0A080, offset: (0, 0), radius: 8, spread: 0); Effect(type: INNER_SHADOW, color: WalaOne/P/400, offset: (-1, -1), radius: 0.5, spread: 0); Effect(type: INNER_SHADOW, color: WalaOne/P/400, offset: (1, 1), radius: 0.5, spread: 0).
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

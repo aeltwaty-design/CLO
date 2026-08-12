@@ -1,0 +1,925 @@
+Currently selected nodes:
+- 54:11541: Wallet
+
+
+<section id="54:11541" name="Wallet" x="10931" y="-3529" width="1269" height="1935">
+  <frame id="54:10152" name="Wallet" x="647" y="133" width="375" height="1685">
+    <frame id="54:10153" name="Header" x="0" y="0" width="375" height="44">
+      <instance id="54:10154" name="Status Bar" x="0" y="0" width="375" height="44" />
+      <frame id="54:10155" name="list" x="0" y="94" width="375" height="50" hidden="true">
+        <frame id="54:10156" name="tab_03" x="0" y="0" width="187.5" height="50">
+          <text id="54:10157" name="label" x="70.75" y="14" width="46" height="22" />
+          <instance id="54:10158" name="message-question" x="77.5" y="15" width="20" height="20" hidden="true" />
+        </frame>
+        <frame id="54:10159" name="tab_02" x="125" y="0" width="125" height="50" hidden="true">
+          <text id="54:10160" name="label" x="11.5" y="14" width="75" height="22" />
+          <instance id="54:10161" name="shop" x="68.5" y="15" width="20" height="20" />
+        </frame>
+        <frame id="54:10162" name="tab_01" x="250" y="0" width="187.5" height="50">
+          <text id="54:10163" name="label" x="70.75" y="14" width="46" height="22" />
+          <instance id="54:10164" name="mouse-circle" x="74.5" y="15" width="20" height="20" hidden="true" />
+        </frame>
+      </frame>
+    </frame>
+    <frame id="54:10165" name="list" x="0" y="94" width="375" height="623" hidden="true">
+      <frame id="54:10166" name="profile" x="20" y="20" width="335" height="85">
+        <text id="54:10167" name="label_04" x="10" y="20.5" width="134" height="24" />
+        <frame id="54:10168" name="label" x="154" y="21.5" width="126" height="22">
+          <text id="54:10169" name="label_02" x="0" y="1" width="44" height="20" />
+          <ellipse id="54:10170" name="Ellipse 809" x="50" y="8.5" width="5" height="5" />
+          <text id="54:10171" name="label_01" x="61" y="0" width="65" height="22" />
+        </frame>
+        <frame id="54:10172" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10173" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10174" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10175" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10176" name="profile" x="20" y="106" width="335" height="85">
+        <text id="54:10177" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10178" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10179" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10180" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10181" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10182" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10183" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10184" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10185" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10186" name="profile" x="20" y="192" width="335" height="85">
+        <text id="54:10187" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10188" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10189" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10190" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10191" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10192" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10193" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10194" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10195" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10196" name="profile" x="20" y="278" width="335" height="85">
+        <text id="54:10197" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10198" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10199" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10200" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10201" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10202" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10203" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10204" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10205" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10206" name="profile" x="20" y="364" width="335" height="85">
+        <text id="54:10207" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10208" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10209" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10210" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10211" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10212" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10213" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10214" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10215" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10216" name="profile" x="20" y="450" width="335" height="85">
+        <text id="54:10217" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10218" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10219" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10220" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10221" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10222" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10223" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10224" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10225" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10226" name="profile" x="20" y="536" width="335" height="85">
+        <text id="54:10227" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10228" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10229" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10230" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10231" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10232" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10233" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10234" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10235" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10236" name="profile" x="20" y="622" width="335" height="85">
+        <text id="54:10237" name="label_04" x="10" y="20.5" width="134" height="24" />
+        <frame id="54:10238" name="label" x="154" y="21.5" width="126" height="22">
+          <text id="54:10239" name="label_02" x="0" y="1" width="44" height="20" />
+          <ellipse id="54:10240" name="Ellipse 809" x="50" y="8.5" width="5" height="5" />
+          <text id="54:10241" name="label_01" x="61" y="0" width="65" height="22" />
+        </frame>
+        <frame id="54:10242" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10243" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10244" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10245" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+    </frame>
+    <frame id="54:10246" name="content" x="0" y="44" width="375" height="1567">
+      <frame id="54:10247" name="div" x="16" y="20" width="343" height="247">
+        <frame id="54:10248" name="Group 289582" x="-95" y="70" width="533" height="203">
+          <frame id="54:10249" name="Frame 9" x="142" y="70" width="296" height="203" />
+          <frame id="54:10250" name="Frame 10" x="-95" y="70" width="275" height="203" />
+        </frame>
+        <frame id="54:10251" name="div" x="0" y="24" width="343" height="44">
+          <frame id="54:10252" name="Frame 5" x="80.999755859375" y="1" width="181.00048828125" height="42">
+            <instance id="54:10253" name="WP Coin" x="0" y="1.999755859375" width="38.00048828125" height="38.00048828125" />
+            <text id="54:10254" name="500,000" x="48.00048828125" y="0" width="133" height="42" />
+            <frame id="54:10255" name="Frame 11" x="143" y="6" width="31" height="30" hidden="true">
+              <rounded-rectangle id="54:10256" name="w4" x="0" y="0" width="31" height="30" />
+              <instance id="54:10257" name="WalaOne_icon" x="9.500024795532227" y="10" width="12.299517631530762" height="10.497516632080078" />
+            </frame>
+            <frame id="54:10258" name="Frame 6" x="143" y="5" width="32" height="32" hidden="true">
+              <instance id="54:10259" name="WalaOne_icon" x="6.999984264373779" y="9.000005722045898" width="17.11236572265625" height="14.605234146118164" />
+            </frame>
+            <rounded-rectangle id="54:10260" name="ChatGPT Image Jun 21, 2025, 11_15_53 PM 1" x="185" y="0" width="42" height="42" hidden="true" />
+            <frame id="54:10261" name="ETH" x="215" y="4.297586441040039" width="34.00002670288086" height="33.40483474731445" hidden="true" />
+          </frame>
+          <frame id="54:10277" name="Frame 1000005751" x="142.5" y="45" width="58" height="18" hidden="true">
+            <instance id="54:10278" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+            <text id="54:10279" name="≈ 5,000" x="16" y="0" width="42" height="18" />
+          </frame>
+        </frame>
+        <frame id="54:10280" name="List item" x="22" y="84" width="299" height="61">
+          <instance id="54:10281" name="🏷️ Tag" x="17" y="19.5" width="75" height="22" />
+          <frame id="54:10282" name="Section title" x="102" y="49" width="180" height="37">
+            <text id="54:10283" name="Text" x="14" y="37" width="166" height="37" />
+          </frame>
+        </frame>
+        <frame id="54:10284" name="div" x="0" y="161" width="343" height="62">
+          <frame id="54:10285" name="div" x="30.5" y="0" width="77.5" height="62">
+            <frame id="54:10286" name="div" x="18.75" y="0" width="40" height="40">
+              <ellipse id="54:10287" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10288" name="arrow-swap-horizontal" x="8" y="8" width="24" height="24" />
+            </frame>
+            <text id="54:10289" name="حول نقاطك" x="5.75" y="44" width="66" height="18" />
+          </frame>
+          <frame id="54:10290" name="div" x="128" y="0" width="87" height="62">
+            <frame id="54:10291" name="div" x="23.5" y="0" width="40" height="40">
+              <ellipse id="54:10292" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10293" name="coin" x="8" y="8" width="24" height="24" />
+            </frame>
+            <text id="54:10294" name="استبدل نقاطك" x="0" y="44" width="87" height="18" />
+          </frame>
+          <frame id="54:10295" name="div" x="235" y="0" width="77.5" height="62">
+            <frame id="54:10296" name="div" x="18.75" y="0" width="40" height="40">
+              <ellipse id="54:10297" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10298" name="plus_mini" x="10" y="10" width="20" height="20" />
+            </frame>
+            <text id="54:10299" name="اشحن نقاطك" x="1.75" y="44" width="74" height="18" />
+          </frame>
+        </frame>
+      </frame>
+      <frame id="54:10300" name="Frame 1000005642" x="16" y="291" width="343" height="193">
+        <frame id="54:10301" name="Frame 1000005610" x="16" y="16" width="311" height="161">
+          <frame id="54:10302" name="Frame 162684" x="0" y="0" width="311" height="21">
+            <frame id="54:10303" name="Frame 1000005603" x="24" y="0" width="287" height="21">
+              <text id="54:10304" name="اربط بطاقتك، واربح نقاطًا مع كل عملية شراء" x="0" y="0" width="287" height="21" />
+            </frame>
+          </frame>
+          <frame id="54:10305" name="Frame 1000005872" x="151" y="41" width="160" height="70">
+            <instance id="54:10306" name="Text" x="0" y="0" width="160" height="18" />
+            <instance id="54:10307" name="Text" x="30" y="26" width="130" height="18" />
+            <instance id="54:10308" name="Text" x="71" y="52" width="89" height="18" />
+          </frame>
+          <instance id="54:10309" name="🆗 Button" x="151" y="131" width="160" height="30" />
+        </frame>
+        <frame id="54:10310" name="Frame 3983" x="-35" y="52" width="176.87257385253906" height="113.70379638671875">
+          <vector id="54:10311" name="Vector" x="16.844314575195312" y="44.21873474121094" width="42.112518310546875" height="23.161884307861328" />
+          <vector id="54:10312" name="Vector 4" x="-3.1575260162353516" y="-15.792119979858398" width="206.35134887695312" height="138.9713134765625" />
+          <frame id="54:10313" name="Frame 3984" x="16.844314575195312" y="82.11956024169922" width="107.38692474365234" height="12.63375473022461" />
+          <frame id="54:10314" name="Frame 3985" x="136.86602783203125" y="44.21873474121094" width="23.161884307861328" height="21.056259155273438" />
+        </frame>
+      </frame>
+      <frame id="54:10315" name="Frame 1000005750" x="16" y="508" width="343" height="1039">
+        <frame id="54:10316" name="Frame 70002" x="0" y="0" width="343" height="1039">
+          <frame id="54:10317" name="Frame 1000005749" x="0" y="0" width="343" height="93">
+            <frame id="54:10318" name="Frame 1000005739" x="0" y="0" width="343" height="45">
+              <instance id="54:10319" name="🗂️ Tabs" x="-16" y="0" width="375" height="45" />
+            </frame>
+            <frame id="54:10320" name="Frame 162765" x="0" y="61" width="343" height="32">
+              <instance id="54:10321" name="🏷️ Tag" x="233" y="0" width="68" height="22" hidden="true" />
+              <frame id="54:10322" name="#Tag base" x="47" y="1" width="92" height="30">
+                <instance id="54:10323" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10324" name="Media" x="75" y="4" width="16" height="16" hidden="true" />
+                <text id="54:10325" name="Text" x="10" y="6" width="72" height="18" />
+              </frame>
+              <frame id="54:10326" name="#Tag base" x="151" y="1" width="93" height="30">
+                <instance id="54:10327" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10328" name="Media" x="75" y="4" width="16" height="16" hidden="true" />
+                <text id="54:10329" name="Text" x="10" y="6" width="73" height="18" />
+              </frame>
+              <frame id="54:10330" name="#Tag base" x="256" y="0" width="87" height="32">
+                <instance id="54:10331" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10332" name="Media" x="10" y="7" width="16" height="16" hidden="true" />
+                <frame id="54:10333" name="Frame 1000005733" x="10" y="6" width="47" height="20">
+                  <instance id="54:10334" name="chevron-down_mini" x="0" y="0" width="20" height="20" />
+                  <text id="54:10335" name="Text" x="20" y="1" width="27" height="18" />
+                </frame>
+                <instance id="54:10336" name="arrows-up-down_outline" x="61" y="8" width="16" height="16" />
+              </frame>
+            </frame>
+          </frame>
+          <frame id="54:10337" name="Frame 1000005738" x="0" y="105" width="343" height="934">
+            <frame id="54:10338" name="Frame 1000005744" x="0" y="0" width="343" height="374">
+              <instance id="54:10339" name="Section header" x="0" y="0" width="343" height="38" />
+              <frame id="54:10340" name="Frame 1000005552" x="0" y="38" width="344" height="336">
+                <frame id="54:10341" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10342" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10343" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10344" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10345" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10346" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10347" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10348" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10349" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10350" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10351" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10352" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10353" name="Text" x="4.1760100728176295e-15" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10354" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10355" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10356" name="Text" x="16" y="22" width="51" height="20">
+                    <instance id="54:10357" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10358" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10359" name="Text" x="22" y="1" width="29" height="18" />
+                    <instance id="54:10360" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10361" name="Section title" x="79" y="52" width="197" height="40">
+                    <text id="54:10362" name="Supporting text" x="6.141191096709834e-16" y="18" width="197" height="18" />
+                    <text id="54:10363" name="Text" x="0" y="40" width="197" height="18" />
+                  </frame>
+                  <instance id="54:10364" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10365" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10366" name="Text" x="16" y="22" width="51" height="20">
+                    <instance id="54:10367" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10368" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10369" name="Text" x="22" y="1" width="29" height="18" />
+                    <instance id="54:10370" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10371" name="Section title" x="79" y="52" width="197" height="40">
+                    <text id="54:10372" name="Supporting text" x="6.141191096709834e-16" y="18" width="197" height="18" />
+                    <text id="54:10373" name="Text" x="0" y="40" width="197" height="18" />
+                  </frame>
+                  <ellipse id="54:10374" name="Ellipse 2977" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10375" name="List item" x="0" y="204" width="344" height="64">
+                  <frame id="54:10376" name="Text" x="16" y="22" width="63" height="20">
+                    <instance id="54:10377" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10378" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10379" name="Text" x="22" y="1" width="41" height="18" />
+                    <instance id="54:10380" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10381" name="Section title" x="91" y="52" width="185" height="40">
+                    <text id="54:10382" name="Supporting text" x="6.141191096709834e-16" y="18" width="185" height="18" />
+                    <text id="54:10383" name="Text" x="0" y="40" width="185" height="18" />
+                  </frame>
+                  <instance id="54:10384" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10385" name="List item" x="0" y="204" width="344" height="64" hidden="true">
+                  <frame id="54:10386" name="Text" x="16" y="22" width="50" height="20">
+                    <instance id="54:10387" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10388" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10389" name="Text" x="22" y="1" width="28" height="18" />
+                    <instance id="54:10390" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10391" name="Section title" x="78" y="52" width="198" height="40">
+                    <text id="54:10392" name="Supporting text" x="3.6847145521467822e-16" y="18" width="198" height="18" />
+                    <text id="54:10393" name="Text" x="0" y="40" width="198" height="18" />
+                  </frame>
+                  <instance id="54:10394" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10395" name="List item" x="0" y="272" width="344" height="64">
+                  <frame id="54:10396" name="Text" x="16" y="22" width="61" height="20">
+                    <instance id="54:10397" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10398" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10399" name="Text" x="22" y="1" width="39" height="18" />
+                    <instance id="54:10400" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10401" name="Section title" x="89" y="52" width="187" height="40">
+                    <text id="54:10402" name="Supporting text" x="6.141191096709834e-16" y="18" width="187" height="18" />
+                    <text id="54:10403" name="Text" x="0" y="40" width="187" height="18" />
+                  </frame>
+                  <ellipse id="54:10404" name="Ellipse 2979" x="288" y="12" width="40" height="40" />
+                </frame>
+              </frame>
+            </frame>
+            <frame id="54:10405" name="Frame 1000005745" x="0" y="382" width="343" height="238">
+              <instance id="54:10406" name="Section header" x="0" y="0" width="343" height="38" />
+              <frame id="54:10407" name="Frame 1000005553" x="0" y="38" width="344" height="200">
+                <frame id="54:10408" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10409" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10410" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10411" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10412" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10413" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10414" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10415" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10416" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10417" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10418" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10419" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10420" name="Text" x="0" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10421" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10422" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10423" name="Text" x="16" y="22" width="76" height="20">
+                    <instance id="54:10424" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10425" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10426" name="Text" x="22" y="1" width="54" height="18" />
+                    <instance id="54:10427" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10428" name="Section title" x="104" y="52" width="172" height="40">
+                    <text id="54:10429" name="Supporting text" x="6.141191096709834e-16" y="18" width="172" height="18" />
+                    <text id="54:10430" name="Text" x="4.1760100728176295e-15" y="40" width="172" height="18" />
+                  </frame>
+                  <instance id="54:10431" name="🟦 Icon container" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10432" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10433" name="Text" x="16" y="22" width="69" height="20">
+                    <instance id="54:10434" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10435" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10436" name="Text" x="22" y="1" width="47" height="18" />
+                    <instance id="54:10437" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10438" name="Section title" x="97" y="52" width="179" height="40">
+                    <text id="54:10439" name="Supporting text" x="6.141191096709834e-16" y="18" width="179" height="18" />
+                    <text id="54:10440" name="Text" x="4.1760100728176295e-15" y="40" width="179" height="18" />
+                  </frame>
+                  <instance id="54:10441" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+              </frame>
+            </frame>
+            <frame id="54:10442" name="Frame 1000005747" x="0" y="628" width="343" height="306">
+              <frame id="54:10443" name="Frame 1000005746" x="0" y="0" width="343" height="38">
+                <instance id="54:10444" name="Section header" x="0" y="0" width="343" height="38" />
+              </frame>
+              <frame id="54:10445" name="Frame 1000005553" x="0" y="38" width="344" height="268">
+                <frame id="54:10446" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10447" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10448" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10449" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10450" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10451" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10452" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10453" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10454" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10455" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10456" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10457" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10458" name="Text" x="0" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10459" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10460" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10461" name="Text" x="16" y="22" width="68" height="20">
+                    <instance id="54:10462" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10463" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10464" name="Text" x="22" y="1" width="46" height="18" />
+                    <instance id="54:10465" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10466" name="Section title" x="96" y="52" width="180" height="40">
+                    <text id="54:10467" name="Supporting text" x="3.6847145521467822e-16" y="18" width="180" height="18" />
+                    <text id="54:10468" name="Text" x="0" y="40" width="180" height="18" />
+                  </frame>
+                  <instance id="54:10469" name="Media" x="288" y="12" width="40" height="40" />
+                  <frame id="54:10470" name="Frame 162814" x="313.5" y="34" width="20" height="20" hidden="true">
+                    <instance id="54:10471" name="gift" x="4.210525989532471" y="4.210525989532471" width="11.578948020935059" height="11.578948020935059" />
+                  </frame>
+                </frame>
+                <frame id="54:10472" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10473" name="Text" x="16" y="22" width="53" height="20">
+                    <instance id="54:10474" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10475" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10476" name="Text" x="22" y="1" width="31" height="18" />
+                    <instance id="54:10477" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10478" name="Section title" x="81" y="52" width="195" height="40">
+                    <text id="54:10479" name="Supporting text" x="3.6847145521467822e-16" y="18" width="195" height="18" />
+                    <text id="54:10480" name="Text" x="0" y="40" width="195" height="18" />
+                  </frame>
+                  <frame id="54:10481" name="Frame 162814" x="313.5" y="34" width="20" height="20" hidden="true">
+                    <instance id="54:10482" name="gift" x="4.210525989532471" y="4.210525989532471" width="11.578948020935059" height="11.578948020935059" />
+                  </frame>
+                  <frame id="54:10483" name="div" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10484" name="List item" x="0" y="204" width="344" height="64">
+                  <frame id="54:10485" name="Text" x="16" y="22" width="74" height="20">
+                    <instance id="54:10486" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10487" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10488" name="Text" x="24" y="1" width="50" height="18" />
+                    <instance id="54:10489" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10490" name="Section title" x="102" y="52" width="174" height="40">
+                    <text id="54:10491" name="Supporting text" x="3.6847145521467822e-16" y="18" width="174" height="18" />
+                    <text id="54:10492" name="Text" x="0" y="40" width="174" height="18" />
+                  </frame>
+                  <instance id="54:10493" name="Media" x="288" y="12" width="40" height="40" />
+                  <frame id="54:10494" name="Frame 162814" x="313.5" y="34" width="20" height="20">
+                    <instance id="54:10495" name="arrow-right_mini" x="5.175438404083252" y="5.175438404083252" width="9.649123191833496" height="9.649123191833496" />
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+        </frame>
+      </frame>
+    </frame>
+    <instance id="54:10496" name="Navbar" x="0" y="1605" width="375" height="80" />
+  </frame>
+  <frame id="54:10497" name="Wallet" x="208" y="133" width="375" height="812">
+    <frame id="54:10498" name="Header" x="0" y="0" width="375" height="44">
+      <instance id="54:10499" name="Status Bar" x="0" y="0" width="375" height="44" />
+      <frame id="54:10500" name="list" x="0" y="94" width="375" height="50" hidden="true">
+        <frame id="54:10501" name="tab_03" x="0" y="0" width="187.5" height="50">
+          <text id="54:10502" name="label" x="70.75" y="14" width="46" height="22" />
+          <instance id="54:10503" name="message-question" x="77.5" y="15" width="20" height="20" hidden="true" />
+        </frame>
+        <frame id="54:10504" name="tab_02" x="125" y="0" width="125" height="50" hidden="true">
+          <text id="54:10505" name="label" x="11.5" y="14" width="75" height="22" />
+          <instance id="54:10506" name="shop" x="68.5" y="15" width="20" height="20" />
+        </frame>
+        <frame id="54:10507" name="tab_01" x="250" y="0" width="187.5" height="50">
+          <text id="54:10508" name="label" x="70.75" y="14" width="46" height="22" />
+          <instance id="54:10509" name="mouse-circle" x="74.5" y="15" width="20" height="20" hidden="true" />
+        </frame>
+      </frame>
+    </frame>
+    <frame id="54:10510" name="list" x="0" y="94" width="375" height="623" hidden="true">
+      <frame id="54:10511" name="profile" x="20" y="20" width="335" height="85">
+        <text id="54:10512" name="label_04" x="10" y="20.5" width="134" height="24" />
+        <frame id="54:10513" name="label" x="154" y="21.5" width="126" height="22">
+          <text id="54:10514" name="label_02" x="0" y="1" width="44" height="20" />
+          <ellipse id="54:10515" name="Ellipse 809" x="50" y="8.5" width="5" height="5" />
+          <text id="54:10516" name="label_01" x="61" y="0" width="65" height="22" />
+        </frame>
+        <frame id="54:10517" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10518" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10519" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10520" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10521" name="profile" x="20" y="106" width="335" height="85">
+        <text id="54:10522" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10523" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10524" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10525" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10526" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10527" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10528" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10529" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10530" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10531" name="profile" x="20" y="192" width="335" height="85">
+        <text id="54:10532" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10533" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10534" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10535" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10536" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10537" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10538" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10539" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10540" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10541" name="profile" x="20" y="278" width="335" height="85">
+        <text id="54:10542" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10543" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10544" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10545" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10546" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10547" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10548" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10549" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10550" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10551" name="profile" x="20" y="364" width="335" height="85">
+        <text id="54:10552" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10553" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10554" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10555" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10556" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10557" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10558" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10559" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10560" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10561" name="profile" x="20" y="450" width="335" height="85">
+        <text id="54:10562" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10563" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10564" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10565" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10566" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10567" name="icon" x="290" y="50" width="35" height="35">
+          <instance id="54:10568" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10569" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10570" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10571" name="profile" x="20" y="536" width="335" height="85">
+        <text id="54:10572" name="label_04" x="10" y="20.5" width="84" height="24" />
+        <frame id="54:10573" name="label" x="104" y="21.5" width="176" height="22">
+          <text id="54:10574" name="label_02" x="0" y="1" width="62" height="20" />
+          <ellipse id="54:10575" name="Ellipse 809" x="68" y="8.5" width="5" height="5" />
+          <text id="54:10576" name="label_01" x="79" y="0" width="97" height="22" />
+        </frame>
+        <frame id="54:10577" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10578" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10579" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10580" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+      <frame id="54:10581" name="profile" x="20" y="622" width="335" height="85">
+        <text id="54:10582" name="label_04" x="10" y="20.5" width="134" height="24" />
+        <frame id="54:10583" name="label" x="154" y="21.5" width="126" height="22">
+          <text id="54:10584" name="label_02" x="0" y="1" width="44" height="20" />
+          <ellipse id="54:10585" name="Ellipse 809" x="50" y="8.5" width="5" height="5" />
+          <text id="54:10586" name="label_01" x="61" y="0" width="65" height="22" />
+        </frame>
+        <frame id="54:10587" name="icon" x="290" y="15" width="35" height="35">
+          <instance id="54:10588" name="export" x="7.5" y="7.5" width="20" height="20" />
+        </frame>
+        <text id="54:10589" name="label_03" x="10" y="50" width="129.8473358154297" height="20" />
+        <text id="54:10590" name="label_03" x="149.8473358154297" y="50" width="129.8473358154297" height="20" />
+      </frame>
+    </frame>
+    <frame id="54:10591" name="content" x="0" y="44" width="375" height="1476">
+      <frame id="54:10592" name="div" x="16" y="20" width="343" height="247">
+        <frame id="54:10593" name="Group 289582" x="-95" y="70" width="533" height="203">
+          <frame id="54:10594" name="Frame 9" x="142" y="70" width="296" height="203" />
+          <frame id="54:10595" name="Frame 10" x="-95" y="70" width="275" height="203" />
+        </frame>
+        <frame id="54:10596" name="div" x="0" y="24" width="343" height="44">
+          <frame id="54:10597" name="Frame 5" x="80.999755859375" y="1" width="181.00048828125" height="42">
+            <instance id="54:10598" name="WP Coin" x="0" y="1.999755859375" width="38.00048828125" height="38.00048828125" />
+            <text id="54:10599" name="500,000" x="48.00048828125" y="0" width="133" height="42" />
+            <frame id="54:10600" name="Frame 11" x="143" y="6" width="31" height="30" hidden="true">
+              <rounded-rectangle id="54:10601" name="w4" x="0" y="0" width="31" height="30" />
+              <instance id="54:10602" name="WalaOne_icon" x="9.500024795532227" y="10" width="12.299517631530762" height="10.497516632080078" />
+            </frame>
+            <frame id="54:10603" name="Frame 6" x="143" y="5" width="32" height="32" hidden="true">
+              <instance id="54:10604" name="WalaOne_icon" x="6.999984264373779" y="9.000005722045898" width="17.11236572265625" height="14.605234146118164" />
+            </frame>
+            <rounded-rectangle id="54:10605" name="ChatGPT Image Jun 21, 2025, 11_15_53 PM 1" x="185" y="0" width="42" height="42" hidden="true" />
+            <frame id="54:10606" name="ETH" x="215" y="4.297586441040039" width="34.00002670288086" height="33.40483474731445" hidden="true" />
+          </frame>
+          <frame id="54:10622" name="Frame 1000005751" x="142.5" y="45" width="58" height="18" hidden="true">
+            <instance id="54:10623" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+            <text id="54:10624" name="≈ 5,000" x="16" y="0" width="42" height="18" />
+          </frame>
+        </frame>
+        <frame id="54:10625" name="List item" x="22" y="84" width="299" height="61">
+          <instance id="54:10626" name="🏷️ Tag" x="17" y="19.5" width="75" height="22" />
+          <frame id="54:10627" name="Section title" x="102" y="49" width="180" height="37">
+            <text id="54:10628" name="Text" x="14" y="37" width="166" height="37" />
+          </frame>
+        </frame>
+        <frame id="54:10629" name="div" x="0" y="161" width="343" height="62">
+          <frame id="54:10630" name="div" x="30.5" y="0" width="77.5" height="62">
+            <frame id="54:10631" name="div" x="18.75" y="0" width="40" height="40">
+              <ellipse id="54:10632" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10633" name="arrow-swap-horizontal" x="8" y="8" width="24" height="24" />
+            </frame>
+            <text id="54:10634" name="حول نقاطك" x="5.75" y="44" width="66" height="18" />
+          </frame>
+          <frame id="54:10635" name="div" x="128" y="0" width="87" height="62">
+            <frame id="54:10636" name="div" x="23.5" y="0" width="40" height="40">
+              <ellipse id="54:10637" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10638" name="coin" x="8" y="8" width="24" height="24" />
+            </frame>
+            <text id="54:10639" name="استبدل نقاطك" x="0" y="44" width="87" height="18" />
+          </frame>
+          <frame id="54:10640" name="div" x="235" y="0" width="77.5" height="62">
+            <frame id="54:10641" name="div" x="18.75" y="0" width="40" height="40">
+              <ellipse id="54:10642" name="Ellipse 1" x="0.25" y="0" width="40" height="40" />
+              <instance id="54:10643" name="plus_mini" x="10" y="10" width="20" height="20" />
+            </frame>
+            <text id="54:10644" name="اشحن نقاطك" x="1.75" y="44" width="74" height="18" />
+          </frame>
+        </frame>
+      </frame>
+      <frame id="54:10645" name="Frame 1000005750" x="16" y="291" width="343" height="1165">
+        <frame id="54:10646" name="Container" x="0" y="0" width="343" height="108">
+          <frame id="54:10647" name="Frame 1321315070" x="0" y="0" width="343" height="49" />
+          <frame id="54:10648" name="Frame 1321315066" x="16" y="12" width="311" height="84">
+            <frame id="54:10649" name="Container" x="0" y="0" width="311" height="28">
+              <instance id="54:10650" name="🆗 Button" x="0" y="0" width="16" height="28" />
+              <frame id="54:10651" name="Frame 1321315069" x="97" y="2" width="214" height="24">
+                <text id="54:10652" name="إجمالي الكاش باك" x="65" y="1.5" width="117" height="21" />
+                <instance id="54:10653" name="⚙️ Icon resizer" x="190" y="0" width="24" height="24" />
+              </frame>
+            </frame>
+            <frame id="54:10654" name="Frame 1321315067" x="0" y="46" width="311" height="38">
+              <frame id="54:10655" name="Paragraph" x="0" y="0" width="57" height="38">
+                <text id="54:10656" name="هذا الشهر" x="0" y="0" width="57" height="18" />
+                <frame id="54:10657" name="Container" x="0" y="17" width="57" height="21">
+                  <text id="54:10658" name="120+" x="0" y="0" width="32" height="21" />
+                  <instance id="54:10659" name="trend-up" x="34" y="2" width="17" height="17" />
+                </frame>
+              </frame>
+              <frame id="54:10660" name="Frame 1321315068" x="243.03030395507812" y="2" width="67.96969604492188" height="34">
+                <frame id="54:10661" name="Container" x="0" y="0" width="67.96969604492188" height="34">
+                  <instance id="54:10662" name="SAR" x="-0.0000019073486328125" y="8.515151023864746" width="16.969697952270508" height="16.969697952270508" />
+                  <text id="54:10663" name="500" x="20.969696044921875" y="0" width="47" height="34" />
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+        </frame>
+        <frame id="54:10664" name="Frame 70003" x="0" y="126" width="343" height="1039">
+          <frame id="54:10665" name="Frame 1000005749" x="0" y="0" width="343" height="93">
+            <frame id="54:10666" name="Frame 1000005739" x="0" y="0" width="343" height="45">
+              <instance id="54:10667" name="🗂️ Tabs" x="-16" y="0" width="375" height="45" />
+            </frame>
+            <frame id="54:10668" name="Frame 162765" x="0" y="61" width="343" height="32">
+              <instance id="54:10669" name="🏷️ Tag" x="233" y="0" width="68" height="22" hidden="true" />
+              <frame id="54:10670" name="#Tag base" x="47" y="1" width="92" height="30">
+                <instance id="54:10671" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10672" name="Media" x="75" y="4" width="16" height="16" hidden="true" />
+                <text id="54:10673" name="Text" x="10" y="6" width="72" height="18" />
+              </frame>
+              <frame id="54:10674" name="#Tag base" x="151" y="1" width="93" height="30">
+                <instance id="54:10675" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10676" name="Media" x="75" y="4" width="16" height="16" hidden="true" />
+                <text id="54:10677" name="Text" x="10" y="6" width="73" height="18" />
+              </frame>
+              <frame id="54:10678" name="#Tag base" x="256" y="0" width="87" height="32">
+                <instance id="54:10679" name="x-mark_outline" x="3" y="6" width="12" height="12" hidden="true" />
+                <instance id="54:10680" name="Media" x="10" y="7" width="16" height="16" hidden="true" />
+                <frame id="54:10681" name="Frame 1000005733" x="10" y="6" width="47" height="20">
+                  <instance id="54:10682" name="chevron-down_mini" x="0" y="0" width="20" height="20" />
+                  <text id="54:10683" name="Text" x="20" y="1" width="27" height="18" />
+                </frame>
+                <instance id="54:10684" name="arrows-up-down_outline" x="61" y="8" width="16" height="16" />
+              </frame>
+            </frame>
+          </frame>
+          <frame id="54:10685" name="Frame 1000005750" x="0" y="105" width="343" height="934">
+            <frame id="54:10686" name="Frame 1000005744" x="0" y="0" width="343" height="374">
+              <instance id="54:10687" name="Section header" x="0" y="0" width="343" height="38" />
+              <frame id="54:10688" name="Frame 1000005552" x="0" y="38" width="344" height="336">
+                <frame id="54:10689" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10690" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10691" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10692" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10693" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10694" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10695" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10696" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10697" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10698" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10699" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10700" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10701" name="Text" x="4.1760100728176295e-15" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10702" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10703" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10704" name="Text" x="16" y="22" width="51" height="20">
+                    <instance id="54:10705" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10706" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10707" name="Text" x="22" y="1" width="29" height="18" />
+                    <instance id="54:10708" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10709" name="Section title" x="79" y="52" width="197" height="40">
+                    <text id="54:10710" name="Supporting text" x="6.141191096709834e-16" y="18" width="197" height="18" />
+                    <text id="54:10711" name="Text" x="0" y="40" width="197" height="18" />
+                  </frame>
+                  <instance id="54:10712" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10713" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10714" name="Text" x="16" y="22" width="51" height="20">
+                    <instance id="54:10715" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10716" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10717" name="Text" x="22" y="1" width="29" height="18" />
+                    <instance id="54:10718" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10719" name="Section title" x="79" y="52" width="197" height="40">
+                    <text id="54:10720" name="Supporting text" x="6.141191096709834e-16" y="18" width="197" height="18" />
+                    <text id="54:10721" name="Text" x="0" y="40" width="197" height="18" />
+                  </frame>
+                  <ellipse id="54:10722" name="Ellipse 2977" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10723" name="List item" x="0" y="204" width="344" height="64">
+                  <frame id="54:10724" name="Text" x="16" y="22" width="63" height="20">
+                    <instance id="54:10725" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10726" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10727" name="Text" x="22" y="1" width="41" height="18" />
+                    <instance id="54:10728" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10729" name="Section title" x="91" y="52" width="185" height="40">
+                    <text id="54:10730" name="Supporting text" x="6.141191096709834e-16" y="18" width="185" height="18" />
+                    <text id="54:10731" name="Text" x="0" y="40" width="185" height="18" />
+                  </frame>
+                  <instance id="54:10732" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10733" name="List item" x="0" y="204" width="344" height="64" hidden="true">
+                  <frame id="54:10734" name="Text" x="16" y="22" width="50" height="20">
+                    <instance id="54:10735" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10736" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10737" name="Text" x="22" y="1" width="28" height="18" />
+                    <instance id="54:10738" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10739" name="Section title" x="78" y="52" width="198" height="40">
+                    <text id="54:10740" name="Supporting text" x="3.6847145521467822e-16" y="18" width="198" height="18" />
+                    <text id="54:10741" name="Text" x="0" y="40" width="198" height="18" />
+                  </frame>
+                  <instance id="54:10742" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10743" name="List item" x="0" y="272" width="344" height="64">
+                  <frame id="54:10744" name="Text" x="16" y="22" width="61" height="20">
+                    <instance id="54:10745" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10746" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10747" name="Text" x="22" y="1" width="39" height="18" />
+                    <instance id="54:10748" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10749" name="Section title" x="89" y="52" width="187" height="40">
+                    <text id="54:10750" name="Supporting text" x="6.141191096709834e-16" y="18" width="187" height="18" />
+                    <text id="54:10751" name="Text" x="0" y="40" width="187" height="18" />
+                  </frame>
+                  <ellipse id="54:10752" name="Ellipse 2979" x="288" y="12" width="40" height="40" />
+                </frame>
+              </frame>
+            </frame>
+            <frame id="54:10753" name="Frame 1000005745" x="0" y="382" width="343" height="238">
+              <instance id="54:10754" name="Section header" x="0" y="0" width="343" height="38" />
+              <frame id="54:10755" name="Frame 1000005553" x="0" y="38" width="344" height="200">
+                <frame id="54:10756" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10757" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10758" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10759" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10760" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10761" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10762" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10763" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10764" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10765" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10766" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10767" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10768" name="Text" x="0" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10769" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10770" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10771" name="Text" x="16" y="22" width="76" height="20">
+                    <instance id="54:10772" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10773" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10774" name="Text" x="22" y="1" width="54" height="18" />
+                    <instance id="54:10775" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10776" name="Section title" x="104" y="52" width="172" height="40">
+                    <text id="54:10777" name="Supporting text" x="6.141191096709834e-16" y="18" width="172" height="18" />
+                    <text id="54:10778" name="Text" x="4.1760100728176295e-15" y="40" width="172" height="18" />
+                  </frame>
+                  <instance id="54:10779" name="🟦 Icon container" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10780" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10781" name="Text" x="16" y="22" width="69" height="20">
+                    <instance id="54:10782" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10783" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10784" name="Text" x="22" y="1" width="47" height="18" />
+                    <instance id="54:10785" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10786" name="Section title" x="97" y="52" width="179" height="40">
+                    <text id="54:10787" name="Supporting text" x="6.141191096709834e-16" y="18" width="179" height="18" />
+                    <text id="54:10788" name="Text" x="4.1760100728176295e-15" y="40" width="179" height="18" />
+                  </frame>
+                  <instance id="54:10789" name="👨🏻 Avatar" x="288" y="12" width="40" height="40" />
+                </frame>
+              </frame>
+            </frame>
+            <frame id="54:10790" name="Frame 1000005747" x="0" y="628" width="343" height="306">
+              <frame id="54:10791" name="Frame 1000005746" x="0" y="0" width="343" height="38">
+                <instance id="54:10792" name="Section header" x="0" y="0" width="343" height="38" />
+              </frame>
+              <frame id="54:10793" name="Frame 1000005553" x="0" y="38" width="344" height="268">
+                <frame id="54:10794" name="List item" x="0" y="0" width="344" height="64">
+                  <frame id="54:10795" name="Frame 1000005752" x="16" y="22" width="52" height="20">
+                    <frame id="54:10796" name="Text" x="0" y="0" width="52" height="20">
+                      <instance id="54:10797" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                      <instance id="54:10798" name="WP Coin" x="0" y="0" width="20" height="20" />
+                      <text id="54:10799" name="Text" x="22" y="1" width="30" height="18" />
+                      <instance id="54:10800" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                    </frame>
+                    <frame id="54:10801" name="Frame 1000005751" x="0" y="20" width="33" height="18" hidden="true">
+                      <instance id="54:10802" name="SAR" x="0" y="1.9999995231628418" width="14.000000953674316" height="14.000000953674316" />
+                      <text id="54:10803" name="≈ 5" x="16" y="0" width="17" height="18" />
+                    </frame>
+                  </frame>
+                  <frame id="54:10804" name="Section title" x="80" y="52" width="196" height="40">
+                    <text id="54:10805" name="Supporting text" x="6.141191096709834e-16" y="18" width="196" height="18" />
+                    <text id="54:10806" name="Text" x="0" y="40" width="196" height="18" />
+                  </frame>
+                  <instance id="54:10807" name="Media" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10808" name="List item" x="0" y="68" width="344" height="64">
+                  <frame id="54:10809" name="Text" x="16" y="22" width="68" height="20">
+                    <instance id="54:10810" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10811" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10812" name="Text" x="22" y="1" width="46" height="18" />
+                    <instance id="54:10813" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10814" name="Section title" x="96" y="52" width="180" height="40">
+                    <text id="54:10815" name="Supporting text" x="3.6847145521467822e-16" y="18" width="180" height="18" />
+                    <text id="54:10816" name="Text" x="0" y="40" width="180" height="18" />
+                  </frame>
+                  <instance id="54:10817" name="Media" x="288" y="12" width="40" height="40" />
+                  <frame id="54:10818" name="Frame 162814" x="313.5" y="34" width="20" height="20" hidden="true">
+                    <instance id="54:10819" name="gift" x="4.210525989532471" y="4.210525989532471" width="11.578948020935059" height="11.578948020935059" />
+                  </frame>
+                </frame>
+                <frame id="54:10820" name="List item" x="0" y="136" width="344" height="64">
+                  <frame id="54:10821" name="Text" x="16" y="22" width="53" height="20">
+                    <instance id="54:10822" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10823" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10824" name="Text" x="22" y="1" width="31" height="18" />
+                    <instance id="54:10825" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10826" name="Section title" x="81" y="52" width="195" height="40">
+                    <text id="54:10827" name="Supporting text" x="3.6847145521467822e-16" y="18" width="195" height="18" />
+                    <text id="54:10828" name="Text" x="0" y="40" width="195" height="18" />
+                  </frame>
+                  <frame id="54:10829" name="Frame 162814" x="313.5" y="34" width="20" height="20" hidden="true">
+                    <instance id="54:10830" name="gift" x="4.210525989532471" y="4.210525989532471" width="11.578948020935059" height="11.578948020935059" />
+                  </frame>
+                  <frame id="54:10831" name="div" x="288" y="12" width="40" height="40" />
+                </frame>
+                <frame id="54:10832" name="List item" x="0" y="204" width="344" height="64">
+                  <frame id="54:10833" name="Text" x="16" y="22" width="74" height="20">
+                    <instance id="54:10834" name="placeholder" x="0" y="0.5" width="20" height="20" hidden="true" />
+                    <instance id="54:10835" name="WP Coin" x="0" y="0" width="20" height="20" />
+                    <text id="54:10836" name="Text" x="24" y="1" width="50" height="18" />
+                    <instance id="54:10837" name="placeholder" x="125" y="0.5" width="20" height="20" hidden="true" />
+                  </frame>
+                  <frame id="54:10838" name="Section title" x="102" y="52" width="174" height="40">
+                    <text id="54:10839" name="Supporting text" x="3.6847145521467822e-16" y="18" width="174" height="18" />
+                    <text id="54:10840" name="Text" x="0" y="40" width="174" height="18" />
+                  </frame>
+                  <instance id="54:10841" name="Media" x="288" y="12" width="40" height="40" />
+                  <frame id="54:10842" name="Frame 162814" x="313.5" y="34" width="20" height="20">
+                    <instance id="54:10843" name="arrow-right_mini" x="5.175438404083252" y="5.175438404083252" width="9.649123191833496" height="9.649123191833496" />
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+        </frame>
+      </frame>
+    </frame>
+    <frame id="54:10844" name="Group 68818" x="0" y="1520" width="375" height="96.99998474121094">
+      <vector id="54:10845" name="Rectangle 1" x="0" y="1547" width="375" height="69.99998474121094" />
+      <vector id="54:10846" name="Rectangle 2" x="0" y="1547" width="375" height="69.99998474121094" />
+      <frame id="54:10847" name="Items" x="2" y="1552" width="371" height="56">
+        <instance id="54:10848" name="#TapBar base" x="0" y="0" width="75" height="56" />
+        <instance id="54:10849" name="#TapBar base" x="75" y="0" width="75" height="56" />
+        <frame id="54:10850" name="Item" x="150" y="0" width="71" height="24" />
+        <instance id="54:10851" name="#TapBar base" x="221" y="0" width="75" height="56" />
+        <instance id="54:10852" name="#TapBar base" x="296" y="0" width="75" height="56" />
+      </frame>
+      <frame id="54:10853" name="Frame 162812" x="157" y="1520" width="62" height="62">
+        <instance id="54:10854" name="scanning" x="19" y="19" width="23.7587890625" height="23.7587890625" />
+      </frame>
+    </frame>
+    <instance id="54:10855" name="Navbar" x="0" y="732" width="375" height="80" />
+  </frame>
+</section>
+IMPORTANT: After you call this tool, you MUST call get_design_context if trying to implement the design, since this tool only returns metadata. If you do not call get_design_context, the agent will not be able to implement the design.

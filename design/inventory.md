@@ -58,6 +58,10 @@ UX-enhancement layer (renders only with live state, so unseeded captures still m
 | Node | Frame | Route | Notes |
 | --- | --- | --- | --- |
 | 47:3538 | Home «الرئيسية» 375×2443 | `/home` | Phase-2 landing (root + tab bar); 11 sections + navbar; contexts/renders in design/phase2/; ref = cropped capped export (smoke diff ≈9.6%) |
+| 54:10152 | Wallet (points) before linking 375×1685 | `/wallet` + `?linked=0` | «اربط بطاقتك» promo → add-card form; gate ≈3.6% (capped ref) |
+| 54:10497 | Wallet (points) after linking 375×812 | `/wallet` + `?linked=1` | «إجمالي الكاش باك» strip → `/cards`; below-fold WalaOne bar; gate ≈2.7% |
+
+Two wallets: **points** (main, `/wallet`, Phase 2) and **cashback** (`/cards`). Cashback access in Phase 2: the after-strip in the points wallet + the ﷼ pill in the Home header; the tab bar's المحفظة goes to `/wallet` in Phase 2 and `/cards` in Phase 1.
 
 ## Proposed interactive flow (clickable prototype)
 
