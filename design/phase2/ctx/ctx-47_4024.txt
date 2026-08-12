@@ -1,0 +1,185 @@
+const imgDiv = "http://localhost:3845/assets/48c5873ea5e66de261a045220b3c4780dba6f242.png";
+const imgDiv1 = "http://localhost:3845/assets/9c23031a270d25995df3cc93349eadd584c7bd69.png";
+const imgDiv2 = "http://localhost:3845/assets/b4c221fa2bf4465f143d9fbf5faf7b20a417cbec.png";
+const imgVectorStroke = "http://localhost:3845/assets/e8b3d916f4a8ca674ba7587240e11d98df1d209d.svg";
+const imgVuesaxLinearBuyCrypto = "http://localhost:3845/assets/c03fb20f4a024c12351087985f13c0bff8d70ca5.svg";
+const imgVuesaxOutlineShop = "http://localhost:3845/assets/b29c8472a920d7f72b3162de749ffef1cc4696df.svg";
+const imgVuesaxOutlineGlobal = "http://localhost:3845/assets/fbf3e34826645b91917a0aea937094cb92634861.svg";
+
+export default function SectionRecommendedForYou() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative size-full" data-node-id="47:4024" data-name="Section - Recommended for You">
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4025" data-name="Container">
+        <div className="content-stretch flex items-center justify-end relative shrink-0" data-node-id="47:4026" data-name="Heading 3">
+          <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="47:4027" data-name="chevron-left_mini">
+            <div className="absolute bottom-1/4 flex items-center justify-center left-[35%] right-[35%] top-1/4" data-node-id="I47:4027;6990:347929" style={{ containerType: "size" }}>
+              <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+                <div className="relative size-full" data-name="Vector (Stroke)">
+                  <div className="absolute inset-[-4.17%_-2.5%]">
+                    <img alt="" className="block max-w-none size-full" src={imgVectorStroke} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/l,18px)] whitespace-nowrap" data-node-id="47:4028" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p dir="auto">
+              <span className="leading-[1.5]">{`عروض `}</span>
+              <span className="leading-[1.5] text-[#00ce8b]">يومك</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4031" data-name="Container">
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex items-center overflow-clip p-[17px] relative rounded-[16px] shadow-[0px_4px_15px_-5px_rgba(0,0,0,0.05)] shrink-0" data-node-id="47:4032" data-name="Card 10">
+          <div aria-hidden className="absolute bg-[var(--bg\/standard\/default,white)] inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative shrink-0 w-[116px]" data-node-id="47:4033">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-center relative size-full">
+              <div className="relative rounded-[500px] shrink-0 size-[64px]" data-node-id="47:4034" data-name="div">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[500px] size-full" src={imgDiv} />
+              </div>
+              <div className="content-stretch flex flex-col gap-[2px] items-center relative shrink-0 w-full" data-node-id="47:4035">
+                <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium h-[14px] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-full" data-node-id="47:4036" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <p className="leading-[1.5]" dir="auto">
+                    كباب هب
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4038" data-name="🏷️ Tag">
+                <div className="bg-[var(--bg\/warning\/light\/default,#fff0e6)] content-stretch flex items-center justify-center px-[var(--space\/100,8px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4038;7581:424935" data-name="#Tag base">
+                  <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/warning\/default,#8c3804)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4038;7581:424938" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    خصم 25%
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[10px] items-center overflow-clip p-[17px] relative rounded-[16px] shadow-[0px_4px_15px_-5px_rgba(0,0,0,0.05)] shrink-0" data-node-id="47:4039" data-name="Card 7">
+          <div aria-hidden className="absolute bg-[var(--bg\/standard\/default,white)] inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative shrink-0 w-[116px]" data-node-id="47:4040">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-center relative size-full">
+              <div className="relative rounded-[16px] shrink-0 size-[64px]" data-node-id="47:4041" data-name="div">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={imgDiv1} />
+              </div>
+              <div className="content-stretch flex flex-col gap-[2px] items-center relative shrink-0 w-full" data-node-id="47:4042">
+                <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Bold'] font-bold h-[14px] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-full" data-node-id="47:4043" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <p className="leading-[1.5]" dir="auto">
+                    أمازون
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4045">
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4046" data-name="🏷️ Tag">
+                  <div className="bg-[var(--bg\/warning\/light\/default,#fff0e6)] content-stretch flex items-center justify-center px-[var(--space\/100,8px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4046;7729:430489" data-name="#Tag base">
+                    <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/warning\/default,#8c3804)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4046;7729:430492">{`خصم 15% `}</p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4047" data-name="🏷️ Tag">
+                  <div className="bg-[var(--walalife\/s\/50,#e7f6f8)] content-stretch flex items-center justify-center px-[var(--space\/100,8px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4047;7581:424935" data-name="#Tag base">
+                    <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--walalife\/s\/500,#12a1ba)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4047;7581:424938" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                      اشترِ 1 واحصل على 1
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4048" data-name="🏷️ Tag">
+                  <div className="bg-[var(--bg\/success\/light\/default,#e6faf3)] content-stretch flex gap-[var(--space\/050,4px)] items-center justify-center pl-[var(--space\/100,8px)] pr-[var(--space\/075,6px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4048;7581:424945" data-name="#Tag base">
+                    <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/success\/default,#00714c)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4048;7581:424947" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                      اكسب نقاط
+                    </p>
+                    <div className="relative shrink-0 size-[12px]" data-node-id="I47:4048;7742:430491" data-name="Property 1=linear">
+                      <div className="absolute contents inset-0" data-node-id="I47:4048;7742:430491;5145:39024" data-name="vuesax/linear/buy-crypto">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearBuyCrypto} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="-translate-x-1/2 absolute left-[calc(50%-56px)] top-[8px]" data-node-id="47:4049">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative size-full">
+              <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center p-[2.105px] relative rounded-[5.263px] shrink-0 size-[20px]" data-node-id="47:4050">
+                <div className="relative shrink-0 size-[16.842px]" data-node-id="47:4051" data-name="shop">
+                  <div className="absolute contents inset-0" data-node-id="I47:4051;95:18401" data-name="vuesax/outline/shop">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxOutlineShop} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[10px] items-center overflow-clip p-[17px] relative rounded-[16px] shadow-[0px_4px_15px_-5px_rgba(0,0,0,0.05)] shrink-0" data-node-id="47:4052" data-name="Card 1">
+          <div aria-hidden className="absolute bg-[var(--bg\/standard\/default,white)] inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative shrink-0 w-[116px]" data-node-id="47:4053">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-center relative size-full">
+              <div className="relative rounded-[16px] shrink-0 size-[64px]" data-node-id="47:4054" data-name="div">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full" src={imgDiv2} />
+              </div>
+              <div className="content-stretch flex flex-col gap-[2px] items-center relative shrink-0 w-full" data-node-id="47:4055">
+                <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Bold'] font-bold h-[14px] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center w-full" data-node-id="47:4056" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <p className="leading-[1.5]" dir="auto">
+                    اكسترا
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[8px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4058">
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4059" data-name="🏷️ Tag">
+                  <div className="bg-[var(--bg\/warning\/light\/default,#fff0e6)] content-stretch flex items-center justify-center px-[var(--space\/100,8px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4059;7581:424935" data-name="#Tag base">
+                    <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/warning\/default,#8c3804)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4059;7581:424938" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>{`خصم 15% `}</p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4060">
+                  <div className="content-stretch flex items-start relative shrink-0" data-node-id="47:4061" data-name="🏷️ Tag">
+                    <div className="bg-[var(--bg\/success\/light\/default,#e6faf3)] content-stretch flex gap-[var(--space\/050,4px)] items-center justify-center pl-[var(--space\/100,8px)] pr-[var(--space\/075,6px)] py-[var(--space\/025,2px)] relative rounded-[var(--radius\/050,4px)] shrink-0" data-node-id="I47:4061;7581:424945" data-name="#Tag base">
+                      <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/success\/default,#00714c)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" dir="auto" data-node-id="I47:4061;7581:424947" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                        اكسب نقاط
+                      </p>
+                      <div className="relative shrink-0 size-[12px]" data-node-id="I47:4061;7742:430491" data-name="Property 1=linear">
+                        <div className="absolute contents inset-0" data-node-id="I47:4061;7742:430491;5145:39024" data-name="vuesax/linear/buy-crypto">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearBuyCrypto} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="-translate-x-1/2 absolute left-[calc(50%-56px)] top-[8px]" data-node-id="47:4062">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-center relative size-full">
+              <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center p-[2.105px] relative rounded-[5.263px] shrink-0 size-[20px]" data-node-id="47:4063">
+                <div className="relative shrink-0 size-[16.842px]" data-node-id="47:4064" data-name="shop">
+                  <div className="absolute contents inset-0" data-node-id="I47:4064;95:18401" data-name="vuesax/outline/shop">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxOutlineShop} />
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center p-[2.105px] relative rounded-[5.263px] shrink-0 size-[20px]" data-node-id="47:4065">
+                <div className="relative shrink-0 size-[16.842px]" data-node-id="47:4066" data-name="global">
+                  <div className="absolute contents inset-0" data-node-id="I47:4066;95:17040" data-name="vuesax/outline/global">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxOutlineGlobal} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Medium/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/L, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Bold: Font(family: "FF Shamel Unique", style: Font Weight/700, size: Font Size/Text/XS, weight: 700, lineHeight: 1.5, letterSpacing: 0), English/Text/Tiny/Medium: Font(family: "Font Family", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0).
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

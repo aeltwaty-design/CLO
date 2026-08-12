@@ -63,13 +63,21 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).
 - **Phase tabs** — the desktop shell shows a Phase 2 / Phase 1 switcher above
-  the phone frame; **Phase 2 is the default tab**. Phase 2 is currently an
-  exact duplicate of the experience and is the divergence point for upcoming
-  iterations — screens branch on `usePhase()` (`src/state/PhaseState.tsx`);
-  Phase 1 stays the frozen approved version. `?phase=` deep-links and the
-  choice sticks per browser tab via sessionStorage; switching restarts the
-  demo at scenario 1. The switcher is hidden at phone-sized viewports, and
-  the QA gate pins itself to Phase 1 via an init script.
+  the phone frame; **Phase 2 is the default tab**. Screens branch on
+  `usePhase()` (`src/state/PhaseState.tsx`); Phase 1 stays the frozen
+  approved version. `?phase=` deep-links and the choice sticks per browser
+  tab via sessionStorage; switching restarts the demo. The switcher is hidden
+  at phone-sized viewports, and the QA gate pins itself to Phase 1 via an
+  init script (except the explicitly `?phase=2`-seeded Home capture).
+- **Phase 2: الرئيسية Home** (Figma 47:3538, 375×2443) — Phase 2 lands on
+  `/home` (root redirect + the tab bar's الرئيسية tab, which stays inert in
+  Phase 1). Full scrolling home: mint hero header (greeting, car-wash promo
+  carousel, عائلتي/بالقرب مني/القسائم tiles, search + 3D category chips),
+  savings counter, «عروض يومك», add-card promo (CTA → the linking form),
+  favorites empty state, grocery banner, food offers, «قسائم حصرية»,
+  flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
+  H&M/IKEA cards deep-link to their store pages. The shared `TabBar` gained
+  an `active` prop ('market' default, byte-identical for Phase 1).
 
 ## Design-sync toolchain
 
@@ -107,7 +115,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   withdrawal fee-transparency line nudges the two filled amount captures
   (`27_10685`/`27_10836`) a few tenths above their old floor, and the extra
   seeded success capture (`27_11148-receipt`, ≈14%) intentionally deviates:
-  it renders the receipt block over the plain drawn frame. The populated
+  it renders the receipt block over the plain drawn frame. The Phase-2 Home
+  capture (`47_3538`, ≈9.6%) is a coarse smoke diff, not a fine gate: its
+  reference is the full-node export downscaled ~0.4× by the 1024px cap and
+  cropped out of the padded canvas, so glyph/photo resampling dominates. The populated
   wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
   nudge section, shifting the content below it.

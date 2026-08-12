@@ -57,6 +57,9 @@ const SCREENS = [
   // receipt (specifics line + arrival timeline + remaining balance) renders
   // because live withdraw state exists
   ['/withdraw/status?ok=1&waccount=1&wamount=50', '27_11148', 812, null, null, '27_11148-receipt'],
+  // Phase 2 Home (47:3538, 375×2443). Ref is the capped full-node export
+  // (~157px wide) so this runs as a DPR-matched smoke diff, not a fine gate.
+  ['/home?phase=2', '47_3538', 2443],
 ];
 
 const ACTIONS = {

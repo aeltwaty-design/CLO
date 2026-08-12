@@ -53,6 +53,12 @@ Entry: wallet tile «تحويل لحساب بنكي» → `/withdraw/account` (o
 
 UX-enhancement layer (renders only with live state, so unseeded captures still match the frames): fee-transparency line on the amount screen, success receipt (specifics + arrival timeline + remaining balance), PIN context line, inline wrong-PIN attempts, IBAN validation + beneficiary-bank auto-detect on the new-account form.
 
+## Phase 2 (usePhase() === 2; Phase 1 frozen)
+
+| Node | Frame | Route | Notes |
+| --- | --- | --- | --- |
+| 47:3538 | Home «الرئيسية» 375×2443 | `/home` | Phase-2 landing (root + tab bar); 11 sections + navbar; contexts/renders in design/phase2/; ref = cropped capped export (smoke diff ≈9.6%) |
+
 ## Proposed interactive flow (clickable prototype)
 
 Mock state `cardLinked` drives before/after versions of Market and Store details:

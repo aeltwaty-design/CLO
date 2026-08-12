@@ -1,0 +1,84 @@
+const imgDiv = "http://localhost:3845/assets/d3d5e0678cb15d2b6557fbc53e1b480d56282713.png";
+const imgLogoSavorySpiceKitchrn = "http://localhost:3845/assets/6dedcd791b30b76750f5c949e275384ca26de5e0.png";
+const imgDiv1 = "http://localhost:3845/assets/698a38ae0271c32c85a05df977621f61da6608ae.png";
+const imgLogo = "http://localhost:3845/assets/66e44278ffdfd4a0b7f234fc3692b985c87bc1da.png";
+const imgDiv2 = "http://localhost:3845/assets/ed7a3c23092808422fbfc30dfd4f7b5bdf0e5159.png";
+const imgUnion = "http://localhost:3845/assets/7e1ea9a4c50bc8f9b508158adeb3a718cd7787a2.svg";
+
+export default function EmptyState() {
+  return (
+    <div className="content-stretch flex flex-col gap-[8px] items-start relative size-full" data-node-id="47:4077" data-name="Empty state">
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4078" data-name="Container">
+        <div className="content-stretch flex items-center justify-end relative shrink-0" data-node-id="47:4079" data-name="Heading 3">
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/l,18px)] text-right whitespace-nowrap" data-node-id="47:4080" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              المتاجر المفضلة
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4084">
+        <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" dir="ltr" data-node-id="47:4085" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+          اكتشف وأضف تجار التجزئة المفضلين لديك
+        </p>
+        <div className="bg-[var(--bg\/highlight\/light\/default,#e6faf3)] content-stretch flex gap-[var(--space\/100,8px)] items-center justify-center overflow-clip p-[var(--space\/200,16px)] relative rounded-[var(--radius\/200,16px)] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)] shrink-0" data-node-id="47:4086" data-name="⏺️ Icon button">
+          <div className="overflow-clip relative shrink-0 size-[24px]" data-node-id="I47:4086;3471:601962" data-name="plus_mini">
+            <div className="absolute inset-[20%]" data-node-id="I47:4086;3471:601962;6990:350770" data-name="Union">
+              <div className="absolute inset-[-1.74%]">
+                <img alt="" className="block max-w-none size-full" src={imgUnion} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex items-center justify-center left-[247px] size-[31.719px] top-[23.89px]" data-node-id="47:4087">
+        <div className="flex-none rotate-[20.16deg]">
+          <div className="border-0 border-[#e5e7eb] border-solid relative rounded-[5148.615px] size-[24.716px]" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[5148.615px] size-full" src={imgDiv} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex items-center justify-center left-[80.36px] size-[27.144px] top-[71.63px]" data-node-id="47:4088">
+        <div className="-rotate-15 flex-none">
+          <div className="relative rounded-[6px] size-[22.163px]" data-name="Logo=Savory Spice Kitchrn">
+            <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none rounded-[6px] size-full" src={imgLogoSavorySpiceKitchrn} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex items-center justify-center left-[169.2px] size-[19.596px] top-[35.2px]" data-node-id="47:4089">
+        <div className="-rotate-15 flex-none">
+          <div className="border-0 border-[#e5e7eb] border-solid relative rounded-[9999px] size-[16px]" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9999px] size-full" src={imgDiv1} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex items-center justify-center left-[22.03px] size-[24.94px] top-[45.03px]" data-node-id="47:4090">
+        <div className="flex-none rotate-[12.12deg]">
+          <div className="relative size-[21px]" data-name="Logo">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute h-[89.88%] left-[2.67%] max-w-none top-[5.51%] w-[256.93%]" src={imgLogo} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex items-center justify-center left-[215.67px] size-[18.658px] top-[71.67px]" data-node-id="47:4092">
+        <div className="flex-none rotate-[10.54deg]">
+          <div className="relative rounded-[4px] size-[16px]" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[4px] size-full" src={imgDiv2} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Medium/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/L, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/XS, weight: 400, lineHeight: 1.5, letterSpacing: 0), Light/Shadow/X Small: Effect(type: DROP_SHADOW, color: #1018280D, offset: (0, 1), radius: 2, spread: 0).
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

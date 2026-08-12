@@ -1,0 +1,324 @@
+const imgOpenBox = "http://localhost:3845/assets/c36caeba00fb8eb98e69d0d6753d5fec74a8e0ab.png";
+const imgOpenBox1 = "http://localhost:3845/assets/e259e3ebdad543bd56a381a4032723e1c956db13.png";
+const imgOpenBox2 = "http://localhost:3845/assets/efe0881a752766db69a668f7981298d369a17778.png";
+const imgOpenBox3 = "http://localhost:3845/assets/7ea705257a0a0a7cb3431019b863508680ffba5f.png";
+const imgOpenBox4 = "http://localhost:3845/assets/5f627ffa41b6bcf0da831c28cf043e2636237c40.png";
+const imgOpenBox5 = "http://localhost:3845/assets/2e9a029b0c86187d8bd8703440acf3edfefd59ec.png";
+const imgOpenBox6 = "http://localhost:3845/assets/fa38894937a80efafb5587796751f66df05e8d6f.png";
+const imgDiscount = "http://localhost:3845/assets/2837c7b189e70d13f63cac83f75906463f83c187.png";
+const imgBackgroundShape = "http://localhost:3845/assets/4eb368ea9a991152e138a2b813337a34690c71f2.png";
+const imgWoCoin = "http://localhost:3845/assets/a8805e2ffd6c3d828d22bdcb2944f3819625a523.svg";
+const imgVectorStroke = "http://localhost:3845/assets/a14ff392946bae6b925864b7667e798871ec4386.svg";
+const imgVuesaxLinearCard = "http://localhost:3845/assets/2a02a76700bfa721a2d4c7abb3f26abfd1e840c9.svg";
+const imgVuesaxLinearSearchNormal = "http://localhost:3845/assets/7e784d450e713f5e771409c8ebed7f9f7b1ad69f.svg";
+const imgEllipse2174 = "http://localhost:3845/assets/56893a4ea95e167f2a349881b41d02341192cabf.svg";
+const imgEllipse2171 = "http://localhost:3845/assets/296f8899729c61f32e662ca573233d499e5c8473.svg";
+const imgNotification03 = "http://localhost:3845/assets/faf791f2529e68a7ef2f5914bc21d4645c571329.svg";
+const imgVuesaxLinearPeople = "http://localhost:3845/assets/c4f14edb4f3dc73aafc57568f4abb02e0ef9e857.svg";
+const imgVuesaxLinearLocation = "http://localhost:3845/assets/7390df9053d9d9aac60c03a290c91afd2e7323fa.svg";
+const imgVuesaxLinearTicket = "http://localhost:3845/assets/02d41c187946e3ed96263cd3096f1393fea2a563.svg";
+
+export default function ImmersiveHeaderBackground() {
+  return (
+    <div className="bg-[#daebe4] relative rounded-bl-[40px] rounded-br-[40px] size-full" data-node-id="47:3620" data-name="Immersive Header Background">
+      <div className="absolute bg-[rgba(255,255,255,0.1)] blur-[32px] right-[-40px] rounded-[33554400px] size-[256px] top-[-40px]" data-node-id="47:3624" data-name="Decorative Circles" />
+      <div className="absolute bg-[rgba(255,255,255,0.1)] blur-[20px] left-[-40px] rounded-[33554400px] size-[160px] top-[80px]" data-node-id="47:3625" data-name="Overlay+Blur" />
+      <div className="absolute content-stretch flex flex-col h-[275px] items-center left-0 pb-[40px] pt-[56px] px-[24px] right-0 top-0" data-node-id="47:3626" data-name="Header Content">
+        <div className="content-stretch flex flex-col gap-[4px] items-start opacity-0 relative shrink-0 w-full" data-node-id="47:3627" data-name="Immersive Balance Display">
+          <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="47:3628" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] text-right tracking-[0.35px] uppercase w-[119.35px]" data-node-id="47:3629">
+              <p className="leading-[20px]" dir="auto">
+                الرصيد الإجمالي
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[8px] items-baseline relative shrink-0 w-full" data-node-id="47:3630" data-name="Paragraph">
+            <div className="h-[29.569px] relative shrink-0 w-[31.997px]" data-node-id="47:3631" data-name="WO Coin">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgWoCoin} />
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Bold'] justify-center leading-[0] not-italic relative shrink-0 text-[60px] text-[color:var(--text\/inverse,white)] text-right whitespace-nowrap" data-node-id="47:3638">
+              <p className="leading-[60px]">0</p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center pt-[8px] relative shrink-0 w-full" data-node-id="47:3639" data-name="Container">
+            <div className="content-stretch flex gap-[2px] items-center relative shrink-0" data-node-id="47:3640" data-name="Container">
+              <div className="content-stretch flex items-center relative shrink-0" data-node-id="47:3641">
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="47:3642" data-name="⚙️ Icon resizer">
+                  <div className="overflow-clip relative shrink-0 size-[16px]" data-node-id="I47:3642;14878:19622" data-name="chevron-right_mini">
+                    <div className="absolute bottom-1/4 flex items-center justify-center left-[35%] right-[35%] top-1/4" data-node-id="I47:3642;14878:19622;6990:347734" style={{ containerType: "size" }}>
+                      <div className="-rotate-90 flex-none h-[100cqw] w-[100cqh]">
+                        <div className="relative size-full" data-name="Vector (Stroke)">
+                          <div className="absolute inset-[-5.21%_-3.12%_-5.21%_-3.13%]">
+                            <img alt="" className="block max-w-none size-full" src={imgVectorStroke} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Normal'] justify-center leading-[0] not-italic relative shrink-0 text-[length:var(--font-size\/text\/s,14px)] text-[rgba(255,255,255,0.9)] text-right whitespace-nowrap" data-node-id="47:3643">
+                <p className="leading-[1.5]" dir="auto">
+                  اربط بطاقتك للحصول على كاش باك
+                </p>
+              </div>
+              <div className="content-stretch flex items-center relative shrink-0" data-node-id="47:3644">
+                <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="47:3645" data-name="⚙️ Icon resizer">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="I47:3645;14878:19622" data-name="Property 1=linear">
+                    <div className="absolute contents inset-0" data-node-id="I47:3645;14878:19622;5145:5921" data-name="vuesax/linear/card">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearCard} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bg-white content-stretch drop-shadow-[0px_20px_12.5px_rgba(229,231,235,0.5),0px_8px_5px_rgba(229,231,235,0.5)] flex flex-col gap-[16px] h-[199px] items-start left-0 px-[16px] py-[24px] right-0 rounded-[24px] top-[416px]" data-node-id="47:3646" data-name="Floating Quick Actions">
+        <div className="content-stretch flex flex-col gap-[6px] items-start justify-center relative shrink-0 w-full" data-node-id="47:3647" data-name="Input with label">
+          <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex items-center justify-end overflow-clip px-[var(--space\/150,12px)] py-[var(--space\/125,10px)] relative rounded-[var(--radius\/full,500px)] shrink-0 w-full" data-node-id="47:3649" data-name="Input">
+            <div className="content-stretch flex flex-[1_0_0] gap-[var(--space\/100,8px)] items-center justify-end min-w-px relative" data-node-id="47:3650" data-name="Content">
+              <p className="[word-break:break-word] font-['FF_Shamel_Unique:Normal'] leading-[1.5] not-italic relative shrink-0 text-[color:var(--text\/quadrant,#96a0b6)] text-[length:var(--font-size\/text\/s,14px)] text-right whitespace-nowrap" dir="auto" data-node-id="47:3651">
+                ابحث عما تحتاجه..
+              </p>
+              <div className="relative shrink-0 size-[18px]" data-node-id="47:3652" data-name="search-normal">
+                <div className="absolute contents inset-0" data-node-id="I47:3652;17:71840" data-name="vuesax/linear/search-normal">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearSearchNormal} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0 w-full" data-node-id="47:3653">
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3654" data-name="Button - Action 6">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3655" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3656" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3657">
+              <p className="leading-[1.5]" dir="auto">
+                خدمات
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3658" data-name="Button - Action 7">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3659" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3660" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox1} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3661">
+              <p className="leading-[1.5]" dir="auto">
+                تعليم
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3662" data-name="Button - Action 8">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3663" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3664" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox2} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3665">
+              <p className="leading-[1.5]" dir="auto">
+                سفر
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3666" data-name="Button - Action 9">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3667" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3668" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox3} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3669">
+              <p className="leading-[1.5]" dir="auto">
+                المنزل
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3670" data-name="Button - Action 5">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3671" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3672" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox4} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3673">
+              <p className="leading-[1.5]" dir="auto">
+                صحة
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3674" data-name="Button - Action 4">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3675" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3676" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox5} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3677">
+              <p className="leading-[1.5]" dir="auto">
+                جمال
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center px-[11.75px] relative shrink-0" data-node-id="47:3678" data-name="Button - Action 2">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3679" data-name="Background">
+              <div className="relative shrink-0 size-[39px]" data-node-id="47:3680" data-name="open-box">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgOpenBox6} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3681">
+              <p className="leading-[1.5]" dir="auto">
+                أزياء
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[8px] items-center pl-[11.75px] relative shrink-0" data-node-id="47:3682" data-name="Button - Action 3">
+            <div className="bg-[var(--bg\/neutral\/primary,#f4f6fc)] content-stretch flex items-center justify-center relative rounded-[33554400px] shrink-0 size-[48px]" data-node-id="47:3683" data-name="Background">
+              <div className="relative shrink-0 size-[32px]" data-node-id="47:3684" data-name="discount">
+                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDiscount} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3685">
+              <p className="leading-[1.5]" dir="auto">
+                طعام
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col gap-[var(--spacing\/3\,5,14px)] items-start left-[16px] top-[128px] w-[343px]" data-node-id="47:3686" data-name="Promotions Container">
+        <div className="h-[131px] relative shrink-0 w-full" data-node-id="47:3687" data-name="Promo Banner">
+          <div className="absolute contents left-0 top-0" data-node-id="47:3688" data-name="Container">
+            <div className="absolute h-[131px] left-0 rounded-[16px] top-0 w-[343px]" data-node-id="47:3689" data-name="Background Shape">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[16px]">
+                <img alt="" className="absolute h-[209.9%] left-0 max-w-none top-[-77.92%] w-full" src={imgBackgroundShape} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[var(--spacing\/2,8px)] items-center justify-center relative shrink-0 w-full" data-node-id="47:3690" data-name="Promotion Dots">
+          <div className="relative shrink-0 size-[8px]" data-node-id="47:3691">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2174} />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-node-id="47:3692">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2174} />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-node-id="47:3693">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2174} />
+          </div>
+          <div className="relative shrink-0 size-[8px]" data-node-id="47:3694">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2171} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex items-center justify-between left-[16px] right-[16px] top-[56px]" data-node-id="47:3695" data-name="Header">
+        <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="47:3696">
+          <div className="bg-[rgba(246,246,246,0.74)] border border-[rgba(255,255,255,0.74)] border-solid overflow-clip relative rounded-[100px] shrink-0 size-[40px]" data-node-id="47:3697" data-name="Icon">
+            <div className="absolute left-[9px] size-[20px] top-[9px]" data-node-id="47:3698" data-name="notification-03">
+              <div className="absolute inset-[-20%_0_0_0]">
+                <img alt="" className="block max-w-none size-full" src={imgNotification03} />
+              </div>
+            </div>
+          </div>
+          <div className="bg-[rgba(246,246,246,0.74)] border border-[rgba(255,255,255,0.74)] border-solid content-stretch flex flex-col h-[40px] items-start overflow-clip px-[12px] py-[9px] relative rounded-[100px] shrink-0 w-[53px]" data-node-id="47:3702" data-name="Icon">
+            <div className="[word-break:break-word] content-stretch flex font-['FF_Shamel_Unique:Medium'] font-[var(--font-weight\/500,normal)] gap-[4px] items-center leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/s,14px)] text-right w-full whitespace-nowrap" data-node-id="47:3703">
+              <p className="relative shrink-0" dir="auto" data-node-id="47:3704">
+                ﷼
+              </p>
+              <p className="relative shrink-0" dir="auto" data-node-id="47:3705">
+                0
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-start relative shrink-0 w-[78px]" data-node-id="47:3706" data-name="Container">
+          <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="47:3707" data-name="Heading 1">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] justify-center leading-[0] not-italic relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/m,16px)] text-right whitespace-nowrap" data-node-id="47:3708">
+              <p dir="auto">
+                <span className="leading-[1.5]">{`هلا، `}</span>
+                <span className="leading-[1.5] text-[#00ce8b]">محمد</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[12px] items-start left-[16px] top-[313px] w-[343px]" data-node-id="47:3709" data-name="Categories List">
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-center justify-center min-w-px pb-[12px] pt-[14px] px-[13px] relative rounded-[12px]" data-node-id="47:3710" style={{ backgroundImage: "linear-gradient(-28.8166385645347deg, rgba(255, 255, 255, 0.5) 31.621%, rgb(255, 255, 255) 135.4%)" }} data-name="Category Icon">
+          <div className="relative shrink-0 size-[32px]" data-node-id="47:3711" data-name="people">
+            <div className="absolute contents inset-0" data-node-id="I47:3711;5145:12980" data-name="vuesax/linear/people">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearPeople} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3712" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              عائلتي
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-center justify-center min-w-px pb-[12px] pt-[14px] px-[13px] relative rounded-[12px]" data-node-id="47:3713" style={{ backgroundImage: "linear-gradient(-28.8166385645347deg, rgba(255, 255, 255, 0.5) 31.621%, rgb(255, 255, 255) 135.4%)" }} data-name="Category Icon">
+          <div className="relative shrink-0 size-[32px]" data-node-id="47:3714" data-name="location">
+            <div className="absolute contents inset-0" data-node-id="I47:3714;95:16625" data-name="vuesax/linear/location">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearLocation} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3715" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              بالقرب مني
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-center justify-center min-w-px pb-[12px] pt-[14px] px-[13px] relative rounded-[12px]" data-node-id="47:3716" style={{ backgroundImage: "linear-gradient(-28.816636828396014deg, rgba(255, 255, 255, 0.5) 31.621%, rgb(255, 255, 255) 135.4%)" }} data-name="Category Icon">
+          <div className="relative shrink-0 size-[32px]" data-node-id="47:3717" data-name="ticket">
+            <div className="absolute contents inset-0" data-node-id="I47:3717;5145:6486" data-name="vuesax/linear/ticket">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearTicket} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:3718" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              القسائم
+            </p>
+          </div>
+          <div className="-translate-x-1/2 absolute content-stretch flex flex-col items-center left-[calc(50%+0.15px)] top-[-7px] w-[41.961px]" data-node-id="47:3719" data-name="Container">
+            <div className="[word-break:break-word] bg-[var(--bg\/highlight\/default,#00ce8b)] content-stretch flex gap-[2px] items-start justify-center leading-[0] not-italic overflow-clip px-[8px] py-[0.5px] relative rounded-[33554400px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] shrink-0 text-[9px] text-[color:var(--text\/alwayslight\/primary,white)] text-center whitespace-nowrap" data-node-id="47:3720" data-name="Background+Shadow">
+              <div className="content-stretch flex font-['Poppins:Bold'] items-center relative shrink-0" data-node-id="47:3721">
+                <div className="flex flex-col justify-center relative shrink-0" data-node-id="47:3722">
+                  <p className="leading-[13.5px] whitespace-pre" dir="ltr">{`﷼  `}</p>
+                </div>
+                <div className="flex flex-col justify-center relative shrink-0" data-node-id="47:3723">
+                  <p className="leading-[13.5px]" dir="ltr">
+                    50
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col font-['FF_Shamel_Unique:Bold'] justify-center relative shrink-0" data-node-id="47:3724">
+                <p className="leading-[13.5px]" dir="ltr">
+                  من
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## ⚙️ Icon resizer
+**Node ID:** 1:236
+
+🧰  Internal Figma component - Used to enable changing icon size when nested inside another component.
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

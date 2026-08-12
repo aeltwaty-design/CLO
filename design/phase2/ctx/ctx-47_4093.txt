@@ -1,0 +1,144 @@
+const imgColorLightGreyCurrentFalseTypeDotSizeLarge = "http://localhost:3845/assets/acc92dcf9a61d64f7e9b6210ad3b45ee80d7fc7d.svg";
+const imgColorLightGreyCurrentFalseTypeDotSizeSmall = "http://localhost:3845/assets/b0adaa4f49b65c9531366e7fcaf6240f4cfac66e.svg";
+const imgColorLightGreyCurrentTrueTypeDotSizeLarge = "http://localhost:3845/assets/5fbb3c38126cb80b296ae44c18f4b6ecc382dbad.svg";
+const imgColorLightGreyCurrentTrueTypeDotSizeSmall = "http://localhost:3845/assets/e95db42495b6eca41288a042088352160c0bb991.svg";
+const imgColorDarkGreyCurrentFalseTypeDotSizeLarge = "http://localhost:3845/assets/9a0ac4bd746540b6f826441444a606ce7f9e56b6.svg";
+const imgColorDarkGreyCurrentFalseTypeDotSizeSmall = "http://localhost:3845/assets/e54cc870cedc0ae80feb56fbd02940084a294de0.svg";
+const imgColorDarkGreyCurrentTrueTypeDotSizeLarge = "http://localhost:3845/assets/978fd6601cb713177980628297c0eb3542262f85.svg";
+const imgColorDarkGreyCurrentTrueTypeDotSizeSmall = "http://localhost:3845/assets/0b841026147369ec5b600d8b13b442c9de949fc4.svg";
+const imgColorWhiteCurrentFalseTypeDotSizeLarge = "http://localhost:3845/assets/85ac2706c1ca5b822a8892cd8112f87c8428ee4d.svg";
+const imgColorWhiteCurrentFalseTypeDotSizeSmall = "http://localhost:3845/assets/c6efebdcc1b734d4cff28623ab84d7d4c624c5d9.svg";
+const imgVibrantAbstract3DBackgroundWithGreenAndOrangeGradientsFloatingShoppingElementsHighQuality = "http://localhost:3845/assets/acc7990fc2280ecd8b7685554ad37c3b7371e081.png";
+const imgIconArrowBanner = "http://localhost:3845/assets/bcfddb457e1454e3133d68214c0ae8ac87008d52.svg";
+type CarouselIndicatorBaseProps = {
+  className?: string;
+  color?: "Light Grey" | "White" | "Dark Grey";
+  current?: boolean;
+  size?: "Small" | "Large";
+  type?: "Dash" | "Dash-progress" | "Dot";
+};
+
+function CarouselIndicatorBase({ className, color = "White", current = false, size = "Large", type = "Dot" }: CarouselIndicatorBaseProps) {
+  const isDarkGreyAndCurrentAndDashAndLarge = color === "Dark Grey" && current && type === "Dash" && size === "Large";
+  const isDarkGreyAndCurrentAndDashAndSmall = color === "Dark Grey" && current && type === "Dash" && size === "Small";
+  const isDarkGreyAndCurrentAndDashProgressAndLarge = color === "Dark Grey" && current && type === "Dash-progress" && size === "Large";
+  const isDarkGreyAndCurrentAndDashProgressAndSmall = color === "Dark Grey" && current && type === "Dash-progress" && size === "Small";
+  const isDarkGreyAndCurrentAndDotAndLarge = color === "Dark Grey" && current && type === "Dot" && size === "Large";
+  const isDarkGreyAndCurrentAndDotAndSmall = color === "Dark Grey" && current && type === "Dot" && size === "Small";
+  const isDarkGreyAndNotCurrentAndDashAndLarge = color === "Dark Grey" && !current && type === "Dash" && size === "Large";
+  const isDarkGreyAndNotCurrentAndDashAndSmall = color === "Dark Grey" && !current && type === "Dash" && size === "Small";
+  const isDarkGreyAndNotCurrentAndDashProgressAndLarge = color === "Dark Grey" && !current && type === "Dash-progress" && size === "Large";
+  const isDarkGreyAndNotCurrentAndDashProgressAndSmall = color === "Dark Grey" && !current && type === "Dash-progress" && size === "Small";
+  const isDarkGreyAndNotCurrentAndDotAndLarge = color === "Dark Grey" && !current && type === "Dot" && size === "Large";
+  const isDarkGreyAndNotCurrentAndDotAndSmall = color === "Dark Grey" && !current && type === "Dot" && size === "Small";
+  const isLightGreyAndCurrentAndDashAndLarge = color === "Light Grey" && current && type === "Dash" && size === "Large";
+  const isLightGreyAndCurrentAndDashAndSmall = color === "Light Grey" && current && type === "Dash" && size === "Small";
+  const isLightGreyAndCurrentAndDashProgressAndLarge = color === "Light Grey" && current && type === "Dash-progress" && size === "Large";
+  const isLightGreyAndCurrentAndDashProgressAndSmall = color === "Light Grey" && current && type === "Dash-progress" && size === "Small";
+  const isLightGreyAndNotCurrentAndDashAndLarge = color === "Light Grey" && !current && type === "Dash" && size === "Large";
+  const isLightGreyAndNotCurrentAndDashAndSmall = color === "Light Grey" && !current && type === "Dash" && size === "Small";
+  const isLightGreyAndNotCurrentAndDashProgressAndLarge = color === "Light Grey" && !current && type === "Dash-progress" && size === "Large";
+  const isLightGreyAndNotCurrentAndDashProgressAndSmall = color === "Light Grey" && !current && type === "Dash-progress" && size === "Small";
+  const isLightGreyAndNotCurrentAndDotAndSmall = color === "Light Grey" && !current && type === "Dot" && size === "Small";
+  const isWhiteAndCurrentAndDashAndLarge = color === "White" && current && type === "Dash" && size === "Large";
+  const isWhiteAndCurrentAndDashAndSmall = color === "White" && current && type === "Dash" && size === "Small";
+  const isWhiteAndCurrentAndDashProgressAndLarge = color === "White" && current && type === "Dash-progress" && size === "Large";
+  const isWhiteAndCurrentAndDashProgressAndSmall = color === "White" && current && type === "Dash-progress" && size === "Small";
+  const isWhiteAndNotCurrentAndDashAndSmall = color === "White" && !current && type === "Dash" && size === "Small";
+  const isWhiteAndNotCurrentAndDashProgressAndLarge = color === "White" && !current && type === "Dash-progress" && size === "Large";
+  const isWhiteAndNotCurrentAndDashProgressAndSmall = color === "White" && !current && type === "Dash-progress" && size === "Small";
+  const isWhiteAndNotCurrentAndDotAndLarge = color === "White" && !current && type === "Dot" && size === "Large";
+  const isWhiteAndNotCurrentAndDotAndSmall = color === "White" && !current && type === "Dot" && size === "Small";
+  return (
+    <div className={className || `relative ${isDarkGreyAndNotCurrentAndDashAndSmall ? "h-[6px] w-[32px]" : size === "Small" && ((color === "White" && !current && type === "Dash") || type === "Dash-progress" || (current && type === "Dash") || (color === "Light Grey" && !current && type === "Dash")) ? "h-[4px] w-[32px]" : size === "Large" && ["Dash", "Dash-progress"].includes(type) ? "h-[6px] w-[43px]" : type === "Dot" && size === "Small" ? "size-[8px]" : "size-[12px]"}`} id={isLightGreyAndNotCurrentAndDashProgressAndSmall ? "node-47_3411" : isLightGreyAndNotCurrentAndDashProgressAndLarge ? "node-47_3407" : isLightGreyAndNotCurrentAndDashAndSmall ? "node-47_3403" : isLightGreyAndNotCurrentAndDashAndLarge ? "node-47_3399" : isDarkGreyAndNotCurrentAndDashProgressAndSmall ? "node-47_3397" : isDarkGreyAndNotCurrentAndDashProgressAndLarge ? "node-47_3395" : isDarkGreyAndNotCurrentAndDashAndSmall ? "node-47_3393" : isDarkGreyAndNotCurrentAndDashAndLarge ? "node-47_3391" : isDarkGreyAndCurrentAndDashProgressAndSmall ? "node-47_3388" : isDarkGreyAndCurrentAndDashProgressAndLarge ? "node-47_3385" : isDarkGreyAndCurrentAndDashAndSmall ? "node-47_3383" : isDarkGreyAndCurrentAndDashAndLarge ? "node-47_3381" : isLightGreyAndCurrentAndDashProgressAndSmall ? "node-47_3375" : isLightGreyAndCurrentAndDashProgressAndLarge ? "node-47_3369" : isLightGreyAndCurrentAndDashAndSmall ? "node-47_3365" : isLightGreyAndCurrentAndDashAndLarge ? "node-47_3361" : isWhiteAndCurrentAndDashProgressAndSmall ? "node-47_3358" : isWhiteAndCurrentAndDashProgressAndLarge ? "node-47_3355" : isWhiteAndCurrentAndDashAndSmall ? "node-47_3353" : isWhiteAndCurrentAndDashAndLarge ? "node-47_3351" : isWhiteAndNotCurrentAndDashProgressAndSmall ? "node-47_3349" : isWhiteAndNotCurrentAndDashProgressAndLarge ? "node-47_3347" : isWhiteAndNotCurrentAndDashAndSmall ? "node-47_3345" : color === "White" && !current && type === "Dash" && size === "Large" ? "node-47_3343" : color === "White" && current && type === "Dot" && size === "Small" ? "node-47_3341" : color === "White" && current && type === "Dot" && size === "Large" ? "node-47_3339" : isWhiteAndNotCurrentAndDotAndSmall ? "node-47_3337" : isWhiteAndNotCurrentAndDotAndLarge ? "node-47_3335" : isDarkGreyAndCurrentAndDotAndSmall ? "node-47_3333" : isDarkGreyAndCurrentAndDotAndLarge ? "node-47_3331" : isDarkGreyAndNotCurrentAndDotAndSmall ? "node-47_3329" : isDarkGreyAndNotCurrentAndDotAndLarge ? "node-47_3327" : color === "Light Grey" && current && type === "Dot" && size === "Small" ? "node-47_3323" : color === "Light Grey" && current && type === "Dot" && size === "Large" ? "node-47_3319" : isLightGreyAndNotCurrentAndDotAndSmall ? "node-47_3315" : "node-47_3311"}>
+      {["Dash", "Dash-progress"].includes(type) && <div className={`absolute inset-0 rounded-[8px] ${color === "Dark Grey" && (type === "Dash-progress" || (!current && type === "Dash")) ? String.raw`bg-[var(--text\/quadrant,#96a0b6)]` : color === "Light Grey" && (type === "Dash-progress" || (!current && type === "Dash")) ? String.raw`bg-[var(--border\/subtle,#f1f3f9)]` : current && type === "Dash" && ["White", "Light Grey"].includes(color) ? String.raw`bg-[var(--bg\/highlight\/default,#00ce8b)]` : String.raw`bg-[var(--bg\/standard\/default,white)]`}`} id={isLightGreyAndNotCurrentAndDashProgressAndSmall ? "node-47_3412" : isLightGreyAndNotCurrentAndDashProgressAndLarge ? "node-47_3408" : isLightGreyAndNotCurrentAndDashAndSmall ? "node-47_3404" : isLightGreyAndNotCurrentAndDashAndLarge ? "node-47_3400" : isDarkGreyAndNotCurrentAndDashProgressAndSmall ? "node-47_3398" : isDarkGreyAndNotCurrentAndDashProgressAndLarge ? "node-47_3396" : isDarkGreyAndNotCurrentAndDashAndSmall ? "node-47_3394" : isDarkGreyAndNotCurrentAndDashAndLarge ? "node-47_3392" : isDarkGreyAndCurrentAndDashProgressAndSmall ? "node-47_3389" : isDarkGreyAndCurrentAndDashProgressAndLarge ? "node-47_3386" : isDarkGreyAndCurrentAndDashAndSmall ? "node-47_3384" : isDarkGreyAndCurrentAndDashAndLarge ? "node-47_3382" : isLightGreyAndCurrentAndDashProgressAndSmall ? "node-47_3376" : isLightGreyAndCurrentAndDashProgressAndLarge ? "node-47_3370" : isLightGreyAndCurrentAndDashAndSmall ? "node-47_3366" : isLightGreyAndCurrentAndDashAndLarge ? "node-47_3362" : isWhiteAndCurrentAndDashProgressAndSmall ? "node-47_3359" : isWhiteAndCurrentAndDashProgressAndLarge ? "node-47_3356" : isWhiteAndCurrentAndDashAndSmall ? "node-47_3354" : isWhiteAndCurrentAndDashAndLarge ? "node-47_3352" : isWhiteAndNotCurrentAndDashProgressAndSmall ? "node-47_3350" : isWhiteAndNotCurrentAndDashProgressAndLarge ? "node-47_3348" : isWhiteAndNotCurrentAndDashAndSmall ? "node-47_3346" : "node-47_3344"} data-name="#Carousel indicator base" />}
+      {!current && type === "Dot" && <img alt="" className="absolute block inset-0 max-w-none size-full" src={isWhiteAndNotCurrentAndDotAndSmall ? imgColorWhiteCurrentFalseTypeDotSizeSmall : isWhiteAndNotCurrentAndDotAndLarge ? imgColorWhiteCurrentFalseTypeDotSizeLarge : isDarkGreyAndNotCurrentAndDotAndSmall ? imgColorDarkGreyCurrentFalseTypeDotSizeSmall : isDarkGreyAndNotCurrentAndDotAndLarge ? imgColorDarkGreyCurrentFalseTypeDotSizeLarge : isLightGreyAndNotCurrentAndDotAndSmall ? imgColorLightGreyCurrentFalseTypeDotSizeSmall : imgColorLightGreyCurrentFalseTypeDotSizeLarge} />}
+      {current && type === "Dot" && (
+        <div className={`absolute ${current && type === "Dot" && size === "Small" ? "inset-[-12.5%]" : "inset-[-8.33%]"}`}>
+          <img alt="" className="block max-w-none size-full" src={isDarkGreyAndCurrentAndDotAndSmall ? imgColorDarkGreyCurrentTrueTypeDotSizeSmall : isDarkGreyAndCurrentAndDotAndLarge ? imgColorDarkGreyCurrentTrueTypeDotSizeLarge : current && type === "Dot" && size === "Small" && ["Light Grey", "White"].includes(color) ? imgColorLightGreyCurrentTrueTypeDotSizeSmall : imgColorLightGreyCurrentTrueTypeDotSizeLarge} />
+        </div>
+      )}
+      {current && type === "Dash-progress" && <div className={`absolute rounded-[8px] ${isDarkGreyAndCurrentAndDashProgressAndSmall ? String.raw`bg-[var(--bg\/standard\/default,white)] bottom-0 left-0 right-1/2 top-0` : isDarkGreyAndCurrentAndDashProgressAndLarge ? String.raw`bg-[var(--bg\/standard\/default,white)] inset-[0_53.49%_0_0]` : isLightGreyAndCurrentAndDashProgressAndSmall ? String.raw`bg-[var(--bg\/highlight\/default,#00ce8b)] bottom-0 left-0 right-1/2 top-0` : isLightGreyAndCurrentAndDashProgressAndLarge ? String.raw`bg-[var(--bg\/highlight\/default,#00ce8b)] inset-[0_53.49%_0_0]` : isWhiteAndCurrentAndDashProgressAndSmall ? String.raw`-translate-y-1/2 bg-[var(--bg\/highlight\/default,#00ce8b)] h-[4px] left-0 top-1/2 w-[16px]` : String.raw`-translate-y-1/2 bg-[var(--bg\/highlight\/default,#00ce8b)] h-[6px] left-0 top-1/2 w-[20px]`}`} id={isDarkGreyAndCurrentAndDashProgressAndSmall ? "node-47_3390" : isDarkGreyAndCurrentAndDashProgressAndLarge ? "node-47_3387" : isLightGreyAndCurrentAndDashProgressAndSmall ? "node-47_3377" : isLightGreyAndCurrentAndDashProgressAndLarge ? "node-47_3371" : isWhiteAndCurrentAndDashProgressAndSmall ? "node-47_3360" : "node-47_3357"} data-name="Dashed-progress-indicator" />}
+    </div>
+  );
+}
+type CarouselIndicatorFrameBaseProps = {
+  className?: string;
+  color?: "White";
+  show4thStep?: boolean;
+  size?: "Large" | "Small";
+  type?: "Dot";
+};
+
+function CarouselIndicatorFrameBase({ className, color = "White", show4thStep = true, size = "Large", type = "Dot" }: CarouselIndicatorFrameBaseProps) {
+  const isDotAndSmallAndWhite = type === "Dot" && size === "Small" && color === "White";
+  return (
+    <div className={className || `content-stretch flex items-center justify-center relative ${isDotAndSmallAndWhite ? String.raw`gap-[var(--space\/100,8px)]` : String.raw`gap-[var(--space\/150,12px)]`}`} id={isDotAndSmallAndWhite ? "node-47_3421" : "node-47_3416"}>
+      <CarouselIndicatorBase className={`relative shrink-0 ${isDotAndSmallAndWhite ? "size-[8px]" : "size-[12px]"}`} current size={isDotAndSmallAndWhite ? "Small" : undefined} />
+      <CarouselIndicatorBase className={`relative shrink-0 ${isDotAndSmallAndWhite ? "size-[8px]" : "size-[12px]"}`} size={isDotAndSmallAndWhite ? "Small" : undefined} />
+      <CarouselIndicatorBase className={`relative shrink-0 ${isDotAndSmallAndWhite ? "size-[8px]" : "size-[12px]"}`} size={isDotAndSmallAndWhite ? "Small" : undefined} />
+      {type === "Dot" && size === "Large" && color === "White" && show4thStep && <CarouselIndicatorBase className="relative shrink-0 size-[12px]" />}
+      {isDotAndSmallAndWhite && show4thStep && <CarouselIndicatorBase className="relative shrink-0 size-[8px]" size="Small" />}
+    </div>
+  );
+}
+
+export default function SectionMarketingBanner() {
+  return (
+    <div className="bg-[rgba(255,255,255,0)] content-stretch flex flex-col items-end justify-center overflow-clip relative rounded-[16px] shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] size-full" data-node-id="47:4093" data-name="Section - Marketing Banner">
+      <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="47:4094">
+        <div className="-scale-y-100 flex-none rotate-180 w-full">
+          <div className="aspect-[343/141.47000122070312] relative size-full" data-name="vibrant abstract 3d background with green and orange gradients, floating shopping elements, high quality">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute h-[147.28%] left-0 max-w-none top-[-23.64%] w-full" src={imgVibrantAbstract3DBackgroundWithGreenAndOrangeGradientsFloatingShoppingElementsHighQuality} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bg-[rgba(0,0,0,0.1)] content-stretch flex flex-col inset-[0_0_-0.43px_0] items-end justify-center px-[24px]" data-node-id="47:4095" data-name="Overlay">
+        <div className="content-stretch flex flex-col items-end relative shrink-0 w-[222.66px]" data-node-id="47:4096" data-name="Heading 3">
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Bold'] font-bold justify-center leading-[0] relative shrink-0 text-[length:var(--font-size\/text\/xl,20px)] text-right text-white whitespace-nowrap" data-node-id="47:4097" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5] mb-0" dir="auto">
+              كاش باك مضاعف على
+            </p>
+            <p className="leading-[1.5]" dir="auto">
+              البقالة
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col items-start pt-[8px] relative shrink-0 w-full" data-node-id="47:4098" data-name="Margin">
+          <div className="content-stretch flex items-center justify-between relative shrink-0 w-full" data-node-id="47:4099" data-name="Container">
+            <CarouselIndicatorFrameBase className="content-stretch flex gap-[var(--space\/100,8px)] items-center justify-center relative shrink-0" size="Small" />
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="47:4101">
+              <div className="flex items-center justify-center relative shrink-0" data-node-id="47:4102">
+                <div className="flex-none rotate-180">
+                  <div className="relative size-[12px]" data-name="icon_arrow_banner">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconArrowBanner} />
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4105" data-name="Container">
+                <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[length:var(--font-size\/text\/xs,12px)] text-white whitespace-nowrap" data-node-id="47:4106" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  <p className="leading-[1.5]" dir="auto">
+                    اكتشف المزيد
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Large/Bold: Font(family: "FF Shamel Unique", style: Font Weight/700, size: Font Size/Text/XL, weight: 700, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0).
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

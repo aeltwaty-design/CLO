@@ -1,0 +1,143 @@
+const imgVectorStroke = "http://localhost:3845/assets/e8b3d916f4a8ca674ba7587240e11d98df1d209d.svg";
+const imgMaskGroup = "http://localhost:3845/assets/5450730031a6b8bd6f6e8fedfb7d045e805fa171.svg";
+const imgGroup = "http://localhost:3845/assets/fcf4aac595023ccd895b5e77afd27ca5aef7c687.svg";
+const imgGroup1 = "http://localhost:3845/assets/66af0f121b37a6871e879559cc7ad6495ab03b61.svg";
+const imgGroup2 = "http://localhost:3845/assets/b7d6daf33766864ba63aa718327d901dd321f508.svg";
+const imgMaskGroup1 = "http://localhost:3845/assets/e7e496a0265b17e9c5dd63eff0d040586a55fe1c.svg";
+const imgVector = "http://localhost:3845/assets/f3d523dd044c38913d906f1e515930b2a7a4707d.svg";
+const imgVector1 = "http://localhost:3845/assets/fabb1b1ce32d1ecdf9341fa20d71622103913d48.svg";
+const imgVector2 = "http://localhost:3845/assets/335e37721e40100908daf09bdd58d99c6e78d9b4.svg";
+const imgTravelling1 = "http://localhost:3845/assets/86bd34b8b37fb104e0c9a59992a9d7b7f495843e.svg";
+const imgMaskGroup2 = "http://localhost:3845/assets/bcbf2f3ad98cdf9162c31e7f9fb3beac6317008b.svg";
+const imgTickets = "http://localhost:3845/assets/bc039bcf801a46f1c15f6c469767836efdb0bda2.svg";
+const imgParticles = "http://localhost:3845/assets/85d9ec9e7edcb2720855d5902aecac7fab61c97d.svg";
+
+export default function SectionTopGuildsRetailers() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-end justify-center relative size-full" data-node-id="47:4263" data-name="Section - Top Guilds (Retailers">
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4264" data-name="Container">
+        <div className="content-stretch flex items-center relative shrink-0" data-node-id="47:4265" data-name="Heading 3">
+          <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="47:4266" data-name="chevron-left_mini">
+            <div className="absolute bottom-1/4 flex items-center justify-center left-[35%] right-[35%] top-1/4" data-node-id="I47:4266;6990:347929" style={{ containerType: "size" }}>
+              <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+                <div className="relative size-full" data-name="Vector (Stroke)">
+                  <div className="absolute inset-[-4.17%_-2.5%]">
+                    <img alt="" className="block max-w-none size-full" src={imgVectorStroke} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/l,18px)] whitespace-nowrap" data-node-id="47:4267" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              قسائم خاصة
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="47:4270">
+        <div className="h-[155.628px] relative shrink-0 w-[138.954px]" data-node-id="47:4271" data-name="Component 32">
+          <div className="absolute bg-[#f55] h-[155.628px] left-0 rounded-[23.622px] top-0 w-[138.954px]" data-node-id="47:4272" />
+          <div className="absolute h-[155.628px] left-0 top-0 w-[138.954px]" data-node-id="47:4273" data-name="Mask Group">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaskGroup} />
+          </div>
+          <p className="-translate-x-full [word-break:break-word] absolute font-['FF_Shamel_Unique:Medium'] leading-[16px] left-[129px] not-italic text-[#f0f0f0] text-[12px] text-right top-[109.3px] w-[122px]" dir="auto" data-node-id="47:4277">
+            احصل على 20% على الطعام والمشروبات
+          </p>
+          <div className="absolute contents inset-[8.45%_41.91%_45.57%_5.82%]" data-node-id="47:4278" style={{ containerType: "size" }}>
+            <div className="absolute flex inset-[8.45%_41.91%_45.57%_5.82%] items-center justify-center" data-node-id="47:4279" style={{ containerType: "size" }}>
+              <div className="flex-none h-[hypot(25.5807cqw,73.208cqh)] rotate-[-19.53deg] w-[hypot(74.4193cqw,-26.792cqh)]">
+                <div className="relative size-full" data-name="Group">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute contents inset-[39.33%_25.29%_40.39%_52%]" data-node-id="47:4298" style={{ containerType: "size" }}>
+            <div className="absolute flex inset-[39.33%_25.29%_40.39%_52%] items-center justify-center" data-node-id="47:4299" style={{ containerType: "size" }}>
+              <div className="-scale-x-100 flex-none h-[hypot(-91.1278cqw,-8.8725cqh)] rotate-[95.56deg] w-[hypot(8.87225cqw,-91.1275cqh)]">
+                <div className="relative size-full" data-name="Group">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup1} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute contents inset-[46.83%_71.96%_43.26%_16.95%]" data-node-id="47:4318" style={{ containerType: "size" }}>
+            <div className="absolute flex inset-[46.83%_71.96%_43.26%_16.95%] items-center justify-center" data-node-id="47:4319" style={{ containerType: "size" }}>
+              <div className="-scale-x-100 flex-none h-[hypot(23.0986cqw,76.9018cqh)] rotate-[-16.72deg] w-[hypot(-76.9014cqw,23.0982cqh)]">
+                <div className="relative size-full" data-name="Group">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup2} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-[155.628px] relative shrink-0 w-[138.954px]" data-node-id="47:4338" data-name="Component 32">
+          <div className="absolute flex h-[155.628px] items-center justify-center left-0 top-0 w-[138.954px]" data-node-id="47:4339">
+            <div className="-scale-y-100 flex-none">
+              <div className="h-[155.628px] relative w-[138.954px]" data-name="Mask Group">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaskGroup1} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-[17.86%_43%_63.39%_11%]" data-node-id="47:4344" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+          </div>
+          <div className="absolute flex inset-[41.96%_22%_45.54%_48%] items-center justify-center" data-node-id="47:4345" style={{ containerType: "size" }}>
+            <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+              <div className="relative size-full" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-[44.64%] flex items-center justify-center left-[18%] right-[69%] top-1/2" data-node-id="47:4346" style={{ containerType: "size" }}>
+            <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+              <div className="relative size-full" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[30.57px] size-[55.581px] top-[37.52px]" data-node-id="47:4347" data-name="travelling 1">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTravelling1} />
+          </div>
+          <p className="-translate-x-full [word-break:break-word] absolute font-['FF_Shamel_Unique:Medium'] leading-[16px] left-[129.05px] not-italic text-[#f0f0f0] text-[12px] text-right top-[109.3px] w-[117px]" dir="auto" data-node-id="47:4358">
+            احصل على خصم 15% على السفر والفنادق
+          </p>
+        </div>
+        <div className="h-[155.628px] relative shrink-0 w-[138.954px]" data-node-id="47:4359" data-name="Component 33">
+          <div className="absolute flex h-[155.628px] items-center justify-center left-0 top-0 w-[138.954px]" data-node-id="47:4360">
+            <div className="flex-none rotate-180">
+              <div className="h-[155.628px] relative w-[138.954px]" data-name="Mask Group">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaskGroup2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute flex items-center justify-center left-[16.67px] size-[78.515px] top-[19.45px]" data-node-id="47:4365">
+            <div className="flex-none rotate-[-42.27deg]">
+              <div className="relative size-[55.581px]" data-name="tickets">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTickets} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-[5.36%_15.64%_41.96%_7%]" data-node-id="47:4382" data-name="particles">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgParticles} />
+          </div>
+          <p className="-translate-x-full [word-break:break-word] absolute font-['FF_Shamel_Unique:Medium'] leading-[16px] left-[129.09px] not-italic text-[#f0f0f0] text-[12px] text-right top-[109.3px] w-[123px]" dir="auto" data-node-id="47:4414">
+            احصل على خصم 25% على تذاكر القسائم
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Medium/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/L, weight: 500, lineHeight: 1.5, letterSpacing: 0), 🎨 Color: Text/Bold text: #F0F0F0.
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

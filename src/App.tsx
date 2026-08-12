@@ -32,7 +32,7 @@ function PhaseTabs() {
   const go = (p: Phase) => {
     if (p === phase) return;
     sessionStorage.setItem('cashback-phase', String(p));
-    window.location.href = `/market?phase=${p}`;
+    window.location.href = `/?phase=${p}`;
   };
   return (
     <div className="phase-tabs" role="tablist" aria-label="Prototype version">

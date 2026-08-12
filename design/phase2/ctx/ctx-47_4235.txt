@@ -1,0 +1,115 @@
+const imgDiv = "http://localhost:3845/assets/698a38ae0271c32c85a05df977621f61da6608ae.png";
+const imgDiv1 = "http://localhost:3845/assets/ed7a3c23092808422fbfc30dfd4f7b5bdf0e5159.png";
+const imgDiv2 = "http://localhost:3845/assets/b4c221fa2bf4465f143d9fbf5faf7b20a417cbec.png";
+const imgDiv3 = "http://localhost:3845/assets/24bcb3d583bab67b3092d93efb38facf8d22ddf0.png";
+const imgVectorStroke = "http://localhost:3845/assets/e8b3d916f4a8ca674ba7587240e11d98df1d209d.svg";
+
+export default function SectionTopGuildsRetailers() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative size-full" data-node-id="47:4235" data-name="Section - Top Guilds (Retailers">
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4236" data-name="Container">
+        <div className="content-stretch flex items-center relative shrink-0" data-node-id="47:4237" data-name="Heading 3">
+          <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="47:4238" data-name="chevron-left_mini">
+            <div className="absolute bottom-1/4 flex items-center justify-center left-[35%] right-[35%] top-1/4" data-node-id="I47:4238;6990:347929" style={{ containerType: "size" }}>
+              <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+                <div className="relative size-full" data-name="Vector (Stroke)">
+                  <div className="absolute inset-[-4.17%_-2.5%]">
+                    <img alt="" className="block max-w-none size-full" src={imgVectorStroke} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Semibold'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/l,18px)] whitespace-nowrap" data-node-id="47:4239" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+            <p className="leading-[1.5]" dir="auto">
+              تجار التجزئة المفضلين
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full" data-node-id="47:4242" data-name="Container">
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[4px] items-center justify-center overflow-clip p-[8px] relative rounded-[16px] shadow-[0px_10px_20px_-5px_rgba(92,246,161,0.2)] shrink-0 size-[80px]" data-node-id="47:4243" data-name="Background+Shadow">
+          <div aria-hidden className="absolute bg-white inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative rounded-[9.019px] shrink-0 size-[36.074px]" data-node-id="47:4244" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9.019px] size-full" src={imgDiv} />
+          </div>
+          <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4245" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" data-node-id="47:4246" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                نوون
+              </p>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[4px] items-center justify-center overflow-clip p-[8px] relative rounded-[16px] shadow-[0px_10px_20px_-5px_rgba(92,246,161,0.2)] shrink-0 size-[80px]" data-node-id="47:4247" data-name="Background+Shadow">
+          <div aria-hidden className="absolute bg-white inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative rounded-[9.019px] shrink-0 size-[36.074px]" data-node-id="47:4248" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9.019px] size-full" src={imgDiv1} />
+          </div>
+          <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4249" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" data-node-id="47:4250" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                إتش آند إم
+              </p>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[4px] items-center justify-center overflow-clip p-[8px] relative rounded-[16px] shadow-[0px_10px_20px_-5px_rgba(92,246,161,0.2)] shrink-0 size-[80px]" data-node-id="47:4251" data-name="Background+Shadow">
+          <div aria-hidden className="absolute bg-white inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative rounded-[9.019px] shrink-0 size-[36.074px]" data-node-id="47:4252" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9.019px] size-full" src={imgDiv2} />
+          </div>
+          <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4253" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" data-node-id="47:4254" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                إكسترا
+              </p>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[4px] items-center justify-center overflow-clip p-[8px] relative rounded-[16px] shadow-[0px_10px_20px_-5px_rgba(92,246,161,0.2)] shrink-0 size-[80px]" data-node-id="47:4255" data-name="Background+Shadow">
+          <div aria-hidden className="absolute bg-white inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative rounded-[9.019px] shrink-0 size-[36.074px]" data-node-id="47:4256" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9.019px] size-full" src={imgDiv3} />
+          </div>
+          <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4257" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" data-node-id="47:4258" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                نمق
+              </p>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+        <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[4px] items-center justify-center overflow-clip p-[8px] relative rounded-[16px] shadow-[0px_10px_20px_-5px_rgba(92,246,161,0.2)] shrink-0 size-[80px]" data-node-id="47:4259" data-name="Background+Shadow">
+          <div aria-hidden className="absolute bg-white inset-0 pointer-events-none rounded-[16px]" />
+          <div className="relative rounded-[9.019px] shrink-0 size-[36.074px]" data-node-id="47:4260" data-name="div">
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[9.019px] size-full" src={imgDiv1} />
+          </div>
+          <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="47:4261" data-name="Container">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] whitespace-nowrap" data-node-id="47:4262" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                اتش اند ام
+              </p>
+            </div>
+          </div>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_-4px_0px_0px_rgba(0,0,0,0.05)]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: Arabic/Text/Medium/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/L, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0).
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.

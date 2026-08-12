@@ -1,0 +1,85 @@
+const imgVuesaxLinearProfileCircle = "http://localhost:3845/assets/0fcc536dad5c0aa52b55da8087a1dfdfe6db2053.svg";
+const imgWallet3 = "http://localhost:3845/assets/cb5b5af6656318e3a451f066e1ddb6d71d9a2191.svg";
+const imgIconNavScan = "http://localhost:3845/assets/f5d5ef2beb2f490b82272422f7d06d6235fff4c2.svg";
+const imgVuesaxLinearBagHappy = "http://localhost:3845/assets/eeacd3a51803c89b26f5136148817d0af54966f0.svg";
+const imgVuesaxBoldHome = "http://localhost:3845/assets/fb03e43bba6c59a5ffc3c39e261d88daa80f86f5.svg";
+
+export default function Navbar() {
+  return (
+    <div className="backdrop-blur-[20px] bg-white border border-[rgba(255,255,255,0.4)] border-solid content-stretch drop-shadow-[0px_25px_25px_rgba(0,206,139,0.1)] flex items-center justify-between px-[19px] py-px relative rounded-tl-[32px] rounded-tr-[32px] size-full" data-node-id="47:4415" data-name="Navbar">
+      <div className="relative shrink-0 w-[50px]" data-node-id="47:4416" data-name="Button">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-center relative size-full">
+          <div className="relative shrink-0 size-[24px]" data-node-id="47:4417" data-name="profile-circle">
+            <div className="absolute contents inset-0" data-node-id="I47:4417;17:63860" data-name="vuesax/linear/profile-circle">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearProfileCircle} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Normal'] justify-center leading-[0] not-italic relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:4418">
+            <p className="leading-[1.5]" dir="auto">
+              الحساب
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="relative shrink-0 w-[50px]" data-node-id="47:4419" data-name="Button">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-center relative size-full">
+          <div className="relative shrink-0 size-[24px]" data-node-id="47:4420" data-name="wallet-3">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgWallet3} />
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Normal'] justify-center leading-[0] not-italic relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:4421">
+            <p className="leading-[1.5]" dir="auto">
+              المحفظة
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="h-[16px] relative shrink-0 w-[64px]" data-node-id="47:4422" data-name="Margin">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
+          <div className="absolute border-4 border-[#f8fafc] border-solid content-stretch flex items-center justify-center left-0 overflow-clip p-[4px] rounded-[33554400px] shadow-[0px_20px_25px_-5px_rgba(0,206,139,0.4),0px_8px_10px_-6px_rgba(0,206,139,0.1)] size-[64px] top-[-48px]" data-node-id="47:4423" style={{ backgroundImage: "linear-gradient(135deg, rgb(0, 206, 139) 0%, rgb(0, 161, 108) 100%)" }} data-name="Button">
+            <div className="relative shrink-0 size-[32px]" data-node-id="47:4424" data-name="icon_nav_scan">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconNavScan} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative shrink-0 w-[50px]" data-node-id="47:4437" data-name="Button">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-center relative size-full">
+          <div className="relative shrink-0 size-[24px]" data-node-id="47:4438" data-name="bag-happy">
+            <div className="absolute contents inset-0" data-node-id="I47:4438;17:69879" data-name="vuesax/linear/bag-happy">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearBagHappy} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Normal'] justify-center leading-[0] not-italic relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:4439">
+            <p className="leading-[1.5]" dir="auto">
+              السوق
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="relative shrink-0 w-[50px]" data-node-id="47:4440" data-name="Button">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-center relative size-full">
+          <div className="relative shrink-0 size-[24px]" data-node-id="47:4441" data-name="home">
+            <div className="absolute contents inset-0" data-node-id="I47:4441;17:83388" data-name="vuesax/bold/home">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxBoldHome} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] justify-center leading-[0] not-italic relative shrink-0 text-[color:var(--text\/selected,#00ce8b)] text-[length:var(--font-size\/text\/xs,12px)] text-center whitespace-nowrap" data-node-id="47:4442">
+            <p className="leading-[1.5]" dir="auto">
+              الرئيسية
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
