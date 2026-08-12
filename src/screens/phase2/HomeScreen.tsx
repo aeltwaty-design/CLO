@@ -210,7 +210,7 @@ export default function HomeScreen() {
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-x-hidden overflow-y-auto">
-        <HomeHeader />
+        <HomeHeader onStartLinking={startLinking} />
         {/* content column (Figma 47:3725, 375×1872 at y585) — relative so it
             paints over the header sheet's 30px spill below y585 */}
         <div className="relative flex w-full flex-col items-start gap-7 px-4 pb-[104px] pt-6">
@@ -251,7 +251,7 @@ function useRestScroll(align: 'end' | 'center' = 'end') {
 
 /** Immersive header background (47:3620): mint block, greeting row, hero
     promo banner + dots, category tiles, white sheet with search + chips. */
-function HomeHeader() {
+function HomeHeader({ onStartLinking }: { onStartLinking: () => void }) {
   const navigate = useNavigate();
   const { cardLinked, cashback } = useAppState();
   const chipsRef = useRestScroll();
@@ -275,11 +275,12 @@ function HomeHeader() {
               </div>
             </div>
           </button>
-          {/* cashback pill — opens the cashback wallet; shows the live balance
-              once a card is linked (drawn 53px width kept for the 0 state) */}
+          {/* cashback pill — before a card exists it is another linking entry
+              (intro sheet over Home); after linking it opens the cashback
+              wallet with the live balance (drawn 53px width kept for 0) */}
           <button
             type="button"
-            onClick={() => navigate('/cards')}
+            onClick={cardLinked ? () => navigate('/cards') : onStartLinking}
             aria-label="الكاش باك"
             className={`flex h-10 ${
               cardLinked ? '' : 'w-[53px] '
