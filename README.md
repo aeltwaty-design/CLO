@@ -89,7 +89,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   an `active` prop ('market' default, byte-identical for Phase 1). **After
   linking a card** Home reacts (derived state — no drawn after-frame): the
   header pill reads the live 560.50 balance and the add-card promo becomes
-  the «إجمالي الكاش باك» strip (Wallet idiom) opening the cashback wallet.
+  the shared «إجمالي الكاش باك» section — identical to the one in the Points
+  Wallet, CTA row included («التفاصيل» → cashback wallet, «استخدمه» → the
+  redemption hub over Home).
 - **Phase 2: the new Saudi Riyal symbol** — everywhere Phase 1 renders the ﷼
   character (FF Shamel draws it as the «ريال» word ligature), Phase 2 renders
   the official new SAR symbol instead, via the shared phase-aware `<Riyal />`
@@ -102,9 +104,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   (`AppState`: 5,000 pts / 560.50 ﷼ defaults, `?pts=` seed): the Points
   Wallet's «حول نقاطك» action and «استخدمها» pill open the **converter**
   (10 pts = 1 ﷼, preset chips ربع/نص/كل with live preview and an in-sheet
-  success); after linking, the wallet carries the shared **cashback strip**
-  (`src/components/CashbackStrip.tsx` — the same surface Home renders, minus
-  the affordance arrow) plus its own CTA row: **«التفاصيل»** (cashback
+  success); after linking, both the wallet and Home render the shared
+  **cashback section** (`src/components/CashbackStrip.tsx` — one component,
+  so the two can never drift) with its CTA row: **«التفاصيل»** (cashback
   wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي (the real withdrawal flow), شراء قسائم
   and إهداء لصديق as live demo redemptions that move the balance, plus شحن
   جوال and تبرع as «قريباً» tiles. Home's savings counter becomes the live
@@ -170,7 +172,7 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   capture (`47_3538`, ≈9.6%) is a coarse smoke diff, not a fine gate: its
   reference is the full-node export downscaled ~0.4× by the 1024px cap and
   cropped out of the padded canvas, so glyph/photo resampling dominates. Its
-  linked sibling (`47_3538-linked`, ≈18%) additionally carries the derived
+  linked sibling (`47_3538-linked`, ≈20%) additionally carries the derived
   after-state (live pill + cashback strip + cashback counter + expiring
   nudge) against the before-only ref. Transition phase 1 also moves the two
   wallet captures by design: `54_10152` ≈4% (points rebased to 5,000) and

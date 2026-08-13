@@ -1,56 +1,40 @@
-import type { ReactNode } from 'react';
 import { useAppState } from '../state/AppState';
 import Riyal from './Riyal';
-import stripBackArrow from '../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
 import stripCardIcon from '../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
 import stripTrendUp from '../assets/figma/a48ef43dadbf020f3a6c615ef0070de2a02b33be.svg';
 
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 /**
- * «إجمالي الكاش باك» strip (grown out of the drawn 54:10646 band) — the one
- * cashback surface shared by Home and the Points Wallet so the two can never
- * drift. Live balance + month delta.
- *
- * - `onOpen` (Home): the whole strip is one button into the cashback wallet,
- *   with the ← affordance arrow.
- * - `actions` (Wallet): the strip is static and hosts its own CTA row instead
- *   (no arrow — the actions carry the navigation).
+ * «إجمالي الكاش باك» section (grown out of the drawn 54:10646 band) — the one
+ * cashback surface, rendered identically by Home and the Points Wallet so the
+ * two can never drift: live balance, month delta, and the CTA row
+ * «التفاصيل» (cashback wallet) · «استخدمه» (redemption hub).
  */
 export default function CashbackStrip({
-  arrow = false,
-  onOpen,
-  actions,
+  onRedeem,
+  onDetails,
   testId,
   balanceTestId,
+  redeemTestId,
 }: {
-  arrow?: boolean;
-  onOpen?: () => void;
-  actions?: ReactNode;
+  onRedeem: () => void;
+  onDetails: () => void;
   testId?: string;
   balanceTestId?: string;
+  redeemTestId?: string;
 }) {
   const { cashback } = useAppState();
 
-  const body = (
-    <>
+  return (
+    <div
+      className="relative flex w-full shrink-0 flex-col items-start gap-3 overflow-clip rounded-2xl bg-bravo-50 px-4 py-3"
+      data-testid={testId}
+    >
       <div className="absolute left-0 top-0 h-[49px] w-full rounded-tl-2xl rounded-tr-2xl bg-[#cac6e7]" />
       <div className="relative flex w-full shrink-0 flex-col items-end gap-[18px]">
-        {/* header band: (← back glyph) + title + card icon */}
-        <div className={`flex w-full items-center ${arrow ? 'justify-between' : 'justify-end'}`}>
-          {arrow && (
-            <div className="relative size-4 shrink-0 overflow-clip">
-              <div className="absolute inset-[20%_15%] flex items-center justify-center" style={{ containerType: 'size' }}>
-                <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
-                  <div className="relative size-full">
-                    <div className="absolute inset-[-2.23%_-2.6%]">
-                      <img alt="" className="block size-full max-w-none" src={stripBackArrow} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+        {/* header band: title + card icon */}
+        <div className="flex w-full items-center justify-end">
           <div className="flex shrink-0 items-center justify-end gap-2">
             <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="auto">
               إجمالي الكاش باك
@@ -84,29 +68,17 @@ export default function CashbackStrip({
           </p>
         </div>
       </div>
-    </>
-  );
-
-  const shell = 'relative flex w-full shrink-0 flex-col items-start gap-3 overflow-clip rounded-2xl bg-bravo-50 px-4 py-3';
-
-  if (actions) {
-    return (
-      <div className={shell} data-testid={testId}>
-        {body}
-        <div className="relative flex w-full items-stretch gap-2">{actions}</div>
+      {/* actions: التفاصيل (left) · استخدمه (right, primary) */}
+      <div className="relative flex w-full items-stretch gap-2">
+        <CashbackStripAction label="التفاصيل" onClick={onDetails} />
+        <CashbackStripAction label="استخدمه" onClick={onRedeem} primary testId={redeemTestId} />
       </div>
-    );
-  }
-
-  return (
-    <button type="button" onClick={onOpen} data-testid={testId} className={`${shell} cursor-pointer`}>
-      {body}
-    </button>
+    </div>
   );
 }
 
 /** CTA inside the strip's action row: primary = filled viola, secondary = white. */
-export function CashbackStripAction({
+function CashbackStripAction({
   label,
   onClick,
   primary,

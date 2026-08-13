@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../../components/Riyal';
@@ -6,6 +6,7 @@ import { useAppState } from '../../state/AppState';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import { useWithdraw } from '../../state/WithdrawState';
 import CashbackStrip from '../../components/CashbackStrip';
+import RedeemSheet from '../../components/RedeemSheet';
 import iconClockNudge from '../../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
 
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -204,6 +205,8 @@ export default function HomeScreen() {
   // first-time add-card gate: the intro sheet rises over Home itself
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
   const { cardLinked } = useAppState();
+  // the cashback section's «استخدمه» opens the redemption hub over Home
+  const [redeemOpen, setRedeemOpen] = useState(false);
   return (
     <div className="relative h-full overflow-hidden bg-surface">
       <div className="h-full overflow-x-hidden overflow-y-auto">
@@ -213,7 +216,7 @@ export default function HomeScreen() {
         <div className="relative flex w-full flex-col items-start gap-7 px-4 pb-[104px] pt-6">
           <SavingsCard />
           <DailyOffersSection />
-          <AddCardPromo onStart={startLinking} />
+          <AddCardPromo onStart={startLinking} onRedeem={() => setRedeemOpen(true)} />
           {cardLinked && <ExpiringNudge />}
           <FavoriteStoresEmpty />
           <GroceryBanner />
@@ -226,6 +229,7 @@ export default function HomeScreen() {
       </div>
       <TabBar active="home" />
       <LinkIntroSheet open={introOpen} onClose={closeIntro} />
+      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} />
     </div>
   );
 }
@@ -1276,17 +1280,24 @@ function ExpiringNudge() {
 /** After linking, the promo slot becomes the cashback-total strip (derived
     after-state — the Points Wallet idiom; live balance, matching the cashback
     wallet it opens). */
-function HomeCashbackStrip({ onOpen }: { onOpen: () => void }) {
-  return <CashbackStrip arrow onOpen={onOpen} testId="home-cashback-strip" />;
+function HomeCashbackStrip({ onRedeem }: { onRedeem: () => void }) {
+  const navigate = useNavigate();
+  return (
+    <CashbackStrip
+      onRedeem={onRedeem}
+      onDetails={() => navigate('/cards')}
+      testId="home-cashback-strip"
+      redeemTestId="home-redeem-cta"
+    />
+  );
 }
 
 /** Add-card promo (47:4067) — CTA enters the add-card flow (first time via
     the intro sheet over Home); once the card is linked the slot renders the
     cashback strip instead. */
-function AddCardPromo({ onStart }: { onStart: () => void }) {
-  const navigate = useNavigate();
+function AddCardPromo({ onStart, onRedeem }: { onStart: () => void; onRedeem: () => void }) {
   const { cardLinked } = useAppState();
-  if (cardLinked) return <HomeCashbackStrip onOpen={() => navigate('/cards')} />;
+  if (cardLinked) return <HomeCashbackStrip onRedeem={onRedeem} />;
   return (
     <section className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
       <div className="flex w-full shrink-0 items-center gap-2.5">

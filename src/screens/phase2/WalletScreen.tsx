@@ -5,7 +5,7 @@ import TabBar from '../../components/TabBar';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import ConvertSheet from '../../components/ConvertSheet';
 import RedeemSheet from '../../components/RedeemSheet';
-import CashbackStrip, { CashbackStripAction } from '../../components/CashbackStrip';
+import CashbackStrip from '../../components/CashbackStrip';
 
 const fmtPts = (n: number) => n.toLocaleString('en-US');
 import { useAppState } from '../../state/AppState';
@@ -274,23 +274,6 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
   );
 }
 
-/** Transition phase 1 — the wallet's cashback section: the same shared
-    «إجمالي الكاش باك» strip Home renders (no affordance arrow here), plus its
-    own CTA row — «التفاصيل» (cashback wallet) and «استخدمه» (redemption hub). */
-function WalletCashbackSection({ onRedeem, onDetails }: { onRedeem: () => void; onDetails: () => void }) {
-  return (
-    <CashbackStrip
-      testId="wallet-cashback-card"
-      balanceTestId="wallet-cashback-balance"
-      actions={
-        <>
-          <CashbackStripAction label="التفاصيل" onClick={onDetails} />
-          <CashbackStripAction label="استخدمه" onClick={onRedeem} primary testId="wallet-redeem-cta" />
-        </>
-      }
-    />
-  );
-}
 
 /* ──────────────────── tabs · chips · transactions ──────────────────── */
 
@@ -657,7 +640,13 @@ export default function WalletScreen() {
           <PointsCard onConvert={() => setConvertOpen(true)} />
           {cardLinked ? (
             <div className="flex w-full shrink-0 flex-col items-start gap-[18px]">
-              <WalletCashbackSection onRedeem={() => setRedeemOpen(true)} onDetails={() => navigate('/cards')} />
+              <CashbackStrip
+                onRedeem={() => setRedeemOpen(true)}
+                onDetails={() => navigate('/cards')}
+                testId="wallet-cashback-card"
+                balanceTestId="wallet-cashback-balance"
+                redeemTestId="wallet-redeem-cta"
+              />
               <TransactionsBlock />
             </div>
           ) : (
