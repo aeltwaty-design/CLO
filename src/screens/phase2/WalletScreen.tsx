@@ -5,10 +5,9 @@ import TabBar from '../../components/TabBar';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import ConvertSheet from '../../components/ConvertSheet';
 import RedeemSheet from '../../components/RedeemSheet';
-import Riyal from '../../components/Riyal';
+import CashbackStrip, { CashbackStripAction } from '../../components/CashbackStrip';
 
 const fmtPts = (n: number) => n.toLocaleString('en-US');
-const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 import { useAppState } from '../../state/AppState';
 // ── status bar ──
 import statusBarMask from '../../assets/figma/863c90e2bcf523e5186af44ac3700298ea5b0759.svg';
@@ -27,9 +26,6 @@ import iconFlash16 from '../../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8
 import iconSecurity16 from '../../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import promoWalletArt from '../../assets/figma/1f42f68b61fe6d35e616fc68f2a5baad32c33423.svg';
-// ── cashback card (after linking) ──
-import iconCard24 from '../../assets/figma/a390ac31e5e3881c6ca4d0f9bbd3514e56e837c9.svg';
-import iconTrendUp from '../../assets/figma/a48ef43dadbf020f3a6c615ef0070de2a02b33be.svg';
 // ── tabs + chips ──
 import iconCart20 from '../../assets/figma/dc54c8c0c41664277ae4d981d87b010f6a84ba2b.svg';
 import iconReceipt20 from '../../assets/figma/4302f8a12f0957461edfe25791837c13cc5a1a26.svg';
@@ -278,100 +274,21 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
   );
 }
 
-/** Glyph painted white through its alpha mask (house mask-recolor pattern). */
-function WhiteGlyph({ src, size }: { src: string; size: number }) {
+/** Transition phase 1 — the wallet's cashback section: the same shared
+    «إجمالي الكاش باك» strip Home renders (no affordance arrow here), plus its
+    own CTA row — «التفاصيل» (cashback wallet) and «استخدمه» (redemption hub). */
+function WalletCashbackSection({ onRedeem, onDetails }: { onRedeem: () => void; onDetails: () => void }) {
   return (
-    <div
-      aria-hidden
-      className="shrink-0 bg-white"
-      style={{
-        width: size,
-        height: size,
-        maskImage: `url("${src}")`,
-        WebkitMaskImage: `url("${src}")`,
-        maskRepeat: 'no-repeat',
-        WebkitMaskRepeat: 'no-repeat',
-        maskSize: '100% 100%',
-        WebkitMaskSize: '100% 100%',
-      }}
+    <CashbackStrip
+      testId="wallet-cashback-card"
+      balanceTestId="wallet-cashback-balance"
+      actions={
+        <>
+          <CashbackStripAction label="التفاصيل" onClick={onDetails} />
+          <CashbackStripAction label="استخدمه" onClick={onRedeem} primary testId="wallet-redeem-cta" />
+        </>
+      }
     />
-  );
-}
-
-/** Transition phase 1 — the cashback CARD (derived; grows out of the drawn
-    54:10646 strip): real-money identity below the points card. Live balance,
-    month delta, expiring chip, and the two actions «استخدمها» (redemption
-    hub) and «عملياتها» (cashback wallet). */
-function CashbackCard({
-  balance,
-  onRedeem,
-  onOps,
-}: {
-  balance: number;
-  onRedeem: () => void;
-  onOps: () => void;
-}) {
-  return (
-    <div
-      className="relative flex w-full shrink-0 flex-col gap-3 overflow-clip rounded-2xl p-4"
-      style={{ backgroundImage: 'linear-gradient(129.55deg, rgb(0, 206, 139) 3.01%, rgb(0, 104, 70) 71.25%)' }}
-      data-testid="wallet-cashback-card"
-    >
-      {/* header: title right + card glyph */}
-      <div className="flex w-full items-center justify-between">
-        <WhiteGlyph src={iconCard24} size={24} />
-        <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-          الكاش باك
-        </p>
-      </div>
-      {/* balance */}
-      <div className="flex w-full items-center justify-end gap-1.5 text-ink-inverse">
-        <p className="text-[17px] font-normal leading-none">
-          <Riyal />
-        </p>
-        <p className="font-en whitespace-nowrap text-[28px] font-bold leading-[1.3]" data-testid="wallet-cashback-balance">
-          {fmtSar(balance)}
-        </p>
-      </div>
-      {/* month delta + expiring chip */}
-      <div className="flex w-full items-center justify-between">
-        <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1">
-          <p className="whitespace-nowrap text-[10px] font-medium leading-[1.5] text-ink-inverse" dir="rtl">
-            {'تنتهي 25 ديسمبر · '}
-            <span className="font-en">50</span> <Riyal />
-          </p>
-        </div>
-        <div className="flex shrink-0 items-center gap-1 text-ink-inverse">
-          <WhiteGlyph src={iconTrendUp} size={15} />
-          <p className="font-en whitespace-nowrap text-sm font-semibold leading-[1.5]">120+</p>
-          <p className="whitespace-nowrap text-xs font-normal leading-[1.5]" dir="auto">
-            هذا الشهر
-          </p>
-        </div>
-      </div>
-      {/* actions: عملياتها (left) · استخدمها (right, primary) */}
-      <div className="flex w-full items-stretch gap-2">
-        <button
-          type="button"
-          onClick={onOps}
-          className="flex h-9 min-w-px flex-[1_0_0] cursor-pointer items-center justify-center rounded-full border border-solid border-white/50"
-        >
-          <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
-            عملياتها
-          </p>
-        </button>
-        <button
-          type="button"
-          onClick={onRedeem}
-          data-testid="wallet-redeem-cta"
-          className="flex h-9 min-w-px flex-[1_0_0] cursor-pointer items-center justify-center rounded-full bg-white"
-        >
-          <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            استخدمها
-          </p>
-        </button>
-      </div>
-    </div>
   );
 }
 
@@ -726,7 +643,7 @@ function WalaOneBar() {
  */
 export default function WalletScreen() {
   const navigate = useNavigate();
-  const { cardLinked, cashback } = useAppState();
+  const { cardLinked } = useAppState();
   // first-time add-card gate: the intro sheet rises over the wallet itself
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
   // transition phase 1: converter + redemption hub
@@ -740,11 +657,7 @@ export default function WalletScreen() {
           <PointsCard onConvert={() => setConvertOpen(true)} />
           {cardLinked ? (
             <div className="flex w-full shrink-0 flex-col items-start gap-[18px]">
-              <CashbackCard
-                balance={cashback}
-                onRedeem={() => setRedeemOpen(true)}
-                onOps={() => navigate('/cards')}
-              />
+              <WalletCashbackSection onRedeem={() => setRedeemOpen(true)} onDetails={() => navigate('/cards')} />
               <TransactionsBlock />
             </div>
           ) : (

@@ -102,9 +102,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   (`AppState`: 5,000 pts / 560.50 ﷼ defaults, `?pts=` seed): the Points
   Wallet's «حول نقاطك» action and «استخدمها» pill open the **converter**
   (10 pts = 1 ﷼, preset chips ربع/نص/كل with live preview and an in-sheet
-  success); after linking, the wallet carries a full green **cashback card**
-  (live balance, «هذا الشهر +120», expiring chip) whose **«استخدمها»** opens
-  the **redemption hub** — تحويل بنكي (the real withdrawal flow), شراء قسائم
+  success); after linking, the wallet carries the shared **cashback strip**
+  (`src/components/CashbackStrip.tsx` — the same surface Home renders, minus
+  the affordance arrow) plus its own CTA row: **«التفاصيل»** (cashback
+  wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي (the real withdrawal flow), شراء قسائم
   and إهداء لصديق as live demo redemptions that move the balance, plus شحن
   جوال and تبرع as «قريباً» tiles. Home's savings counter becomes the live
   cashback counter after linking (→ cashback wallet) and the expiring nudge
@@ -173,7 +174,7 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   after-state (live pill + cashback strip + cashback counter + expiring
   nudge) against the before-only ref. Transition phase 1 also moves the two
   wallet captures by design: `54_10152` ≈4% (points rebased to 5,000) and
-  `54_10497` ≈20% (the drawn viola strip becomes the green cashback card). The populated
+  `54_10497` ≈6.6% (the drawn strip gains its «استخدمه»/«التفاصيل» CTA row). The populated
   wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
   nudge section, shifting the content below it.
