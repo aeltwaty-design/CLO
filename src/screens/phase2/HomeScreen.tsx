@@ -618,31 +618,20 @@ function DotsSmall() {
 
 /** ctg_01 (47:3726): total-savings card with the money-pot illustration. */
 function SavingsCard() {
-  const navigate = useNavigate();
-  const { cardLinked, cashback } = useAppState();
   return (
     <button
       type="button"
-      data-testid="home-cashback-counter"
-      onClick={cardLinked ? () => navigate('/cards') : undefined}
-      className={`relative h-[90px] w-full shrink-0 overflow-clip rounded-2xl bg-surface-neutral text-start ${
-        cardLinked ? 'cursor-pointer' : ''
-      }`}
+      className="relative h-[90px] w-full shrink-0 overflow-clip rounded-2xl bg-surface-neutral text-start"
     >
       <div className="absolute left-[126px] top-1/2 flex -translate-y-1/2 flex-col items-end justify-center">
         <div className="mb-[-1px] flex w-[78px] shrink-0 items-center justify-end">
           <p className="whitespace-nowrap text-right text-sm font-normal leading-[1.5] text-ink" dir="auto">
-            {cardLinked ? 'كاش باك جمعته حتى الآن' : 'إجمالي المدخرات حتى الآن'}
+            إجمالي المدخرات حتى الآن
           </p>
         </div>
         <div className="mb-[-1px] flex h-[35px] shrink-0 items-center gap-1">
-          <p
-            className={`font-en whitespace-nowrap text-right text-[24px] font-bold leading-[1.4] text-[#e85d07] ${
-              cardLinked ? '' : 'w-[85px]'
-            }`}
-            dir="auto"
-          >
-            {cardLinked ? fmtSar(cashback) : '15,000'}
+          <p className="font-en w-[85px] whitespace-nowrap text-right text-[24px] font-bold leading-[1.4] text-[#e85d07]" dir="auto">
+            15,000
           </p>
           <div className="relative h-[30px] w-5 shrink-0">
             <p className="absolute inset-0 whitespace-nowrap text-center text-[24px] font-bold leading-[1.4] text-[#e85d07]" dir="auto">
@@ -653,7 +642,7 @@ function SavingsCard() {
         <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-tertiary" dir="ltr">
           {'هذا الشهر: '}
           <Riyal />{' '}
-          <span className="font-en">{cardLinked ? '120+' : '50'}</span>
+          <span className="font-en">50</span>
         </p>
       </div>
       <div className="absolute right-[300.77px] top-[calc(50%+0.12px)] flex size-[26.233px] -translate-y-1/2 items-center justify-center">
