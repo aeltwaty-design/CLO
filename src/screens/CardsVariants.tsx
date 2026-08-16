@@ -382,7 +382,9 @@ function LinkedCardPanel({
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-end justify-center">
-            <p className="font-en h-[22px] w-[85px] text-right text-xl font-medium leading-[1.5] text-ink" dir="auto">
+            {/* h pinned to the drawn 22px box; nowrap so the masked number
+                never wraps over the divider */}
+            <p className="font-en h-[22px] whitespace-nowrap text-right text-xl font-medium leading-[22px] text-ink" dir="auto">
               **** 1234
             </p>
           </div>
