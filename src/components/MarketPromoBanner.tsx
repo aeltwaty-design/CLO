@@ -1,10 +1,11 @@
 import bannerArt from '../assets/figma/5f398b0220b18eef0795015b5a0ced39bdd8fe93.png';
 
 /**
- * «ادفع مثل كل مرة ، وخذ أكثر كل مــرة» — the lilac promo banner drawn into
- * both market lists (Figma 91:44353, shown in the العروض frame 91:44135 and
- * the القسائم frame 91:43784): a #ebe8f9 field with the card/coins
- * illustration bleeding off the left edge and the headline pinned right.
+ * The lilac promo banner drawn into both market lists (Figma 91:44353, shown
+ * in the العروض frame 91:44135 and the القسائم frame 91:43784): a #ebe8f9
+ * field with the card/coins illustration bleeding off the left edge and the
+ * headline pinned right. Copy is «كاش باك حتى 50% بدون حد» per user
+ * direction, replacing the drawn «ادفع مثل كل مرة ، وخذ أكثر كل مــرة».
  */
 export default function MarketPromoBanner({ onClick }: { onClick?: () => void }) {
   return (
@@ -19,10 +20,11 @@ export default function MarketPromoBanner({ onClick }: { onClick?: () => void })
         <img alt="" className="pointer-events-none absolute inset-0 size-full max-w-none object-contain" src={bannerArt} />
       </div>
       <div className="absolute right-3.5 top-[calc(50%-0.5px)] flex w-[186px] -translate-y-1/2 flex-col items-end justify-center gap-2">
-        <p className="w-[215px] text-right text-sm font-bold leading-[1.5] text-black" dir="auto">
-          {'ادفع مثل كل مرة ، وخذ'}
+        <p className="w-[215px] text-right text-sm font-bold leading-[1.5] text-black" dir="rtl">
+          {'كاش باك حتى '}
+          <span className="font-en">50%</span>
           <br />
-          {'أكثر كل مــــــــــــــــــــــــــــرة'}
+          {'بدون حد'}
         </p>
       </div>
       <div className="absolute left-[314px] top-[101px] h-3 w-[11px] bg-[#eeeafb]" />

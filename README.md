@@ -48,9 +48,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   91:43784 vouchers) — العروض is now live too: full-width offer rows (اسم
   المتجر + «خصم N%» / «كسب نقاط» tags, shop/global badges, gold «ما يفوتك»
   ribbon) with its own «كسب نقاط» filter chip, deep-linked by `?tab=offers`.
-  Both lists carry the lilac **«ادفع مثل كل مرة ، وخذ أكثر كل مــرة»** banner
-  (`src/components/MarketPromoBanner.tsx` — one component in both tabs) drawn
-  under the first row/card; tapping it opens the card-linking form. The vouchers tab drops the promo banner, adds the خصومات filter chip
+  Both lists carry the lilac banner (`src/components/MarketPromoBanner.tsx` —
+  one component in both tabs) drawn under the first row/card, reading
+  **«كاش باك حتى 50% بدون حد»** per user direction (the frames draw «ادفع مثل
+  كل مرة ، وخذ أكثر كل مــرة»); tapping it opens the card-linking form. The vouchers tab drops the promo banner, adds the خصومات filter chip
   and swaps the merchant grid for the drawn voucher grid — نمق (gold «ما
   يفوتك» card) and أمازون with «تبدأ من» prices, هنقرسيتشن/جاهز برايم with
   follower counts, and جرير/قولدن سنت/أمازون with favourite hearts; each card
