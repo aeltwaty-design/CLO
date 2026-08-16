@@ -44,8 +44,12 @@ function MaskIcon({ src, size }: { src: string; size: number }) {
   );
 }
 
+/** Keyframes shared by the status screens (withdraw + gift). */
+export const STATUS_KEYFRAMES =
+  '@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes dash-flow{to{background-position:-12px 0}}';
+
 /** 12:30 status bar drawn as one alpha-masked shape (Figma "Blur Evenly"). */
-function MaskStatusBar() {
+export function MaskStatusBar() {
   const maskClasses =
     'absolute inset-0 bg-ink mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[16.448px_9.333px] mask-size-[324.886px_13.333px]';
   return (
@@ -72,7 +76,7 @@ function Sparkle({ left, top, delay }: { left: string; top: string; delay: numbe
 }
 
 /** Green badge + staggered sparks (27:11151), LinkSuccessScreen animation idiom. */
-function SuccessArt() {
+export function SuccessArt() {
   return (
     <div className="flex shrink-0 flex-col items-start py-[33.5px]">
       <div className="relative h-[159.117px] w-[196.997px]">
@@ -108,7 +112,7 @@ function SuccessArt() {
 }
 
 /** Warning-triangle collage on its sparkle blob (27:11170 "Approve"). */
-function FailureArt() {
+export function FailureArt() {
   return (
     <div
       className="relative size-[250px] shrink-0 bg-surface"
@@ -152,11 +156,7 @@ export default function WithdrawStatusScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <style>
-        {
-          '@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes dash-flow{to{background-position:-12px 0}}'
-        }
-      </style>
+      <style>{STATUS_KEYFRAMES}</style>
       <div className="flex h-full w-full flex-col items-center overflow-y-auto">
         <MaskStatusBar />
 

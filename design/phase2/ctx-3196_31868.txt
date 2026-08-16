@@ -1,0 +1,239 @@
+const imgWoCoin = "http://localhost:3845/assets/d471e0ac23e6ef4c0309ed841dcec76098fd8c8f.svg";
+const imgWoCoin1 = "http://localhost:3845/assets/1fc63f5f61f3f22b61f4543f37dec854ea9f0818.svg";
+const imgEllipse2977 = "http://localhost:3845/assets/c50ecb71efbb68c4000ec299e71e9b21699f634d.png";
+const imgVector619Stroke = "http://localhost:3845/assets/fd6f26534a87f4d8bbe62b710db8bf509383bda4.svg";
+const imgEllipse1 = "http://localhost:3845/assets/0e1559e739afd9e82a2b44c1d16782eb658a719d.svg";
+const imgVuesaxLinearProfile2User = "http://localhost:3845/assets/216b33fad7a7fff9f904a21f336efb66e293be1d.svg";
+const imgGroup = "http://localhost:3845/assets/9d68c2375542c6d5fe4d0983a150dc84c3df5ba6.svg";
+const imgVuesaxLinearEdit = "http://localhost:3845/assets/30a8a7af34a2a4266156e3e7d5cbeb76da909206.svg";
+const imgVector616Stroke = "http://localhost:3845/assets/6f699ce9674edd9450d824e2a91b2474f156ebd8.svg";
+type WpCoinProps = {
+  className?: string;
+  size?: "16" | "20";
+};
+
+function WpCoin({ className, size = "16" }: WpCoinProps) {
+  const is20 = size === "20";
+  return (
+    <div className={className || `relative ${is20 ? "size-[20px]" : "size-[16px]"}`} id={is20 ? "node-2018_8555" : "node-2018_8546"}>
+      <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]" id={is20 ? "node-2018_8557" : "node-2018_8548"} data-name="WO Coin">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={is20 ? imgWoCoin1 : imgWoCoin} />
+      </div>
+    </div>
+  );
+}
+
+export default function EnterPoints() {
+  return (
+    <div className="bg-[var(--bg\/standard\/default,white)] content-stretch flex flex-col items-center justify-between relative size-full" data-node-id="3196:31868" data-name="Enter points">
+      <div className="content-stretch flex flex-col items-center relative shrink-0 w-full" data-node-id="3196:31950">
+        <div className="border-[var(--border\/subtle,#f1f3f9)] border-b border-solid content-stretch flex items-center justify-between pb-[14px] pt-[24px] px-[16px] relative shrink-0 w-full" data-node-id="3196:31951" data-name="Content">
+          <div className="bg-[var(--bg\/standard\/default,white)] border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[var(--space\/050,4px)] items-center justify-center overflow-clip px-[var(--space\/100,8px)] py-[var(--space\/075,6px)] relative rounded-[var(--radius\/full,500px)] shrink-0" data-node-id="3196:31952" data-name="🆗 Button">
+            <WpCoin className="relative shrink-0 size-[20px]" size="20" />
+            <p className="[word-break:break-word] font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/s,14px)] text-right whitespace-nowrap" dir="auto" data-node-id="3196:31954">
+              500,000
+            </p>
+          </div>
+          <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0 w-[204px]" data-node-id="3196:31956">
+            <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/l,18px)] text-center whitespace-nowrap" data-node-id="3196:31957" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              <p className="leading-[1.5]" dir="auto">
+                حولها للعائلة
+              </p>
+            </div>
+            <button className="block cursor-pointer overflow-clip relative shrink-0 size-[20px]" data-node-id="3196:31958" data-name="arrow-small-right_outline">
+              <div className="absolute inset-[17.71%_14.58%]" data-node-id="I3196:31958;7729:431896" data-name="Vector 619 (Stroke)">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector619Stroke} />
+              </div>
+            </button>
+          </div>
+        </div>
+        <div className="bg-[var(--bg\/standard\/default,white)] content-stretch flex flex-col gap-[24px] items-center px-[16px] py-[20px] relative shrink-0" data-node-id="3196:31959" data-name="content">
+          <div className="bg-[var(--bg\/success\/light\/default,#e6faf3)] content-stretch flex gap-[16px] h-[88px] items-center justify-end overflow-clip px-[var(--space\/150,12px)] py-[16px] relative rounded-[16px] shrink-0 w-[343px]" data-node-id="3196:31961" data-name="div">
+            <div className="[word-break:break-word] bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex flex-col gap-[2px] h-full items-end leading-[1.5] relative shrink-0 text-right w-[259px]" data-node-id="3196:31962" data-name="div">
+              <p className="font-['FF_Shamel_Unique:Semibold'] font-medium relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/m,16px)] w-full" dir="auto" data-node-id="3196:31963" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                أرسل إلى العائلة
+              </p>
+              <p className="font-['FF_Shamel_Unique:Regular'] font-normal relative shrink-0 text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] w-full" dir="auto" data-node-id="3196:31964" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                شارك نقاطك في ولاء بلس مع عائلتك الكريمة على الفور
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip px-[17px] py-[16px] relative rounded-[9999px] shadow-[0px_2px_8px_2px_rgba(0,206,139,0.2)] shrink-0 size-[40px]" data-node-id="3196:31965" data-name="div">
+              <div aria-hidden className="absolute backdrop-blur-[6px] bg-[#00ce8b] inset-0 pointer-events-none rounded-[9999px]" />
+              <div className="-translate-x-1/2 absolute left-[calc(50%+0.25px)] size-[40px] top-0" data-node-id="3196:31966">
+                <div className="absolute inset-[-25%]">
+                  <img alt="" className="block max-w-none size-full" src={imgEllipse1} />
+                </div>
+              </div>
+              <div className="relative shrink-0 size-[24px]" data-node-id="3196:31967" data-name="profile-2user">
+                <div className="absolute contents inset-0" data-node-id="I3196:31967;5145:12667" data-name="vuesax/linear/profile-2user">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearProfile2User} />
+                </div>
+              </div>
+              <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_2px_2px_0.5px_-2px_rgba(255,255,255,0.5),inset_-2px_-2px_0.5px_-2px_rgba(255,255,255,0.5),inset_0px_0px_8px_0px_rgba(160,160,160,0.5)]" />
+            </div>
+          </div>
+          <div className="bg-white border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col items-center p-[16px] relative rounded-[16px] shrink-0 w-[343px]" data-node-id="3196:31968" data-name="section">
+            <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" data-node-id="3196:31969">
+              <div className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full" data-node-id="3196:31970">
+                <div className="bg-[rgba(0,0,0,0)] border-0 border-[#e5e7eb] border-solid content-stretch flex items-center justify-end relative shrink-0 w-full" data-node-id="3196:31971" data-name="label">
+                  <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal h-[24px] leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/m,16px)] text-right w-[253px]" dir="auto" data-node-id="3196:31972" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                    كم ودك تحول؟
+                  </p>
+                </div>
+                <div className="bg-white border border-[var(--border\/input,#ccd2e0)] border-solid content-stretch flex items-center justify-between px-[16px] py-[17px] relative rounded-[8px] shrink-0 w-full" data-node-id="3196:31973" data-name="input">
+                  <div className="h-[20.331px] relative shrink-0 w-[22px]" data-node-id="3196:31974" data-name="Group">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+                  </div>
+                  <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Semibold')] font-[var(--font-weight\/600,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/quadrant,#96a0b6)] text-[length:var(--font-size\/text\/m,16px)] text-right whitespace-nowrap" data-node-id="3196:31981">
+                    <p className="leading-[1.5]" dir="auto">
+                      0
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full" data-node-id="4195:19260">
+                <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-node-id="4195:19261">
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[11px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19262">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19264">
+                      <p className="leading-[1.5]" dir="auto">
+                        5,000
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[11px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19265">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19267">
+                      <p className="leading-[1.5]" dir="auto">
+                        1,000
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[11px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19268">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19270">
+                      <p className="leading-[1.5]" dir="auto">
+                        500
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-node-id="4195:19271">
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19272">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19274">
+                      <p className="leading-[1.5]" dir="auto">
+                        50,000
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19275">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19277">
+                      <p className="leading-[1.5]" dir="auto">
+                        20,000
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[12px] relative rounded-[500px] shrink-0 w-[96px]" data-node-id="4195:19278">
+                    <WpCoin className="relative shrink-0 size-[16px]" />
+                    <div className="[word-break:break-word] flex flex-col font-[family-name:var(--font-family,'Poppins:Medium')] font-[var(--font-weight\/500,normal)] justify-center leading-[0] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right whitespace-nowrap" data-node-id="4195:19280">
+                      <p className="leading-[1.5]" dir="auto">
+                        10,000
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white border border-[var(--border\/default,#e2e6ee)] border-solid content-stretch flex flex-col gap-[18px] items-center p-[16px] relative rounded-[16px] shrink-0 w-[343px]" data-node-id="3196:32003" data-name="section">
+            <div className="content-stretch flex gap-[4px] items-center justify-end relative shrink-0 w-full" data-node-id="3196:32004">
+              <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/s,14px)] text-right whitespace-nowrap" dir="auto" data-node-id="3196:32007" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                المرسل إليه
+              </p>
+            </div>
+            <div className="bg-[var(--bg\/selected-light\/default,#e6faf3)] border border-[var(--border\/selected,#00ce8b)] border-solid content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end px-[var(--space\/200,16px)] py-[var(--space\/150,12px)] relative rounded-[var(--radius\/200,16px)] shrink-0 w-full" data-node-id="3196:32008" data-name="List item">
+              <div className="relative shrink-0 size-[16px]" data-node-id="3196:32009" data-name="edit">
+                <div className="absolute contents inset-0" data-node-id="I3196:32009;5145:36498" data-name="vuesax/linear/edit">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVuesaxLinearEdit} />
+                </div>
+              </div>
+              <div className="flex flex-[1_0_0] items-center justify-center min-w-px relative" data-node-id="3196:32010">
+                <div className="-scale-y-100 flex-none w-full">
+                  <div className="content-stretch flex flex-col gap-[4px] items-end justify-center relative w-full" data-name="Section title">
+                    <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="3196:32011">
+                      <div className="-scale-y-100 flex-none w-full">
+                        <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Regular'] font-normal justify-end leading-[0] relative text-[color:var(--text\/secondary,#40444c)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                          <p className="leading-[1.5]" dir="ltr">
+                            زوجة
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center relative shrink-0 w-full" data-node-id="3196:32012">
+                      <div className="-scale-y-100 flex-none w-full">
+                        <div className="[word-break:break-word] flex flex-col font-['FF_Shamel_Unique:Medium'] font-medium justify-end leading-[0] relative text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/xs,12px)] text-right w-full" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                          <p className="leading-[1.5]" dir="auto">
+                            سارة القحطاني
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative shrink-0 size-[40px]" data-node-id="3196:32013">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" height="40" src={imgEllipse2977} width="40" />
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[var(--space\/150,12px)] items-center justify-end relative shrink-0 w-full" data-node-id="3196:32014" data-name="🔘 List control">
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-end min-w-px relative" data-node-id="I3196:32014;1097:63686" data-name="Text and supporting text">
+                <p className="[word-break:break-word] font-['FF_Shamel_Unique:Regular'] font-normal leading-[1.5] relative shrink-0 text-[color:var(--text\/primary,#111317)] text-[length:var(--font-size\/text\/s,12px)] text-right w-full" dir="auto" data-node-id="I3196:32014;1097:63687" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+                  أضف إلى التحويل السريع
+                </p>
+              </div>
+              <div className="bg-[var(--bg\/highlight\/default,#00ce8b)] border border-[var(--border\/highlightprimary,#00ce8b)] border-solid overflow-clip relative rounded-[var(--radius\/050,4px)] shrink-0 size-[16px]" data-node-id="I3196:32014;3281:386459" data-name="#Checkbox base">
+                <div className="absolute inset-[calc(12.5%-0.75px)] overflow-clip" data-node-id="I3196:32014;3281:386459;1097:63897" data-name="check_outline">
+                  <div className="absolute inset-[17.71%_14.58%]" data-node-id="I3196:32014;3281:386459;1097:63897;7240:401356" data-name="Vector 616 (Stroke)">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector616Stroke} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col items-center relative shrink-0" data-node-id="3196:32015">
+        <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="3196:32016">
+          <div className="bg-[var(--bg\/disabled,#f1f3f9)] content-stretch flex gap-[var(--space\/100,8px)] items-center justify-center overflow-clip px-[var(--space\/200,16px)] py-[var(--space\/125,10px)] relative rounded-[var(--radius\/150,12px)] shrink-0 w-[343px]" data-node-id="3196:32017" data-name="🆗 Button">
+            <p className="[word-break:break-word] font-['FF_Shamel_Unique:Medium'] font-medium leading-[1.5] relative shrink-0 text-[color:var(--text\/quadrant,#96a0b6)] text-[length:var(--font-size\/text\/s,14px)] text-right whitespace-nowrap" dir="auto" data-node-id="I3196:32017;3287:435163" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>
+              اللي بعده
+            </p>
+          </div>
+        </div>
+        <div className="h-[34px] relative shrink-0 w-[375px]" data-node-id="3196:32018" data-name="HomeIndicator">
+          <div className="-translate-x-1/2 absolute bg-[var(--text\/primary,#111317)] bottom-[8px] h-[5px] left-[calc(50%+0.5px)] rounded-[100px] w-[134px]" data-node-id="I3196:32018;5:3093" data-name="Home Indicator" />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: English/Text/Small/Medium: Font(family: "Font Family", style: Font Weight/500, size: Font Size/Text/S, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Medium/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/L, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Regular/Semi Bold: Font(family: "FF Shamel Unique", style: Font Weight/600, size: Font Size/Text/M, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/XS, weight: 400, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Regular/Regular: Font(family: "FF Shamel Unique", style: Font Weight/400, size: Font Size/Text/M, weight: 400, lineHeight: 1.5, letterSpacing: 0), English/Text/Regular/Semi Bold: Font(family: "Font Family", style: Font Weight/600, size: Font Size/Text/M, weight: 600, lineHeight: 1.5, letterSpacing: 0), English/Text/Tiny/Medium: Font(family: "Font Family", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Small/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/S, weight: 500, lineHeight: 1.5, letterSpacing: 0), Arabic/Text/Tiny/Medium: Font(family: "FF Shamel Unique", style: Font Weight/500, size: Font Size/Text/XS, weight: 500, lineHeight: 1.5, letterSpacing: 0).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## HomeIndicator
+**Node ID:** 1:10015
+
+**Documentation:**
+- [https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/](https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/)
+Image assets are stored on a localhost server. Clients can use these images directly in code as a way to view the image assets the same way they would other remote servers. Images and SVGs will be stored as constants, e.g. const image = 'http://localhost:3845/assets/10c13ac1a228a365cb98a0064b1d5afbc84887b2.png' These constants will be used in the code as the source for the image, e.g. <img src={image} /> This is true for both images and SVGs, so you can use the same approach for both types of assets.
+IMPORTANT: After you call this tool, you MUST call get_screenshot to get a screenshot of the node for context.
