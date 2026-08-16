@@ -304,13 +304,28 @@ export default function CardsScreen() {
   );
 }
 
-/** Wallet action tile: 24px icon over a 12px label, in the drawn 20px-radius box. */
-function ActionTile({ icon, label, onClick }: { icon: string; label: string; onClick: () => void }) {
+/** Wallet action tile: 24px icon over a 12px label, in the drawn 20px-radius
+    box. Shared with the zero-balance wallet so the two can't drift; `muted`
+    is the nothing-to-redeem state of the before-linking wallet. */
+export function ActionTile({
+  icon,
+  label,
+  onClick,
+  muted,
+}: {
+  icon: string;
+  label: string;
+  onClick: () => void;
+  muted?: boolean;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex min-w-px flex-[1_0_0] cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5"
+      disabled={muted}
+      className={`flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5 ${
+        muted ? 'opacity-40' : 'cursor-pointer'
+      }`}
     >
       <div className="relative size-6 shrink-0">
         <img alt="" className="absolute inset-0 block size-full max-w-none" src={icon} />

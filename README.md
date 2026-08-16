@@ -83,7 +83,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   balance card drops the drawn «?» affordance, and the three action tiles
   (تحويل لحساب بنكي · الحسابات · البطاقات) collapse into two: **«استخدمه»**
   (the redemption hub, which still leads with تحويل لحساب بنكي) and
-  **«الاعدادات»** → `/cards/settings`.
+  **«الاعدادات»** → `/cards/settings`. The zero-balance wallet before linking
+  carries the same pair (shared `ActionTile`), with «استخدمه» muted — its
+  balance is 0.00, so there is nothing to redeem yet.
 - `/cards/settings` — الاعدادات hub, two managed things each on its own
   screen: «البطاقات المضافة» → `/cards/manage` and «الحسابات البنكية» →
   `/cards/accounts` (payout accounts on file + «حساب بنكي جديد» → the
@@ -255,7 +257,8 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   expiring-cashback line moved out of the balance card into the compact
   nudge section, the balance card lost its «?» affordance, and the three
   drawn action tiles collapsed into «استخدمه» + «الاعدادات» — all of which
-  shifts the content below. The القسائم tab
+  shifts the content below. The zero-balance wallet (`1_10736`, ≈3.7%)
+  deviates the same way, having been aligned to that CTA pair. The القسائم tab
   (`65_23785`, ≈2.0%) gates against a true 375×812 export, so it sits near the
   glyph-noise floor — the extra few tenths are the user-directed Phase-2 tab
   reorder (الكاش باك first) against the drawn row; extracting the shared

@@ -1,7 +1,9 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../components/Riyal';
 import LinkIntroSheet, { useLinkIntroGate } from '../components/LinkIntroSheet';
+import RedeemSheet from '../components/RedeemSheet';
+import { ActionTile } from './CardsScreen';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -21,11 +23,8 @@ import lineDivider from '../assets/figma/561e1dc11b0819cb2a66aeb53cae489866c5b96
 import iconTrash from '../assets/figma/363d85e6a8cce52a41631333c9b708a8e110ecda.svg';
 import plusWhite from '../assets/figma/1782ca329908717a3751d66c5fff07ae32e411f5.svg';
 import plusMuted from '../assets/figma/91223892d4ae26767df85ad2af33e1200bebb0a8.svg';
-import iconQuestion from '../assets/figma/08fd9a8c6914963186b300dfbef228aae5500d3a.svg';
 import iconExport from '../assets/figma/a495e8b4f8c794ab58d35158625e671abac5391a.svg';
-import iconBank from '../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
-import iconCards from '../assets/figma/8c05f1e5f6147e716d668aa6bce34eed3ff26de4.svg';
-import iconPlus from '../assets/figma/bf70f48b3d5eef63682262c282b088b7fbe9fc1f.svg';
+import iconSetting from '../assets/figma/56f665cc37df1dc4bd8183e41b481c8e896e1dfb.svg';
 import iconArrowLeftMini from '../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
 import iconChevronLeft from '../assets/figma/ea1e744f0dba38ca037f977b4d23eb336ff91694.svg';
 import promoCoinsRight from '../assets/figma/c133d46124697695c166c9121006e44e2859cf63.svg';
@@ -71,6 +70,8 @@ export function CardsEmpty() {
 
 /** الكاش باك — wallet home, zero balance / no transactions yet (Figma 1:10736). */
 export function CardsZero() {
+  const navigate = useNavigate();
+  const [redeemOpen, setRedeemOpen] = useState(false);
   return (
     <div className="relative h-full overflow-hidden">
       <div className="h-full overflow-y-auto bg-surface">
@@ -101,51 +102,16 @@ export function CardsZero() {
                     </div>
                     <p className="font-en whitespace-nowrap text-[36px] font-bold not-italic leading-[54px] text-ink-inverse">0.00</p>
                   </div>
-                  <div className="absolute left-[13px] top-[13px] size-9 overflow-clip">
-                    <div className="absolute inset-[9.38%]">
-                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconQuestion} />
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              {/* Action tiles */}
-              <div className="flex shrink-0 flex-col items-start gap-2.5">
-                <div className="flex w-full shrink-0 flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5">
-                  <div className="relative size-6 shrink-0">
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconExport} />
-                  </div>
-                  <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                    سحب لحساب بنكي
-                  </p>
-                </div>
-                <div className="flex w-[343px] shrink-0 items-start justify-end gap-2">
-                  <div className="flex w-[105px] shrink-0 flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5">
-                    <div className="relative size-6 shrink-0">
-                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconBank} />
-                    </div>
-                    <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                      الحسابات
-                    </p>
-                  </div>
-                  <div className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line py-2.5 pl-[58px] pr-3">
-                    <div className="relative size-6 shrink-0">
-                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-                    </div>
-                    <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                      البطاقات
-                    </p>
-                    <div className="absolute left-[-1.5px] top-[-1px] flex h-[70px] w-[47px] flex-col items-center justify-center rounded-bl-[20px] rounded-tl-[20px] bg-brand-400 px-3 py-2.5">
-                      <div className="relative size-5 shrink-0 overflow-clip">
-                        <div className="absolute inset-[20%]">
-                          <div className="absolute inset-[-2.08%]">
-                            <img alt="" className="block size-full max-w-none" src={iconPlus} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Action tiles — same pair as the populated wallet (user
+                  direction): «استخدمه» (redemption hub) + «الاعدادات».
+                  Before linking the balance is 0.00, so there is nothing to
+                  redeem and «استخدمه» stays muted. */}
+              <div className="flex w-[343px] shrink-0 items-start gap-2">
+                <ActionTile icon={iconSetting} label="الاعدادات" onClick={() => navigate('/cards/settings')} />
+                <ActionTile icon={iconExport} label="استخدمه" onClick={() => setRedeemOpen(true)} muted />
               </div>
             </div>
 
@@ -244,6 +210,8 @@ export function CardsZero() {
       <div className="absolute bottom-0 left-px flex w-[375px] flex-col items-center overflow-clip pt-3">
         <HomeIndicator />
       </div>
+
+      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} />
     </div>
   );
 }
