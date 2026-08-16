@@ -8,16 +8,19 @@ const fmtPts = (n: number) => n.toLocaleString('en-US');
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 /** Transition phase 1 — the points → cashback converter (10 pts = 1 ﷼).
-    Preset chips (الربع / النص / كل النقاط) with a live ﷼ preview and an
-    in-sheet success moment; balances move app-wide through AppState. */
+    Preset chips (الربع / النص / كل النقاط) or any custom amount, with a live
+    ﷼ preview and an in-sheet success moment; balances move app-wide through
+    AppState. */
 export default function ConvertSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { points, cashback, convertPoints } = useAppState();
   const [sel, setSel] = useState<number | null>(null);
+  const [custom, setCustom] = useState('');
   const [done, setDone] = useState<number | null>(null); // converted ﷼ amount
 
   useEffect(() => {
     if (open) {
       setSel(null);
+      setCustom('');
       setDone(null);
     }
   }, [open]);
@@ -31,7 +34,13 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
     { label: 'النص', pts: Math.floor(points / 2) },
     { label: 'كل النقاط', pts: points },
   ];
-  const chosen = sel ?? points;
+  // a typed amount takes over from the chips until it is cleared
+  const usingCustom = custom !== '';
+  const customPts = Number(custom) || 0;
+  const chosen = usingCustom ? customPts : sel ?? points;
+  const tooSmall = usingCustom && customPts > 0 && customPts < POINTS_RATE;
+  const tooBig = chosen > points;
+  const valid = chosen >= POINTS_RATE && chosen <= points;
 
   return (
     <div className="absolute inset-0 z-50">
@@ -127,12 +136,15 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
             {/* preset chips */}
             <div className="flex w-full items-stretch gap-2">
               {presets.map((p) => {
-                const active = chosen === p.pts;
+                const active = !usingCustom && chosen === p.pts;
                 return (
                   <button
                     key={p.label}
                     type="button"
-                    onClick={() => setSel(p.pts)}
+                    onClick={() => {
+                      setSel(p.pts);
+                      setCustom('');
+                    }}
                     className={`flex min-w-px flex-[1_0_0] flex-col items-center gap-0.5 rounded-2xl border border-solid py-2.5 ${
                       active ? 'border-2 border-brand-400 bg-brand-50' : 'border-line bg-surface'
                     }`}
@@ -146,27 +158,80 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
               })}
             </div>
 
+            {/* أو مبلغ مخصص — any amount between the 10-point floor and the
+                whole balance */}
+            <div
+              className={`flex w-full items-center gap-2 rounded-2xl border border-solid px-3 py-2.5 ${
+                usingCustom ? 'border-brand-400 bg-brand-50' : 'border-line bg-surface'
+              }`}
+            >
+              <div className="relative size-5 shrink-0">
+                <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]">
+                  <img alt="" className="block size-full max-w-none" src={coinWp} />
+                </div>
+              </div>
+              <input
+                type="text"
+                inputMode="numeric"
+                dir="ltr"
+                value={custom}
+                onChange={(e) => setCustom(e.target.value.replace(/[^\d]/g, ''))}
+                placeholder={`${POINTS_RATE}–${fmtPts(points)}`}
+                aria-label="مبلغ مخصص بالنقاط"
+                data-testid="convert-custom"
+                className="font-en min-w-px flex-[1_0_0] bg-transparent text-right text-sm font-semibold leading-[1.5] text-ink outline-none placeholder:font-normal placeholder:text-ink-quadrant"
+              />
+              <p className="shrink-0 whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
+                مبلغ مخصص
+              </p>
+            </div>
+
             {/* live preview */}
-            <div className="flex w-full items-center justify-center gap-1 rounded-2xl bg-brand-50 px-4 py-3">
+            <div
+              className={`flex w-full items-center justify-center gap-1 rounded-2xl px-4 py-3 ${
+                valid ? 'bg-brand-50' : 'bg-surface-neutral'
+              }`}
+            >
               <p className="text-sm font-normal leading-[1.5] text-ink" dir="rtl" data-testid="convert-preview">
-                {'بتحصل '}
-                <span className="font-en text-base font-bold text-brand-400">{fmtSar(chosen / POINTS_RATE)}</span>{' '}
-                <span className="text-brand-400">
-                  <Riyal />
-                </span>
-                {' كاش باك'}
+                {tooBig ? (
+                  <span className="text-ink-danger">أكثر من رصيدك من النقاط</span>
+                ) : tooSmall ? (
+                  <span className="text-ink-tertiary">
+                    {'أقل تحويل '}
+                    <span className="font-en">{POINTS_RATE}</span>
+                    {' نقاط'}
+                  </span>
+                ) : !valid ? (
+                  <span className="text-ink-tertiary">اختر مبلغ أو اكتبه</span>
+                ) : (
+                  <>
+                    {'بتحصل '}
+                    <span className="font-en text-base font-bold text-brand-400">{fmtSar(chosen / POINTS_RATE)}</span>{' '}
+                    <span className="text-brand-400">
+                      <Riyal />
+                    </span>
+                    {' كاش باك'}
+                  </>
+                )}
               </p>
             </div>
 
             <button
               type="button"
+              disabled={!valid}
               onClick={() => {
                 convertPoints(chosen);
                 setDone(chosen / POINTS_RATE);
               }}
-              className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
+              data-testid="convert-cta"
+              className={`flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl px-4 py-2.5 ${
+                valid ? 'bg-brand-400' : 'bg-surface-disabled'
+              }`}
             >
-              <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+              <p
+                className={`whitespace-nowrap text-sm font-medium leading-[1.5] ${valid ? 'text-ink-inverse' : 'text-ink-quadrant'}`}
+                dir="auto"
+              >
                 حوّلها كاش باك
               </p>
             </button>

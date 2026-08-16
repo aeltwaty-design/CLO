@@ -163,8 +163,11 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   its migration toward cashback-only. Balances are **live app state**
   (`AppState`: 5,000 pts / 560.50 ﷼ defaults, `?pts=` seed): the Points
   Wallet's «حول نقاطك» action and «استخدمها» pill open the **converter**
-  (10 pts = 1 ﷼, preset chips ربع/نص/كل with live preview and an in-sheet
-  success); after linking, both the wallet and Home render the shared
+  (10 pts = 1 ﷼, preset chips ربع/نص/كل **or a «مبلغ مخصص» amount** — any
+  points figure from the 10-point floor up to the balance, which takes over
+  from the chips until cleared and guards «أقل تحويل 10 نقاط» / «أكثر من
+  رصيدك من النقاط» — with a live preview and an in-sheet success);
+  after linking, both the wallet and Home render the shared
   **cashback section** (`src/components/CashbackStrip.tsx` — one component,
   so the two can never drift) with its CTA row: **«التفاصيل»** (cashback
   wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي
