@@ -21,6 +21,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   auto-advancing 3-step stepper, trust chips, CTA) — a UX redesign of the
   full-screen onboarding; `/cashback/intro` still serves the original
   full-screen version for deep links and the QA gate.
+- **Phase 2: السوق القسائم tab** (Figma 65:23785) — the Market tabs are live in
+  Phase 2: الكاش باك ⇄ القسائم switch the grid in place (`?tab=vouchers`
+  deep-links the vouchers tab), while العروض stays inert until its frame
+  lands. The vouchers tab drops the promo banner, adds the خصومات filter chip
+  and swaps the merchant grid for the drawn voucher grid — نمق (gold «ما
+  يفوتك» card) and أمازون with «تبدأ من» prices, هنقرسيتشن/جاهز برايم with
+  follower counts, and جرير/قولدن سنت/أمازون with favourite hearts; each card
+  opens its store page (`/store/namaq`, `/store/jarir`, … all vouchers
+  variant). Phase 1 keeps the frozen single-tab market, byte-identical.
 - `/cashback/add-card` — UX-upgraded form: **live card preview** that fills in
   as you type (scheme detected from the first digit), 4-4-4-4 grouping, expiry
   auto-advance, inline validation ticks, collapsed optional nickname, and a
@@ -36,10 +45,19 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   after) → `الكل` → `/transactions` → row tap opens the details sheet. The
   populated wallet pulls the expiring-cashback note out of the balance card
   into a compact nudge («عندك 50 ﷼ تنتهي 25 ديسمبر» + «حوّلها الحين») whose
-  CTA presets the 50 ﷼ and enters the withdrawal flow.
-- `/cards/manage` — «البطاقات المضافة» (from the wallet's البطاقات tile or the
+  CTA presets the 50 ﷼ and enters the withdrawal flow. Per user direction its
+  balance card drops the drawn «?» affordance, and the three action tiles
+  (تحويل لحساب بنكي · الحسابات · البطاقات) collapse into two: **«استخدمه»**
+  (the redemption hub, which still leads with تحويل لحساب بنكي) and
+  **«الاعدادات»** → `/cards/settings`.
+- `/cards/settings` — الاعدادات hub, two managed things each on its own
+  screen: «البطاقات المضافة» → `/cards/manage` and «الحسابات البنكية» →
+  `/cards/accounts` (payout accounts on file + «حساب بنكي جديد» → the
+  add-bank form). No drawn frame — built from the wallet's own row/app-bar
+  language, so it's outside the QA gate.
+- `/cards/manage` — «البطاقات المضافة» (from الاعدادات → البطاقات المضافة or the
   sheet's إدارة البطاقات); `?cards=3` demos the three-card cap state.
-- **Withdrawal «سحب الكاش باك»** — wallet tile «تحويل لحساب بنكي» →
+- **Withdrawal «سحب الكاش باك»** — wallet «استخدمه» → تحويل لحساب بنكي →
   `/withdraw/account` (radio enables the CTA; «حساب بنكي جديد» → the add-bank
   form with رقم الحساب/IBAN modes and the beneficiary-bank sheet) →
   `/withdraw/amount` (quick chips, «أقصى مبلغ» = balance − fee = 559.5, daily
@@ -57,8 +75,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   remaining balance), a context line above the PIN dots, IBAN validation with
   beneficiary-bank auto-detect (`SA` + 22 digits; the two digits after SA pick
   the bank — 80 الراجحي / 05 الإنماء / 15 البلاد / 60 الجزيرة), and a
-  repeat-withdrawal shortcut (the wallet's transfer tile skips straight to the
-  amount step once an account is on file).
+  repeat-withdrawal shortcut (the wallet's «حوّلها الحين» nudge and the
+  redemption hub's تحويل لحساب بنكي skip straight to the amount step once an
+  account is on file).
 - Fresh loads always start **before linking** (scenario 1); the linking journey
   flips the app to the after state live, and a reload restarts the demo.
   `?linked=1` deep-links straight to the after state (used by the QA gate).
@@ -109,9 +128,26 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   success); after linking, both the wallet and Home render the shared
   **cashback section** (`src/components/CashbackStrip.tsx` — one component,
   so the two can never drift) with its CTA row: **«التفاصيل»** (cashback
-  wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي (the real withdrawal flow), شراء قسائم
-  and إهداء لصديق as live demo redemptions that move the balance, plus شحن
-  جوال and تبرع as «قريباً» tiles. The expiring-cashback nudge also surfaces
+  wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي
+  (the real withdrawal flow), «اشترِ قسائم» (hands off to the Market's القسائم
+  tab, `/market?tab=vouchers`, instead of an in-sheet picker) and **«أهدِها»**
+  (the gift flow below), plus شحن جوال and تبرع as «قريباً» tiles.
+- **«أهدِها» gift flow** (drawn تحويل النقاط section 73:29323, adapted points
+  → cashback per user direction; limited to زملاء العمل and أفراد العائلة) —
+  the hub row opens an in-sheet audience chooser (mirroring the drawn hub
+  sheet), then: `/gift/pick?aud=colleagues|family` (radio list exactly as
+  drawn — selected row goes mint with a green border; colleagues adds the
+  «ارسل لهم مره ثانية» recents avatars ماجد رجل/حمود الخضر; family lists
+  سارة/أحمد/فاطمة with relations) → `/gift/amount` («حولها لزميل/للعائلة»,
+  live cashback chip in the app bar, promo strip per audience, «كم ودك
+  تحول؟» input + chips 5/10/50/100/200/500 ﷼ — chips and CTA above balance
+  disabled, «المرسل إليه» card with edit-glyph back to the picker, visual
+  «أضف إلى التحويل السريع» checkbox) → `/gift/pin` («تأكيد التحويل», bare
+  keypad as drawn — same demo PIN rules as the withdrawal) → `/gift/status`
+  (drawn success/failure art; success spends the live balance and shows
+  «وصلت N ﷼ لـ…»; كمل → wallet, حاول مره ثانية → PIN). State seeds:
+  `?gaud=colleagues|family` (also presets the audience's first contact),
+  `?gamount=N`. The expiring-cashback nudge also surfaces
   on Home after linking. The withdrawal flow itself keeps its pixel-pinned
   drawn values (560.50 world) regardless of conversions.
 - **Phase 2: linking intro until the first card** — every «add card» tap
@@ -149,7 +185,7 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `?onion=<refId>` gives a 50% onion skin. Size the window to the ref's exact
   frame (e.g. 375×1034 for the Market before-state) or the lower half compares
   the wrong rows. Dev builds only.
-- **QA gate**: `node scripts/qa-diff.mjs` (dev server running) captures all 20
+- **QA gate**: `node scripts/qa-diff.mjs` (dev server running) captures all 39
   screens/states/sheets with headless Chromium at true resolution and
   pixelmatch-diffs them (AA-aware) against `design/refs`, writing heatmaps to
   `design/qa/`. Accepted floor: ≤~4% glyph-stroke noise (browser vs Figma font
@@ -178,9 +214,26 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   nudge) against the before-only ref. Transition phase 1 also moves the two
   wallet captures by design: `54_10152` ≈4% (points rebased to 5,000) and
   `54_10497` ≈6.6% (the drawn strip gains its «استخدمه»/«التفاصيل» CTA row). The populated
-  wallet (`1_10563`, ≈8.5%) also deviates by user direction: the
+  wallet (`1_10563`, ≈7.7%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
-  nudge section, shifting the content below it.
+  nudge section, the balance card lost its «?» affordance, and the three
+  drawn action tiles collapsed into «استخدمه» + «الاعدادات» — all of which
+  shifts the content below. The القسائم tab
+  (`65_23785`, ≈1.7%) gates against a true 375×812 export, so it sits at the
+  glyph-noise floor; extracting the shared `MarketTabs` for it left the two
+  Phase-1 market captures pixel-identical (verified at 0 differing px). The
+  gift flow gates against the **source frames** of the drawn تحويل النقاط
+  section (`3196:*`/`3887:*` in the WalaPlus revamp file — the Cashback
+  copy's node ids refuse the metadata/codegen endpoints), pulled via the
+  local Dev-Mode MCP: PIN `3887_40765` ≈0.1%, family pick `3196_33505`
+  ≈1.6%, status `3196_32860`/`32879` ≈1.2/1.5% (the gift failure drops the
+  drawn-elsewhere error-code line, as its frame does). The two amount
+  screens (`3196_31717`/`31868`, ≈4.1%) deviate by design — points →
+  cashback: WO-coin glyphs become the Riyal symbol, chips scale ÷100,
+  نقاطك → كاش باك copy, and the balance chip reads the live 560.50. The
+  colleagues pick (`3196_33656`, ≈3.7%) is a coarse gate: its ref is a
+  hand-cropped 1:1 canvas render (that frame refuses export), and the drawn
+  title typo «زملاء العملاء» is rendered as زملاء العمل per user direction.
 
 ## Conventions (important before editing)
 

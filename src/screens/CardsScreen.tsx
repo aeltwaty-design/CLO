@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWithdraw } from '../state/WithdrawState';
 import { useAppState } from '../state/AppState';
 import Riyal from '../components/Riyal';
+import RedeemSheet from '../components/RedeemSheet';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -11,11 +12,8 @@ import iconSignal from '../assets/figma/f192404e6429d17169474171bdc045888f5cada9
 import imgTime from '../assets/figma/0df437cb81db5679e48b4bd0954f6de88d23f868.svg';
 import iconSearch from '../assets/figma/94eebfc1b004b10817770c3aae389af4892d7357.svg';
 import iconArrowBack from '../assets/figma/fd6f26534a87f4d8bbe62b710db8bf509383bda4.svg';
-import iconQuestion from '../assets/figma/08fd9a8c6914963186b300dfbef228aae5500d3a.svg';
 import iconExport from '../assets/figma/a495e8b4f8c794ab58d35158625e671abac5391a.svg';
-import iconBank from '../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
-import iconCards from '../assets/figma/8c05f1e5f6147e716d668aa6bce34eed3ff26de4.svg';
-import iconPlus from '../assets/figma/bf70f48b3d5eef63682262c282b088b7fbe9fc1f.svg';
+import iconSetting from '../assets/figma/56f665cc37df1dc4bd8183e41b481c8e896e1dfb.svg';
 import iconClock from '../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
 import iconChevronLeft from '../assets/figma/ea1e744f0dba38ca037f977b4d23eb336ff91694.svg';
 import lineDivider from '../assets/figma/561e1dc11b0819cb2a66aeb53cae489866c5b961.svg';
@@ -110,12 +108,13 @@ const recentRows: RecentTx[] = [
 export default function CardsScreen() {
   const navigate = useNavigate();
   // repeat-withdrawal shortcut: once an account is on file (completed or
-  // seeded withdrawal), the transfer tile skips straight to the amount step
+  // seeded withdrawal), the expiring-cashback CTA skips to the amount step
   const { account, setAmount } = useWithdraw();
   // transition phase 1: live balance (default 560.50 = the drawn frame)
   const { cashback } = useAppState();
   const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const withdrawTo = account ? '/withdraw/amount' : '/withdraw/account';
+  const [redeemOpen, setRedeemOpen] = useState(false);
   // expiring-cashback CTA: preset the drawn expiring 50 ﷼ and enter the flow
   const sendExpiring = () => {
     setAmount(50);
@@ -168,11 +167,6 @@ export default function CardsScreen() {
                     {fmtSar(cashback)}
                   </p>
                 </div>
-                <div className="absolute left-[13px] top-[13px] size-9 overflow-clip">
-                  <div className="absolute inset-[9.38%]">
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconQuestion} />
-                  </div>
-                </div>
               </div>
 
               {/* ⏳ Expiring cashback — compact nudge with a direct transfer CTA
@@ -213,55 +207,13 @@ export default function CardsScreen() {
                 </div>
               </div>
 
-              {/* Action tiles */}
-              <div className="flex shrink-0 flex-col items-start gap-2.5">
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => navigate(withdrawTo)}
-                  onKeyDown={(e) => e.key === 'Enter' && navigate(withdrawTo)}
-                  className="flex w-full shrink-0 cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5"
-                >
-                  <div className="relative size-6 shrink-0">
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconExport} />
-                  </div>
-                  <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                    تحويل لحساب بنكي
-                  </p>
-                </div>
-                <div className="flex w-[343px] shrink-0 items-start justify-end gap-2">
-                  <div className="flex w-[105px] shrink-0 flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5">
-                    <div className="relative size-6 shrink-0">
-                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconBank} />
-                    </div>
-                    <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                      الحسابات
-                    </p>
-                  </div>
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => navigate('/cards/manage')}
-                    onKeyDown={(e) => e.key === 'Enter' && navigate('/cards/manage')}
-                    className="relative flex min-w-px flex-[1_0_0] cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line py-2.5 pl-[58px] pr-3"
-                  >
-                    <div className="relative size-6 shrink-0">
-                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-                    </div>
-                    <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                      البطاقات
-                    </p>
-                    <div className="absolute left-[-1.5px] top-[-1px] flex h-[70px] w-[47px] flex-col items-center justify-center rounded-bl-[20px] rounded-tl-[20px] bg-brand-400 px-3 py-2.5">
-                      <div className="relative size-5 shrink-0 overflow-clip">
-                        <div className="absolute inset-[20%]">
-                          <div className="absolute inset-[-2.08%]">
-                            <img alt="" className="block size-full max-w-none" src={iconPlus} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Action tiles — user direction: the three drawn tiles
+                  (تحويل لحساب بنكي · الحسابات · البطاقات) collapse into
+                  «استخدمه» (redemption hub, bank transfer included) and
+                  «الاعدادات» (cards + accounts, each on its own screen). */}
+              <div className="flex w-[343px] shrink-0 items-start gap-2">
+                <ActionTile icon={iconSetting} label="الاعدادات" onClick={() => navigate('/cards/settings')} />
+                <ActionTile icon={iconExport} label="استخدمه" onClick={() => setRedeemOpen(true)} />
               </div>
             </div>
 
@@ -346,7 +298,27 @@ export default function CardsScreen() {
           <div className="absolute bottom-2 left-[calc(50%+0.5px)] h-[5px] w-[134px] -translate-x-1/2 rounded-[100px] bg-ink" />
         </div>
       </div>
+
+      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} />
     </div>
+  );
+}
+
+/** Wallet action tile: 24px icon over a 12px label, in the drawn 20px-radius box. */
+function ActionTile({ icon, label, onClick }: { icon: string; label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex min-w-px flex-[1_0_0] cursor-pointer flex-col items-center justify-center gap-2 rounded-[20px] border border-solid border-line px-3 py-2.5"
+    >
+      <div className="relative size-6 shrink-0">
+        <img alt="" className="absolute inset-0 block size-full max-w-none" src={icon} />
+      </div>
+      <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
+        {label}
+      </p>
+    </button>
   );
 }
 

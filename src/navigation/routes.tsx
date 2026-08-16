@@ -9,6 +9,7 @@ import CashbackIntroScreen from '../screens/CashbackIntroScreen';
 import AddCardScreen from '../screens/AddCardScreen';
 import LinkSuccessScreen from '../screens/LinkSuccessScreen';
 import { CardsHome, CardsManage } from '../screens/CardsDispatch';
+import { BankAccountsScreen, CardsSettingsScreen } from '../screens/CardsSettings';
 import TransactionsScreen from '../screens/TransactionsScreen';
 import WithdrawAccountScreen from '../screens/withdraw/WithdrawAccountScreen';
 import WithdrawNewAccountScreen from '../screens/withdraw/WithdrawNewAccountScreen';
@@ -16,6 +17,10 @@ import WithdrawAmountScreen from '../screens/withdraw/WithdrawAmountScreen';
 import WithdrawSummaryScreen from '../screens/withdraw/WithdrawSummaryScreen';
 import WithdrawPinScreen from '../screens/withdraw/WithdrawPinScreen';
 import WithdrawStatusScreen from '../screens/withdraw/WithdrawStatusScreen';
+import GiftPickScreen from '../screens/gift/GiftPickScreen';
+import GiftAmountScreen from '../screens/gift/GiftAmountScreen';
+import GiftPinScreen from '../screens/gift/GiftPinScreen';
+import GiftStatusScreen from '../screens/gift/GiftStatusScreen';
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +37,8 @@ export const router = createBrowserRouter([
       { path: '/cashback/success', element: <LinkSuccessScreen /> },
       { path: '/cards', element: <CardsHome /> },
       { path: '/cards/manage', element: <CardsManage /> },
+      { path: '/cards/settings', element: <CardsSettingsScreen /> },
+      { path: '/cards/accounts', element: <BankAccountsScreen /> },
       { path: '/transactions', element: <TransactionsScreen /> },
       // WithdrawProvider lives in App.tsx (above the keyed ScreenTransition,
       // which remounts per route and would reset nested provider state)
@@ -41,6 +48,11 @@ export const router = createBrowserRouter([
       { path: '/withdraw/summary', element: <WithdrawSummaryScreen /> },
       { path: '/withdraw/pin', element: <WithdrawPinScreen /> },
       { path: '/withdraw/status', element: <WithdrawStatusScreen /> },
+      // GiftProvider lives in App.tsx (same reasoning as WithdrawProvider)
+      { path: '/gift/pick', element: <GiftPickScreen /> },
+      { path: '/gift/amount', element: <GiftAmountScreen /> },
+      { path: '/gift/pin', element: <GiftPinScreen /> },
+      { path: '/gift/status', element: <GiftStatusScreen /> },
       { path: '*', element: <Navigate to="/market" replace /> },
     ],
   },

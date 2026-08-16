@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { AppStateProvider, useAppState } from './state/AppState';
 import { WithdrawProvider } from './state/WithdrawState';
+import { GiftProvider } from './state/GiftState';
 import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 
@@ -51,6 +52,7 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Home (Phase 2)', url: '/home', p: 2 },
   { label: 'Market — before card', url: '/market?linked=0' },
   { label: 'Market — after card', url: '/market?linked=1' },
+  { label: 'Market — vouchers tab (Phase 2)', url: '/market?tab=vouchers', p: 2 },
   { label: 'Store: cashback — before', url: '/store/hm?linked=0' },
   { label: 'Store: cashback — after', url: '/store/hm?linked=1' },
   { label: 'Store: offers — before', url: '/store/ikea?linked=0' },
@@ -62,6 +64,8 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Linking: success', url: '/cashback/success' },
   { label: 'Cashback wallet — before', url: '/cards?linked=0' },
   { label: 'Cashback wallet — after', url: '/cards?linked=1' },
+  { label: 'Wallet settings', url: '/cards/settings?linked=1' },
+  { label: 'Bank accounts', url: '/cards/accounts?linked=1' },
   { label: 'Manage cards', url: '/cards/manage?linked=1' },
   { label: 'Manage cards — 3-card cap', url: '/cards/manage?linked=1&cards=3' },
   { label: 'Transactions', url: '/transactions?linked=1' },
@@ -73,6 +77,12 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Withdraw: summary (seeded)', url: '/withdraw/summary?linked=1&waccount=1&wamount=50' },
   { label: 'Withdraw: PIN (seeded)', url: '/withdraw/pin?linked=1&waccount=1&wamount=50' },
   { label: 'Withdraw: Touch ID', url: '/withdraw/pin?linked=1&touchid=1' },
+  { label: 'Gift: pick colleagues', url: '/gift/pick?aud=colleagues&linked=1' },
+  { label: 'Gift: pick family', url: '/gift/pick?aud=family&linked=1' },
+  { label: 'Gift: amount (seeded)', url: '/gift/amount?linked=1&gaud=colleagues' },
+  { label: 'Gift: PIN (seeded)', url: '/gift/pin?linked=1&gaud=colleagues&gamount=50' },
+  { label: 'Gift: success + receipt', url: '/gift/status?ok=1&linked=1&gaud=colleagues&gamount=50' },
+  { label: 'Gift: failure', url: '/gift/status?ok=0&linked=1' },
   { label: 'Withdraw: success', url: '/withdraw/status?ok=1' },
   { label: 'Withdraw: success + receipt', url: '/withdraw/status?ok=1&waccount=1&wamount=50&linked=1' },
   { label: 'Withdraw: failure', url: '/withdraw/status?ok=0' },
@@ -168,16 +178,18 @@ function App() {
     <PhaseProvider>
       <AppStateProvider>
         <WithdrawProvider>
-          <div className="app-shell">
-            <PhaseTabs />
-            <div className="stage">
-              <div className="phone-frame">
-                <RouterProvider router={router} />
-                <DiffOverlay />
+          <GiftProvider>
+            <div className="app-shell">
+              <PhaseTabs />
+              <div className="stage">
+                <div className="phone-frame">
+                  <RouterProvider router={router} />
+                  <DiffOverlay />
+                </div>
+                <DemoControls />
               </div>
-              <DemoControls />
             </div>
-          </div>
+          </GiftProvider>
         </WithdrawProvider>
       </AppStateProvider>
     </PhaseProvider>

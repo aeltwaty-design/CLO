@@ -60,6 +60,33 @@ UX-enhancement layer (renders only with live state, so unseeded captures still m
 | 47:3538 | Home «الرئيسية» 375×2443 | `/home` | Phase-2 landing (root + tab bar); 11 sections + navbar; contexts/renders in design/phase2/; ref = cropped capped export (smoke diff ≈9.6%) |
 | 54:10152 | Wallet (points) before linking 375×1685 | `/wallet` + `?linked=0` | «اربط بطاقتك» promo → add-card form; gate ≈3.6% (capped ref) |
 | 54:10497 | Wallet (points) after linking 375×812 | `/wallet` + `?linked=1` | «إجمالي الكاش باك» strip → `/cards`; below-fold WalaOne bar; gate ≈2.7% |
+| 65:23785 | Market · القسائم tab 375×812 | `/market` + `?tab=vouchers` | live tab of the Market hub: voucher grid (8 stores) instead of the merchant grid, no promo banner, extra خصومات filter chip; cards → `/store/:id` (vouchers variant); gate ≈1.7% |
+
+## «أهدِها» gift flow (drawn تحويل النقاط section 73:29323, added 2026-08-13)
+
+The Cashback file's section is a copy whose node ids refuse the MCP metadata/codegen endpoints, so contexts/refs were pulled from the **source frames** on the WalaPlus revamp file's «✈️ Points transfer» page (identical content, section 3196:31366) via the local Dev-Mode toolchain. Adaptation per user direction: the flow moves **cashback** (points → ﷼): Riyal glyphs instead of WO coins, chips ÷100 (5/10/50/100/200/500), كاش باك copy, live 560.50 balance chip; only the زملاء العمل and أفراد العائلة audiences are built (entry: redemption-hub «أهدِها» → in-sheet chooser).
+
+| Node (source) | Frame | Route / state | Notes |
+|------|------|---------------|-------|
+| 3196:33255 / 33656 | زملاء العمل pick ×2 | `/gift/pick?aud=colleagues` | recents «ارسل لهم مره ثانية» (ماجد رجل + حمود الخضر) + radio list ×7; drawn title typo «زملاء العملاء» rendered as زملاء العمل; 33656 ref = 1:1 canvas crop (frame refuses export) — coarse gate ≈3.7% |
+| 3196:33505 | أفراد العائلة pick | `/gift/pick?aud=family` | سارة/زوجة, أحمد/ابن, فاطمة/ابنة; mint user-plus label button; gate ≈1.6% |
+| 3196:31717 / 32019 | amount ×2 (زميل) | `/gift/amount` | «حولها لزميل»; gate ≈4.1% (cashback adaptation) |
+| 3196:31868 / 32164 | amount ×2 (عائلة) | `/gift/amount` | «حولها للعائلة»; drawn quick-transfer checkbox checked; gate ≈4.2% |
+| 3887:40765 | PIN «تأكيد التحويل» | `/gift/pin` | bare keypad (no نسيته؟/fingerprint); same demo PIN rules as withdrawal; success spends the live balance; gate ≈0.1% |
+| 3196:32860 / 32879 | status success / failure | `/gift/status?ok=1/0` | drawn withdraw-style art; failure has no error-code line; receipt «وصلت N ﷼ لـ…» renders only with live state; gates ≈1.2/1.5% |
+
+State seeds: `?gaud=colleagues|family` (presets the audience's first contact), `?gamount=N`.
+
+## Derived screens (user direction, no drawn frame)
+
+| Screen | Route | Notes |
+| --- | --- | --- |
+| الاعدادات | `/cards/settings` | from the cashback wallet's «الاعدادات» tile; two rows → البطاقات المضافة (`/cards/manage`, drawn 1:10520/1:10838) and الحسابات البنكية |
+| الحسابات البنكية | `/cards/accounts` | payout accounts on file (`REGISTERED_ACCOUNT` + any added mid-flow) and the dashed «حساب بنكي جديد» → `/withdraw/new-account` |
+
+Both reuse the wallet app-bar/list language rather than a Figma frame, so they are not in the QA gate.
+
+The Market tabs are live in Phase 2 only (`MarketTabs`, shared by both states so they can't drift): الكاش باك ⇄ القسائم switch in place, العروض stays inert until its frame lands. Phase 1 keeps the frozen single-tab market — verified pixel-identical (0 differing px on 1:7750 / 1:8098).
 
 Two wallets: **points** (main, `/wallet`, Phase 2) and **cashback** (`/cards`). Cashback access in Phase 2: the after-strip in the points wallet + the ﷼ pill in the Home header; the tab bar's المحفظة goes to `/wallet` in Phase 2 and `/cards` in Phase 1.
 

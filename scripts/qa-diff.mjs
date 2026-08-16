@@ -67,6 +67,21 @@ const SCREENS = [
   // smoke) / after 54:10497 (true 375×812 viewport frame)
   ['/wallet?phase=2&linked=0', '54_10152', 1685],
   ['/wallet?phase=2&linked=1', '54_10497', 812],
+  // Phase 2 Market · القسائم tab (65:23785) — true 375×812 ref
+  ['/market?phase=2&tab=vouchers', '65_23785', 812],
+  // «أهدِها» gift flow (drawn تحويل النقاط section; refs pulled from the
+  // source frames via the local Dev-Mode MCP). Points → cashback adaptation
+  // per user direction, so the amount screens deviate by design (Riyal
+  // glyphs + ÷100 chip values + كاش باك copy vs the drawn points values);
+  // the pick screens and failure status are structural 1:1 gates. The PIN
+  // capture carries the seeded context line (state-conditional UX layer).
+  ['/gift/pick?aud=colleagues&linked=1&phase=2', '3196_33656', 812, 'giftPickRecent'],
+  ['/gift/pick?aud=family&linked=1&phase=2', '3196_33505', 812, 'giftPickFamily'],
+  ['/gift/amount?linked=1&phase=2&gaud=colleagues', '3196_31717', 812],
+  ['/gift/amount?linked=1&phase=2&gaud=family', '3196_31868', 812],
+  ['/gift/pin?linked=1&phase=2&gaud=colleagues&gamount=50', '3887_40765', 812],
+  ['/gift/status?ok=1&phase=2', '3196_32860', 812],
+  ['/gift/status?ok=0&phase=2', '3196_32879', 812],
 ];
 
 const ACTIONS = {
@@ -93,6 +108,14 @@ const ACTIONS = {
   },
   async openOfferSheet(page) {
     await page.locator('button', { hasText: 'خصم 15%' }).first().click();
+  },
+  // gift pick refs are drawn in their selected states
+  async giftPickRecent(page) {
+    // recents column: the حمود avatar tile (ring + green label when active)
+    await page.locator('button:has-text("حمود الخضر")').first().click();
+  },
+  async giftPickFamily(page) {
+    await page.locator('button', { hasText: 'سارة القحطاني' }).first().click();
   },
 };
 
