@@ -166,7 +166,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   (10 pts = 1 ﷼, preset chips ربع/نص/كل **or a «مبلغ مخصص» amount** — any
   points figure from the 10-point floor up to the balance, which takes over
   from the chips until cleared and guards «أقل تحويل 10 نقاط» / «أكثر من
-  رصيدك من النقاط» — with a live preview and an in-sheet success);
+  رصيدك من النقاط» — with a live preview, then an **in-sheet PIN step**
+  («تأكيد التحويل», same demo codes as every other flow: `000000` wrong ×3,
+  `999999` fails, else confirms) before the success moment);
   after linking, both the wallet and Home render the shared
   **cashback section** (`src/components/CashbackStrip.tsx` — one component,
   so the two can never drift) with its CTA row: **«التفاصيل»** (cashback

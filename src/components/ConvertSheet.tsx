@@ -7,6 +7,26 @@ import coinWp from '../assets/figma/1fc63f5f61f3f22b61f4543f37dec854ea9f0818.svg
 const fmtPts = (n: number) => n.toLocaleString('en-US');
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+/** Same PIN contract as the withdrawal / gift / voucher flows: 000000 is
+    wrong (3 tries), 999999 fails the transfer, anything else confirms. */
+const PIN_LENGTH = 6;
+const WRONG_PIN = '0'.repeat(PIN_LENGTH);
+const FAIL_PIN = '9'.repeat(PIN_LENGTH);
+const MAX_ATTEMPTS = 3;
+
+/** Compact keypad key of the in-sheet PIN step. */
+function PinKey({ digit, onPress }: { digit: number; onPress: (d: string) => void }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onPress(String(digit))}
+      className="font-en size-16 shrink-0 rounded-full text-[22px] font-semibold leading-[1.4] text-ink transition-colors active:bg-surface-neutral"
+    >
+      {digit}
+    </button>
+  );
+}
+
 /** Transition phase 1 — the points → cashback converter (10 pts = 1 ﷼).
     Preset chips (الربع / النص / كل النقاط) or any custom amount, with a live
     ﷼ preview and an in-sheet success moment; balances move app-wide through
@@ -16,12 +36,21 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
   const [sel, setSel] = useState<number | null>(null);
   const [custom, setCustom] = useState('');
   const [done, setDone] = useState<number | null>(null); // converted ﷼ amount
+  // PIN step between the form and the success moment
+  const [confirming, setConfirming] = useState(false);
+  const [pin, setPin] = useState('');
+  const [attempts, setAttempts] = useState(0);
+  const [pinError, setPinError] = useState('');
 
   useEffect(() => {
     if (open) {
       setSel(null);
       setCustom('');
       setDone(null);
+      setConfirming(false);
+      setPin('');
+      setAttempts(0);
+      setPinError('');
     }
   }, [open]);
 
@@ -42,11 +71,44 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
   const tooBig = chosen > points;
   const valid = chosen >= POINTS_RATE && chosen <= points;
 
+  /** A completed 6-digit entry: apply the demo rules, then convert. */
+  const submitPin = (entry: string) => {
+    if (entry === FAIL_PIN) {
+      setPin('');
+      setPinError('ما ضبطت التحويل.. جرب مره ثانية');
+      return;
+    }
+    if (entry === WRONG_PIN) {
+      const n = attempts + 1;
+      setAttempts(n);
+      setPin('');
+      setPinError(
+        n >= MAX_ATTEMPTS
+          ? 'رمز غير صحيح.. حاول لاحقاً'
+          : n === 1
+            ? 'رمز غير صحيح.. باقي محاولتين'
+            : 'رمز غير صحيح.. باقي محاولة وحدة',
+      );
+      return;
+    }
+    convertPoints(chosen);
+    setDone(chosen / POINTS_RATE);
+    setConfirming(false);
+  };
+
+  const pressDigit = (d: string) => {
+    if (pin.length >= PIN_LENGTH || attempts >= MAX_ATTEMPTS) return;
+    const next = pin + d;
+    setPin(next);
+    setPinError('');
+    if (next.length === PIN_LENGTH) setTimeout(() => submitPin(next), 350);
+  };
+
   return (
     <div className="absolute inset-0 z-50">
       <style>
         {
-          '@keyframes sheet-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes sheet-fade{from{opacity:0}to{opacity:1}}@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}'
+          '@keyframes sheet-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes sheet-fade{from{opacity:0}to{opacity:1}}@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes pin-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
         }
       </style>
       <button
@@ -91,6 +153,78 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
               <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
                 تم
               </p>
+            </button>
+          </div>
+        ) : confirming ? (
+          /* 🔒 PIN — same contract as the withdrawal / gift / voucher flows */
+          <div className="flex w-full flex-col items-center gap-3 pb-2" data-testid="convert-pin">
+            <p className="w-full text-center text-base font-bold leading-[1.5] text-ink" dir="auto">
+              تأكيد التحويل
+            </p>
+            <p className="w-full text-center text-xs font-normal leading-[1.5] text-ink-secondary" dir="rtl">
+              {'تحويل '}
+              <span className="font-en">{fmtPts(chosen)}</span>
+              {' نقطة = '}
+              <span className="font-en font-medium text-ink">{fmtSar(chosen / POINTS_RATE)}</span> <Riyal />
+            </p>
+
+            {/* indicators — mirrored so the dots fill right-to-left */}
+            <div className="flex items-center justify-center py-1">
+              <div key={attempts} className="flex-none rotate-180 -scale-y-100" style={pinError ? { animation: 'pin-shake 300ms ease' } : undefined}>
+                <div className="flex items-center justify-center gap-4">
+                  {Array.from({ length: PIN_LENGTH }, (_, i) => (
+                    <div
+                      key={i}
+                      className={`size-3 shrink-0 rounded-lg transition-colors duration-150 ${i < pin.length ? 'bg-brand-400' : 'bg-line'}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {pinError && (
+              <p role="status" className="text-center text-xs font-medium leading-[1.5] text-ink-danger" dir="auto" data-testid="convert-pin-error">
+                {pinError}
+              </p>
+            )}
+
+            <div className="flex w-full flex-col items-center gap-1.5">
+              {[
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+              ].map((row) => (
+                <div key={row[0]} className="flex items-center gap-1.5">
+                  {row.map((d) => (
+                    <PinKey key={d} digit={d} onPress={pressDigit} />
+                  ))}
+                </div>
+              ))}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setPin((v) => v.slice(0, -1))}
+                  aria-label="مسح"
+                  className="size-16 shrink-0 rounded-full text-lg font-medium text-ink-secondary transition-colors active:bg-surface-neutral"
+                >
+                  ⌫
+                </button>
+                <PinKey digit={0} onPress={pressDigit} />
+                <div className="size-16 shrink-0" aria-hidden />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setConfirming(false);
+                setPin('');
+                setPinError('');
+              }}
+              className="pt-1 text-xs font-medium leading-[1.5] text-ink-tertiary"
+              dir="auto"
+            >
+              رجوع
             </button>
           </div>
         ) : points <= 0 ? (
@@ -220,8 +354,10 @@ export default function ConvertSheet({ open, onClose }: { open: boolean; onClose
               type="button"
               disabled={!valid}
               onClick={() => {
-                convertPoints(chosen);
-                setDone(chosen / POINTS_RATE);
+                setPin('');
+                setPinError('');
+                setAttempts(0);
+                setConfirming(true);
               }}
               data-testid="convert-cta"
               className={`flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl px-4 py-2.5 ${
