@@ -1296,9 +1296,11 @@ function AddCardPromo({ onStart, onRedeem }: { onStart: () => void; onRedeem: ()
     <section className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
       <div className="flex w-full shrink-0 items-center gap-2.5">
         <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5 text-right">
-          <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="auto">
-            {'أضف بطاقتك واحصل علي '}
-            <span className="text-viola-500">الكاش باك</span>
+          <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="rtl">
+            {'حتى '}
+            <span className="font-en text-viola-500">50%</span>
+            <span className="text-viola-500">{' كاش باك'}</span>
+            {' بدون حد'}
           </p>
           <p className="w-[min-content] min-w-full text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
             ادفع ببطاقتك واكسب استرداد نقدي مع كل عملية شراء تقوم بها

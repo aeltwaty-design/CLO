@@ -108,7 +108,7 @@ export default function LinkIntroSheet({
             <p className="w-full text-right text-[0px] font-bold leading-none text-ink" dir="auto">
               <span className="text-[18px] leading-[1.5]">{'كاش باك حتى '}</span>
               <span className="font-en text-[18px] font-bold not-italic leading-[1.5]">[X]%</span>
-              <span className="text-[18px] leading-[1.5]">{' مع كل عملية مؤهلة'}</span>
+              <span className="text-[18px] leading-[1.5]">{' بدون حد'}</span>
             </p>
             <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
               مرة وحدة تضيف بطاقتك.. وبعدها ادفع وبس
