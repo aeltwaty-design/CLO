@@ -21,6 +21,23 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   auto-advancing 3-step stepper, trust chips, CTA) — a UX redesign of the
   full-screen onboarding; `/cashback/intro` still serves the original
   full-screen version for deep links and the QA gate.
+- **Phase 2: voucher purchase** (Figma section 65:23784) — a voucher card in
+  the القسائم tab opens the buyable **store page** (65:25229: hero, merchant
+  card, the drawn denomination ladder 100/200/350/400/500 ﷼ priced in WO
+  points with «وفر 20%» tiers, dock «بشتريها» / «برسلها هدية» → the gift
+  flow). Selecting a tier and buying opens the **«شراء قسيمة» drawer**
+  (65:24960 / 65:25073 — its «كيف تستخدمها؟» gains في الفرع·اونلاين tabs when
+  the merchant has both channels) → **PIN** «تأكيد شراء القسيمة» (65:26375,
+  Touch ID overlay, same demo PIN rules) → the **success ticket** (65:25888:
+  perforated card, voucher code with «نسخ» to the clipboard, barcode, ملخص
+  العملية). Not enough balance → the drawn insufficient-balance sheet
+  (65:25194). **Flexible payment (user direction):** the store page adds a
+  **«مبلغ مخصص»** tile — any face value 10–500 ﷼ at the base rate (1 ﷼ =
+  5 نقاط) — and the drawer adds a **«طريقة الدفع»** block: نقاط (as drawn),
+  **كاش باك** (face value 1:1) or **مقسّم**, where a slider moves ﷼ from the
+  cashback balance and the remainder bills in points pro-rata at that tier's
+  own rate. Both balances move on purchase. Phase 1 keeps its frozen voucher
+  store pages. Seeds: `?vstore=`, `?vface=`, `?vpay=`, `?vcash=`.
 - **Phase 2: السوق القسائم tab** (Figma 65:23785) — the Market tabs are live in
   Phase 2: الكاش باك ⇄ القسائم switch the grid in place (`?tab=vouchers`
   deep-links the vouchers tab), while العروض stays inert until its frame
@@ -42,7 +59,16 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   rows and voucher tiles open the تسوّق واربح sheet (its copy/CTA switch after
   linking); the cashback page's tier card expands/collapses via its chevron.
 - Tab bar المحفظة → `/cards` (zero-balance wallet before linking, populated
-  after) → `الكل` → `/transactions` → row tap opens the details sheet. The
+  after) → `الكل` → `/transactions` → row tap opens the details sheet. In
+  Phase 2 the app bar gains a **statement export** affordance (derived, no
+  drawn frame): «تصدير كشف حساب» sheet with period presets (آخر 7 أيام /
+  هذا الشهر / آخر 30 يوم / فترة مخصصة from–to), a live «N عمليات · الصافي»
+  preview, and a one-tap **PDF download** — an A4 RTL bank-style statement
+  (brand header, holder/card/period meta, earned/spent/net/balance tiles,
+  dated rows with the new SAR symbol) rendered by the browser and packed via
+  jspdf + html2canvas, so Arabic shapes correctly. Transaction dates anchor
+  to runtime "today" (`src/data/transactions.ts`); Phase 1 renders the frozen
+  screen byte-identically. The
   populated wallet pulls the expiring-cashback note out of the balance card
   into a compact nudge («عندك 50 ﷼ تنتهي 25 ديسمبر» + «حوّلها الحين») whose
   CTA presets the 50 ﷼ and enters the withdrawal flow. Per user direction its
@@ -234,6 +260,12 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   colleagues pick (`3196_33656`, ≈3.7%) is a coarse gate: its ref is a
   hand-cropped 1:1 canvas render (that frame refuses export), and the drawn
   title typo «زملاء العملاء» is rendered as زملاء العمل per user direction.
+  The voucher-purchase flow gates at `65_25229` ≈5.3% (store page) and
+  `65_26375` ≈1.4% (PIN, captured with its drawn Touch ID overlay open); the
+  drawer `65_24960` ≈10.4% and the ticket `65_25888` ≈10.6% deviate by
+  design — the drawer carries the added «طريقة الدفع» block (pushing the
+  drawn sections down) and the ticket renders a live code/date/price against
+  the frame's static `bfa-14000000030` · 50,000 نقطة · 20 يوليو 2025.
 
 ## Conventions (important before editing)
 

@@ -2,6 +2,7 @@ import { RouterProvider } from 'react-router-dom';
 import { AppStateProvider, useAppState } from './state/AppState';
 import { WithdrawProvider } from './state/WithdrawState';
 import { GiftProvider } from './state/GiftState';
+import { VoucherProvider } from './state/VoucherState';
 import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 
@@ -77,6 +78,13 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Withdraw: summary (seeded)', url: '/withdraw/summary?linked=1&waccount=1&wamount=50' },
   { label: 'Withdraw: PIN (seeded)', url: '/withdraw/pin?linked=1&waccount=1&wamount=50' },
   { label: 'Withdraw: Touch ID', url: '/withdraw/pin?linked=1&touchid=1' },
+  { label: 'Voucher store (Phase 2)', url: '/store/amazon?linked=1', p: 2 },
+  { label: 'Voucher: purchase sheet', url: '/store/amazon?linked=1&vface=100', p: 2 },
+  { label: 'Voucher: split payment', url: '/store/amazon?linked=1&vface=100&vpay=split&vcash=50', p: 2 },
+  { label: 'Voucher: low points', url: '/store/amazon?linked=1&vface=500&pts=100', p: 2 },
+  { label: 'Voucher: PIN (seeded)', url: '/vouchers/pin?linked=1&vstore=amazon&vface=100', p: 2 },
+  { label: 'Voucher: success ticket', url: '/vouchers/success?ok=1&linked=1&vstore=amazon&vface=100', p: 2 },
+  { label: 'Voucher: failure', url: '/vouchers/success?ok=0&linked=1&vstore=amazon&vface=100', p: 2 },
   { label: 'Gift: pick colleagues', url: '/gift/pick?aud=colleagues&linked=1' },
   { label: 'Gift: pick family', url: '/gift/pick?aud=family&linked=1' },
   { label: 'Gift: amount (seeded)', url: '/gift/amount?linked=1&gaud=colleagues' },
@@ -179,16 +187,18 @@ function App() {
       <AppStateProvider>
         <WithdrawProvider>
           <GiftProvider>
-            <div className="app-shell">
-              <PhaseTabs />
-              <div className="stage">
-                <div className="phone-frame">
-                  <RouterProvider router={router} />
-                  <DiffOverlay />
+            <VoucherProvider>
+              <div className="app-shell">
+                <PhaseTabs />
+                <div className="stage">
+                  <div className="phone-frame">
+                    <RouterProvider router={router} />
+                    <DiffOverlay />
+                  </div>
+                  <DemoControls />
                 </div>
-                <DemoControls />
               </div>
-            </div>
+            </VoucherProvider>
           </GiftProvider>
         </WithdrawProvider>
       </AppStateProvider>

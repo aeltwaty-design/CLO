@@ -21,6 +21,8 @@ import GiftPickScreen from '../screens/gift/GiftPickScreen';
 import GiftAmountScreen from '../screens/gift/GiftAmountScreen';
 import GiftPinScreen from '../screens/gift/GiftPinScreen';
 import GiftStatusScreen from '../screens/gift/GiftStatusScreen';
+import VoucherPinScreen from '../screens/vouchers/VoucherPinScreen';
+import VoucherSuccessScreen from '../screens/vouchers/VoucherSuccessScreen';
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,9 @@ export const router = createBrowserRouter([
       { path: '/gift/amount', element: <GiftAmountScreen /> },
       { path: '/gift/pin', element: <GiftPinScreen /> },
       { path: '/gift/status', element: <GiftStatusScreen /> },
+      // VoucherProvider lives in App.tsx (same reasoning as the others)
+      { path: '/vouchers/pin', element: <VoucherPinScreen /> },
+      { path: '/vouchers/success', element: <VoucherSuccessScreen /> },
       { path: '*', element: <Navigate to="/market" replace /> },
     ],
   },

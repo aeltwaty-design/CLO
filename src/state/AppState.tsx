@@ -20,6 +20,8 @@ type AppState = {
   cashback: number;
   convertPoints: (pts: number) => void;
   spendCashback: (amount: number) => void;
+  /** Voucher purchases bill points directly (no conversion to ﷼). */
+  spendPoints: (pts: number) => void;
 };
 
 const Ctx = createContext<AppState | null>(null);
@@ -50,10 +52,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     setCashback((c) => c + pts / POINTS_RATE);
   };
   const spendCashback = (amount: number) => setCashback((c) => Math.max(0, c - amount));
+  const spendPoints = (pts: number) => setPoints((p) => Math.max(0, p - pts));
 
   return (
     <Ctx.Provider
-      value={{ cardLinked, setCardLinked, introSuppressed, points, cashback, convertPoints, spendCashback }}
+      value={{ cardLinked, setCardLinked, introSuppressed, points, cashback, convertPoints, spendCashback, spendPoints }}
     >
       {children}
     </Ctx.Provider>

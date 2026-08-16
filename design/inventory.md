@@ -77,12 +77,27 @@ The Cashback file's section is a copy whose node ids refuse the MCP metadata/cod
 
 State seeds: `?gaud=colleagues|family` (presets the audience's first contact), `?gamount=N`.
 
+## Voucher purchase flow (القسائم section 65:23784, added 2026-08-16)
+
+Phase 2 replaces the frozen voucher store pages for every `variant: 'vouchers'` merchant; Phase 1 keeps `StoreVouchers{Before,After}` (so `1_9399`/`1_9603` stay green).
+
+| Node | Frame | Route / state | Notes |
+|------|------|---------------|-------|
+| 65:25229 / 65:25365 | Store details | `/store/:id` (Phase 2) | hero + merchant card + drawn ladder (100→400 وفر 20% · 200→1,000 · 350→1,500 وفر 20% · 400→2,000 · 500→2,500) + dock بشتريها / برسلها هدية → gift flow; gate ≈5.3% |
+| 65:24960 / 65:25073 | شراء قسيمة drawer | sheet over the store page | merchant + face value, عن القسيمة, كيف تستخدمها (في الفرع·اونلاين tabs when both channels), الشروط والأحكام; gate ≈10.4% (adds طريقة الدفع) |
+| 65:25194 | Insufficient balance | sheet over the drawer | قيمة القسيمة / رصيدك الحالي / اللي تحتاجه + اشحن → `/wallet`; renders in points or cashback depending on which balance fell short |
+| 65:26375 | PIN «تأكيد شراء القسيمة» | `/vouchers/pin` | withdrawal keypad + Touch ID overlay; demo rules unchanged; gate ≈1.4% (captured with the overlay open, as drawn) |
+| 65:25888 | Success ticket | `/vouchers/success?ok=1/0` | perforated card, code + «نسخ» (clipboard), barcode, ملخص العملية; gate ≈10.6% (live code/date/price vs the frame's static values) |
+
+**Flexible payment (user direction, no drawn frame):** «مبلغ مخصص» tile on the store page (10–500 ﷼ at 5 نقاط/﷼ — `src/data/vouchers.ts`) and the drawer's «طريقة الدفع» block — نقاط · كاش باك (face 1:1) · مقسّم (slider; remainder pro-rata in points). Seeds: `?vstore=`, `?vface=`, `?vpay=`, `?vcash=`.
+
 ## Derived screens (user direction, no drawn frame)
 
 | Screen | Route | Notes |
 | --- | --- | --- |
 | الاعدادات | `/cards/settings` | from the cashback wallet's «الاعدادات» tile; two rows → البطاقات المضافة (`/cards/manage`, drawn 1:10520/1:10838) and الحسابات البنكية |
 | الحسابات البنكية | `/cards/accounts` | payout accounts on file (`REGISTERED_ACCOUNT` + any added mid-flow) and the dashed «حساب بنكي جديد» → `/withdraw/new-account` |
+| تصدير كشف حساب | sheet over `/transactions` (Phase 2) | bank-statement export: period presets + from–to, live preview, A4 RTL PDF via jspdf+html2canvas (`src/lib/statementPdf.ts`); tx dates anchored to runtime today in `src/data/transactions.ts` |
 
 Both reuse the wallet app-bar/list language rather than a Figma frame, so they are not in the QA gate.
 

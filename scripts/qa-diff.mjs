@@ -82,6 +82,15 @@ const SCREENS = [
   ['/gift/pin?linked=1&phase=2&gaud=colleagues&gamount=50', '3887_40765', 812],
   ['/gift/status?ok=1&phase=2', '3196_32860', 812],
   ['/gift/status?ok=0&phase=2', '3196_32879', 812],
+  // Voucher purchase flow (65:23784). The store page and drawer gain the
+  // user-directed flexible-payment surfaces (مبلغ مخصص tile · طريقة الدفع
+  // block), so they deviate from the drawn frames by design; the PIN and the
+  // success ticket are structural matches.
+  ['/store/amazon?linked=1&phase=2', '65_25229', 846],
+  ['/store/amazon?linked=1&phase=2&vface=100', '65_24960', 812, 'openPurchase'],
+  // the drawn PIN frame shows its Touch ID overlay open
+  ['/vouchers/pin?linked=1&phase=2&vstore=amazon&vface=100', '65_26375', 812, 'openTouchId'],
+  ['/vouchers/success?ok=1&linked=1&phase=2&vstore=amazon&vface=100', '65_25888', 950],
 ];
 
 const ACTIONS = {
@@ -116,6 +125,15 @@ const ACTIONS = {
   },
   async giftPickFamily(page) {
     await page.locator('button', { hasText: 'سارة القحطاني' }).first().click();
+  },
+  async openTouchId(page) {
+    await page.click('button[aria-label="البصمة"]');
+  },
+  // the purchase drawer is drawn over the store page with a tier picked
+  async openPurchase(page) {
+    await page.click('[data-testid=voucher-100]');
+    await page.waitForTimeout(150);
+    await page.click('[data-testid=buy-voucher]');
   },
 };
 
