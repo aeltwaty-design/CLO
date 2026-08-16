@@ -1,6 +1,9 @@
 import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../components/Riyal';
+import ExportStatementSheet from '../components/ExportStatementSheet';
+import { usePhase } from '../state/PhaseState';
+import iconExport from '../assets/figma/a495e8b4f8c794ab58d35158625e671abac5391a.svg';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import batteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -182,10 +185,14 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
   },
 ];
 
-/** كل العمليات — full transaction history (Figma 1:10931 "all transactions", 375×812). */
+/** كل العمليات — full transaction history (Figma 1:10931 "all transactions",
+    375×812). Phase 2 adds the statement-export affordance next to the drawn
+    search glyph (derived feature — Phase 1 stays byte-identical). */
 export default function TransactionsScreen() {
   const navigate = useNavigate();
+  const phase = usePhase();
   const [selected, setSelected] = useState<Tx | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
 
   return (
     <div className="relative h-full overflow-hidden">
@@ -195,8 +202,21 @@ export default function TransactionsScreen() {
 
           {/* 🧭 App bar */}
           <div className="flex w-full items-center justify-between border-b border-solid border-line-subtle px-4 pb-3.5 pt-6">
-            <div className="relative size-5 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSearch} />
+            <div className="flex shrink-0 items-center gap-4">
+              <div className="relative size-5 shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSearch} />
+              </div>
+              {phase === 2 && (
+                <button
+                  type="button"
+                  onClick={() => setExportOpen(true)}
+                  aria-label="تصدير كشف حساب"
+                  data-testid="open-export"
+                  className="relative size-5 shrink-0 cursor-pointer"
+                >
+                  <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconExport} />
+                </button>
+              )}
             </div>
             <div className="flex w-[204px] shrink-0 items-center justify-end gap-4">
               <p className="whitespace-nowrap text-center text-lg font-medium leading-[1.5] text-ink" dir="auto">
@@ -284,6 +304,7 @@ export default function TransactionsScreen() {
       </div>
 
       {selected !== null && <TransactionDetailsSheet tx={selected} onClose={() => setSelected(null)} />}
+      <ExportStatementSheet open={exportOpen} onClose={() => setExportOpen(false)} />
     </div>
   );
 }
