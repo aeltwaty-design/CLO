@@ -331,10 +331,9 @@ function HomeHeader({ onStartLinking }: { onStartLinking: () => void }) {
       </div>
 
       {/* main CTAs (83:6940) — RTL reads قسائم · كاش باك · عروض خاصة.
-          عروض خاصة has no built screen yet, so it stays inert like the
-          market's العروض tab. */}
+          Each opens its own Market tab now that العروض is built (91:44135). */}
       <div className="absolute left-4 top-[313px] flex w-[343px] items-start gap-3">
-        <CategoryTile icon={ctaDiscountShape} label="عروض خاصة" />
+        <CategoryTile icon={ctaDiscountShape} label="عروض خاصة" onClick={() => navigate('/market?tab=offers')} />
         <CategoryTile icon={ctaBuyCrypto} label="كاش باك" badge="حتى 10%" onClick={() => navigate('/market')} />
         <CategoryTile icon={iconTicket} label="قسائم" onClick={() => navigate('/market?tab=vouchers')} />
       </div>

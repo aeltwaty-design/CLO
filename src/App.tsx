@@ -136,6 +136,7 @@ function DemoControls() {
         </button>
       </div>
       <div className="demo-group">
+        {/* the 3-4 hottest demos only — everything else lives in the jump menu */}
         <span className="demo-label">Shortcuts</span>
         <button type="button" onClick={() => jump('/home', 2)}>
           Home
@@ -143,8 +144,11 @@ function DemoControls() {
         <button type="button" onClick={() => jump('/withdraw/amount?linked=1&waccount=1&wamount=50')}>
           Withdraw demo
         </button>
-        <button type="button" onClick={() => jump('/cards/manage?linked=1&cards=3')}>
-          3 cards
+        <button type="button" onClick={() => jump('/recharge/operator?linked=1', 2)}>
+          Recharge demo
+        </button>
+        <button type="button" onClick={() => jump('/donate/cause?linked=1', 2)}>
+          Donate demo
         </button>
         <select
           value=""
