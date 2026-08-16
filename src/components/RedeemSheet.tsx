@@ -13,8 +13,9 @@ type View = 'list' | 'gift';
     built withdrawal flow, vouchers hand off to the Market's القسائم tab,
     «أهدِها» opens the gift flow (drawn تحويل النقاط section 73:29323 —
     audience rows in-sheet like the drawn hub, limited to زملاء العمل and
-    أفراد العائلة per user direction); phone top-up and donation are honest
-    «قريباً» roadmap tiles. Internal views — no sheet stacking. */
+    أفراد العائلة per user direction), and «شحن رصيد جوال» / «تبرع فيها» open
+    the two derived flows (operator/cause pickers of their own, so no extra
+    in-sheet view). Internal views — no sheet stacking. */
 export default function RedeemSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate();
   const { cashback } = useAppState();
@@ -43,6 +44,16 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
   const toGift = (aud: 'colleagues' | 'family') => {
     onClose();
     navigate(`/gift/pick?aud=${aud}`);
+  };
+
+  const toRecharge = () => {
+    onClose();
+    navigate('/recharge/operator');
+  };
+
+  const toDonate = () => {
+    onClose();
+    navigate('/donate/cause');
   };
 
   const Back = ({ label }: { label: string }) => (
@@ -110,9 +121,14 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 testid="redeem-gift"
               />
               <Divider />
-              <RedeemRow title="شحن رصيد جوال" sub="عبّي رصيدك بكاش باك" soon />
+              <RedeemRow
+                title="شحن رصيد جوال"
+                sub="عبّي رصيدك بكاش باك"
+                onPick={toRecharge}
+                testid="redeem-recharge"
+              />
               <Divider />
-              <RedeemRow title="تبرع فيها" sub="خلها صدقة بضغطة" soon />
+              <RedeemRow title="تبرع فيها" sub="خلها صدقة بضغطة" onPick={toDonate} testid="redeem-donate" />
             </div>
           </>
         )}

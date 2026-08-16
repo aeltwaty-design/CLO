@@ -23,6 +23,16 @@ import GiftPinScreen from '../screens/gift/GiftPinScreen';
 import GiftStatusScreen from '../screens/gift/GiftStatusScreen';
 import VoucherPinScreen from '../screens/vouchers/VoucherPinScreen';
 import VoucherSuccessScreen from '../screens/vouchers/VoucherSuccessScreen';
+import RechargeOperatorScreen from '../screens/recharge/RechargeOperatorScreen';
+import RechargeNumberScreen from '../screens/recharge/RechargeNumberScreen';
+import RechargeAmountScreen from '../screens/recharge/RechargeAmountScreen';
+import RechargePinScreen from '../screens/recharge/RechargePinScreen';
+import RechargeStatusScreen from '../screens/recharge/RechargeStatusScreen';
+import DonateCauseScreen from '../screens/donate/DonateCauseScreen';
+import DonateCharityScreen from '../screens/donate/DonateCharityScreen';
+import DonateAmountScreen from '../screens/donate/DonateAmountScreen';
+import DonatePinScreen from '../screens/donate/DonatePinScreen';
+import DonateStatusScreen from '../screens/donate/DonateStatusScreen';
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +68,19 @@ export const router = createBrowserRouter([
       // VoucherProvider lives in App.tsx (same reasoning as the others)
       { path: '/vouchers/pin', element: <VoucherPinScreen /> },
       { path: '/vouchers/success', element: <VoucherSuccessScreen /> },
+      // RechargeProvider/DonateProvider live in App.tsx (same reasoning as the
+      // others). Both flows share the PIN and status screens under
+      // screens/redeem, wired by a thin per-flow wrapper.
+      { path: '/recharge/operator', element: <RechargeOperatorScreen /> },
+      { path: '/recharge/number', element: <RechargeNumberScreen /> },
+      { path: '/recharge/amount', element: <RechargeAmountScreen /> },
+      { path: '/recharge/pin', element: <RechargePinScreen /> },
+      { path: '/recharge/status', element: <RechargeStatusScreen /> },
+      { path: '/donate/cause', element: <DonateCauseScreen /> },
+      { path: '/donate/charity', element: <DonateCharityScreen /> },
+      { path: '/donate/amount', element: <DonateAmountScreen /> },
+      { path: '/donate/pin', element: <DonatePinScreen /> },
+      { path: '/donate/status', element: <DonateStatusScreen /> },
       { path: '*', element: <Navigate to="/market" replace /> },
     ],
   },

@@ -3,6 +3,8 @@ import { AppStateProvider, useAppState } from './state/AppState';
 import { WithdrawProvider } from './state/WithdrawState';
 import { GiftProvider } from './state/GiftState';
 import { VoucherProvider } from './state/VoucherState';
+import { RechargeProvider } from './state/RechargeState';
+import { DonateProvider } from './state/DonateState';
 import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 
@@ -92,6 +94,18 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Gift: PIN (seeded)', url: '/gift/pin?linked=1&gaud=colleagues&gamount=50' },
   { label: 'Gift: success + receipt', url: '/gift/status?ok=1&linked=1&gaud=colleagues&gamount=50' },
   { label: 'Gift: failure', url: '/gift/status?ok=0&linked=1' },
+  { label: 'Recharge: pick operator', url: '/recharge/operator?linked=1' },
+  { label: 'Recharge: number (seeded)', url: '/recharge/number?linked=1&rop=stc' },
+  { label: 'Recharge: amount (seeded)', url: '/recharge/amount?linked=1&rop=stc&rnum=0551234567' },
+  { label: 'Recharge: PIN (seeded)', url: '/recharge/pin?linked=1&rop=stc&rnum=0551234567&ramount=50' },
+  { label: 'Recharge: success + receipt', url: '/recharge/status?ok=1&linked=1&rop=stc&rnum=0551234567&ramount=50' },
+  { label: 'Recharge: failure', url: '/recharge/status?ok=0&linked=1' },
+  { label: 'Donate: pick cause', url: '/donate/cause?linked=1' },
+  { label: 'Donate: pick charity (seeded)', url: '/donate/charity?linked=1&dcause=orphans' },
+  { label: 'Donate: amount (seeded)', url: '/donate/amount?linked=1&dcharity=kafala' },
+  { label: 'Donate: PIN (seeded)', url: '/donate/pin?linked=1&dcharity=kafala&damount=50' },
+  { label: 'Donate: success + receipt', url: '/donate/status?ok=1&linked=1&dcharity=kafala&damount=50' },
+  { label: 'Donate: failure', url: '/donate/status?ok=0&linked=1' },
   { label: 'Withdraw: success', url: '/withdraw/status?ok=1' },
   { label: 'Withdraw: success + receipt', url: '/withdraw/status?ok=1&waccount=1&wamount=50&linked=1' },
   { label: 'Withdraw: failure', url: '/withdraw/status?ok=0' },
@@ -175,6 +189,8 @@ function DemoControls() {
           PIN <code>000000</code> = wrong PIN (3 tries → failure) · <code>999999</code> = transfer failure · any other
           PIN succeeds. Seeds: <code>?linked=1/0</code> card state · <code>?waccount=1</code> account on file ·{' '}
           <code>?wamount=50</code> amount · <code>?cards=3</code> card cap · <code>?touchid=1</code> Touch ID ·{' '}
+          <code>?rop=stc</code>/<code>?rnum=</code>/<code>?ramount=</code> recharge ·{' '}
+          <code>?dcause=</code>/<code>?dcharity=</code>/<code>?damount=</code> donation ·{' '}
           <code>?phase=1/2</code> version. A reload restarts the demo.
         </p>
       </details>
@@ -189,16 +205,20 @@ function App() {
         <WithdrawProvider>
           <GiftProvider>
             <VoucherProvider>
-              <div className="app-shell">
-                <PhaseTabs />
-                <div className="stage">
-                  <div className="phone-frame">
-                    <RouterProvider router={router} />
-                    <DiffOverlay />
+              <RechargeProvider>
+                <DonateProvider>
+                  <div className="app-shell">
+                    <PhaseTabs />
+                    <div className="stage">
+                      <div className="phone-frame">
+                        <RouterProvider router={router} />
+                        <DiffOverlay />
+                      </div>
+                      <DemoControls />
+                    </div>
                   </div>
-                  <DemoControls />
-                </div>
-              </div>
+                </DonateProvider>
+              </RechargeProvider>
             </VoucherProvider>
           </GiftProvider>
         </WithdrawProvider>

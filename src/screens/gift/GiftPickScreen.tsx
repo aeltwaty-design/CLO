@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useGift } from '../../state/GiftState';
 import { colleagueRecents, giftLists, type GiftContact } from '../../data/giftContacts';
-import { IosStatusBar, GiftAppBar } from './GiftChrome';
+import { IosStatusBar, FlowAppBar } from '../../components/redeem/FlowChrome';
 import iconSearch from '../../assets/figma/7e784d450e713f5e771409c8ebed7f9f7b1ad69f.svg';
 import iconCheck from '../../assets/figma/ec91bd5baa6ab023b5ea89bcec71a71003ab1230.svg';
 import iconUserPlus from '../../assets/figma/1f08c5f70abbbf78f9edf1e6921ca5c1c393da94.svg';
@@ -40,7 +40,7 @@ export default function GiftPickScreen() {
         <div className="flex w-full flex-col items-center gap-6 px-4">
           <div className="-mx-4 flex w-[375px] flex-col items-start">
             <IosStatusBar />
-            <GiftAppBar />
+            <FlowAppBar />
           </div>
 
           {/* label row — the family variant carries the mint user-plus button */}

@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppState } from '../../state/AppState';
-import { useGift } from '../../state/GiftState';
-import Riyal from '../../components/Riyal';
 import { IosStatusBar } from '../../components/redeem/FlowChrome';
 
-/** Six PIN indicators, as drawn (3887:40765 «تأكيد التحويل»). */
+/** Six PIN indicators, as the drawn confirmations do (3887:40765). */
 const PIN_LENGTH = 6;
 
-/** Demo rules — same as the withdrawal PIN, so the cheat-sheet stays true:
-    all-zeros = wrong PIN (inline retry, 3 attempts then failure); all-nines
-    = instant transfer-failure; anything else succeeds. */
+/** Demo rules — identical to the withdrawal and gift PINs, so the app's
+    cheat-sheet stays true: all-zeros = wrong PIN (inline retry, 3 attempts
+    then failure); all-nines = instant failure; anything else succeeds. */
 const WRONG_PIN = '0'.repeat(PIN_LENGTH);
-const TRANSFER_FAIL_PIN = '9'.repeat(PIN_LENGTH);
+const FAIL_PIN = '9'.repeat(PIN_LENGTH);
 const MAX_ATTEMPTS = 3;
 
 function DigitKey({ digit, onPress }: { digit: number; onPress: (d: string) => void }) {
@@ -30,15 +28,32 @@ function DigitKey({ digit, onPress }: { digit: number; onPress: (d: string) => v
 }
 
 /**
- * تأكيد التحويل — gift-flow PIN (drawn 3887:40765, 375×812): six dots and a
- * bare digit pad (row 4 = blank / 0 / blank — no نسيته؟, no fingerprint,
- * unlike the withdrawal PIN). On success the gift amount leaves the live
- * cashback balance, then → /gift/status.
+ * Shared confirmation PIN for the derived redemption flows (شحن رصيد جوال and
+ * تبرع فيها). Structurally the gift PIN — six dots over a bare keypad, row 4 =
+ * blank / 0 / blank — with the copy, the context line and the settle action
+ * passed in, so the two flows can never drift apart or from the demo rules.
  */
-export default function GiftPinScreen() {
+export default function RedeemPinScreen({
+  title,
+  subtitle,
+  context,
+  ready,
+  backTo,
+  statusPath,
+  onSettle,
+}: {
+  title: string;
+  subtitle: string;
+  /** the line under the title — what exactly is being confirmed */
+  context: ReactNode;
+  /** false when the flow was deep-linked cold, so there is nothing to confirm */
+  ready: boolean;
+  backTo: string;
+  statusPath: string;
+  /** debits the live balance; runs once, immediately before the success route */
+  onSettle: () => void;
+}) {
   const navigate = useNavigate();
-  const { spendCashback } = useAppState();
-  const { amount, recipient } = useGift();
   const [pin, setPin] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [wrong, setWrong] = useState(false);
@@ -49,14 +64,14 @@ export default function GiftPinScreen() {
   useEffect(() => {
     if (pin.length !== PIN_LENGTH) return;
     const t = setTimeout(() => {
-      if (pin === TRANSFER_FAIL_PIN) {
-        navigate('/gift/status?ok=0');
+      if (pin === FAIL_PIN) {
+        navigate(`${statusPath}?ok=0`);
         return;
       }
       if (pin === WRONG_PIN) {
         const n = attempts + 1;
         if (n >= MAX_ATTEMPTS) {
-          navigate('/gift/status?ok=0');
+          navigate(`${statusPath}?ok=0`);
           return;
         }
         setAttempts(n);
@@ -64,11 +79,14 @@ export default function GiftPinScreen() {
         setPin('');
         return;
       }
-      spendCashback(amount);
-      navigate('/gift/status?ok=1');
+      onSettle();
+      navigate(`${statusPath}?ok=1`);
     }, 350);
     return () => clearTimeout(t);
-  }, [pin, attempts, navigate, amount, spendCashback]);
+    // onSettle is redeclared per render by the flow wrappers; keying the effect
+    // on it would re-run the settle timer mid-entry
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pin, attempts, navigate, statusPath]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -79,7 +97,7 @@ export default function GiftPinScreen() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  if (amount <= 0 || !recipient) return <Navigate to="/gift/amount" replace />;
+  if (!ready) return <Navigate to={backTo} replace />;
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
@@ -91,10 +109,10 @@ export default function GiftPinScreen() {
           {/* Label */}
           <div className="absolute left-6 top-20 flex w-[327px] flex-col items-center justify-center gap-1 text-center">
             <p className="w-full text-lg font-bold leading-[1.5] text-ink" dir="auto">
-              تأكيد التحويل
+              {title}
             </p>
             <p className="w-full text-sm font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              قم بكتابة الرقم السري لتأكيد التحويل
+              {subtitle}
             </p>
           </div>
 
@@ -102,18 +120,18 @@ export default function GiftPinScreen() {
           <p
             className="absolute left-1/2 top-[150px] -translate-x-1/2 whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-tertiary"
             dir="rtl"
+            data-testid="pin-context"
           >
-            {'إهداء '}
-            <span className="font-en">{amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
-            {' '}
-            <Riyal />
-            {' لـ'}
-            {recipient.name}
+            {context}
           </p>
 
           {/* 🔵 Indicators — mirrored as drawn, so dots fill right-to-left */}
           <div className="absolute left-[calc(50%+0.5px)] top-[180px] flex -translate-x-1/2 items-center justify-center">
-            <div key={attempts} className="flex-none rotate-180 -scale-y-100" style={wrong ? { animation: 'pin-shake 300ms ease' } : undefined}>
+            <div
+              key={attempts}
+              className="flex-none rotate-180 -scale-y-100"
+              style={wrong ? { animation: 'pin-shake 300ms ease' } : undefined}
+            >
               <div className="flex items-center justify-center gap-6">
                 {Array.from({ length: PIN_LENGTH }, (_, i) => (
                   <div

@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAppState } from '../../state/AppState';
 import { useGift } from '../../state/GiftState';
 import Riyal from '../../components/Riyal';
-import { IosStatusBar, BackArrow } from './GiftChrome';
+import { IosStatusBar, BackArrow } from '../../components/redeem/FlowChrome';
 import iconBriefcase from '../../assets/figma/eec1cb423a0fdc92072abdd2d9c2fbfb5921b6fc.svg';
 import iconPeople from '../../assets/figma/c4f14edb4f3dc73aafc57568f4abb02e0ef9e857.svg';
 import iconEdit from '../../assets/figma/2f32ae6cacf71bafc710b01e73dee5f65fab16be.png';

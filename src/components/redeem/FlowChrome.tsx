@@ -34,7 +34,7 @@ export function IosStatusBar() {
   );
 }
 
-/** 20px back arrow of the gift app bars (arrow-small-right_outline). */
+/** 20px back arrow of the flow app bars (arrow-small-right_outline). */
 export function BackArrow() {
   const navigate = useNavigate();
   return (
@@ -52,8 +52,9 @@ export function BackArrow() {
 }
 
 /** Pick-screen app bar (drawn 3196:33258: pt-8 pb-14, border-b subtle) —
-    back arrow at the right, optional left slot, no inline title. */
-export function GiftAppBar({ title, left }: { title?: string; left?: ReactNode }) {
+    back arrow at the right, optional left slot, no inline title. Shared by
+    every redemption journey (gift, recharge, donation) so they can't drift. */
+export function FlowAppBar({ title, left }: { title?: string; left?: ReactNode }) {
   return (
     <div className="flex w-full shrink-0 items-center justify-between border-b border-solid border-line-subtle px-4 pb-3.5 pt-2">
       {left ?? <div className="size-5 shrink-0" aria-hidden />}

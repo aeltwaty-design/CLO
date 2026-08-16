@@ -182,8 +182,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   so the two can never drift) with its CTA row: **«التفاصيل»** (cashback
   wallet) and **«استخدمه»**, which opens the **redemption hub** — تحويل بنكي
   (the real withdrawal flow), «اشترِ قسائم» (hands off to the Market's القسائم
-  tab, `/market?tab=vouchers`, instead of an in-sheet picker) and **«أهدِها»**
-  (the gift flow below), plus شحن جوال and تبرع as «قريباً» tiles.
+  tab, `/market?tab=vouchers`, instead of an in-sheet picker), **«أهدِها»**
+  (the gift flow below), **«شحن رصيد جوال»** and **«تبرع فيها»** (the two
+  derived flows below). Every row in the hub now leads somewhere.
 - **«أهدِها» gift flow** (drawn تحويل النقاط section 73:29323, adapted points
   → cashback per user direction; limited to زملاء العمل and أفراد العائلة) —
   the hub row opens an in-sheet audience chooser (mirroring the drawn hub
@@ -202,6 +203,40 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `?gamount=N`. The expiring-cashback nudge also surfaces
   on Home after linking. The withdrawal flow itself keeps its pixel-pinned
   drawn values (560.50 world) regardless of conversions.
+- **«شحن رصيد جوال» top-up flow** (derived, no drawn frame — the Figma file
+  holds nothing telecom-shaped, so this is built from the gift journey's own
+  pick/amount/PIN/status language): `/recharge/operator` (radio rows for
+  stc · موبايلي · زين · Virgin, each on a monogram tile with its KSA prefixes —
+  no operator art exists, so `BrandMark` stands in for a logo; the
+  «اشحن لهم مره ثانية» recents sit on top and, because a past top-up already
+  implies its operator, a tap fills both and skips straight to the amount) →
+  `/recharge/number` («لأي رقم تبي تشحن؟» grouped `055 123 4567` field in the
+  card-number idiom, a **«رقمي»** chip for the demo user's own line, and a soft
+  hint when the typed prefix belongs to another operator — informative only,
+  since ported numbers are real) → `/recharge/amount` («كم تبي تشحن؟», chips
+  10/20/30/50/100/200 ﷼) → `/recharge/pin` («تأكيد الشحن») → `/recharge/status`
+  («تم شحن الرصيد بنجاح» + «وصل N ﷼ رصيد stc لـ…»). Seeds: `?rop=`, `?rnum=`,
+  `?ramount=`.
+- **«تبرع فيها» donation flow** (derived, no drawn frame): `/donate/cause`
+  (a two-up tile grid — كفالة يتيم · صدقة جارية · إغاثة عاجلة · صحة وعلاج —
+  reusing glyphs already in the repo, each painted brand-green through its own
+  alpha mask so the four read as one set; a tap commits and moves on, like the
+  Market cards, so there is no CTA) → `/donate/charity` (the gift picker's
+  radio list, filtered to that cause; the organisations in
+  `src/data/charities.ts` are deliberately **generic placeholder entities**, not
+  real registered charities, so the prototype never shows invented donation
+  records against a real name) → `/donate/amount` («كم تبي تتبرع؟», chips
+  10/25/50/100/200/500 ﷼) → `/donate/pin` («تأكيد التبرع») → `/donate/status`
+  («تم التبرع بنجاح»). Seeds: `?dcause=`, `?dcharity=` (also presets its cause),
+  `?damount=N`.
+  Both flows are **cashback only** per user direction — no points, no split — so
+  the CTA dies at zero or above balance and any chip above balance goes inert,
+  making overspend unreachable rather than error-handled. They share one PIN and
+  one status screen (`src/screens/redeem/`, a thin per-flow wrapper each) and
+  one amount card (`src/components/redeem/AmountCard.tsx`), so they cannot drift
+  from each other or from the demo PIN rules. Neither has a drawn reference, so
+  neither is in the QA gate; the gift screens' chrome moved to
+  `src/components/redeem/FlowChrome.tsx` in the process, with no DOM change.
 - **Phase 2: linking intro until the first card** — every «add card» tap
   opens the intro bottom sheet **over the screen it was tapped on** (Home
   promo → over Home, Points-Wallet promo → over the wallet, manage cards →
