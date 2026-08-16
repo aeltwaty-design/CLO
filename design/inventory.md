@@ -60,6 +60,8 @@ UX-enhancement layer (renders only with live state, so unseeded captures still m
 | 47:3538 | Home «الرئيسية» 375×2443 | `/home` | Phase-2 landing (root + tab bar); 11 sections + navbar; contexts/renders in design/phase2/; ref = cropped capped export (smoke diff ≈9.6%) |
 | 54:10152 | Wallet (points) before linking 375×1685 | `/wallet` + `?linked=0` | «اربط بطاقتك» promo → add-card form; gate ≈3.6% (capped ref) |
 | 54:10497 | Wallet (points) after linking 375×812 | `/wallet` + `?linked=1` | «إجمالي الكاش باك» strip → `/cards`; below-fold WalaOne bar; gate ≈2.7% |
+| 91:44135 | Market · العروض tab 375×951 | `/market` + `?tab=offers` | offer rows (خصم N% · كسب نقاط tags, ما يفوتك ribbon) + «كسب نقاط» filter chip + the shared promo banner; gate ≈2.7% |
+| 91:43784 | Market · القسائم tab (updated) | `/market` + `?tab=vouchers` | adds the lilac «ادفع مثل كل مرة» banner under the first row — shared `MarketPromoBanner` with the العروض tab; the 65:23785 gate carries this as a documented deviation (≈2.3%) |
 | 65:23785 | Market · القسائم tab 375×812 | `/market` + `?tab=vouchers` | live tab of the Market hub: voucher grid (8 stores) instead of the merchant grid, no promo banner, extra خصومات filter chip; cards → `/store/:id` (vouchers variant); gate ≈1.7% |
 
 ## «أهدِها» gift flow (drawn تحويل النقاط section 73:29323, added 2026-08-13)

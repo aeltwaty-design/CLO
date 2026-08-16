@@ -43,7 +43,14 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   deep-links the vouchers tab), while العروض stays inert until its frame
   lands. Per user direction the Phase-2 row is reordered to read **الكاش باك ·
   القسائم · العروض** (cashback first and selected by default); Phase 1 keeps
-  the drawn order. The vouchers tab drops the promo banner, adds the خصومات filter chip
+  the drawn order.
+- **Phase 2: العروض tab + the shared promo banner** (Figma 91:44135 offers /
+  91:43784 vouchers) — العروض is now live too: full-width offer rows (اسم
+  المتجر + «خصم N%» / «كسب نقاط» tags, shop/global badges, gold «ما يفوتك»
+  ribbon) with its own «كسب نقاط» filter chip, deep-linked by `?tab=offers`.
+  Both lists carry the lilac **«ادفع مثل كل مرة ، وخذ أكثر كل مــرة»** banner
+  (`src/components/MarketPromoBanner.tsx` — one component in both tabs) drawn
+  under the first row/card; tapping it opens the card-linking form. The vouchers tab drops the promo banner, adds the خصومات filter chip
   and swaps the merchant grid for the drawn voucher grid — نمق (gold «ما
   يفوتك» card) and أمازون with «تبدأ من» prices, هنقرسيتشن/جاهز برايم with
   follower counts, and جرير/قولدن سنت/أمازون with favourite hearts; each card

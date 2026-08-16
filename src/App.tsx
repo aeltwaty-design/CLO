@@ -54,6 +54,7 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Market — before card', url: '/market?linked=0' },
   { label: 'Market — after card', url: '/market?linked=1' },
   { label: 'Market — vouchers tab (Phase 2)', url: '/market?tab=vouchers', p: 2 },
+  { label: 'Market — offers tab (Phase 2)', url: '/market?tab=offers', p: 2 },
   { label: 'Store: cashback — before', url: '/store/hm?linked=0' },
   { label: 'Store: cashback — after', url: '/store/hm?linked=1' },
   { label: 'Store: offers — before', url: '/store/ikea?linked=0' },

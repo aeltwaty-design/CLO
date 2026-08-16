@@ -67,8 +67,12 @@ const SCREENS = [
   // smoke) / after 54:10497 (true 375×812 viewport frame)
   ['/wallet?phase=2&linked=0', '54_10152', 1685],
   ['/wallet?phase=2&linked=1', '54_10497', 812],
-  // Phase 2 Market · القسائم tab (65:23785) — true 375×812 ref
+  // Phase 2 Market · القسائم tab (65:23785) — true 375×812 ref. The lilac
+  // promo banner (91:43784) now sits under its first row, so the capture
+  // carries that documented deviation from the older frame.
   ['/market?phase=2&tab=vouchers', '65_23785', 812],
+  // Phase 2 Market · العروض tab (91:44135) — offer rows + the same banner
+  ['/market?phase=2&tab=offers&linked=1', '91_44135', 951],
   // «أهدِها» gift flow (drawn تحويل النقاط section; refs pulled from the
   // source frames via the local Dev-Mode MCP). Points → cashback adaptation
   // per user direction, so the amount screens deviate by design (Riyal

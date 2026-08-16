@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import MarketPromoBanner from './MarketPromoBanner';
 import photoNamaq from '../assets/figma/9058c524c17f20227eae51a2f833010fdbd061c9.png';
 import photoAmazon from '../assets/figma/9c23031a270d25995df3cc93349eadd584c7bd69.png';
 import photoAmazonRound from '../assets/figma/d3d5e0678cb15d2b6557fbc53e1b480d56282713.png';
@@ -50,19 +51,23 @@ const grid: VoucherCardData[] = [
   { name: 'أمازون', photo: photoAmazonRound, crop: { left: '-9.77%', top: '-11.25%', size: '124.08%' }, round: true, gap: 6, heart: true, badges: ['shop', 'global'], badgesRow: true, storeId: 'amazon' },
 ];
 
-/** القسائم tab grid of the Market hub (Figma 65:23785 → 65:23981). */
+/** القسائم tab grid of the Market hub (Figma 65:23785 → 65:23981), with the
+    lilac promo banner drawn under the first row (91:43784). */
 export default function VoucherGrid() {
   const navigate = useNavigate();
   const rows: VoucherCardData[][] = [];
   for (let i = 0; i < grid.length; i += 2) rows.push(grid.slice(i, i + 2));
 
   return (
-    <div className="flex h-[828px] w-full shrink-0 flex-col items-start gap-4">
+    <div className="flex w-full shrink-0 flex-col items-start gap-4">
       {rows.map((row, i) => (
-        <div key={i} className="flex w-full shrink-0 items-start justify-between">
-          {row.map((card, j) => (
-            <VoucherCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
-          ))}
+        <div key={i} className="contents">
+          <div className="flex w-full shrink-0 items-start justify-between">
+            {row.map((card, j) => (
+              <VoucherCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
+            ))}
+          </div>
+          {i === 0 && <MarketPromoBanner onClick={() => navigate('/cashback/add-card')} />}
         </div>
       ))}
     </div>

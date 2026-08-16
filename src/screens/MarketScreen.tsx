@@ -8,8 +8,8 @@ import LinkIntroSheet from '../components/LinkIntroSheet';
 import { useAppState } from '../state/AppState';
 import { usePhase } from '../state/PhaseState';
 
-/** Tabs with a built screen — العروض has no frame yet, so it stays inert. */
-const PHASE2_TABS: MarketTab[] = ['cashback', 'vouchers'];
+/** Tabs with a built screen. */
+const PHASE2_TABS: MarketTab[] = ['cashback', 'vouchers', 'offers'];
 
 /** Physical left→right order, so the RTL row reads الكاش باك · القسائم ·
     العروض (user direction: cashback first and default, vouchers next).
@@ -28,7 +28,8 @@ export default function MarketScreen() {
   // route transition is keyed by pathname, so /market → /market?tab= is a
   // same-screen update — e.g. the redemption hub's «اشترِ قسائم»)
   const [params] = useSearchParams();
-  const urlTab: MarketTab = params.get('tab') === 'vouchers' ? 'vouchers' : 'cashback';
+  const seed = params.get('tab');
+  const urlTab: MarketTab = seed === 'vouchers' ? 'vouchers' : seed === 'offers' ? 'offers' : 'cashback';
   const [tab, setTab] = useState<MarketTab>(urlTab);
   useEffect(() => setTab(urlTab), [urlTab]);
   const [introOpen, setIntroOpen] = useState(false);

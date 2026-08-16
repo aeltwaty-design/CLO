@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import MarketTabs, { type MarketTab } from './MarketTabs';
 import VoucherGrid from './VoucherGrid';
+import OfferList from './OfferList';
 import iconGame from '../assets/figma/487808c3aacf34e454858028bafa949d51fc8fc4.svg';
 import iconReserve from '../assets/figma/3d431b38e487ec249d7e07be2a9758f36c9ab8fc.svg';
 import iconBag2 from '../assets/figma/c659ceac8d0b427ea2ca3d470cf1021b07a0497a.svg';
@@ -20,6 +21,7 @@ import iconSetting4 from '../assets/figma/56f665cc37df1dc4bd8183e41b481c8e896e1d
 import iconCardLinear from '../assets/figma/cfddfdc83575442fea5b41d4866b055c7e910f83.svg';
 import iconCardOutline from '../assets/figma/e07df267c11566d711b4257037ae3887e9bc32db.svg';
 import iconTickCircle from '../assets/figma/7d6f0d889568034a1bc416ccaf53f71b77fc8c92.svg';
+import iconBuyCrypto from '../assets/figma/6650b53b751252998b63b1038e80319c2fdff2ca.svg';
 
 type CardData = {
   name: string;
@@ -96,6 +98,7 @@ export default function MarketContent({
 }) {
   const navigate = useNavigate();
   const vouchers = tab === 'vouchers';
+  const offers = tab === 'offers';
   const grid = linked ? afterGrid : beforeGrid;
   const rows: CardData[][] = [];
   for (let i = 0; i < grid.length; i += 2) rows.push(grid.slice(i, i + 2));
@@ -105,7 +108,7 @@ export default function MarketContent({
       <MarketTabs active={tab} available={tabsAvailable} order={tabsOrder} onChange={onTabChange} />
 
       {/* Promo banner — cashback tab, before-link only */}
-      {!linked && !vouchers && (
+      {!linked && !vouchers && !offers && (
       <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
         <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
           <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
@@ -168,13 +171,24 @@ export default function MarketContent({
         </div>
       </div>
 
-      {/* Filter chips — القسائم leads with the خصومات filter (65:23951) */}
+      {/* Filter chips — القسائم leads with خصومات (65:23951), العروض with
+          «كسب نقاط» (91:44301) */}
       <div className="flex w-full shrink-0 items-center justify-end gap-3">
         {vouchers && (
           <div className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-solid border-line px-2.5">
             <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
               خصومات
             </p>
+          </div>
+        )}
+        {offers && (
+          <div className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-solid border-line px-2.5">
+            <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
+              كسب نقاط
+            </p>
+            <div className="relative size-[16.842px] shrink-0">
+              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconBuyCrypto} />
+            </div>
           </div>
         )}
         <div className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-solid border-line px-2.5">
@@ -213,9 +227,11 @@ export default function MarketContent({
         </div>
       </div>
 
-      {/* Grid — merchants (كاش باك) or voucher stores (قسائم) */}
+      {/* Grid — merchants (كاش باك), offer rows (عروض) or voucher stores (قسائم) */}
       {vouchers ? (
         <VoucherGrid />
+      ) : offers ? (
+        <OfferList />
       ) : (
         <div className="flex h-[828px] w-[343px] shrink-0 flex-col items-end gap-4">
           {rows.map((row, i) => (
