@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Riyal from '../components/Riyal';
 import ExportStatementSheet from '../components/ExportStatementSheet';
+import MonthFilterSheet from '../components/MonthFilterSheet';
 import { usePhase } from '../state/PhaseState';
 import iconExport from '../assets/figma/a495e8b4f8c794ab58d35158625e671abac5391a.svg';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
@@ -50,9 +51,14 @@ type Tx = {
 
 const timePlain = <span className="font-en">08:30</span>;
 
-const sections: { title: string; h: number; rows: Tx[] }[] = [
+/** Day sections as drawn (1:10931), each anchored to a real date so the
+    month filter can slice them. `h` pins the drawn group height; the
+    past-month sections below it are demo data with auto height. */
+type Section = { title: string; h?: number; dayOffset: number; rows: Tx[] };
+
+const sections: Section[] = [
   {
-    title: 'اليوم', h: 118,
+    title: 'اليوم', dayOffset: 0, h: 118,
     rows: [
       {
         id: 'today-hm',
@@ -75,7 +81,7 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'أمس', h: 230,
+    title: 'أمس', dayOffset: 1, h: 230,
     rows: [
       {
         id: 'yd-withdraw',
@@ -114,7 +120,7 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الجمعة', h: 110,
+    title: 'الجمعة', dayOffset: 2, h: 110,
     rows: [
       {
         id: 'fri-ikea',
@@ -130,7 +136,7 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الخميس', h: 222,
+    title: 'الخميس', dayOffset: 3, h: 222,
     rows: [
       {
         id: 'thu-withdraw',
@@ -168,7 +174,7 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
     ],
   },
   {
-    title: 'الأربعاء', h: 110,
+    title: 'الأربعاء', dayOffset: 4, h: 110,
     rows: [
       {
         id: 'wed-tamimi',
@@ -185,6 +191,104 @@ const sections: { title: string; h: number; rows: Tx[] }[] = [
   },
 ];
 
+/** Older activity so the month filter has months to slice — outside the
+    drawn frame, and never visible until an earlier month is picked. */
+const pastSections: Section[] = [
+  {
+    title: '', dayOffset: 34,
+    rows: [
+      {
+        id: 'm1-hm',
+        amount: '35+',
+        amountClass: 'text-brand-400',
+        sar: sarGreen,
+        time: timePlain,
+        timeClass: 'text-ink-secondary',
+        name: 'اتش اند ام',
+        nameClass: 'text-ink',
+        media: { kind: 'photo', src: photoHm },
+      },
+      {
+        id: 'm1-withdraw',
+        amount: '200-',
+        amountClass: 'text-ink',
+        sar: sarPrimary,
+        time: timePlain,
+        timeClass: 'text-ink-secondary',
+        name: 'سحب لحساب',
+        nameClass: 'text-ink',
+        media: { kind: 'photo', src: photoTransfer },
+      },
+    ],
+  },
+  {
+    title: '', dayOffset: 41,
+    rows: [
+      {
+        id: 'm1-ikea',
+        amount: '15+',
+        amountClass: 'text-brand-400',
+        sar: sarGreen,
+        time: timePlain,
+        timeClass: 'text-ink-secondary',
+        name: 'ايكيا',
+        nameClass: 'text-ink',
+        media: { kind: 'photo', src: photoIkea },
+      },
+    ],
+  },
+  {
+    title: '', dayOffset: 68,
+    rows: [
+      {
+        id: 'm2-era',
+        amount: '10+',
+        amountClass: 'text-brand-400',
+        sar: sarGreen,
+        time: timePlain,
+        timeClass: 'text-ink-secondary',
+        name: 'قهوة إرا',
+        nameClass: 'text-ink',
+        media: { kind: 'photo', src: photoEra },
+      },
+      {
+        id: 'm2-points',
+        amount: '80-',
+        amountClass: 'text-ink',
+        sar: sarPrimary,
+        time: timePlain,
+        timeClass: 'text-ink-secondary',
+        name: 'تحويل لنقاط',
+        nameClass: 'text-ink',
+        media: { kind: 'icon', src: iconSwap, framed: true },
+      },
+    ],
+  },
+];
+
+const MONTHS_AR = [
+  'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+  'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
+];
+
+/** Date of a section, counted back from today. */
+function sectionDate(dayOffset: number): Date {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - dayOffset);
+  return d;
+}
+
+const monthKey = (d: Date) => `${d.getFullYear()}-${d.getMonth()}`;
+const monthFromKey = (key: string) => {
+  const [y, m] = key.split('-').map(Number);
+  return new Date(y, m, 1);
+};
+const monthLabel = (d: Date) => `${MONTHS_AR[d.getMonth()]} ${d.getFullYear()}`;
+/** Day heading for a past-month section («12 يوليو»), as the drawn labels
+    (اليوم/أمس/…) only make sense inside the current month. */
+const dayLabel = (d: Date) => `${d.getDate()} ${MONTHS_AR[d.getMonth()]}`;
+
 /** كل العمليات — full transaction history (Figma 1:10931 "all transactions",
     375×812). Phase 2 adds the statement-export affordance next to the drawn
     search glyph (derived feature — Phase 1 stays byte-identical). */
@@ -193,6 +297,14 @@ export default function TransactionsScreen() {
   const phase = usePhase();
   const [selected, setSelected] = useState<Tx | null>(null);
   const [exportOpen, setExportOpen] = useState(false);
+  // month filter (Phase 2): defaults to the current month, so the drawn
+  // sections — all within the last five days — render exactly as framed
+  const [month, setMonth] = useState(() => monthKey(new Date()));
+  const [monthOpen, setMonthOpen] = useState(false);
+
+  const all = phase === 2 ? [...sections, ...pastSections] : sections;
+  const months = [...new Set(all.map((s) => monthKey(sectionDate(s.dayOffset))))];
+  const visible = phase === 2 ? all.filter((s) => monthKey(sectionDate(s.dayOffset)) === month) : all;
 
   return (
     <div className="relative h-full overflow-hidden">
@@ -232,7 +344,8 @@ export default function TransactionsScreen() {
 
           {/* Content */}
           <div className="flex w-[375px] flex-col items-center gap-6 bg-surface px-4 py-5">
-            {/* Filter chips (inert) — row overflows the frame to the left, as drawn */}
+            {/* Filter chips — drawn ones stay inert; Phase 2 adds the live
+                month filter at the head of the row (rightmost in RTL) */}
             <div className="flex w-full shrink-0 flex-col items-end gap-3">
               <div className="flex shrink-0 items-center gap-3">
                 <FilterChip label="تحويل" />
@@ -260,19 +373,47 @@ export default function TransactionsScreen() {
                     </div>
                   </div>
                 </div>
+                {phase === 2 && (
+                  <button
+                    type="button"
+                    onClick={() => setMonthOpen(true)}
+                    data-testid="open-month"
+                    className="flex shrink-0 cursor-pointer items-center justify-center gap-1 rounded-2xl border border-solid border-brand-400 bg-brand-50 px-2.5 py-1.5"
+                  >
+                    <div className="relative size-5 shrink-0 overflow-clip">
+                      <div className="absolute bottom-[35%] left-1/4 right-1/4 top-[35%]">
+                        <div className="absolute inset-[-4.17%_-2.5%]">
+                          <img alt="" className="block size-full max-w-none" src={iconChevronDown} />
+                        </div>
+                      </div>
+                    </div>
+                    <p className="whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-brand-400" dir="auto" data-testid="month-label">
+                      {monthLabel(monthFromKey(month))}
+                    </p>
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Day sections — mt-[-3px] pins the list top to the design's
                 y185 (chip row renders 3px taller than the Figma stroke box) */}
             <div className="mt-[-3px] flex w-full shrink-0 flex-col items-start gap-2">
-              {sections.map((section) => (
+              {visible.length === 0 && (
+                <p className="w-full py-10 text-center text-sm font-normal leading-[1.5] text-ink-tertiary" dir="auto" data-testid="month-empty">
+                  ما فيه عمليات في هذا الشهر
+                </p>
+              )}
+              {visible.map((section) => (
                 /* group height pinned to the design frame so per-row text
                    rounding cannot accumulate down the list */
-                <div key={section.title} className="flex w-full shrink-0 flex-col items-start" style={{ height: section.h }}>
+                <div
+                  key={section.rows[0].id}
+                  className="flex w-full shrink-0 flex-col items-start"
+                  style={{ height: section.h }}
+                >
                   <div className="flex h-[26px] w-full shrink-0 flex-col items-end">
                     <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                      {section.title}
+                      {section.title || dayLabel(sectionDate(section.dayOffset))}
                     </p>
                   </div>
                   <div className={`flex w-full shrink-0 flex-col items-end rounded-[20px] border border-solid border-line p-4 ${section.rows.length > 1 ? 'gap-2' : ''}`}>
@@ -305,6 +446,14 @@ export default function TransactionsScreen() {
 
       {selected !== null && <TransactionDetailsSheet tx={selected} onClose={() => setSelected(null)} />}
       <ExportStatementSheet open={exportOpen} onClose={() => setExportOpen(false)} />
+      <MonthFilterSheet
+        open={monthOpen}
+        onClose={() => setMonthOpen(false)}
+        months={months}
+        selected={month}
+        labelOf={(key) => monthLabel(monthFromKey(key))}
+        onPick={setMonth}
+      />
     </div>
   );
 }

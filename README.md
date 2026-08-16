@@ -62,8 +62,14 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   linking); the cashback page's tier card expands/collapses via its chevron.
 - Tab bar المحفظة → `/cards` (zero-balance wallet before linking, populated
   after) → `الكل` → `/transactions` → row tap opens the details sheet. In
-  Phase 2 the app bar gains a **statement export** affordance (derived, no
-  drawn frame): «تصدير كشف حساب» sheet with period presets (آخر 7 أيام /
+  Phase 2 the filter row gains a live **month filter** (derived, no drawn
+  frame): a mint chip naming the current month opens «اختر الشهر», listing
+  only the months that carry activity; picking one slices the list (past
+  months label their groups by date, e.g. «13 يوليو») and an empty month
+  says «ما فيه عمليات في هذا الشهر». It defaults to the current month, so
+  the drawn sections render as framed; the drawn تحويل/سحب/كاش باك chips
+  stay inert. In Phase 2 the app bar also gains a **statement export**
+  affordance (derived, no drawn frame): «تصدير كشف حساب» sheet with period presets (آخر 7 أيام /
   هذا الشهر / آخر 30 يوم / فترة مخصصة from–to), a live «N عمليات · الصافي»
   preview, and a one-tap **PDF download** — an A4 RTL bank-style statement
   (brand header, holder/card/period meta, earned/spent/net/balance tiles,

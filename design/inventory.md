@@ -98,6 +98,7 @@ Phase 2 replaces the frozen voucher store pages for every `variant: 'vouchers'` 
 | الاعدادات | `/cards/settings` | from the cashback wallet's «الاعدادات» tile; two rows → البطاقات المضافة (`/cards/manage`, drawn 1:10520/1:10838) and الحسابات البنكية |
 | الحسابات البنكية | `/cards/accounts` | payout accounts on file (`REGISTERED_ACCOUNT` + any added mid-flow) and the dashed «حساب بنكي جديد» → `/withdraw/new-account` |
 | تصدير كشف حساب | sheet over `/transactions` (Phase 2) | bank-statement export: period presets + from–to, live preview, A4 RTL PDF via jspdf+html2canvas (`src/lib/statementPdf.ts`); tx dates anchored to runtime today in `src/data/transactions.ts` |
+| اختر الشهر | sheet over `/transactions` (Phase 2) | month filter chip + picker (`MonthFilterSheet`); the drawn day sections carry a `dayOffset`, and `pastSections` add two earlier months of demo activity so the filter has something to slice — never visible until an earlier month is picked |
 
 Both reuse the wallet app-bar/list language rather than a Figma frame, so they are not in the QA gate.
 
