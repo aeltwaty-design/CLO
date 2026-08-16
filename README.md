@@ -41,7 +41,9 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - **Phase 2: السوق القسائم tab** (Figma 65:23785) — the Market tabs are live in
   Phase 2: الكاش باك ⇄ القسائم switch the grid in place (`?tab=vouchers`
   deep-links the vouchers tab), while العروض stays inert until its frame
-  lands. The vouchers tab drops the promo banner, adds the خصومات filter chip
+  lands. Per user direction the Phase-2 row is reordered to read **الكاش باك ·
+  القسائم · العروض** (cashback first and selected by default); Phase 1 keeps
+  the drawn order. The vouchers tab drops the promo banner, adds the خصومات filter chip
   and swaps the merchant grid for the drawn voucher grid — نمق (gold «ما
   يفوتك» card) and أمازون with «تبدأ من» prices, هنقرسيتشن/جاهز برايم with
   follower counts, and جرير/قولدن سنت/أمازون with favourite hearts; each card
@@ -126,7 +128,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - **Phase 2: الرئيسية Home** (Figma 47:3538, 375×2443) — Phase 2 lands on
   `/home` (root redirect + the tab bar's الرئيسية tab, which stays inert in
   Phase 1). Full scrolling home: mint hero header (greeting, car-wash promo
-  carousel, عائلتي/بالقرب مني/القسائم tiles, search + 3D category chips),
+  carousel, the main CTA row — **قسائم · كاش باك «حتى 10%» · عروض خاصة**
+  (Figma 83:6940, replacing the drawn عائلتي/بالقرب مني/القسائم tiles per
+  user direction; قسائم → the Market vouchers tab, كاش باك → the Market,
+  عروض خاصة inert until its screen exists) — search + 3D category chips),
   savings counter, «عروض يومك», add-card promo (CTA → the linking form),
   favorites empty state, grocery banner, food offers, «قسائم حصرية»,
   flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
@@ -245,9 +250,13 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   nudge section, the balance card lost its «?» affordance, and the three
   drawn action tiles collapsed into «استخدمه» + «الاعدادات» — all of which
   shifts the content below. The القسائم tab
-  (`65_23785`, ≈1.7%) gates against a true 375×812 export, so it sits at the
-  glyph-noise floor; extracting the shared `MarketTabs` for it left the two
-  Phase-1 market captures pixel-identical (verified at 0 differing px). The
+  (`65_23785`, ≈2.0%) gates against a true 375×812 export, so it sits near the
+  glyph-noise floor — the extra few tenths are the user-directed Phase-2 tab
+  reorder (الكاش باك first) against the drawn row; extracting the shared
+  `MarketTabs` left the two Phase-1 market captures pixel-identical (verified
+  at 0 differing px). The Phase-2 Home captures moved a fifth of a point
+  (`47_3538` ≈8.8% / `47_3538-linked` ≈20.0%) when its main CTA row became
+  قسائم · كاش باك · عروض خاصة (83:6940). The
   gift flow gates against the **source frames** of the drawn تحويل النقاط
   section (`3196:*`/`3887:*` in the WalaPlus revamp file — the Cashback
   copy's node ids refuse the metadata/codegen endpoints), pulled via the

@@ -11,6 +11,11 @@ import { usePhase } from '../state/PhaseState';
 /** Tabs with a built screen — العروض has no frame yet, so it stays inert. */
 const PHASE2_TABS: MarketTab[] = ['cashback', 'vouchers'];
 
+/** Physical left→right order, so the RTL row reads الكاش باك · القسائم ·
+    العروض (user direction: cashback first and default, vouchers next).
+    Phase 1 keeps the drawn order. */
+const PHASE2_TAB_ORDER: MarketTab[] = ['offers', 'vouchers', 'cashback'];
+
 /**
  * السوق — Market hub. الكاش باك tab: Figma 1:7750 before-link / 1:8098 after.
  * Phase 2 adds the live القسائم tab (65:23785) — `?tab=vouchers` deep-links
@@ -37,6 +42,7 @@ export default function MarketScreen() {
           onStart={openIntro}
           tab={phase === 2 ? tab : 'cashback'}
           tabsAvailable={phase === 2 ? PHASE2_TABS : undefined}
+          tabsOrder={phase === 2 ? PHASE2_TAB_ORDER : undefined}
           onTabChange={phase === 2 ? setTab : undefined}
         />
       </div>

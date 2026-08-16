@@ -84,12 +84,14 @@ export default function MarketContent({
   onStart,
   tab = 'cashback',
   tabsAvailable,
+  tabsOrder,
   onTabChange,
 }: {
   linked?: boolean;
   onStart?: () => void;
   tab?: MarketTab;
   tabsAvailable?: MarketTab[];
+  tabsOrder?: MarketTab[];
   onTabChange?: (tab: MarketTab) => void;
 }) {
   const navigate = useNavigate();
@@ -100,7 +102,7 @@ export default function MarketContent({
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 bg-surface px-4 py-2.5">
-      <MarketTabs active={tab} available={tabsAvailable} onChange={onTabChange} />
+      <MarketTabs active={tab} available={tabsAvailable} order={tabsOrder} onChange={onTabChange} />
 
       {/* Promo banner — cashback tab, before-link only */}
       {!linked && !vouchers && (

@@ -25,9 +25,9 @@ import iconSearch from '../../assets/figma/7e784d450e713f5e771409c8ebed7f9f7b1ad
 import heroDotGray from '../../assets/figma/56893a4ea95e167f2a349881b41d02341192cabf.svg';
 import heroDotDark from '../../assets/figma/296f8899729c61f32e662ca573233d499e5c8473.svg';
 import iconNotification from '../../assets/figma/faf791f2529e68a7ef2f5914bc21d4645c571329.svg';
-import iconPeople from '../../assets/figma/c4f14edb4f3dc73aafc57568f4abb02e0ef9e857.svg';
-import iconLocation from '../../assets/figma/7390df9053d9d9aac60c03a290c91afd2e7323fa.svg';
 import iconTicket from '../../assets/figma/02d41c187946e3ed96263cd3096f1393fea2a563.svg';
+import ctaDiscountShape from '../../assets/figma/b696ce7fb6adfd3c08e9ccb0af72f4ed58db7266.svg';
+import ctaBuyCrypto from '../../assets/figma/6650b53b751252998b63b1038e80319c2fdff2ca.svg';
 // ── section/card assets ──
 import chevronStroke from '../../assets/figma/e8b3d916f4a8ca674ba7587240e11d98df1d209d.svg';
 import photoKebab from '../../assets/figma/48c5873ea5e66de261a045220b3c4780dba6f242.png';
@@ -330,11 +330,13 @@ function HomeHeader({ onStartLinking }: { onStartLinking: () => void }) {
         </div>
       </div>
 
-      {/* category tiles (47:3709) */}
+      {/* main CTAs (83:6940) — RTL reads قسائم · كاش باك · عروض خاصة.
+          عروض خاصة has no built screen yet, so it stays inert like the
+          market's العروض tab. */}
       <div className="absolute left-4 top-[313px] flex w-[343px] items-start gap-3">
-        <CategoryTile icon={iconPeople} label="عائلتي" />
-        <CategoryTile icon={iconLocation} label="بالقرب مني" />
-        <CategoryTile icon={iconTicket} label="القسائم" badge />
+        <CategoryTile icon={ctaDiscountShape} label="عروض خاصة" />
+        <CategoryTile icon={ctaBuyCrypto} label="كاش باك" badge="حتى 10%" onClick={() => navigate('/market')} />
+        <CategoryTile icon={iconTicket} label="قسائم" onClick={() => navigate('/market?tab=vouchers')} />
       </div>
 
       {/* floating white sheet (47:3646): search + colorful category chips */}
@@ -372,10 +374,22 @@ function HomeHeader({ onStartLinking }: { onStartLinking: () => void }) {
   );
 }
 
-function CategoryTile({ icon, label, badge }: { icon: string; label: string; badge?: boolean }) {
+function CategoryTile({
+  icon,
+  label,
+  badge,
+  onClick,
+}: {
+  icon: string;
+  label: string;
+  /** pill floating above the tile, e.g. «حتى 10%» */
+  badge?: string;
+  onClick?: () => void;
+}) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className="relative flex min-w-px flex-[1_0_0] flex-col items-center justify-center gap-2.5 rounded-xl bg-[linear-gradient(-28.8166385645347deg,rgba(255,255,255,0.5)_31.621%,rgb(255,255,255)_135.4%)] px-[13px] pb-3 pt-3.5"
     >
       <div className="relative size-8 shrink-0">
@@ -385,19 +399,10 @@ function CategoryTile({ icon, label, badge }: { icon: string; label: string; bad
         {label}
       </p>
       {badge && (
-        <div className="absolute left-[calc(50%+0.15px)] top-[-7px] flex w-[41.961px] -translate-x-1/2 flex-col items-center">
-          <div className="flex shrink-0 items-start justify-center gap-0.5 overflow-clip whitespace-nowrap rounded-full bg-brand-400 px-2 py-[0.5px] text-center text-[9px] text-ink-inverse shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
-            <div className="flex shrink-0 items-center font-bold">
-              <p className="whitespace-pre leading-[13.5px]" dir="ltr">
-                <Riyal />
-                {'  '}
-              </p>
-              <p className="font-en leading-[13.5px]" dir="ltr">
-                50
-              </p>
-            </div>
-            <p className="font-bold leading-[13.5px]" dir="ltr">
-              من
+        <div className="absolute left-[calc(50%+0.48px)] top-[-7px] flex w-[41.961px] -translate-x-1/2 flex-col items-center">
+          <div className="flex shrink-0 items-start justify-center overflow-clip rounded-full bg-brand-400 px-2 py-[0.5px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
+            <p className="whitespace-nowrap text-center text-[9px] font-bold leading-[13.5px] text-ink-inverse" dir="auto">
+              {badge}
             </p>
           </div>
         </div>

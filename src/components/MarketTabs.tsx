@@ -2,39 +2,46 @@ import inkBar from '../assets/figma/bab1ce16d7a8ee274f4360fff6cc3b8442c1eb17.svg
 
 export type MarketTab = 'cashback' | 'offers' | 'vouchers';
 
-/** DOM order = physical order (الكاش باك leftmost … القسائم rightmost). */
-const TABS: { key: MarketTab; label: string }[] = [
-  { key: 'cashback', label: 'الكاش باك' },
-  { key: 'offers', label: 'العروض' },
-  { key: 'vouchers', label: 'القسائم' },
-];
+const LABELS: Record<MarketTab, string> = {
+  cashback: 'الكاش باك',
+  offers: 'العروض',
+  vouchers: 'القسائم',
+};
+
+/** Physical left→right order as drawn — reads الكاش باك … القسائم, so the
+    القسائم tab is the first one in the RTL row. */
+const DRAWN_ORDER: MarketTab[] = ['cashback', 'offers', 'vouchers'];
 
 /**
  * 🗂️ السوق segment tabs — one component for every tab state, so the
  * cashback frame (1:7891) and the vouchers frame (65:23927) can't drift.
  * The selected tab carries the ink bar + brand-colored medium label.
  *
- * Inert unless `onChange` is passed with the tabs that have a built screen:
- * Phase 1 keeps the frozen, unclickable version.
+ * `order` is the physical left→right sequence; RTL reads it backwards, so
+ * the last entry is the row's first tab. Inert unless `onChange` is passed
+ * with the tabs that have a built screen: Phase 1 keeps the frozen,
+ * unclickable version in its drawn order.
  */
 export default function MarketTabs({
   active = 'cashback',
   available,
+  order = DRAWN_ORDER,
   onChange,
 }: {
   active?: MarketTab;
   available?: MarketTab[];
+  order?: MarketTab[];
   onChange?: (tab: MarketTab) => void;
 }) {
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex h-[45px] w-[375px] items-end justify-between border-b border-solid border-line bg-surface">
-        {TABS.map((tab) => (
-          <div key={tab.key} className="flex flex-[1_0_0] flex-row items-end self-stretch">
+        {order.map((key) => (
+          <div key={key} className="flex flex-[1_0_0] flex-row items-end self-stretch">
             <Tab
-              label={tab.label}
-              active={active === tab.key}
-              onSelect={onChange && available?.includes(tab.key) ? () => onChange(tab.key) : undefined}
+              label={LABELS[key]}
+              active={active === key}
+              onSelect={onChange && available?.includes(key) ? () => onChange(key) : undefined}
             />
           </div>
         ))}
