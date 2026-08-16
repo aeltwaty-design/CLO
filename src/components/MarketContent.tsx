@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import MarketTabs, { type MarketTab } from './MarketTabs';
+import VoucherGrid from './VoucherGrid';
 import iconGame from '../assets/figma/487808c3aacf34e454858028bafa949d51fc8fc4.svg';
 import iconReserve from '../assets/figma/3d431b38e487ec249d7e07be2a9758f36c9ab8fc.svg';
 import iconBag2 from '../assets/figma/c659ceac8d0b427ea2ca3d470cf1021b07a0497a.svg';
@@ -7,7 +9,6 @@ import photoIkea from '../assets/figma/6dedcd791b30b76750f5c949e275384ca26de5e0.
 import photoPanda from '../assets/figma/4fc36a8ced1a071b990cb535d493dc935eefcc30.png';
 import photoZara from '../assets/figma/453784f58c394882dae76c32815f4f8dac9abc7e.png';
 import photoGeneric from '../assets/figma/dd4a3adad978f80c4ff16fb2f52a4d5543742f4c.png';
-import inkBar from '../assets/figma/bab1ce16d7a8ee274f4360fff6cc3b8442c1eb17.svg';
 import iconCards from '../assets/figma/7829263638c55bcb9dddbbe8eec00ec0e4075ca2.svg';
 import iconArrowLeft from '../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import iconZid from '../assets/figma/171223f0d13e73efa58fd15a982bd843352a4655.svg';
@@ -73,41 +74,36 @@ const afterGrid: CardData[] = [
   { name: 'إيكيا', nameEn: true, category: 'المنزل والأثاث', photo: photoGeneric, photoFit: 'cover', pill: 'linked', cashbackPct: 5, badges: [], storeId: 'ikea' },
 ];
 
-/** Market screen scrollable content (Figma 1:7890 before / 1:8238 after card link). */
-export default function MarketContent({ linked = false, onStart }: { linked?: boolean; onStart?: () => void }) {
+/**
+ * Market screen scrollable content — الكاش باك tab (Figma 1:7890 before /
+ * 1:8238 after card link) and القسائم tab (65:23785). Tabs, category chips
+ * and filter chips are shared; only the banner and the grid switch.
+ */
+export default function MarketContent({
+  linked = false,
+  onStart,
+  tab = 'cashback',
+  tabsAvailable,
+  onTabChange,
+}: {
+  linked?: boolean;
+  onStart?: () => void;
+  tab?: MarketTab;
+  tabsAvailable?: MarketTab[];
+  onTabChange?: (tab: MarketTab) => void;
+}) {
   const navigate = useNavigate();
+  const vouchers = tab === 'vouchers';
   const grid = linked ? afterGrid : beforeGrid;
   const rows: CardData[][] = [];
   for (let i = 0; i < grid.length; i += 2) rows.push(grid.slice(i, i + 2));
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 bg-surface px-4 py-2.5">
-      {/* 🗂️ Tabs */}
-      <div className="flex w-full flex-col items-center">
-        <div className="flex h-[45px] w-[375px] items-end justify-between border-b border-solid border-line bg-surface">
-          <div className="flex flex-[1_0_0] flex-row items-end self-stretch">
-            <div className="relative flex h-full min-w-px flex-[1_0_0] flex-col items-center justify-center overflow-clip">
-              <div className="absolute bottom-0 left-0 right-0 h-0">
-                <div className="absolute inset-[-2px_0_0_0]">
-                  <img alt="" className="block size-full max-w-none" src={inkBar} />
-                </div>
-              </div>
-              <div className="flex shrink-0 items-center justify-center gap-1">
-                <div className="flex shrink-0 items-center justify-center gap-2.5 overflow-clip py-2">
-                  <p className="whitespace-nowrap text-right text-[14px] font-medium leading-[1.5] text-brand-400" dir="auto">
-                    الكاش باك
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <SegmentTab label="العروض" />
-          <SegmentTab label="القسائم" />
-        </div>
-      </div>
+      <MarketTabs active={tab} available={tabsAvailable} onChange={onTabChange} />
 
-      {/* Promo banner — before-link only */}
-      {!linked && (
+      {/* Promo banner — cashback tab, before-link only */}
+      {!linked && !vouchers && (
       <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
         <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
           <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
@@ -170,8 +166,15 @@ export default function MarketContent({ linked = false, onStart }: { linked?: bo
         </div>
       </div>
 
-      {/* Filter chips */}
+      {/* Filter chips — القسائم leads with the خصومات filter (65:23951) */}
       <div className="flex w-full shrink-0 items-center justify-end gap-3">
+        {vouchers && (
+          <div className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-solid border-line px-2.5">
+            <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
+              خصومات
+            </p>
+          </div>
+        )}
         <div className="flex h-[30px] shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-solid border-line px-2.5">
           <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink" dir="auto">
             في الفروع
@@ -208,32 +211,20 @@ export default function MarketContent({ linked = false, onStart }: { linked?: bo
         </div>
       </div>
 
-      {/* Merchant grid */}
-      <div className="flex h-[828px] w-[343px] shrink-0 flex-col items-end gap-4">
-        {rows.map((row, i) => (
-          <div key={i} className="flex w-full shrink-0 items-start justify-between">
-            {row.map((card, j) => (
-              <MerchantCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SegmentTab({ label }: { label: string }) {
-  return (
-    <div className="flex flex-[1_0_0] flex-row items-end self-stretch">
-      <div className="relative flex h-full min-w-px flex-[1_0_0] items-center justify-center overflow-clip">
-        <div className="flex shrink-0 items-center justify-center gap-1">
-          <div className="flex shrink-0 items-center justify-center gap-2.5 overflow-clip py-2">
-            <p className="whitespace-nowrap text-right text-[14px] font-normal leading-[1.5] text-ink" dir="auto">
-              {label}
-            </p>
-          </div>
+      {/* Grid — merchants (كاش باك) or voucher stores (قسائم) */}
+      {vouchers ? (
+        <VoucherGrid />
+      ) : (
+        <div className="flex h-[828px] w-[343px] shrink-0 flex-col items-end gap-4">
+          {rows.map((row, i) => (
+            <div key={i} className="flex w-full shrink-0 items-start justify-between">
+              {row.map((card, j) => (
+                <MerchantCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
+              ))}
+            </div>
+          ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }

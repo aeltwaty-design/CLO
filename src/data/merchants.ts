@@ -8,8 +8,9 @@ export type StoreVariant = 'cashback' | 'offers' | 'vouchers';
 export type Merchant = {
   id: string;
   name: string;
-  category: string;
-  cashbackPct: number;
+  /** optional: the vouchers grid (65:23785) draws neither field */
+  category?: string;
+  cashbackPct?: number;
   /** gold "لا يفوتك / ما يفوتك" badge + gold border */
   featured?: boolean;
   variant: StoreVariant;
@@ -69,6 +70,15 @@ export const merchants: Record<string, Merchant> = {
     variant: 'cashback',
     inBranch: true,
   },
+
+  /* Market القسائم tab (65:23785) — the stores drawn in that grid, so every
+     voucher card opens the vouchers Store-details design by its own id. */
+  namaq: { id: 'namaq', name: 'قهوة نمق', featured: true, variant: 'vouchers', online: true, inBranch: true },
+  amazon: { id: 'amazon', name: 'أمازون', variant: 'vouchers', online: true },
+  hunger: { id: 'hunger', name: 'هنقرسيتشن', variant: 'vouchers', online: true },
+  jahez: { id: 'jahez', name: 'جاهز برايم', variant: 'vouchers', online: true },
+  jarir: { id: 'jarir', name: 'مكتبة جرير', variant: 'vouchers', online: true, inBranch: true },
+  golden: { id: 'golden', name: 'قولدن سنت', variant: 'vouchers', online: true, inBranch: true },
 };
 
 /** Grid order exactly as drawn in the before-link Market design (1:7750). */
