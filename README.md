@@ -165,7 +165,13 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   Home's add-card promo, the Points Wallet's `LinkPromoBanner` (which draws
   «اربط بطاقتك، واربح نقاطًا مع كل عملية شراء») and the market banner, with the
   linking intro sheet on «بدون حد» too. Both promo CTAs read **«ابدأ»** rather
-  than «أضف بطاقتك» / «اربطها الأن». Phase 1 keeps its drawn wording, and
+  than «أضف بطاقتك» / «اربطها الأن». The wallet banner's drawn green
+  wallet-card art is replaced by a **«50%» illustration** (derived, no drawn
+  frame — `FiftyPercentArt` in `WalletScreen.tsx`): halo, dashed orbit, a
+  tilted card keeping a nod to the art it replaces, sparkles and confetti. It
+  is inline SVG rather than an exported asset, so the numerals render in the
+  app's own Poppins and every colour stays a theme token via Tailwind's
+  `fill-*`/`stroke-*` utilities. Phase 1 keeps its drawn wording and art, and
   `CashbackIntroScreen` (1:10239) stays pinned to the frame.
 - **Phase 2: the new Saudi Riyal symbol** — everywhere Phase 1 renders the ﷼
   character (FF Shamel draws it as the «ريال» word ligature), Phase 2 renders
@@ -306,9 +312,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   linked sibling (`47_3538-linked`, ≈20%) additionally carries the derived
   after-state (live pill + cashback section with its CTAs + expiring
   nudge) against the before-only ref. Transition phase 1 also moves the two
-  wallet captures by design: `54_10152` ≈3.8% (points rebased to 5,000, plus
-  the user-directed promo copy — «كاش باك حتى 50% بدون حد» and «ابدأ» over the
-  drawn headline and «اربطها الأن») and `54_10497` ≈6.6% (the drawn strip gains
+  wallet captures by design: `54_10152` ≈5.6% (points rebased to 5,000, plus
+  the user-directed promo rework — «كاش باك حتى 50% بدون حد» and «ابدأ» over
+  the drawn headline and «اربطها الأن», and the «50%» illustration replacing
+  the drawn wallet-card art) and `54_10497` ≈6.6% (the drawn strip gains
   its «استخدمه»/«التفاصيل» CTA row). The populated
   wallet (`1_10563`, ≈7.7%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact

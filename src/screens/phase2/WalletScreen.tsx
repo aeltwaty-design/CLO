@@ -25,7 +25,6 @@ import iconShop16 from '../../assets/figma/8b46d8c8b043dd24e8af69e3f25d9d115f217
 import iconFlash16 from '../../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
 import iconSecurity16 from '../../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
-import promoWalletArt from '../../assets/figma/1f42f68b61fe6d35e616fc68f2a5baad32c33423.svg';
 // ── tabs + chips ──
 import iconCart20 from '../../assets/figma/dc54c8c0c41664277ae4d981d87b010f6a84ba2b.svg';
 import iconReceipt20 from '../../assets/figma/4302f8a12f0957461edfe25791837c13cc5a1a26.svg';
@@ -270,10 +269,88 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
           </p>
         </button>
       </div>
-      <div className="absolute left-[-35px] top-[52px] h-[113.704px] w-[176.873px]">
-        <img alt="" className="absolute inset-0 block size-full max-w-none" src={promoWalletArt} />
+      <div className="absolute left-1 top-[42px] h-[116px] w-[148px]">
+        <FiftyPercentArt />
       </div>
     </div>
+  );
+}
+
+/** Four-point twinkle, drawn around the origin so it can be placed by transform. */
+function Sparkle({ x, y, scale, className }: { x: number; y: number; scale: number; className: string }) {
+  return (
+    <path
+      transform={`translate(${x} ${y}) scale(${scale})`}
+      d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z"
+      className={className}
+    />
+  );
+}
+
+/**
+ * «50%» promo art (derived, no drawn frame) — replaces the drawn green wallet
+ * card so the illustration carries the same claim as the headline instead of
+ * repeating the card already pictured elsewhere on the screen. Inline SVG
+ * rather than an exported asset, so the numerals render in the app's own
+ * Poppins and every colour stays a theme token via Tailwind's fill/stroke
+ * utilities; the tilted card behind keeps a nod to the art it replaces.
+ */
+function FiftyPercentArt() {
+  return (
+    <svg
+      viewBox="0 0 148 116"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="absolute inset-0 size-full"
+      aria-hidden
+    >
+      {/* soft halo + dashed orbit */}
+      <circle cx="72" cy="58" r="46" className="fill-viola-100" opacity="0.5" />
+      <circle cx="72" cy="58" r="33" className="fill-viola-100" opacity="0.55" />
+      <circle
+        cx="72"
+        cy="58"
+        r="53"
+        fill="none"
+        strokeWidth="1.5"
+        strokeDasharray="3 7"
+        className="stroke-viola-300"
+        opacity="0.75"
+      />
+
+      {/* tilted card behind — a nod to the drawn art this replaces */}
+      <g transform="rotate(-14 72 58)">
+        <rect x="28" y="32" width="88" height="55" rx="10" className="fill-bravo-500" opacity="0.17" />
+        <rect x="28" y="47" width="88" height="7" className="fill-bravo-500" opacity="0.22" />
+        <rect x="90" y="64" width="20" height="8" rx="2.5" className="fill-gold-600" opacity="0.55" />
+      </g>
+
+      {/* the claim */}
+      <text
+        x="64"
+        y="75"
+        textAnchor="middle"
+        fontSize="46"
+        fontWeight="700"
+        letterSpacing="-2"
+        className="font-en fill-bravo-500"
+      >
+        50
+      </text>
+      <text x="111" y="47" textAnchor="middle" fontSize="23" fontWeight="700" className="font-en fill-brand-400">
+        %
+      </text>
+
+      {/* artistic touches */}
+      <Sparkle x={26} y={20} scale={1.15} className="fill-brand-400" />
+      <Sparkle x={122} y={92} scale={0.95} className="fill-gold-600" />
+      <Sparkle x={121} y={22} scale={0.7} className="fill-viola-500" />
+      <Sparkle x={19} y={90} scale={0.6} className="fill-brand-400" />
+      <circle cx="41" cy="100" r="3" className="fill-viola-300" />
+      <circle cx="136" cy="58" r="2.5" className="fill-brand-400" />
+      <circle cx="10" cy="52" r="2" className="fill-gold-600" />
+      <circle cx="94" cy="14" r="2.5" className="fill-viola-300" />
+    </svg>
   );
 }
 
