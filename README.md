@@ -148,7 +148,7 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   (Figma 83:6940, replacing the drawn عائلتي/بالقرب مني/القسائم tiles per
   user direction; each opens its own Market tab — قسائم → القسائم, كاش باك →
   الكاش باك, عروض خاصة → العروض) — search + 3D category chips),
-  savings counter, «عروض يومك», add-card promo (CTA → the linking form),
+  «عروض يومك», add-card promo (CTA → the linking form),
   favorites empty state, grocery banner, food offers, «قسائم حصرية»,
   flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
   H&M/IKEA cards deep-link to their store pages. The shared `TabBar` gained
@@ -157,9 +157,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   header pill reads the live 560.50 balance and the add-card promo becomes
   the shared «إجمالي الكاش باك» section — identical to the one in the Points
   Wallet, CTA row included («التفاصيل» → cashback wallet, «استخدمه» → the
-  redemption hub over Home). The savings card above it keeps its drawn
-  «إجمالي المدخرات» content in both states — the cashback figure lives in the
-  section below rather than being duplicated.
+  redemption hub over Home). The drawn «إجمالي المدخرات» savings card
+  (47:3726) that sat above it is **removed per user direction**, along with the
+  ~120 illustration fragments that composed its money-pot art (the files stay
+  in `src/assets/figma/`, now unimported, in case it returns).
 - **Before-link promo** (user direction) — Home and the Points Wallet now share
   **one banner** (`src/components/LinkPromoBanner.tsx`, so the two can never
   drift): Home's own smaller drawn promo card (47:4067) is gone, replaced by
@@ -312,12 +313,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   capture (`47_3538`, ≈18%) is a coarse smoke diff, not a fine gate: its
   reference is the full-node export downscaled ~0.4× by the 1024px cap and
   cropped out of the padded canvas, so glyph/photo resampling dominates. It
-  additionally carries the user-directed promo swap — Home's own small
-  add-card card was replaced by the shared `LinkPromoBanner`, which is ~90px
-  taller and shifts everything below it. Its
-  linked sibling (`47_3538-linked`, ≈20%) additionally carries the derived
-  after-state (live pill + cashback section with its CTAs + expiring
-  nudge) against the before-only ref. Transition phase 1 also moves the two
+  additionally carries two user-directed structural changes: Home's own small
+  add-card card became the shared `LinkPromoBanner` (~90px taller), and the
+  drawn «إجمالي المدخرات» savings card was removed — so everything below the
+  header sits at a different offset than the reference draws it. Its linked
+  sibling (`47_3538-linked`, ≈10.9%) also carries the derived after-state
+  (live pill + cashback section with its CTAs + expiring nudge) against the
+  before-only ref; it reads *lower* than the unlinked capture because dropping
+  the savings card happens to pull its content back toward the reference's
+  offsets. Transition phase 1 also moves the two
   wallet captures by design: `54_10152` ≈5.6% (points rebased to 5,000, plus
   the user-directed promo rework — «كاش باك حتى 50% بدون حد» and «ابدأ» over
   the drawn headline and «اربطها الأن», and the «50%» illustration replacing
