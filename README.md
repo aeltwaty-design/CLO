@@ -225,10 +225,11 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   drawn values (560.50 world) regardless of conversions.
 - **«تحويل لنقاط ولاء ون» flow** (drawn ولاء ون section 108:45207, adapted
   points → cashback per user direction like the gift flow — the drawn frames
-  convert WalaPlus points, ours spend the live cashback at the drawn
-  **1 ﷼ = 50 نقطة** rate strip): the hub row after «تحويل لحساب بنكي» opens
+  convert WalaPlus points, ours spend the live cashback at
+  **1 ﷼ = 500 نقطة** per user direction — the drawn strip's «50 ← 1» is a
+  points-to-points rate): the hub row after «تحويل لحساب بنكي» opens
   `/walaone/amount` («حولها لولاء ون»: promo card verbatim including the drawn
-  «محدوووودة», the «50 ← 1» rate strip with its ⇄ button, «كم ودك تحول؟» chips
+  «محدوووودة», the «500 ← 1» rate strip with its ⇄ button, «كم ودك تحول؟» chips
   5–500 ﷼ and the live **«تساوي»** WalaOne line) → `/walaone/confirm`
   («تأكيد التحويل»: ملخص العملية, the «رقم جوال محفظة ولاء ون» +966 field with
   the KSA flag, «استخدم رقمي», and «تأكيد رقم الجوال» opening the drawn **OTP

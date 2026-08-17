@@ -97,7 +97,7 @@ Phase 2 replaces the frozen voucher store pages for every `variant: 'vouchers'` 
 
 | Frame | Route / state | Notes |
 | --- | --- | --- |
-| amount ×2 (empty/filled) | `/walaone/amount` | «حولها لولاء ون»: promo card (copy verbatim incl. «محدوووودة»), «50 ← 1» rate strip + ⇄, chips + live «تساوي»; adapted points → cashback per user direction (drawn green-points input → live ﷼, chips ÷100, rate's green coin → Riyal glyph) |
+| amount ×2 (empty/filled) | `/walaone/amount` | «حولها لولاء ون»: promo card (copy verbatim incl. «محدوووودة»), «500 ← 1» rate strip + ⇄ (1 ﷼ = 500 per user direction; the drawn «50 ← 1» is points-to-points), chips + live «تساوي»; adapted points → cashback (drawn green-points input → live ﷼, chips ÷100, rate's green coin → Riyal glyph) |
 | تأكيد التحويل ×5 states | `/walaone/confirm` | ملخص العملية + «رقم جوال محفظة ولاء ون» +966 field (KSA flag hand-authored `src/assets/icons/flag-sa.svg`), «استخدم رقمي», verify button; «تمم التحويل» disabled until verified. Demo: `5 0000 0000` → «غير مربوط» error |
 | OTP sheet | over `/walaone/confirm` | five boxes filling right-to-left, «تغيير», resend countdown from 01:30, 5-minute validity hint; demo `00000` = wrong |
 | PIN | `/walaone/pin` | shared `RedeemPinScreen`; context names both sides of the conversion |

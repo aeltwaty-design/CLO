@@ -10,8 +10,9 @@ import MaskGlyph from '../../components/redeem/MaskGlyph';
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const fmtPts = (n: number) => n.toLocaleString('en-US');
 
-/** Drawn rate — the strip reads «50 ← 1»: one riyal buys 50 WalaOne points. */
-export const WALAONE_PER_RIYAL = 50;
+/** Rate per user direction: one riyal buys 500 WalaOne points (the drawn
+    strip reads «50 ← 1» — its green side is WalaPlus points, not riyal). */
+export const WALAONE_PER_RIYAL = 500;
 
 /** Drawn chips ÷100 into the cashback world (gift precedent), physical order
     so the RTL rows read 5→50 and 100→500. */
