@@ -212,10 +212,25 @@ function flushBeacon() {
   }
 }
 
+/** true when every comment in `a` exists in `b` at the same freshness */
+function sameDoc(a: CommentsDoc, b: CommentsDoc): boolean {
+  if (a.comments.length !== b.comments.length) return false;
+  const m = new Map(b.comments.map((c) => [c.id, c.updatedAt]));
+  return a.comments.every((c) => m.get(c.id) === c.updatedAt);
+}
+
 export async function refreshRemote() {
   const remote = await fetchRemote();
-  if (remote) emit({ doc: mergeDocs(snapshot.doc, remote), status: 'shared' });
-  else emit({ status: 'local' });
+  if (remote) {
+    const merged = mergeDocs(snapshot.doc, remote);
+    emit({ doc: merged, status: 'shared' });
+    // sync flows UP too: comments born while the API was down (or before the
+    // store was provisioned) live only in this browser — if the merge holds
+    // anything the server lacks, push it so other devices can see it
+    if (!sameDoc(merged, remote)) schedulePush();
+  } else {
+    emit({ status: 'local' });
+  }
 }
 
 export function initCommentsStore() {
