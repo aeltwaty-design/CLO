@@ -160,12 +160,15 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   redemption hub over Home). The savings card above it keeps its drawn
   «إجمالي المدخرات» content in both states — the cashback figure lives in the
   section below rather than being duplicated.
-- **Before-link promo copy** (user direction) — every surface that asks for a
-  card now makes the same claim in the same words, **«كاش باك حتى 50% بدون حد»**:
-  Home's add-card promo, the Points Wallet's `LinkPromoBanner` (which draws
-  «اربط بطاقتك، واربح نقاطًا مع كل عملية شراء») and the market banner, with the
-  linking intro sheet on «بدون حد» too. Both promo CTAs read **«ابدأ»** rather
-  than «أضف بطاقتك» / «اربطها الأن». The wallet banner's drawn green
+- **Before-link promo** (user direction) — Home and the Points Wallet now share
+  **one banner** (`src/components/LinkPromoBanner.tsx`, so the two can never
+  drift): Home's own smaller drawn promo card (47:4067) is gone, replaced by
+  the wallet's banner (54:10300) in the same slot, with the linked state still
+  swapping to the shared cashback strip. Every surface that asks for a card
+  therefore makes the same claim in the same words,
+  **«كاش باك حتى 50% بدون حد»** — the banner, the market banner, and the
+  linking intro sheet on «بدون حد» too. The CTA reads **«ابدأ»** rather
+  than the drawn «أضف بطاقتك» / «اربطها الأن». The wallet banner's drawn green
   wallet-card art is replaced by a **«50%» illustration** (derived, no drawn
   frame — `FiftyPercentArt` in `WalletScreen.tsx`): halo, dashed orbit, a
   tilted card keeping a nod to the art it replaces, sparkles and confetti. It
@@ -306,9 +309,12 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   (`27_10685`/`27_10836`) a few tenths above their old floor, and the extra
   seeded success capture (`27_11148-receipt`, ≈14%) intentionally deviates:
   it renders the receipt block over the plain drawn frame. The Phase-2 Home
-  capture (`47_3538`, ≈9.6%) is a coarse smoke diff, not a fine gate: its
+  capture (`47_3538`, ≈18%) is a coarse smoke diff, not a fine gate: its
   reference is the full-node export downscaled ~0.4× by the 1024px cap and
-  cropped out of the padded canvas, so glyph/photo resampling dominates. Its
+  cropped out of the padded canvas, so glyph/photo resampling dominates. It
+  additionally carries the user-directed promo swap — Home's own small
+  add-card card was replaced by the shared `LinkPromoBanner`, which is ~90px
+  taller and shifts everything below it. Its
   linked sibling (`47_3538-linked`, ≈20%) additionally carries the derived
   after-state (live pill + cashback section with its CTAs + expiring
   nudge) against the before-only ref. Transition phase 1 also moves the two

@@ -7,6 +7,7 @@ import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroShee
 import { useWithdraw } from '../../state/WithdrawState';
 import CashbackStrip from '../../components/CashbackStrip';
 import RedeemSheet from '../../components/RedeemSheet';
+import LinkPromoBanner from '../../components/LinkPromoBanner';
 import iconClockNudge from '../../assets/figma/48986a4e85102fcc197e2b20835710b0c837cafd.svg';
 
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -42,8 +43,6 @@ import iconShop from '../../assets/figma/b29c8472a920d7f72b3162de749ffef1cc4696d
 import iconGlobal from '../../assets/figma/fbf3e34826645b91917a0aea937094cb92634861.svg';
 import iconBuyCrypto from '../../assets/figma/c03fb20f4a024c12351087985f13c0bff8d70ca5.svg';
 import iconTickCircle from '../../assets/figma/7d6f0d889568034a1bc416ccaf53f71b77fc8c92.svg';
-import iconCards from '../../assets/figma/7829263638c55bcb9dddbbe8eec00ec0e4075ca2.svg';
-import iconArrowLeft from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import iconPlus from '../../assets/figma/7e1ea9a4c50bc8f9b508158adeb3a718cd7787a2.svg';
 import favLogo1 from '../../assets/figma/d3d5e0678cb15d2b6557fbc53e1b480d56282713.png';
 import favLogo2 from '../../assets/figma/66e44278ffdfd4a0b7f234fc3692b985c87bc1da.png';
@@ -1285,48 +1284,15 @@ function HomeCashbackStrip({ onRedeem }: { onRedeem: () => void }) {
   );
 }
 
-/** Add-card promo (47:4067) — CTA enters the add-card flow (first time via
-    the intro sheet over Home); once the card is linked the slot renders the
-    cashback strip instead. */
+/** Add-card promo (47:4067) — the shared `LinkPromoBanner` per user direction,
+    so Home and the Points Wallet make the same offer in the same words and
+    can't drift; the drawn Home promo was a smaller card of its own. CTA enters
+    the add-card flow (first time via the intro sheet over Home); once the card
+    is linked the slot renders the cashback strip instead. */
 function AddCardPromo({ onStart, onRedeem }: { onStart: () => void; onRedeem: () => void }) {
   const { cardLinked } = useAppState();
   if (cardLinked) return <HomeCashbackStrip onRedeem={onRedeem} />;
-  return (
-    <section className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
-      <div className="flex w-full shrink-0 items-center gap-2.5">
-        <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5 text-right">
-          <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink" dir="rtl">
-            {'حتى '}
-            <span className="font-en text-viola-500">50%</span>
-            <span className="text-viola-500">{' كاش باك'}</span>
-            {' بدون حد'}
-          </p>
-          <p className="w-[min-content] min-w-full text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-            ادفع ببطاقتك واكسب استرداد نقدي مع كل عملية شراء تقوم بها
-          </p>
-        </div>
-        <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
-          <div className="relative size-5 shrink-0">
-            <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-          </div>
-        </div>
-      </div>
-      <div className="flex w-full shrink-0 items-center justify-center gap-3">
-        <button
-          type="button"
-          onClick={onStart}
-          className="flex h-[30px] min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-surface px-2"
-        >
-          <div className="relative size-4 shrink-0">
-            <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
-          </div>
-          <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            ابدأ
-          </p>
-        </button>
-      </div>
-    </section>
-  );
+  return <LinkPromoBanner onLink={onStart} />;
 }
 
 /** «المتاجر المفضلة» empty state (47:4077) with scattered floating logos. */
