@@ -146,8 +146,8 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   Phase 1). Full scrolling home: mint hero header (greeting, car-wash promo
   carousel, the main CTA row — **قسائم · كاش باك «حتى 10%» · عروض خاصة**
   (Figma 83:6940, replacing the drawn عائلتي/بالقرب مني/القسائم tiles per
-  user direction; قسائم → the Market vouchers tab, كاش باك → the Market,
-  عروض خاصة inert until its screen exists) — search + 3D category chips),
+  user direction; each opens its own Market tab — قسائم → القسائم, كاش باك →
+  الكاش باك, عروض خاصة → العروض) — search + 3D category chips),
   savings counter, «عروض يومك», add-card promo (CTA → the linking form),
   favorites empty state, grocery banner, food offers, «قسائم حصرية»,
   flash-sale countdown (static as drawn), retailer circles, «قسائم خاصة»;
@@ -160,6 +160,13 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   redemption hub over Home). The savings card above it keeps its drawn
   «إجمالي المدخرات» content in both states — the cashback figure lives in the
   section below rather than being duplicated.
+- **Before-link promo copy** (user direction) — every surface that asks for a
+  card now makes the same claim in the same words, **«كاش باك حتى 50% بدون حد»**:
+  Home's add-card promo, the Points Wallet's `LinkPromoBanner` (which draws
+  «اربط بطاقتك، واربح نقاطًا مع كل عملية شراء») and the market banner, with the
+  linking intro sheet on «بدون حد» too. Both promo CTAs read **«ابدأ»** rather
+  than «أضف بطاقتك» / «اربطها الأن». Phase 1 keeps its drawn wording, and
+  `CashbackIntroScreen` (1:10239) stays pinned to the frame.
 - **Phase 2: the new Saudi Riyal symbol** — everywhere Phase 1 renders the ﷼
   character (FF Shamel draws it as the «ريال» word ligature), Phase 2 renders
   the official new SAR symbol instead, via the shared phase-aware `<Riyal />`
@@ -299,8 +306,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   linked sibling (`47_3538-linked`, ≈20%) additionally carries the derived
   after-state (live pill + cashback section with its CTAs + expiring
   nudge) against the before-only ref. Transition phase 1 also moves the two
-  wallet captures by design: `54_10152` ≈4% (points rebased to 5,000) and
-  `54_10497` ≈6.6% (the drawn strip gains its «استخدمه»/«التفاصيل» CTA row). The populated
+  wallet captures by design: `54_10152` ≈3.8% (points rebased to 5,000, plus
+  the user-directed promo copy — «كاش باك حتى 50% بدون حد» and «ابدأ» over the
+  drawn headline and «اربطها الأن») and `54_10497` ≈6.6% (the drawn strip gains
+  its «استخدمه»/«التفاصيل» CTA row). The populated
   wallet (`1_10563`, ≈7.7%) also deviates by user direction: the
   expiring-cashback line moved out of the balance card into the compact
   nudge section, the balance card lost its «?» affordance, and the three

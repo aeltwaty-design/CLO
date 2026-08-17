@@ -1321,7 +1321,7 @@ function AddCardPromo({ onStart, onRedeem }: { onStart: () => void; onRedeem: ()
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
           </div>
           <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            أضف بطاقتك
+            ابدأ
           </p>
         </button>
       </div>

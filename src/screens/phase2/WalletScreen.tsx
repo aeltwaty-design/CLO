@@ -211,18 +211,21 @@ function PointsCard({ onConvert }: { onConvert: () => void }) {
 
 /* ─────────────── variant blocks: promo banner / cashback strip ─────────────── */
 
-/** BEFORE linking — «اربط بطاقتك، واربح نقاطًا مع كل عملية شراء» promo
-    (54:10300): benefits list, CTA to the add-card form, wallet illustration. */
+/** BEFORE linking — the card promo (54:10300): benefits list, CTA to the
+    add-card form, wallet illustration. Headline reads «كاش باك حتى 50% بدون
+    حد» per user direction, replacing the drawn «اربط بطاقتك، واربح نقاطًا مع
+    كل عملية شراء» — the same claim the Home promo and the market banner make. */
 function LinkPromoBanner({ onLink }: { onLink: () => void }) {
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
       <div className="flex w-full shrink-0 flex-col items-end gap-5">
         <div className="flex w-full shrink-0 flex-col items-end">
           <div className="flex shrink-0 items-center">
-            <p className="whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="auto">
-              <span className="font-medium text-ink">اربط بطاقتك، و</span>
-              <span className="font-bold text-bravo-500">اربح نقاطًا</span>
-              <span className="font-medium text-ink">{` مع كل عملية شراء`}</span>
+            <p className="whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="rtl">
+              <span className="font-bold text-bravo-500">كاش باك</span>
+              <span className="font-medium text-ink">{' حتى '}</span>
+              <span className="font-en font-bold text-bravo-500">50%</span>
+              <span className="font-medium text-ink">{' بدون حد'}</span>
             </p>
           </div>
         </div>
@@ -263,7 +266,7 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft16} />
           </div>
           <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            اربطها الأن
+            ابدأ
           </p>
         </button>
       </div>
