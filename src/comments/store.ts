@@ -30,7 +30,10 @@ export type ElementRef = {
 
 export type CommentPin = {
   id: string;
-  /** stable pin number — allocated once, never reused after deletes */
+  /** monotonic creation order (internal — never shown). The number a viewer
+      sees is the pin's position among LIVE comments (`displayNumbers`), so
+      deleting renumbers and an emptied board starts again at 1, per user
+      direction. */
   seq: number;
   path: string;
   /** screen identity from variantKey() */
@@ -301,6 +304,14 @@ export function pinsFor(variant: string, doc: CommentsDoc = snapshot.doc): Comme
 export const liveComments = (doc: CommentsDoc = snapshot.doc) => doc.comments.filter((c) => !c.deletedAt);
 
 export const liveCount = (doc: CommentsDoc = snapshot.doc) => liveComments(doc).length;
+
+/** Viewer-facing numbering: 1..n over live comments in creation order —
+    derived, never stored, so it renumbers on delete AND stays identical on
+    every synced client (deterministic sort by seq, then id). */
+export function displayNumbers(doc: CommentsDoc = snapshot.doc): Map<string, number> {
+  const live = liveComments(doc).slice().sort((a, b) => a.seq - b.seq || a.id.localeCompare(b.id));
+  return new Map(live.map((c, i) => [c.id, i + 1]));
+}
 
 /* ── author name ──────────────────────────────────────────── */
 

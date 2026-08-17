@@ -6,6 +6,7 @@ import { variantKey } from './variantKey';
 import {
   addComment,
   commentsSuppressed,
+  displayNumbers,
   getSnapshot,
   initCommentsStore,
   pinsFor,
@@ -65,6 +66,7 @@ function Layer() {
 
   const variant = variantKey(location, phase, cardLinked);
   const pins = pinsFor(variant, doc);
+  const numbers = displayNumbers(doc);
   const active = activeId ? (pins.find((p) => p.id === activeId) ?? null) : null;
 
   useEffect(() => initCommentsStore(), []);
@@ -243,7 +245,7 @@ function Layer() {
               key={pin.id}
               type="button"
               data-comment-ui
-              data-testid={`comment-pin-${pin.seq}`}
+              data-testid={`comment-pin-${numbers.get(pin.id)}`}
               onClick={() => {
                 clearFocus();
                 setDraft(null);
@@ -252,7 +254,7 @@ function Layer() {
               className="pointer-events-auto absolute z-[105] flex size-6 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full rounded-bl-[4px] border-2 border-solid border-white bg-brand-400 shadow-[0px_2px_8px_rgba(0,0,0,0.25)]"
               style={pos}
             >
-              <span className="font-en text-[10px] font-bold leading-none text-ink-inverse">{pin.seq}</span>
+              <span className="font-en text-[10px] font-bold leading-none text-ink-inverse">{numbers.get(pin.id)}</span>
             </button>
           );
         })}

@@ -2,6 +2,7 @@ import { useEffect, useSyncExternalStore } from 'react';
 import {
   commentsSuppressed,
   deleteComment,
+  displayNumbers,
   getSnapshot,
   initCommentsStore,
   liveComments,
@@ -76,6 +77,7 @@ function Panel() {
   useEffect(() => initCommentsStore(), []);
 
   const live = liveComments(doc);
+  const numbers = displayNumbers(doc);
 
   // group by full variant; groups by recency, rows by seq
   const groups = new Map<string, CommentPin[]>();
@@ -131,9 +133,9 @@ function Panel() {
                 ))}
               </p>
               {g.rows.map((c) => (
-                <div key={c.id} className="comments-row" data-testid={`panel-row-${c.seq}`}>
+                <div key={c.id} className="comments-row" data-testid={`panel-row-${numbers.get(c.id)}`}>
                   <button type="button" className="comments-row-main" onClick={() => jump(c)}>
-                    <span className="comments-seq">{c.seq}</span>
+                    <span className="comments-seq">{numbers.get(c.id)}</span>
                     <span className="comments-body">
                       {c.element?.label && (
                         <span className="comments-el" dir="rtl">
