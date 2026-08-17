@@ -25,6 +25,7 @@ export default function CommentComposer({
   frameH,
   pinLeft,
   pinTop,
+  elementLabel,
   onSave,
   onClose,
 }: {
@@ -36,6 +37,8 @@ export default function CommentComposer({
   frameH: number;
   pinLeft: number;
   pinTop: number;
+  /** the captured element's readable name — «حول: …» chip */
+  elementLabel?: string;
   /** save a NEW comment (text, author); existing edits go through the store */
   onSave: (text: string, author: string) => void;
   onClose: () => void;
@@ -85,6 +88,16 @@ export default function CommentComposer({
       style={below ? { left, top: pinTop + 18 } : { left, bottom: frameH - pinTop + 18 }}
       onClick={(e) => e.stopPropagation()}
     >
+      {elementLabel && (
+        <p
+          className="w-full truncate rounded-lg bg-brand-50 px-2 py-1 text-right text-[10px] font-medium leading-[1.5] text-brand-500"
+          dir="rtl"
+          data-testid="comment-element-chip"
+        >
+          {'حول: '}
+          {elementLabel}
+        </p>
+      )}
       {editing ? (
         <>
           <textarea

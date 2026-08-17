@@ -5,20 +5,16 @@ import { useAppState } from '../state/AppState';
 import { variantKey } from './variantKey';
 import {
   addComment,
+  commentsSuppressed,
   getSnapshot,
   initCommentsStore,
-  liveCount,
   pinsFor,
-  refreshRemote,
-  startPolling,
-  stopPolling,
   subscribe,
-  exportJson,
-  importJson,
+  type ElementRef,
 } from './store';
 import CommentComposer from './CommentComposer';
 
-type Draft = { x: number; contentY: number };
+type Draft = { x: number; contentY: number; element?: ElementRef };
 
 /** The active screen's main vertical scroller (sheets carry their own small
     ones; StoreRouter nests the real one a level deeper). */
@@ -35,44 +31,37 @@ const subscribeRouter = (fn: () => void) => router.subscribe(fn);
 const getLocation = () => router.state.location;
 
 /**
- * Review-comment layer (derived feature — the prototype's Figma-style pins):
- * a floating 💬 chip toggles comment mode; while ON, every tap drops a
- * numbered pin with a composer, existing pins open for view/edit/delete, and
- * app interaction is paused (one capture-phase click listener on the phone
- * frame — the layer itself is pointer-events-none so native scrolling keeps
- * working). Pins anchor to the screen's scroll-content space and are keyed
- * by screen variant (variantKey). Hidden entirely for webdriver captures
- * (unless ?comments=1), under ?diff=/?onion=, or when sessionStorage
- * 'clo-no-comments' is set — the pixel gate never sees it.
+ * Review-pin layer inside the phone frame (a prototype-shell tool, not
+ * product UI — its controls live in the shell's CommentsPanel outside the
+ * frame; on phones, `?comments=1` seeds mode ON and the session is
+ * capture-only, with no in-frame chrome at all). While mode is ON, every tap
+ * is intercepted by one capture-phase click listener: the tapped element is
+ * captured (highlight + readable label) and a numbered pin + composer open;
+ * existing pins open for view/edit/delete. Native scrolling keeps working —
+ * the layer is pointer-events-none and pins track the screen's scroll
+ * content. `?focus=<id>` (from the inbox) scrolls to a pin and opens it.
+ * Suppressed for webdriver/?diff/?onion — the QA gate never sees it.
  */
 export default function CommentLayer() {
-  const params = new URLSearchParams(window.location.search);
-  const suppressed =
-    params.has('diff') ||
-    params.has('onion') ||
-    (navigator.webdriver && !params.has('comments')) ||
-    sessionStorage.getItem('clo-no-comments') !== null;
-
-  if (suppressed) return null;
-  return <Layer seedOn={params.get('comments') === '1'} />;
+  if (commentsSuppressed()) return null;
+  return <Layer />;
 }
 
-function Layer({ seedOn }: { seedOn: boolean }) {
+function Layer() {
   const phase = usePhase();
   const { cardLinked } = useAppState();
   const location = useSyncExternalStore(subscribeRouter, getLocation);
-  const { doc, status } = useSyncExternalStore(subscribe, getSnapshot);
+  const { doc, mode } = useSyncExternalStore(subscribe, getSnapshot);
 
-  const [mode, setMode] = useState(seedOn);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [scrollTop, setScrollTop] = useState(0);
   const [frame, setFrame] = useState({ w: 375, h: 812 });
+  const [hint, setHint] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-  const modeRef = useRef(mode);
-  modeRef.current = mode;
+  const focusRef = useRef(new URLSearchParams(window.location.search).get('focus'));
+  const focusAppliedRef = useRef<string | null>(null);
 
   const variant = variantKey(location, phase, cardLinked);
   const pins = pinsFor(variant, doc);
@@ -105,12 +94,54 @@ function Layer({ seedOn }: { seedOn: boolean }) {
     };
   }, []);
 
-  // route/screen change: close any open popover, re-read the fresh scroller
+  // route/screen change: close any open popover, re-read the fresh scroller.
+  // While an inbox focus is pending/applied, the reset must not wipe it —
+  // the router emits a late state update right after the initial load.
   useLayoutEffect(() => {
     setDraft(null);
-    setActiveId(null);
+    if (!focusRef.current) setActiveId(null);
     setScrollTop(resolveScroller()?.scrollTop ?? 0);
   }, [location]);
+
+  // mode flip from the shell panel: drop any in-progress popover
+  useEffect(() => {
+    if (!mode) {
+      setDraft(null);
+      setActiveId(null);
+      focusRef.current = null;
+      focusAppliedRef.current = null;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
+  // ?focus=<id> from the inbox — waits for the doc (a fresh browser only
+  // receives the comment via the init GET). Stays pending (guarding the
+  // location reset above) until the viewer closes the popover; the applied
+  // ref keeps the 5s polls from re-scrolling.
+  useEffect(() => {
+    const id = focusRef.current;
+    if (!id || focusAppliedRef.current === id) return;
+    const c = doc.comments.find((x) => x.id === id && !x.deletedAt);
+    if (!c) return; // not arrived yet — retry on the next doc update
+    if (c.variant !== variant) {
+      focusRef.current = null;
+      setHint(true);
+      const t = setTimeout(() => setHint(false), 4000);
+      return () => clearTimeout(t);
+    }
+    focusAppliedRef.current = id;
+    const scroller = resolveScroller();
+    if (scroller) scroller.scrollTop = Math.max(0, c.contentY - frame.h / 2);
+    setScrollTop(scroller?.scrollTop ?? 0);
+    setActiveId(c.id);
+  }, [doc, variant, frame.h]);
+
+  const clearFocus = () => {
+    focusRef.current = null;
+    focusAppliedRef.current = null;
+  };
+  const clearFocusRef = useRef(clearFocus);
+  clearFocusRef.current = clearFocus;
 
   // comment mode: pause the app behind one capture-phase click listener
   useEffect(() => {
@@ -121,59 +152,87 @@ function Layer({ seedOn }: { seedOn: boolean }) {
       if (target?.closest('[data-comment-ui]')) return; // our own UI
       e.preventDefault();
       e.stopPropagation();
+      clearFocusRef.current();
       setActiveId(null);
       setDraft((prev) => {
         if (prev) return null; // second tap dismisses an open composer
         const r = frameEl.getBoundingClientRect();
         const scroller = resolveScroller();
-        return {
-          x: (e.clientX - r.left) / r.width,
-          contentY: e.clientY - r.top + (scroller?.scrollTop ?? 0),
-        };
+        const st = scroller?.scrollTop ?? 0;
+
+        // capture the tapped element — e.target IS the hit test (this layer
+        // and the DiffOverlay are pointer-events-none, so they never occlude)
+        let element: ElementRef | undefined;
+        const screenEl = document.querySelector('.screen');
+        if (target && screenEl?.contains(target) && target !== screenEl && target !== scroller) {
+          const cand =
+            (target.closest('button,a,input,textarea,select,[data-testid],[role=button]') as HTMLElement | null) ??
+            target;
+          if (screenEl.contains(cand)) {
+            const cr = cand.getBoundingClientRect();
+            // Arabic-first label: aria → text → img alt → testid → tag.
+            // innerText (not textContent) so sibling lines keep separators.
+            const label =
+              cand.getAttribute('aria-label') ||
+              (cand.innerText ?? '').trim().replace(/\s+/g, ' ').slice(0, 40) ||
+              cand.querySelector('img')?.getAttribute('alt') ||
+              cand.getAttribute('data-testid') ||
+              cand.tagName.toLowerCase();
+            element = {
+              label,
+              testid: cand.getAttribute('data-testid') ?? undefined,
+              x: (cr.left - r.left) / r.width,
+              w: cr.width / r.width,
+              y: cr.top - r.top + st,
+              h: cr.height,
+            };
+          }
+        }
+        return { x: (e.clientX - r.left) / r.width, contentY: e.clientY - r.top + st, element };
       });
     };
     frameEl.addEventListener('click', onClick, { capture: true });
     return () => frameEl.removeEventListener('click', onClick, { capture: true });
   }, [mode]);
 
-  // sync cadence follows the mode
-  useEffect(() => {
-    if (mode) {
-      void refreshRemote();
-      startPolling();
-      return () => stopPolling();
-    }
-  }, [mode]);
-
-  const toggleMode = () => {
-    setDraft(null);
-    setActiveId(null);
-    setMode((m) => !m);
-  };
-
   const saveDraft = (text: string, author: string) => {
     if (!draft) return;
-    addComment({ path: location.pathname, variant, x: draft.x, contentY: draft.contentY, text, author });
+    addComment({
+      path: location.pathname,
+      variant,
+      x: draft.x,
+      contentY: draft.contentY,
+      element: draft.element,
+      text,
+      author,
+    });
     setDraft(null);
   };
 
-  const doExport = () => {
-    const blob = new Blob([exportJson()], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'clo-comments.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  };
-
-  const count = liveCount(doc);
   const pinPos = (p: { x: number; contentY: number }) => ({
     left: p.x * frame.w,
     top: p.contentY - scrollTop,
   });
 
+  // the element outline shown while a popover is open (stored rect is the
+  // honest record of what was tapped — no live re-resolution)
+  const highlight = draft?.element ?? active?.element ?? null;
+
   return (
     <div ref={rootRef} className="pointer-events-none absolute inset-0 z-[100]" style={{ WebkitTouchCallout: 'none' }}>
+      {mode && highlight && (
+        <div
+          className="pointer-events-none absolute z-[104] rounded-lg border-2 border-dashed border-brand-400 bg-brand-400/10"
+          data-testid="comment-highlight"
+          style={{
+            left: highlight.x * frame.w - 2,
+            top: highlight.y - scrollTop - 2,
+            width: highlight.w * frame.w + 4,
+            height: highlight.h + 4,
+          }}
+        />
+      )}
+
       {/* pins — visible only while the viewer has comments on */}
       {mode &&
         pins.map((pin) => {
@@ -186,11 +245,12 @@ function Layer({ seedOn }: { seedOn: boolean }) {
               data-comment-ui
               data-testid={`comment-pin-${pin.seq}`}
               onClick={() => {
+                clearFocus();
                 setDraft(null);
                 setActiveId((cur) => (cur === pin.id ? null : pin.id));
               }}
               className="pointer-events-auto absolute z-[105] flex size-6 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full rounded-bl-[4px] border-2 border-solid border-white bg-brand-400 shadow-[0px_2px_8px_rgba(0,0,0,0.25)]"
-              style={pinPos(pin)}
+              style={pos}
             >
               <span className="font-en text-[10px] font-bold leading-none text-ink-inverse">{pin.seq}</span>
             </button>
@@ -215,6 +275,7 @@ function Layer({ seedOn }: { seedOn: boolean }) {
           frameH={frame.h}
           pinLeft={pinPos(draft).left}
           pinTop={pinPos(draft).top}
+          elementLabel={draft.element?.label}
           onSave={saveDraft}
           onClose={() => setDraft(null)}
         />
@@ -228,89 +289,30 @@ function Layer({ seedOn }: { seedOn: boolean }) {
           frameH={frame.h}
           pinLeft={pinPos(active).left}
           pinTop={pinPos(active).top}
-          onSave={() => setActiveId(null)}
-          onClose={() => setActiveId(null)}
+          elementLabel={active.element?.label}
+          onSave={() => {
+            clearFocus();
+            setActiveId(null);
+          }}
+          onClose={() => {
+            clearFocus();
+            setActiveId(null);
+          }}
         />
       )}
 
-      {/* floating chip + (while ON) the sync/export cluster */}
-      <div
-        data-comment-ui
-        className="pointer-events-auto absolute left-3 z-[106] flex items-center gap-2"
-        style={{ bottom: 'calc(96px + env(safe-area-inset-bottom, 0px))' }}
-      >
-        <button
-          type="button"
-          onClick={toggleMode}
-          aria-pressed={mode}
-          aria-label="التعليقات"
-          data-testid="comments-chip"
-          className={`relative flex size-10 cursor-pointer items-center justify-center rounded-full border border-solid shadow-[0px_4px_14px_rgba(0,0,0,0.25)] ${
-            mode ? 'border-brand-400 bg-brand-400' : 'border-line bg-white/90'
-          }`}
+      {/* inbox jump landed on a screen whose live state can't be seeded */}
+      {hint && (
+        <div
+          className="pointer-events-none absolute inset-x-6 z-[110] rounded-xl bg-ink px-4 py-2.5"
+          style={{ bottom: 120 }}
+          data-testid="comment-focus-hint"
         >
-          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden>
-            <path
-              d="M3 6.2C3 4.4 4.4 3 6.2 3h7.6C15.6 3 17 4.4 17 6.2v4.6c0 1.8-1.4 3.2-3.2 3.2H8.4L5 16.6a.6.6 0 0 1-1-.5V14A3.2 3.2 0 0 1 3 10.8Z"
-              fill="none"
-              strokeWidth="1.6"
-              className={mode ? 'stroke-white' : 'stroke-ink'}
-            />
-          </svg>
-          {count > 0 && (
-            <span
-              data-testid="comments-count"
-              className={`font-en absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold leading-none ${
-                mode ? 'bg-white text-brand-500' : 'bg-brand-400 text-ink-inverse'
-              }`}
-            >
-              {count}
-            </span>
-          )}
-        </button>
-
-        {mode && (
-          <div className="flex items-center gap-1 rounded-full border border-solid border-line bg-white/95 px-2 py-1 shadow-[0px_4px_14px_rgba(0,0,0,0.18)]">
-            <span
-              data-testid="comments-status"
-              className={`flex items-center gap-1 px-1 text-[10px] font-medium leading-[1.5] ${
-                status === 'shared' ? 'text-brand-500' : 'text-ink-tertiary'
-              }`}
-              dir="auto"
-            >
-              <span className={`size-1.5 rounded-full ${status === 'shared' ? 'bg-brand-400' : 'bg-ink-quadrant'}`} />
-              {status === 'shared' ? 'مشتركة' : 'محلية'}
-            </span>
-            <button
-              type="button"
-              onClick={doExport}
-              className="cursor-pointer px-1 text-[10px] font-medium leading-[1.5] text-ink-secondary"
-              dir="auto"
-            >
-              تصدير
-            </button>
-            <button
-              type="button"
-              onClick={() => fileRef.current?.click()}
-              className="cursor-pointer px-1 text-[10px] font-medium leading-[1.5] text-ink-secondary"
-              dir="auto"
-            >
-              استيراد
-            </button>
-            <input
-              ref={fileRef}
-              type="file"
-              accept="application/json,.json"
-              className="hidden"
-              onChange={async (e) => {
-                const f = e.target.files?.[0];
-                if (f) importJson(await f.text());
-                e.target.value = '';
-              }}
-            />
-          </div>
-        )}
-      </div>
+          <p className="text-center text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
+            تعذّر فتح الشاشة تلقائيًا.. الشاشة تحتاج خطوات حية
+          </p>
+        </div>
+      )}
     </div>
   );
 }
