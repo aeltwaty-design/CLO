@@ -44,6 +44,20 @@ function MaskIcon({ src, size }: { src: string; size: number }) {
  * so it flips to its after-link state. Dock + home indicator pinned as drawn
  * (155px block; the design keeps 16px between list and dock → pb-[171px]).
  */
+/** Timeline chevrons, physically left→right — the palette cycles through the
+    design-system families (brand / viola / gold / bravo). `currentColor`
+    strokes, so each class is just a text token. */
+const TIMELINE_ARROWS = [
+  'text-brand-400',
+  'text-viola-500',
+  'text-gold-600',
+  'text-bravo-400',
+  'text-brand-400',
+  'text-viola-500',
+  'text-gold-600',
+  'text-bravo-400',
+];
+
 export default function LinkSuccessScreen() {
   const navigate = useNavigate();
   const { setCardLinked } = useAppState();
@@ -55,7 +69,7 @@ export default function LinkSuccessScreen() {
 
   return (
     <div className="relative h-full overflow-hidden bg-surface">
-      <style>{'@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes dash-flow{to{background-position:-12px 0}}'}</style>
+      <style>{'@keyframes pop-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}@keyframes spark-in{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@keyframes rise-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes arrow-chase{0%,55%,100%{opacity:.25}25%{opacity:1}}'}</style>
       <div className="h-full overflow-y-auto pb-[134px]">
         {/* 📶 Status bar */}
         <div className="relative h-11 w-[375px] shrink-0 overflow-clip">
@@ -194,23 +208,35 @@ export default function LinkSuccessScreen() {
                   ادفع بالبطاقة
                 </p>
               </div>
-              <div className="relative mx-1 mt-[17px] h-0.5 min-w-px flex-1">
-                <div
-                  className="absolute inset-0 rounded-full"
-                  data-testid="timeline-connector"
-                  style={{
-                    backgroundImage: 'repeating-linear-gradient(to left, #00ce8b 0 6px, transparent 6px 12px)',
-                    animation: 'dash-flow 600ms linear infinite',
-                  }}
-                />
-                <p
-                  className="absolute left-1/2 top-[-13px] -translate-x-1/2 whitespace-nowrap rounded-full bg-brand-400 px-2 py-0.5 text-[10px] font-medium leading-[1.4] text-ink-inverse"
-                  dir="auto"
-                >
-                  {'خلال '}
-                  <span className="font-en">15</span>
-                  {' يوم'}
-                </p>
+              {/* forward arrows, card → wallet (RTL forward = leftward): a
+                  chase pulse travels right-to-left over chevrons cycling the
+                  design-system palette (user direction — replaces the dashed
+                  line and its «خلال 15 يوم» pill) */}
+              <div
+                className="mx-1 mt-[13px] flex min-w-px flex-1 items-center justify-center gap-[5px] overflow-hidden"
+                data-testid="timeline-connector"
+                aria-hidden
+              >
+                {TIMELINE_ARROWS.map((cls, i) => (
+                  <svg
+                    key={i}
+                    viewBox="0 0 8 10"
+                    className={`h-2.5 w-2 shrink-0 ${cls}`}
+                    style={{
+                      animation: 'arrow-chase 900ms linear infinite',
+                      animationDelay: `${(TIMELINE_ARROWS.length - 1 - i) * 110}ms`,
+                    }}
+                  >
+                    <path
+                      d="M6.5 1 2 5l4.5 4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ))}
               </div>
               <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
                 <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
