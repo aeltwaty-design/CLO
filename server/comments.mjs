@@ -19,6 +19,7 @@ import { notifyNewComments } from './notify.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_FILE = join(HERE, 'comments-data.json');
+const NOTIFIED_FILE = join(HERE, 'comments-notified.json');
 const DIST = join(HERE, '..', 'dist');
 const BODY_LIMIT = 512 * 1024;
 const TOMBSTONE_TTL = 30 * 24 * 3600 * 1000;
@@ -38,6 +39,21 @@ function writeDoc(doc) {
   const tmp = `${DATA_FILE}.tmp`;
   writeFileSync(tmp, JSON.stringify(doc));
   renameSync(tmp, DATA_FILE);
+}
+
+async function loadNotified() {
+  try {
+    const ids = JSON.parse(readFileSync(NOTIFIED_FILE, 'utf8'));
+    return Array.isArray(ids) ? ids : [];
+  } catch {
+    return [];
+  }
+}
+
+async function saveNotified(ids) {
+  const tmp = `${NOTIFIED_FILE}.tmp`;
+  writeFileSync(tmp, JSON.stringify(ids));
+  renameSync(tmp, NOTIFIED_FILE);
 }
 
 function mergeDocs(a, b) {
@@ -93,7 +109,12 @@ export function handleCommentsApi(req, res) {
         const merged = mergeDocs(stored, incoming);
         writeDoc(merged);
         const proto = req.headers['x-forwarded-proto'] ?? 'http';
-        await notifyNewComments(stored, merged, `${proto}://${req.headers.host ?? 'localhost'}`);
+        await notifyNewComments({
+          merged,
+          origin: `${proto}://${req.headers.host ?? 'localhost'}`,
+          loadNotified,
+          saveNotified,
+        });
         sendJson(res, 200, merged);
       } catch {
         sendJson(res, 400, { error: 'bad json' });

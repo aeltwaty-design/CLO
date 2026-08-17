@@ -41,29 +41,51 @@ function redisEnv() {
   return url && token ? { url, token } : null;
 }
 
-async function redisGet(env) {
-  const res = await fetch(`${env.url}/get/${KEY}`, {
+const NOTIFIED_KEY = 'clo-comments-notified';
+
+async function redisRead(env, key) {
+  const res = await fetch(`${env.url}/get/${key}`, {
     headers: { authorization: `Bearer ${env.token}` },
   });
   if (!res.ok) throw new Error(`redis get ${res.status}`);
   const { result } = await res.json();
-  if (!result) return emptyDoc();
+  return result ?? null;
+}
+
+async function redisWrite(env, key, value) {
+  const res = await fetch(`${env.url}/set/${key}`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${env.token}` },
+    body: value,
+  });
+  if (!res.ok) throw new Error(`redis set ${res.status}`);
+}
+
+async function redisGet(env) {
+  const raw = await redisRead(env, KEY);
+  if (!raw) return emptyDoc();
   try {
-    const doc = JSON.parse(result);
+    const doc = JSON.parse(raw);
     return doc?.version === 1 && Array.isArray(doc.comments) ? doc : emptyDoc();
   } catch {
     return emptyDoc();
   }
 }
 
-async function redisSet(env, doc) {
-  const res = await fetch(`${env.url}/set/${KEY}`, {
-    method: 'POST',
-    headers: { authorization: `Bearer ${env.token}` },
-    body: JSON.stringify(doc),
-  });
-  if (!res.ok) throw new Error(`redis set ${res.status}`);
+const redisSet = (env, doc) => redisWrite(env, KEY, JSON.stringify(doc));
+
+async function loadNotified(env) {
+  const raw = await redisRead(env, NOTIFIED_KEY);
+  if (!raw) return [];
+  try {
+    const ids = JSON.parse(raw);
+    return Array.isArray(ids) ? ids : [];
+  } catch {
+    return [];
+  }
 }
+
+const saveNotified = (env, ids) => redisWrite(env, NOTIFIED_KEY, JSON.stringify(ids));
 
 export default async function handler(req, res) {
   const env = redisEnv();
@@ -94,7 +116,12 @@ export default async function handler(req, res) {
       const merged = mergeDocs(stored, incoming);
       await redisSet(env, merged);
       // must complete before responding — serverless may freeze afterwards
-      await notifyNewComments(stored, merged, `https://${req.headers.host}`);
+      await notifyNewComments({
+        merged,
+        origin: `https://${req.headers.host}`,
+        loadNotified: () => loadNotified(env),
+        saveNotified: (ids) => saveNotified(env, ids),
+      });
       res.setHeader('cache-control', 'no-store');
       res.status(200).json(merged);
       return;

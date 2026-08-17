@@ -9,12 +9,17 @@
  *                             which needs no domain verification)
  *   RESEND_API_BASE         — test override
  *
- * "New" = a live comment whose id was absent from the stored doc before the
- * merge — edits and deletes never email. The client debounces its pushes, so
- * a burst of comments usually lands as ONE email listing them all. Mail
- * failures are swallowed: notifications must never fail the comments API.
+ * Delivery is tracked, not fire-and-forget: the host supplies a persisted
+ * set of already-notified comment ids, and ids are added ONLY after Resend
+ * confirms the send (res.ok). A failed or rate-limited send therefore
+ * retries automatically on the next push — comments can arrive late in a
+ * digest, but never silently never. One transient retry (429/5xx/network)
+ * happens in-call. Mail failures still never fail the comments API.
  */
 const DEFAULT_TO = 'a.eltwaty@walaplus.com';
+const BACKLOG_WINDOW = 7 * 24 * 3600 * 1000;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
@@ -34,12 +39,45 @@ function linkFor(origin, c) {
   return `${origin}${c.path || '/'}?${sp.toString()}`;
 }
 
-export async function notifyNewComments(stored, merged, origin) {
+async function sendMail(base, key, payload) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 5000);
+  try {
+    return await fetch(`${base}/emails`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: ctl.signal,
+    });
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+/**
+ * @param {object} args
+ * @param {{version:1, comments:any[]}} args.merged — the doc after this push
+ * @param {string} args.origin — site origin for the jump links
+ * @param {() => Promise<string[]>} args.loadNotified — persisted notified ids
+ * @param {(ids: string[]) => Promise<void>} args.saveNotified
+ */
+export async function notifyNewComments({ merged, origin, loadNotified, saveNotified }) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
 
-  const before = new Set(stored.comments.map((c) => c.id));
-  const fresh = merged.comments.filter((c) => !before.has(c.id) && !c.deletedAt && c.text);
+  let notified;
+  try {
+    notified = new Set(await loadNotified());
+  } catch {
+    notified = new Set();
+  }
+
+  // everything live, real, recent, and not yet successfully emailed —
+  // failures from earlier pushes are still here and go out with this digest
+  const cutoff = Date.now() - BACKLOG_WINDOW;
+  const fresh = merged.comments.filter(
+    (c) => !c.deletedAt && c.text && !notified.has(c.id) && (c.createdAt ?? 0) > cutoff,
+  );
   if (fresh.length === 0) return;
 
   const to = process.env.COMMENTS_NOTIFY_EMAIL || DEFAULT_TO;
@@ -75,15 +113,27 @@ export async function notifyNewComments(stored, merged, origin) {
     </div>`;
 
   try {
-    const ctl = new AbortController();
-    const t = setTimeout(() => ctl.abort(), 5000);
-    await fetch(`${base}/emails`, {
-      method: 'POST',
-      headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ from, to, subject, html }),
-      signal: ctl.signal,
-    });
-    clearTimeout(t);
+    let res;
+    try {
+      res = await sendMail(base, key, { from, to, subject, html });
+    } catch {
+      res = null;
+    }
+    if (!res || res.status === 429 || res.status >= 500) {
+      await sleep(1100); // ride out Resend's 2 req/s limit, then one retry
+      try {
+        res = await sendMail(base, key, { from, to, subject, html });
+      } catch {
+        res = null;
+      }
+    }
+    if (!res?.ok) return; // stay unnotified — the next push retries
+
+    // confirmed sent — persist, pruned to ids that still exist in the doc
+    const current = new Set(merged.comments.map((c) => c.id));
+    const next = [...notified].filter((id) => current.has(id));
+    for (const c of fresh) next.push(c.id);
+    await saveNotified(next);
   } catch {
     /* mail must never fail the comments API */
   }

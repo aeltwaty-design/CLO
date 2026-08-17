@@ -7,3 +7,4 @@ Thumbs.db
 public/refs
 design/qa
 server/comments-data.json
+server/comments-notified.json
