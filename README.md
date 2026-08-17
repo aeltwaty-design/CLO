@@ -14,13 +14,21 @@ Phone-sized viewport (375×812) renders full-bleed; desktop windows get a center
 phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 (otherwise every load starts before linking, and completing the flow flips it live).
 
-To deploy on a subdomain **with shared review comments**, build then run the
-bundled host — one process serves `dist/` and the comments API:
+To deploy on a subdomain **with shared review comments**:
 
-```bash
-npm run build
-npm run serve   # PORT=8080 by default
-```
+- **Vercel** (the current clo.atwaty.com host): `vercel.json` provides the
+  SPA rewrites and `api/comments.js` provides the comments API as a
+  serverless function. Serverless has no durable disk, so the doc lives in
+  Redis — one dashboard step: project → **Storage → Create → Redis
+  (Upstash, free tier)**, then redeploy. Until the store exists the endpoint
+  answers 503 and comments stay device-local.
+- **Own server**: build then run the bundled host — one process serves
+  `dist/` and the comments API off a JSON file:
+
+  ```bash
+  npm run build
+  npm run serve   # PORT=8080 by default
+  ```
 
 On a purely static host the app still works; comments just fall back to
 device-local (see the comment-layer bullet below).

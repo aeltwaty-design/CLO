@@ -157,7 +157,9 @@ export const getSnapshot = (): Snapshot => snapshot;
 async function fetchRemote(): Promise<CommentsDoc | null> {
   try {
     const ctl = new AbortController();
-    const t = setTimeout(() => ctl.abort(), 1500);
+    // generous enough for a cold serverless start (Vercel) — a too-eager
+    // abort would flash «محلية» on first load even when sharing works
+    const t = setTimeout(() => ctl.abort(), 4000);
     const res = await fetch('/api/comments', { signal: ctl.signal });
     clearTimeout(t);
     if (!res.ok) return null;
