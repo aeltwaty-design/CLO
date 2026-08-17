@@ -217,6 +217,10 @@ function PointsCard({ onConvert }: { onConvert: () => void }) {
 function LinkPromoBanner({ onLink }: { onLink: () => void }) {
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
+      {/* art first, so it paints behind the copy and the CTA */}
+      <div className="pointer-events-none absolute left-0 top-[30px] h-[164px] w-[160px]">
+        <FiftyPercentArt />
+      </div>
       <div className="flex w-full shrink-0 flex-col items-end gap-5">
         <div className="flex w-full shrink-0 flex-col items-end">
           <div className="flex shrink-0 items-center">
@@ -269,9 +273,6 @@ function LinkPromoBanner({ onLink }: { onLink: () => void }) {
           </p>
         </button>
       </div>
-      <div className="absolute left-1 top-[42px] h-[116px] w-[148px]">
-        <FiftyPercentArt />
-      </div>
     </div>
   );
 }
@@ -298,58 +299,58 @@ function Sparkle({ x, y, scale, className }: { x: number; y: number; scale: numb
 function FiftyPercentArt() {
   return (
     <svg
-      viewBox="0 0 148 116"
+      viewBox="0 0 160 164"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="absolute inset-0 size-full"
       aria-hidden
     >
       {/* soft halo + dashed orbit */}
-      <circle cx="72" cy="58" r="46" className="fill-viola-100" opacity="0.5" />
-      <circle cx="72" cy="58" r="33" className="fill-viola-100" opacity="0.55" />
+      <circle cx="77" cy="81" r="66" className="fill-viola-100" opacity="0.5" />
+      <circle cx="77" cy="81" r="47" className="fill-viola-100" opacity="0.55" />
       <circle
-        cx="72"
-        cy="58"
-        r="53"
+        cx="77"
+        cy="81"
+        r="76"
         fill="none"
-        strokeWidth="1.5"
-        strokeDasharray="3 7"
+        strokeWidth="2"
+        strokeDasharray="4 10"
         className="stroke-viola-300"
         opacity="0.75"
       />
 
       {/* tilted card behind — a nod to the drawn art this replaces */}
-      <g transform="rotate(-14 72 58)">
-        <rect x="28" y="32" width="88" height="55" rx="10" className="fill-bravo-500" opacity="0.17" />
-        <rect x="28" y="47" width="88" height="7" className="fill-bravo-500" opacity="0.22" />
-        <rect x="90" y="64" width="20" height="8" rx="2.5" className="fill-gold-600" opacity="0.55" />
+      <g transform="rotate(-14 77 81)">
+        <rect x="22" y="48" width="110" height="68" rx="13" className="fill-bravo-500" opacity="0.17" />
+        <rect x="22" y="68" width="110" height="9" className="fill-bravo-500" opacity="0.22" />
+        <rect x="104" y="90" width="24" height="10" rx="3" className="fill-gold-600" opacity="0.55" />
       </g>
 
       {/* the claim */}
       <text
-        x="64"
-        y="75"
+        x="58"
+        y="118"
         textAnchor="middle"
-        fontSize="46"
+        fontSize="92"
         fontWeight="700"
-        letterSpacing="-2"
+        letterSpacing="-4"
         className="font-en fill-bravo-500"
       >
         50
       </text>
-      <text x="111" y="47" textAnchor="middle" fontSize="23" fontWeight="700" className="font-en fill-brand-400">
+      <text x="130" y="76" textAnchor="middle" fontSize="46" fontWeight="700" className="font-en fill-brand-400">
         %
       </text>
 
       {/* artistic touches */}
-      <Sparkle x={26} y={20} scale={1.15} className="fill-brand-400" />
-      <Sparkle x={122} y={92} scale={0.95} className="fill-gold-600" />
-      <Sparkle x={121} y={22} scale={0.7} className="fill-viola-500" />
-      <Sparkle x={19} y={90} scale={0.6} className="fill-brand-400" />
-      <circle cx="41" cy="100" r="3" className="fill-viola-300" />
-      <circle cx="136" cy="58" r="2.5" className="fill-brand-400" />
-      <circle cx="10" cy="52" r="2" className="fill-gold-600" />
-      <circle cx="94" cy="14" r="2.5" className="fill-viola-300" />
+      <Sparkle x={20} y={30} scale={1.5} className="fill-brand-400" />
+      <Sparkle x={140} y={126} scale={1.2} className="fill-gold-600" />
+      <Sparkle x={140} y={34} scale={0.9} className="fill-viola-500" />
+      <Sparkle x={16} y={132} scale={0.8} className="fill-brand-400" />
+      <circle cx="44" cy="150" r="4" className="fill-viola-300" />
+      <circle cx="150" cy="108" r="3.5" className="fill-brand-400" />
+      <circle cx="6" cy="72" r="3" className="fill-gold-600" />
+      <circle cx="100" cy="10" r="3.5" className="fill-viola-300" />
     </svg>
   );
 }
