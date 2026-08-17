@@ -5,6 +5,7 @@ import { GiftProvider } from './state/GiftState';
 import { VoucherProvider } from './state/VoucherState';
 import { RechargeProvider } from './state/RechargeState';
 import { DonateProvider } from './state/DonateState';
+import { WalaOneProvider } from './state/WalaOneState';
 import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 
@@ -94,6 +95,11 @@ const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [
   { label: 'Gift: PIN (seeded)', url: '/gift/pin?linked=1&gaud=colleagues&gamount=50' },
   { label: 'Gift: success + receipt', url: '/gift/status?ok=1&linked=1&gaud=colleagues&gamount=50' },
   { label: 'Gift: failure', url: '/gift/status?ok=0&linked=1' },
+  { label: 'WalaOne: amount', url: '/walaone/amount?linked=1', p: 2 },
+  { label: 'WalaOne: confirm (seeded)', url: '/walaone/confirm?linked=1&w1amount=50', p: 2 },
+  { label: 'WalaOne: PIN (seeded)', url: '/walaone/pin?linked=1&w1amount=50&w1phone=512345678&w1v=1', p: 2 },
+  { label: 'WalaOne: success + receipt', url: '/walaone/status?ok=1&linked=1&w1amount=50&w1phone=512345678&w1v=1', p: 2 },
+  { label: 'WalaOne: failure', url: '/walaone/status?ok=0&linked=1', p: 2 },
   { label: 'Recharge: pick operator', url: '/recharge/operator?linked=1' },
   { label: 'Recharge: number (seeded)', url: '/recharge/number?linked=1&rop=stc' },
   { label: 'Recharge: amount (seeded)', url: '/recharge/amount?linked=1&rop=stc&rnum=0551234567' },
@@ -194,6 +200,8 @@ function DemoControls() {
           PIN succeeds. Seeds: <code>?linked=1/0</code> card state · <code>?waccount=1</code> account on file ·{' '}
           <code>?wamount=50</code> amount · <code>?cards=3</code> card cap · <code>?touchid=1</code> Touch ID ·{' '}
           <code>?rop=stc</code>/<code>?rnum=</code>/<code>?ramount=</code> recharge ·{' '}
+          <code>?w1amount=</code>/<code>?w1phone=</code>/<code>?w1v=1</code> WalaOne (OTP <code>00000</code> = wrong,
+          number <code>5 0000 0000</code> = unlinked) ·{' '}
           <code>?dcause=</code>/<code>?dcharity=</code>/<code>?damount=</code> donation ·{' '}
           <code>?phase=1/2</code> version. A reload restarts the demo.
         </p>
@@ -211,6 +219,7 @@ function App() {
             <VoucherProvider>
               <RechargeProvider>
                 <DonateProvider>
+                <WalaOneProvider>
                   <div className="app-shell">
                     <PhaseTabs />
                     <div className="stage">
@@ -221,6 +230,7 @@ function App() {
                       <DemoControls />
                     </div>
                   </div>
+                </WalaOneProvider>
                 </DonateProvider>
               </RechargeProvider>
             </VoucherProvider>

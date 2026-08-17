@@ -5,6 +5,7 @@ import { useWithdraw } from '../state/WithdrawState';
 import Riyal from './Riyal';
 import MaskGlyph from './redeem/MaskGlyph';
 import iconBank from '../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
+import iconSwap from '../assets/figma/deefd6b77894536589cb50f767e7a9c50d68ba82.svg';
 import iconTicket from '../assets/figma/02d41c187946e3ed96263cd3096f1393fea2a563.svg';
 import iconBriefcase from '../assets/figma/eec1cb423a0fdc92072abdd2d9c2fbfb5921b6fc.svg';
 import iconPeople from '../assets/figma/c4f14edb4f3dc73aafc57568f4abb02e0ef9e857.svg';
@@ -51,6 +52,11 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
   const toGift = (aud: 'colleagues' | 'family') => {
     onClose();
     navigate(`/gift/pick?aud=${aud}`);
+  };
+
+  const toWalaOne = () => {
+    onClose();
+    navigate('/walaone/amount');
   };
 
   const toRecharge = () => {
@@ -113,6 +119,14 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 icon={iconBank}
                 onPick={toBank}
                 testid="redeem-bank"
+              />
+              <Divider />
+              <RedeemRow
+                title="تحويل لنقاط ولاء ون"
+                sub="حوّل كاش باك لنقاط ولاء ون"
+                icon={iconSwap}
+                onPick={toWalaOne}
+                testid="redeem-walaone"
               />
               <Divider />
               <RedeemRow

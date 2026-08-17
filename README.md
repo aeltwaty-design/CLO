@@ -223,6 +223,23 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   `?gamount=N`. The expiring-cashback nudge also surfaces
   on Home after linking. The withdrawal flow itself keeps its pixel-pinned
   drawn values (560.50 world) regardless of conversions.
+- **«تحويل لنقاط ولاء ون» flow** (drawn ولاء ون section 108:45207, adapted
+  points → cashback per user direction like the gift flow — the drawn frames
+  convert WalaPlus points, ours spend the live cashback at the drawn
+  **1 ﷼ = 50 نقطة** rate strip): the hub row after «تحويل لحساب بنكي» opens
+  `/walaone/amount` («حولها لولاء ون»: promo card verbatim including the drawn
+  «محدوووودة», the «50 ← 1» rate strip with its ⇄ button, «كم ودك تحول؟» chips
+  5–500 ﷼ and the live **«تساوي»** WalaOne line) → `/walaone/confirm`
+  («تأكيد التحويل»: ملخص العملية, the «رقم جوال محفظة ولاء ون» +966 field with
+  the KSA flag, «استخدم رقمي», and «تأكيد رقم الجوال» opening the drawn **OTP
+  sheet** — five boxes filling right-to-left, «تغيير», resend countdown,
+  5-minute validity; «تمم التحويل» stays disabled until verified) →
+  `/walaone/pin` → `/walaone/status` (drawn «تم تحويل النقاط بنجاح» /
+  «ما ضبطت», shared status screen). Demo rules: number `5 0000 0000` →
+  «غير مربوط بمحفظة ولاء ون» error; OTP `00000` = wrong; PIN rules as
+  everywhere. Seeds: `?w1amount=`, `?w1phone=`, `?w1v=1`. Refs for this
+  section are not auto-gated (its node resists `get_metadata`; built from
+  native-res canvas crops) — the flow is interaction-verified end to end.
 - **«شحن رصيد جوال» top-up flow** (derived, no drawn frame — the Figma file
   holds nothing telecom-shaped, so this is built from the gift journey's own
   pick/amount/PIN/status language): `/recharge/operator` (radio rows for

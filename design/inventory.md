@@ -93,6 +93,18 @@ Phase 2 replaces the frozen voucher store pages for every `variant: 'vouchers'` 
 
 **Flexible payment (user direction, no drawn frame):** «مبلغ مخصص» tile on the store page (10–500 ﷼ at 5 نقاط/﷼ — `src/data/vouchers.ts`) and the drawer's «طريقة الدفع» block — نقاط · كاش باك (face 1:1) · مقسّم (slider; remainder pro-rata in points). Seeds: `?vstore=`, `?vface=`, `?vpay=`, `?vcash=`.
 
+## «تحويل لنقاط ولاء ون» flow (drawn ولاء ون section 108:45207, added 2026-08-17)
+
+| Frame | Route / state | Notes |
+| --- | --- | --- |
+| amount ×2 (empty/filled) | `/walaone/amount` | «حولها لولاء ون»: promo card (copy verbatim incl. «محدوووودة»), «50 ← 1» rate strip + ⇄, chips + live «تساوي»; adapted points → cashback per user direction (drawn green-points input → live ﷼, chips ÷100, rate's green coin → Riyal glyph) |
+| تأكيد التحويل ×5 states | `/walaone/confirm` | ملخص العملية + «رقم جوال محفظة ولاء ون» +966 field (KSA flag hand-authored `src/assets/icons/flag-sa.svg`), «استخدم رقمي», verify button; «تمم التحويل» disabled until verified. Demo: `5 0000 0000` → «غير مربوط» error |
+| OTP sheet | over `/walaone/confirm` | five boxes filling right-to-left, «تغيير», resend countdown from 01:30, 5-minute validity hint; demo `00000` = wrong |
+| PIN | `/walaone/pin` | shared `RedeemPinScreen`; context names both sides of the conversion |
+| success / failure | `/walaone/status?ok=1/0` | drawn «تم تحويل النقاط بنجاح» (body «ستصل نقاطك قريبا إلى الجهة الأخرى») / «ما ضبطت»; shared status screen, receipt names the points + wallet number |
+
+Entry: the hub row «تحويل لنقاط ولاء ون» after «تحويل لحساب بنكي». Seeds: `?w1amount=`, `?w1phone=`, `?w1v=1`. Not auto-gated — the section node resists `get_metadata` (SSE error), so it was built from native-res canvas crops and interaction-verified end to end (26-check walk).
+
 ## Derived screens (user direction, no drawn frame)
 
 | Screen | Route | Notes |

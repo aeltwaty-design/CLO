@@ -28,6 +28,10 @@ import RechargeNumberScreen from '../screens/recharge/RechargeNumberScreen';
 import RechargeAmountScreen from '../screens/recharge/RechargeAmountScreen';
 import RechargePinScreen from '../screens/recharge/RechargePinScreen';
 import RechargeStatusScreen from '../screens/recharge/RechargeStatusScreen';
+import WalaOneAmountScreen from '../screens/walaone/WalaOneAmountScreen';
+import WalaOneConfirmScreen from '../screens/walaone/WalaOneConfirmScreen';
+import WalaOnePinScreen from '../screens/walaone/WalaOnePinScreen';
+import WalaOneStatusScreen from '../screens/walaone/WalaOneStatusScreen';
 import DonateCauseScreen from '../screens/donate/DonateCauseScreen';
 import DonateCharityScreen from '../screens/donate/DonateCharityScreen';
 import DonateAmountScreen from '../screens/donate/DonateAmountScreen';
@@ -76,6 +80,11 @@ export const router = createBrowserRouter([
       { path: '/recharge/amount', element: <RechargeAmountScreen /> },
       { path: '/recharge/pin', element: <RechargePinScreen /> },
       { path: '/recharge/status', element: <RechargeStatusScreen /> },
+      // WalaOneProvider lives in App.tsx too — drawn ولاء ون flow (108:45207)
+      { path: '/walaone/amount', element: <WalaOneAmountScreen /> },
+      { path: '/walaone/confirm', element: <WalaOneConfirmScreen /> },
+      { path: '/walaone/pin', element: <WalaOnePinScreen /> },
+      { path: '/walaone/status', element: <WalaOneStatusScreen /> },
       { path: '/donate/cause', element: <DonateCauseScreen /> },
       { path: '/donate/charity', element: <DonateCharityScreen /> },
       { path: '/donate/amount', element: <DonateAmountScreen /> },
