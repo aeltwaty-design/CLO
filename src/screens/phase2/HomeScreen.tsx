@@ -214,7 +214,12 @@ function HomeHeader({ onStartLinking }: { onStartLinking: () => void }) {
       </div>
 
       {/* floating white sheet (47:3646): search + colorful category chips */}
-      <div className="absolute inset-x-0 top-[416px] flex h-[199px] flex-col items-start gap-4 rounded-3xl bg-white px-4 py-6 [filter:drop-shadow(0px_20px_12.5px_rgba(229,231,235,0.5))_drop-shadow(0px_8px_5px_rgba(229,231,235,0.5))]">
+      {/* Only the top corners are rounded and there is no drop shadow: the
+          sheet is white, it spills 30px past the mint header, and the page
+          behind it is white — so a rounded bottom edge plus a downward shadow
+          drew corner notches and a grey wash over the content column instead
+          of merging into it (user direction). */}
+      <div className="absolute inset-x-0 top-[416px] flex h-[199px] flex-col items-start gap-4 rounded-t-3xl bg-white px-4 py-6">
         <div className="flex w-full shrink-0 flex-col items-start justify-center gap-1.5">
           <div className="flex h-[41px] w-full items-center justify-end overflow-clip rounded-full border border-solid border-line bg-surface px-3">
             <div className="flex min-w-px flex-[1_0_0] items-center justify-end gap-2">
