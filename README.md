@@ -79,7 +79,8 @@ device-local (see the comment-layer bullet below).
   Both lists carry the lilac banner (`src/components/MarketPromoBanner.tsx` —
   one component in both tabs) drawn under the first row/card, reading
   **«كاش باك حتى 50% بدون حد»** per user direction (the frames draw «ادفع مثل
-  كل مرة ، وخذ أكثر كل مــرة»); tapping it opens the card-linking form. The vouchers tab drops the promo banner, adds the خصومات filter chip
+  كل مرة ، وخذ أكثر كل مــرة»); tapping it switches to the الكاش باك tab
+  (user direction — previously the card-linking form). The vouchers tab drops the promo banner, adds the خصومات filter chip
   and swaps the merchant grid for the drawn voucher grid — نمق (gold «ما
   يفوتك» card) and أمازون with «تبدأ من» prices, هنقرسيتشن/جاهز برايم with
   follower counts, and جرير/قولدن سنت/أمازون with favourite hearts; each card

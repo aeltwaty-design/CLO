@@ -67,7 +67,7 @@ export default function VoucherGrid() {
               <VoucherCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
             ))}
           </div>
-          {i === 0 && <MarketPromoBanner onClick={() => navigate('/cashback/add-card')} />}
+          {i === 0 && <MarketPromoBanner onClick={() => navigate('/market?tab=cashback')} />}
         </div>
       ))}
     </div>

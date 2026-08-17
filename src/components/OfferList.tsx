@@ -38,7 +38,7 @@ export default function OfferList() {
       {offers.map((offer, i) => (
         <div key={`${offer.storeId}-${i}`} className="contents">
           <OfferCard data={offer} onOpen={() => navigate(`/store/${offer.storeId}`)} />
-          {i === 0 && <MarketPromoBanner onClick={() => navigate('/cashback/add-card')} />}
+          {i === 0 && <MarketPromoBanner onClick={() => navigate('/market?tab=cashback')} />}
         </div>
       ))}
     </div>
