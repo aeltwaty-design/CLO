@@ -174,12 +174,6 @@
     padding: 3px 7px;
   }
 
-  .comments-panel .comments-mini {
-    padding: 3px 8px;
-    font: 500 11px/1.5 var(--font-sans);
-    border-radius: 999px;
-  }
-
   .comments-list {
     display: flex;
     flex-direction: column;

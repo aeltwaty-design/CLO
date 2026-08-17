@@ -273,8 +273,8 @@ device-local (see the comment-layer bullet below).
   same-origin `/api/comments` — identical handler in the vite dev middleware
   and `npm run serve` (`server/comments.mjs`, server-side LWW merge, one JSON
   file) — so every viewer of the hosted subdomain sees the same pins (مشتركة
-  badge, 5s poll while ON); static hosting degrades to device-local (محلية)
-  with تصدير/استيراد in the panel. On phones (<768px) the shell chrome
+  badge, 5s poll while ON); static hosting degrades to device-local
+  (محلية). On phones (<768px) the shell chrome
   doesn't exist: `?comments=1` seeds mode ON for a capture-only review
   session. Suppressed for webdriver (unless `?comments`), `?diff=`/`?onion=`,
   and sessionStorage `clo-no-comments` — the QA gate never sees it.

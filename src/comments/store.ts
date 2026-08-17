@@ -7,7 +7,7 @@
  * 2. Same-origin `/api/comments` — best-effort. Served by the vite dev
  *    middleware in dev and by `server/comments.mjs` on the subdomain; when
  *    unreachable (pure static hosting) the store degrades to device-local
- *    and the UI shows «محلية» plus export/import.
+ *    and the UI shows «محلية».
  *
  * Concurrency model: last-write-wins per comment id (`updatedAt`), deletes
  * are tombstones (text/author stripped) so a delete can never be resurrected
@@ -318,20 +318,3 @@ export function setAuthor(name: string) {
   }
 }
 
-/* ── export / import (static-hosting fallback sharing) ────── */
-
-export function exportJson(): string {
-  return JSON.stringify(snapshot.doc, null, 2);
-}
-
-export function importJson(raw: string): boolean {
-  try {
-    const doc = JSON.parse(raw) as CommentsDoc;
-    if (doc?.version !== 1 || !Array.isArray(doc.comments)) return false;
-    emit({ doc: mergeDocs(snapshot.doc, doc) });
-    schedulePush();
-    return true;
-  } catch {
-    return false;
-  }
-}

@@ -1,10 +1,8 @@
-import { useEffect, useRef, useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import {
   commentsSuppressed,
   deleteComment,
-  exportJson,
   getSnapshot,
-  importJson,
   initCommentsStore,
   liveComments,
   subscribe,
@@ -75,7 +73,6 @@ export default function CommentsPanel() {
 
 function Panel() {
   const { doc, status, mode } = useSyncExternalStore(subscribe, getSnapshot);
-  const fileRef = useRef<HTMLInputElement>(null);
   useEffect(() => initCommentsStore(), []);
 
   const live = liveComments(doc);
@@ -102,15 +99,6 @@ function Panel() {
     window.location.href = `${target.path}?${target.search}`;
   };
 
-  const doExport = () => {
-    const blob = new Blob([exportJson()], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'clo-comments.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  };
-
   return (
     <div className="comments-panel">
       <div className="demo-group">
@@ -125,23 +113,6 @@ function Panel() {
           <span className="comments-count" data-testid="panel-count">
             {live.length}
           </span>
-          <button type="button" className="comments-mini" onClick={doExport}>
-            تصدير
-          </button>
-          <button type="button" className="comments-mini" onClick={() => fileRef.current?.click()}>
-            استيراد
-          </button>
-          <input
-            ref={fileRef}
-            type="file"
-            accept="application/json,.json"
-            style={{ display: 'none' }}
-            onChange={async (e) => {
-              const f = e.target.files?.[0];
-              if (f) importJson(await f.text());
-              e.target.value = '';
-            }}
-          />
         </div>
       </div>
 
