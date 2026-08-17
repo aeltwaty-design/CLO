@@ -71,7 +71,8 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 - Tab bar المحفظة → `/cards` (zero-balance wallet before linking, populated
   after) → `الكل` → `/transactions` → row tap opens the details sheet. In
   Phase 2 the filter row gains a live **month filter** (derived, no drawn
-  frame): a mint chip naming the current month opens «اختر الشهر», listing
+  frame): a month headline over the list («أغسطس 2026» + chevron — moved out
+  of the chip row per user direction) opens «اختر الشهر», listing
   only the months that carry activity; picking one slices the list (past
   months label their groups by date, e.g. «13 يوليو») and an empty month
   says «ما فيه عمليات في هذا الشهر». It defaults to the current month, so

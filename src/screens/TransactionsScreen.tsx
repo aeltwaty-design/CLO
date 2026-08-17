@@ -373,27 +373,35 @@ export default function TransactionsScreen() {
                     </div>
                   </div>
                 </div>
-                {phase === 2 && (
-                  <button
-                    type="button"
-                    onClick={() => setMonthOpen(true)}
-                    data-testid="open-month"
-                    className="flex shrink-0 cursor-pointer items-center justify-center gap-1 rounded-2xl border border-solid border-brand-400 bg-brand-50 px-2.5 py-1.5"
-                  >
-                    <div className="relative size-5 shrink-0 overflow-clip">
-                      <div className="absolute bottom-[35%] left-1/4 right-1/4 top-[35%]">
-                        <div className="absolute inset-[-4.17%_-2.5%]">
-                          <img alt="" className="block size-full max-w-none" src={iconChevronDown} />
-                        </div>
-                      </div>
-                    </div>
-                    <p className="whitespace-nowrap text-center text-xs font-medium leading-[1.5] text-brand-400" dir="auto" data-testid="month-label">
-                      {monthLabel(monthFromKey(month))}
-                    </p>
-                  </button>
-                )}
               </div>
             </div>
+
+            {/* Phase-2 month headline over the list — the month filter moved
+                out of the chip row per user direction: the headline names the
+                month + year, and tapping it still opens «اختر الشهر» */}
+            {phase === 2 && (
+              <button
+                type="button"
+                onClick={() => setMonthOpen(true)}
+                data-testid="open-month"
+                className="flex w-full shrink-0 cursor-pointer items-center justify-end gap-1.5"
+              >
+                <div className="relative size-4 shrink-0 overflow-clip">
+                  <div className="absolute bottom-[35%] left-1/4 right-1/4 top-[35%]">
+                    <div className="absolute inset-[-4.17%_-2.5%]">
+                      <img alt="" className="block size-full max-w-none" src={iconChevronDown} />
+                    </div>
+                  </div>
+                </div>
+                <p
+                  className="whitespace-nowrap text-right text-base font-medium leading-[1.5] text-ink"
+                  dir="auto"
+                  data-testid="month-label"
+                >
+                  {monthLabel(monthFromKey(month))}
+                </p>
+              </button>
+            )}
 
             {/* Day sections — mt-[-3px] pins the list top to the design's
                 y185 (chip row renders 3px taller than the Figma stroke box) */}
