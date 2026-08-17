@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppState } from '../state/AppState';
 import { useWithdraw } from '../state/WithdrawState';
 import Riyal from './Riyal';
+import MaskGlyph from './redeem/MaskGlyph';
+import iconBank from '../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
+import iconTicket from '../assets/figma/02d41c187946e3ed96263cd3096f1393fea2a563.svg';
+import iconBriefcase from '../assets/figma/eec1cb423a0fdc92072abdd2d9c2fbfb5921b6fc.svg';
+import iconPeople from '../assets/figma/c4f14edb4f3dc73aafc57568f4abb02e0ef9e857.svg';
+import iconHeart from '../assets/figma/abd2930f3bda6577cc003ae3e4e50852eb9b1aa4.svg';
+import iconMobile from '../assets/icons/mobile.svg';
 
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -103,6 +110,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="تحويل لحساب بنكي"
                 sub={`${fmtSar(cashback)} ﷼ متاحة للسحب`}
+                icon={iconBank}
                 onPick={toBank}
                 testid="redeem-bank"
               />
@@ -110,6 +118,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="اشترِ قسائم"
                 sub="تصفّح قسائم المتاجر في السوق"
+                icon={iconTicket}
                 onPick={toVouchers}
                 testid="redeem-vouchers"
               />
@@ -117,6 +126,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="أهدِها"
                 sub="لزملائك في العمل أو أفراد عائلتك"
+                icon={iconPeople}
                 onPick={() => setView('gift')}
                 testid="redeem-gift"
               />
@@ -124,11 +134,12 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="شحن رصيد جوال"
                 sub="عبّي رصيدك بكاش باك"
+                icon={iconMobile}
                 onPick={toRecharge}
                 testid="redeem-recharge"
               />
               <Divider />
-              <RedeemRow title="تبرع فيها" sub="خلها صدقة بضغطة" onPick={toDonate} testid="redeem-donate" />
+              <RedeemRow title="تبرع فيها" sub="خلها صدقة بضغطة" icon={iconHeart} onPick={toDonate} testid="redeem-donate" />
             </div>
           </>
         )}
@@ -140,6 +151,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="زملاء العمل"
                 sub="شارك كاش باك مع زملائك في العمل"
+                icon={iconBriefcase}
                 onPick={() => toGift('colleagues')}
                 testid="gift-colleagues"
               />
@@ -147,6 +159,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
               <RedeemRow
                 title="أفراد العائلة"
                 sub="شارك كاش باك مع عائلتك الكريمة"
+                icon={iconPeople}
                 onPick={() => toGift('family')}
                 testid="gift-family"
               />
@@ -165,12 +178,15 @@ function Divider() {
 function RedeemRow({
   title,
   sub,
+  icon,
   onPick,
   soon,
   testid,
 }: {
   title: string;
   sub: string;
+  /** row glyph, painted brand-green in a mint circle (cause-tile idiom) */
+  icon?: string;
   onPick?: () => void;
   soon?: boolean;
   testid?: string;
@@ -201,6 +217,11 @@ function RedeemRow({
           {sub}
         </span>
       </span>
+      {icon && (
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-50">
+          <MaskGlyph src={icon} size={20} className="bg-brand-400" />
+        </span>
+      )}
     </button>
   );
 }
