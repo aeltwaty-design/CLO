@@ -8,6 +8,7 @@ import { DonateProvider } from './state/DonateState';
 import { WalaOneProvider } from './state/WalaOneState';
 import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
+import CommentLayer from './comments/CommentLayer';
 
 /**
  * Dev-only pixel-diff overlay: ?diff=<refId> renders design/refs/<refId>.png
@@ -226,6 +227,7 @@ function App() {
                       <div className="phone-frame">
                         <RouterProvider router={router} />
                         <DiffOverlay />
+                        <CommentLayer />
                       </div>
                       <DemoControls />
                     </div>

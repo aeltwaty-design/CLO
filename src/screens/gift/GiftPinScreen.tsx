@@ -72,6 +72,7 @@ export default function GiftPinScreen() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if ((e.target as HTMLElement)?.closest?.('input,textarea')) return;
       if (/^[0-9]$/.test(e.key)) append(e.key);
       else if (e.key === 'Backspace') erase();
     };

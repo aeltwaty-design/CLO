@@ -6,3 +6,4 @@ scripts/.mcp-session
 Thumbs.db
 public/refs
 design/qa
+server/comments-data.json

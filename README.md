@@ -14,6 +14,17 @@ Phone-sized viewport (375×812) renders full-bleed; desktop windows get a center
 phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
 (otherwise every load starts before linking, and completing the flow flips it live).
 
+To deploy on a subdomain **with shared review comments**, build then run the
+bundled host — one process serves `dist/` and the comments API:
+
+```bash
+npm run build
+npm run serve   # PORT=8080 by default
+```
+
+On a purely static host the app still works; comments just fall back to
+device-local (see the comment-layer bullet below).
+
 ## The clickable flow
 
 - `/market` — السوق hub (cashback tab). Before linking, the promo banner's
@@ -241,6 +252,25 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   everywhere. Seeds: `?w1amount=`, `?w1phone=`, `?w1v=1`. Refs for this
   section are not auto-gated (its node resists `get_metadata`; built from
   native-res canvas crops) — the flow is interaction-verified end to end.
+- **Review comments — the pin layer** (derived, no drawn frame; a prototype
+  tool, not product UI): a floating 💬 chip inside the frame (works on real
+  phones) toggles comment mode. While ON, every tap drops a numbered pin with
+  a composer — author name asked once per device — existing pins open for
+  view/**edit/delete** (anyone may edit any comment; deletes are tombstones so
+  peers can't resurrect them), and app interaction is paused behind one
+  capture-phase click listener; native scrolling keeps working and pins track
+  the screen's scroll content. OFF hides all pins. Pins are keyed per screen
+  *variant* (`src/comments/variantKey.ts`: phase + path + state params +
+  card-linked where it matters) — they can't address open bottom sheets, by
+  design. **Sharing:** comments live in localStorage and sync through
+  same-origin `/api/comments` — served identically by the vite dev middleware
+  and by `npm run serve` (`server/comments.mjs`, LWW-merge on the server, one
+  JSON file) — so every viewer of the hosted subdomain sees the same pins
+  (مشتركة badge, 5s poll while ON); on a static host it degrades to
+  device-local (محلية) with تصدير/استيراد JSON as the sharing fallback. The
+  layer is invisible to webdriver captures unless `?comments=1`, under
+  `?diff=`/`?onion=`, or with sessionStorage `clo-no-comments` — the QA gate
+  never sees it. Seeds: `?comments=1` arrives with mode ON.
 - **«شحن رصيد جوال» top-up flow** (derived, no drawn frame — the Figma file
   holds nothing telecom-shaped, so this is built from the gift journey's own
   pick/amount/PIN/status language): `/recharge/operator` (radio rows for
