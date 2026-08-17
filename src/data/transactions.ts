@@ -79,6 +79,30 @@ export const txGroups: TxGroup[] = [
     dayOffset: 4,
     items: [{ id: 't9', type: 'cashback', title: 'اسواق التميمي', time: '08:30', amount: 20 }],
   },
+  // Two earlier months, mirroring the transactions screen's `pastSections`
+  // demo rows — so the export sheet's month pills line up with the months
+  // the on-screen month filter offers.
+  {
+    day: 'الشهر الماضي',
+    dayOffset: 34,
+    items: [
+      { id: 'p1', type: 'cashback', title: 'اتش اند ام', time: '08:30', amount: 35 },
+      { id: 'p2', type: 'withdraw', title: 'سحب لحساب', time: '08:30', amount: -200 },
+    ],
+  },
+  {
+    day: 'الشهر الماضي',
+    dayOffset: 41,
+    items: [{ id: 'p3', type: 'cashback', title: 'ايكيا', time: '08:30', amount: 15 }],
+  },
+  {
+    day: 'قبل شهرين',
+    dayOffset: 68,
+    items: [
+      { id: 'p4', type: 'refund', title: 'قهوة إرا', time: '08:30', amount: 10 },
+      { id: 'p5', type: 'transfer', title: 'تحويل لنقاط', time: '08:30', amount: -80 },
+    ],
+  },
 ];
 
 /** Flat statement rows (newest first), each with its absolute date. */

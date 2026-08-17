@@ -78,8 +78,10 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   says «ما فيه عمليات في هذا الشهر». It defaults to the current month, so
   the drawn sections render as framed; the drawn تحويل/سحب/كاش باك chips
   stay inert. In Phase 2 the app bar also gains a **statement export**
-  affordance (derived, no drawn frame): «تصدير كشف حساب» sheet with period presets (آخر 7 أيام /
-  هذا الشهر / آخر 30 يوم / فترة مخصصة from–to), a live «N عمليات · الصافي»
+  affordance (derived, no drawn frame): «تصدير كشف حساب» sheet with **month
+  pills only** (per user direction, replacing the earlier presets + custom
+  from–to) — one pill per month carrying activity, newest first, matching the
+  months the on-screen filter offers — a live «N عمليات · الصافي»
   preview, and a one-tap **PDF download** — an A4 RTL bank-style statement
   (brand header, holder/card/period meta, earned/spent/net/balance tiles,
   dated rows with the new SAR symbol) rendered by the browser and packed via

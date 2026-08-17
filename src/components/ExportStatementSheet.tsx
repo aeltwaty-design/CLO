@@ -6,58 +6,61 @@ import Riyal from './Riyal';
 
 const fmtSar = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-type Preset = 'week' | 'month' | 'days30' | 'custom';
-
-const PRESETS: { key: Exclude<Preset, 'custom'>; label: string }[] = [
-  { key: 'week', label: 'آخر 7 أيام' },
-  { key: 'month', label: 'هذا الشهر' },
-  { key: 'days30', label: 'آخر 30 يوم' },
+const MONTHS_AR = [
+  'يناير',
+  'فبراير',
+  'مارس',
+  'أبريل',
+  'مايو',
+  'يونيو',
+  'يوليو',
+  'أغسطس',
+  'سبتمبر',
+  'أكتوبر',
+  'نوفمبر',
+  'ديسمبر',
 ];
 
-const iso = (d: Date) => {
-  const z = new Date(d);
-  z.setMinutes(z.getMinutes() - z.getTimezoneOffset());
-  return z.toISOString().slice(0, 10);
-};
+/** `YYYY-M` key for a date's month. */
+const monthKey = (d: Date) => `${d.getFullYear()}-${d.getMonth()}`;
 
-/** Parse an `<input type=date>` value as LOCAL midnight (the bare string
-    would parse as UTC and shift the day in non-UTC timezones). */
-const parseLocal = (s: string): Date | null => {
-  const [y, m, d] = s.split('-').map(Number);
-  return y && m && d ? new Date(y, m - 1, d) : null;
-};
-
-/** «تصدير كشف حساب» — bank-statement export sheet (derived, Phase 2 only):
-    period presets + custom from–to, live count/net preview, one-tap PDF. */
+/** «تصدير كشف حساب» — bank-statement export sheet (derived, Phase 2 only).
+    Month pills only, per user direction (replacing the earlier presets +
+    custom from–to): the sheet lists the months that carry activity, newest
+    first; picking one shows the count/net preview and the CTA exports that
+    month's statement. A month still in progress exports through today. */
 export default function ExportStatementSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { cashback } = useAppState();
-  // no period until the user picks one — the preview/CTA follow the choice
-  const [preset, setPreset] = useState<Preset | null>(null);
-  const today = useMemo(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  }, []);
-  const [customFrom, setCustomFrom] = useState(() => iso(new Date(today.getTime() - 6 * 86400000)));
-  const [customTo, setCustomTo] = useState(() => iso(today));
+  // no month until the user picks one — the preview/CTA follow the choice
+  const [month, setMonth] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  const all = useMemo(() => statementTxs(), []);
+  // months carrying activity, newest first (matches the screen's month filter)
+  const months = useMemo(() => {
+    const seen = new Map<string, Date>();
+    for (const t of all) {
+      const k = monthKey(t.date);
+      if (!seen.has(k)) seen.set(k, new Date(t.date.getFullYear(), t.date.getMonth(), 1));
+    }
+    return [...seen.entries()]
+      .sort((a, b) => b[1].getTime() - a[1].getTime())
+      .map(([key, first]) => ({ key, label: `${MONTHS_AR[first.getMonth()]} ${first.getFullYear()}` }));
+  }, [all]);
 
   if (!open) return null;
 
   const range = ((): { from: Date; to: Date } | null => {
-    if (preset === null) return null;
-    const to = new Date(today);
-    if (preset === 'week') return { from: new Date(today.getTime() - 6 * 86400000), to };
-    if (preset === 'days30') return { from: new Date(today.getTime() - 29 * 86400000), to };
-    if (preset === 'month') return { from: new Date(today.getFullYear(), today.getMonth(), 1), to };
-    const from = parseLocal(customFrom) ?? to;
-    const t = parseLocal(customTo) ?? to;
-    return from <= t ? { from, to: t } : { from: t, to: from };
+    if (month === null) return null;
+    const [y, m] = month.split('-').map(Number);
+    const from = new Date(y, m, 1);
+    const endOfMonth = new Date(y, m + 1, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return { from, to: endOfMonth < today ? endOfMonth : today };
   })();
 
-  const txs: StatementTx[] = range
-    ? statementTxs().filter((t) => t.date >= range.from && t.date <= range.to)
-    : [];
+  const txs: StatementTx[] = range ? all.filter((t) => t.date >= range.from && t.date <= range.to) : [];
   const net = txs.reduce((s, t) => s + t.amount, 0);
 
   const exportPdf = async () => {
@@ -97,47 +100,41 @@ export default function ExportStatementSheet({ open, onClose }: { open: boolean;
       >
         <div className="h-1 w-9 rounded-full bg-line" />
 
-        <div className="flex w-full items-center justify-end">
+        <div className="flex w-full flex-col items-end gap-0.5">
           <p className="text-base font-bold leading-[1.5] text-ink" dir="auto">
             تصدير كشف حساب
           </p>
+          <p className="text-xs font-normal leading-[1.5] text-ink-tertiary" dir="auto">
+            اختر الشهر اللي تبي كشفه
+          </p>
         </div>
 
-        {/* period presets */}
+        {/* month pills — newest first, rightmost in RTL */}
         <div className="flex w-full flex-row-reverse flex-wrap items-center gap-2">
-          {PRESETS.map((p) => {
-            const active = preset === p.key;
-            return (
-              <PresetChip key={p.key} label={p.label} active={active} onPick={() => setPreset(p.key)} />
-            );
-          })}
+          {months.map((m) => (
+            <MonthPill
+              key={m.key}
+              label={m.label}
+              active={month === m.key}
+              testid={`export-month-${m.key}`}
+              onPick={() => setMonth(m.key)}
+            />
+          ))}
         </div>
 
-        {/* ➗ custom period sits under its own divider */}
-        <div className="h-px w-full shrink-0 bg-line-subtle" />
-        <div className="flex w-full flex-row-reverse items-center">
-          <PresetChip label="فترة مخصصة" active={preset === 'custom'} onPick={() => setPreset('custom')} />
-        </div>
-
-        {/* custom from–to */}
-        {preset === 'custom' && (
-          <div className="flex w-full items-stretch gap-2">
-            <DateField label="إلى" value={customTo} max={iso(today)} onChange={setCustomTo} />
-            <DateField label="من" value={customFrom} max={iso(today)} onChange={setCustomFrom} />
-          </div>
-        )}
-
-        {/* live preview — appears once a period is picked */}
+        {/* live preview — appears once a month is picked */}
         {range && (
           <div className="flex w-full items-center justify-between rounded-2xl bg-surface-neutral px-4 py-3">
             <p className="text-xs font-medium leading-[1.5]" dir="rtl" data-testid="export-preview">
               {txs.length === 0 ? (
-                <span className="text-ink-tertiary">ما فيه عمليات في هذي الفترة</span>
+                <span className="text-ink-tertiary">ما فيه عمليات في هذا الشهر</span>
               ) : (
                 <span className="text-ink">
                   {'الصافي: '}
-                  <span className={`font-en ${net >= 0 ? 'text-brand-400' : 'text-ink-danger'}`}>{net > 0 ? '+' : ''}{fmtSar(net)}</span>
-                  {' '}
+                  <span className={`font-en ${net >= 0 ? 'text-brand-400' : 'text-ink-danger'}`}>
+                    {net > 0 ? '+' : ''}
+                    {fmtSar(net)}
+                  </span>{' '}
                   <Riyal />
                 </span>
               )}
@@ -172,37 +169,35 @@ export default function ExportStatementSheet({ open, onClose }: { open: boolean;
   );
 }
 
-/** Period chip — mint + green border when active (gift-chip idiom). */
-function PresetChip({ label, active, onPick }: { label: string; active: boolean; onPick: () => void }) {
+/** Month pill — mint + green border when active (gift-chip idiom). */
+function MonthPill({
+  label,
+  active,
+  testid,
+  onPick,
+}: {
+  label: string;
+  active: boolean;
+  testid: string;
+  onPick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onPick}
+      data-testid={testid}
       className={`flex shrink-0 items-center justify-center rounded-2xl border border-solid px-3 py-1.5 ${
         active ? 'border-brand-400 bg-brand-50' : 'cursor-pointer border-line bg-surface'
       }`}
     >
-      <p className={`whitespace-nowrap text-center text-xs leading-[1.5] ${active ? 'font-medium text-brand-400' : 'font-normal text-ink'}`} dir="auto">
+      <p
+        className={`whitespace-nowrap text-center text-xs leading-[1.5] ${
+          active ? 'font-medium text-brand-400' : 'font-normal text-ink'
+        }`}
+        dir="auto"
+      >
         {label}
       </p>
     </button>
-  );
-}
-
-/** Native date input styled like the app's rounded fields. */
-function DateField({ label, value, max, onChange }: { label: string; value: string; max: string; onChange: (v: string) => void }) {
-  return (
-    <label className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1">
-      <span className="text-xs font-medium leading-[1.5] text-ink" dir="auto">
-        {label}
-      </span>
-      <input
-        type="date"
-        value={value}
-        max={max}
-        onChange={(e) => onChange(e.target.value)}
-        className="font-en w-full rounded-xl border border-solid border-line bg-surface px-3 py-2 text-right text-xs font-normal leading-[1.5] text-ink outline-none"
-      />
-    </label>
   );
 }
