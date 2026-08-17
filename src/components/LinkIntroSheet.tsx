@@ -7,6 +7,7 @@ import heroCards from '../assets/figma/b4ee0f8753c19b40ccfa4d1d2ab5f3fd3d853273.
 import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.svg';
 import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
 import iconPlus from '../assets/figma/1782ca329908717a3751d66c5fff07ae32e411f5.svg';
+import iconInfoSmall from '../assets/figma/60e86b53328378fe6e2eaac39925383a1427b8b4.svg';
 
 /** Entry-point gate: in Phase 2, EVERY «add card» tap opens the intro sheet
     over the screen it was tapped on for as long as no card has been added
@@ -35,6 +36,87 @@ const STEPS = [
   { title: 'خذ الكاش باك في محفظة ولاء بلس', desc: 'يوصلك خلال 15 يوم من الشراء' },
 ];
 
+type TipId = 'safe' | 'rewards';
+
+/** Trust chip with an ⓘ explainer (user direction — the drawn chips are
+    label + glyph only). The ⓘ sits at the reading end of the label
+    (physically leftmost), reusing the withdrawal summary's drawn info glyph;
+    hover, focus, or tap opens an ink tooltip bubble anchored above the chip
+    — a bubble, not the withdrawal's InfoSheet, since this sheet is already
+    an overlay and stacking a second one for one sentence is too heavy. */
+function TrustChip({
+  id,
+  label,
+  icon,
+  tipText,
+  align,
+  openTip,
+  setTip,
+}: {
+  id: TipId;
+  label: string;
+  icon: string;
+  tipText: string;
+  /** which chip edge the bubble hugs, so it never leaves the 375px frame */
+  align: 'left' | 'right';
+  openTip: TipId | null;
+  setTip: (t: TipId | null) => void;
+}) {
+  const open = openTip === id;
+  return (
+    <div className="relative flex shrink-0 items-center gap-1.5 rounded-full bg-brand-50 py-1.5 pl-2.5 pr-2.5">
+      {open && (
+        <div
+          role="tooltip"
+          data-testid={`chip-tip-${id}`}
+          className={`absolute bottom-[calc(100%+8px)] z-10 w-[230px] rounded-xl bg-ink px-3 py-2.5 ${
+            align === 'right' ? 'right-0' : 'left-0'
+          }`}
+          style={{ animation: 'tip-in 150ms ease-out both' }}
+        >
+          <p className="text-right text-xs font-normal leading-[1.5] text-ink-inverse" dir="rtl">
+            {tipText}
+          </p>
+          <div
+            aria-hidden
+            className={`absolute top-full size-0 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink ${
+              align === 'right' ? 'right-4' : 'left-4'
+            }`}
+          />
+        </div>
+      )}
+      <button
+        type="button"
+        aria-label={`المزيد عن ${label}`}
+        aria-expanded={open}
+        data-testid={`chip-info-${id}`}
+        onMouseEnter={() => setTip(id)}
+        onMouseLeave={() => setTip(null)}
+        onFocus={() => setTip(id)}
+        onBlur={() => setTip(null)}
+        // touch has no hover, so a tap toggles; mouse clicks stay hover-only
+        // (a click handler would fight the mouseenter that precedes it)
+        onPointerDown={(e) => {
+          if (e.pointerType === 'touch') setTip(open ? null : id);
+        }}
+        className="relative size-[13.306px] shrink-0 cursor-pointer overflow-clip"
+      >
+        <div className="absolute inset-[12.5%]">
+          <div className="absolute inset-[-5.56%]">
+            <img alt="" className="block size-full max-w-none" src={iconInfoSmall} />
+          </div>
+        </div>
+      </button>
+      <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
+        {label}
+      </p>
+      <div className="relative size-4 shrink-0">
+        <img alt="" className="absolute inset-0 block size-full max-w-none" src={icon} />
+      </div>
+    </div>
+  );
+}
+
 /**
  * UX redesign: the linking intro as a partial-height bottom sheet over the
  * Market. Mint hero with the cards illustration, an auto-advancing 3-step
@@ -55,6 +137,7 @@ export default function LinkIntroSheet({
 }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
+  const [tip, setTip] = useState<TipId | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -70,7 +153,7 @@ export default function LinkIntroSheet({
 
   return (
     <div className="absolute inset-0 z-50">
-      <style>{'@keyframes sheet-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes sheet-fade{from{opacity:0}to{opacity:1}}@keyframes step-in{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}'}</style>
+      <style>{'@keyframes sheet-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes sheet-fade{from{opacity:0}to{opacity:1}}@keyframes step-in{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}@keyframes tip-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}'}</style>
       <button
         type="button"
         aria-label="إغلاق"
@@ -161,24 +244,27 @@ export default function LinkIntroSheet({
           </div>
         </div>
 
-        {/* trust chips */}
+        {/* trust chips — each carries an ⓘ whose hover/tap opens a tooltip
+            with the longer story behind the claim (user direction) */}
         <div className="flex w-full items-center justify-end gap-2">
-          <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-brand-50 py-1.5 pl-3 pr-2.5">
-            <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
-              بياناتك في أمان
-            </p>
-            <div className="relative size-4 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconShieldTick} />
-            </div>
-          </div>
-          <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-brand-50 py-1.5 pl-3 pr-2.5">
-            <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink" dir="auto">
-              فوق مكافآت بنكك
-            </p>
-            <div className="relative size-4 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCoin} />
-            </div>
-          </div>
+          <TrustChip
+            id="safe"
+            label="بياناتك في أمان"
+            icon={iconShieldTick}
+            align="left"
+            tipText="بيانات بطاقتك مشفرة بأعلى معايير الأمان وما نشاركها مع أحد.. نقرأ العمليات فقط عشان نحسب لك الكاش باك"
+            openTip={tip}
+            setTip={setTip}
+          />
+          <TrustChip
+            id="rewards"
+            label="فوق مكافآت بنكك"
+            icon={iconCoin}
+            align="right"
+            tipText="الكاش باك يجيك فوق مكافآت بطاقتك البنكية نفسها.. نقاط بنكك ما تتأثر، وتكسب من الجهتين"
+            openTip={tip}
+            setTip={setTip}
+          />
         </div>
 
         <p className="w-full text-center text-xs font-normal leading-[1.5] text-ink-tertiary" dir="auto">

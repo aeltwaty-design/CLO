@@ -262,7 +262,12 @@ phone frame. `?linked=1` / `?linked=0` forces the before/after card-link state
   first card is linked, every entry goes straight to the form. A cold form
   deep link shows the sheet over the form itself (in-app arrivals never
   double-show), `?intro=0` suppresses it, and Phase 1 keeps its original
-  flows.
+  flows. The two trust chips («بياناتك في أمان» / «فوق مكافآت بنكك») each
+  carry an **ⓘ explainer** (derived, no drawn ⓘ on the chips): hover, focus,
+  or tap opens an ink tooltip bubble above the chip with the longer story —
+  a bubble rather than the withdrawal's drawn info sheet, since the intro is
+  already an overlay; the ⓘ glyph itself is the drawn one from the
+  withdrawal summary.
 - **Phase 2: المحفظة Points Wallet** (Figma 54:10152 before / 54:10497 after
   linking) — the app's main wallet is **points**; cashback is the second
   wallet. In Phase 2 the tab bar's المحفظة opens `/wallet` (points): green
