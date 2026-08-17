@@ -124,7 +124,14 @@ export function CardsZero() {
                 <span className="text-xs leading-[1.5]">استخدم بطاقاتك المربوطة في الشراء من شركاؤنا واربح كاش باك فوري يصل ل</span>
                 <span className="font-en text-xs not-italic leading-[1.5]">50%</span>
               </p>
-              <div className="flex w-[157px] shrink-0 items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-surface px-2 py-1.5">
+              {/* CTA → the Market's cashback tab (its default tab, so the
+                  plain route lands there in both phases) */}
+              <button
+                type="button"
+                onClick={() => navigate('/market')}
+                data-testid="discover-stores"
+                className="flex w-[157px] shrink-0 cursor-pointer items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-surface px-2 py-1.5"
+              >
                 <div className="relative size-4 shrink-0 overflow-clip">
                   <div className="absolute flex inset-[20%_15%] items-center justify-center" style={{ containerType: 'size' }}>
                     <div className="h-[100cqw] w-[100cqh] flex-none rotate-90">
@@ -139,7 +146,7 @@ export function CardsZero() {
                 <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
                   اكتشف المتاجر
                 </p>
-              </div>
+              </button>
               {/* Decorative bag + coins, top-right */}
               <div className="absolute left-[256.53px] top-[-0.04px] h-[52px] w-[83.474px]">
                 <div className="absolute left-0 top-0 h-[52px] w-[83.474px]">
