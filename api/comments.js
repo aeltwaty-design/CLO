@@ -13,6 +13,8 @@
  * last-write-wins per comment id, deletes are tombstones — and returns
  * the merged doc, which the client adopts.
  */
+import { notifyNewComments } from '../server/notify.mjs';
+
 const KEY = 'clo-comments-v1';
 const BODY_LIMIT = 512 * 1024;
 const TOMBSTONE_TTL = 30 * 24 * 3600 * 1000;
@@ -88,8 +90,11 @@ export default async function handler(req, res) {
         res.status(400).json({ error: 'bad doc' });
         return;
       }
-      const merged = mergeDocs(await redisGet(env), incoming);
+      const stored = await redisGet(env);
+      const merged = mergeDocs(stored, incoming);
       await redisSet(env, merged);
+      // must complete before responding — serverless may freeze afterwards
+      await notifyNewComments(stored, merged, `https://${req.headers.host}`);
       res.setHeader('cache-control', 'no-store');
       res.status(200).json(merged);
       return;

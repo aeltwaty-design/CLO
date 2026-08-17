@@ -22,6 +22,15 @@ To deploy on a subdomain **with shared review comments**:
   Redis — one dashboard step: project → **Storage → Create → Redis
   (Upstash, free tier)**, then redeploy. Until the store exists the endpoint
   answers 503 and comments stay device-local.
+  **Email notifications:** every *new* comment (not edits/deletes) sends an
+  email to `a.eltwaty@walaplus.com` (the default recipient) via Resend:
+  create a free resend.com account **with that same address** (unverified
+  domains only deliver to the account owner), make an API key, add it as the
+  `RESEND_API_KEY` env var in Vercel, redeploy. Optional overrides:
+  `COMMENTS_NOTIFY_EMAIL`, `COMMENTS_NOTIFY_FROM`. Without the key the API
+  simply doesn't send. Bursts batch into one email; each item links straight
+  to its pin (`?comments=1&focus=`). Same env vars work for the self-host
+  server below (`server/notify.mjs` is shared by both).
 - **Own server**: build then run the bundled host — one process serves
   `dist/` and the comments API off a JSON file:
 

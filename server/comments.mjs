@@ -15,6 +15,7 @@ import { createServer } from 'node:http';
 import { readFileSync, writeFileSync, renameSync, existsSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, extname, normalize } from 'node:path';
+import { notifyNewComments } from './notify.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA_FILE = join(HERE, 'comments-data.json');
@@ -80,7 +81,7 @@ export function handleCommentsApi(req, res) {
       }
       chunks.push(chunk);
     });
-    req.on('end', () => {
+    req.on('end', async () => {
       if (res.writableEnded) return;
       try {
         const incoming = JSON.parse(Buffer.concat(chunks).toString('utf8'));
@@ -88,8 +89,11 @@ export function handleCommentsApi(req, res) {
           sendJson(res, 400, { error: 'bad doc' });
           return;
         }
-        const merged = mergeDocs(readDoc(), incoming);
+        const stored = readDoc();
+        const merged = mergeDocs(stored, incoming);
         writeDoc(merged);
+        const proto = req.headers['x-forwarded-proto'] ?? 'http';
+        await notifyNewComments(stored, merged, `${proto}://${req.headers.host ?? 'localhost'}`);
         sendJson(res, 200, merged);
       } catch {
         sendJson(res, 400, { error: 'bad json' });
