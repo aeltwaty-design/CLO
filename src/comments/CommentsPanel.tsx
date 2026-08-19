@@ -12,6 +12,7 @@ import {
 } from './store';
 import { parseVariant, variantToSearch } from './variantKey';
 import { seedFor } from '../navigation/screenLinks';
+import { PHASE_LABEL, type Phase } from '../state/PhaseState';
 
 /** Arabic screen names for the inbox rows. */
 const SCREEN_AR: [RegExp, string][] = [
@@ -46,7 +47,7 @@ function describeVariant(variant: string): string[] {
   if (params.linked === '1') chips.push('بعد الربط');
   else if (params.linked === '0') chips.push('قبل الربط');
   if (path.startsWith('/store/')) chips.push(path.slice('/store/'.length));
-  chips.push(`Phase ${phase}`);
+  chips.push(PHASE_LABEL[Number(phase) as Phase] ?? `Phase ${phase}`);
   return chips;
 }
 

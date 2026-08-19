@@ -34,7 +34,7 @@ export default function TabBar({ active = 'market' }: { active?: 'market' | 'hom
         icon={wallet ? navWalletActive : navWallet}
         label="المحفظة"
         active={wallet}
-        onClick={() => navigate(phase === 2 ? '/wallet' : '/cards')}
+        onClick={() => navigate(phase >= 2 ? '/wallet' : '/cards')}
       />
 
       {/* elevated scan button */}
@@ -53,7 +53,7 @@ export default function TabBar({ active = 'market' }: { active?: 'market' | 'hom
         icon={home ? navHomeActive : navHome}
         label="الرئيسية"
         active={home}
-        onClick={phase === 2 ? () => navigate('/home') : undefined}
+        onClick={phase >= 2 ? () => navigate('/home') : undefined}
       />
     </nav>
   );

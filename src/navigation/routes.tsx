@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
     element: <ScreenTransition />,
     children: [
       // Phase 2 lands on the Home tab; Phase 1 keeps the market entry
-      { path: '/', element: <Navigate to={PHASE === 2 ? '/home' : '/market'} replace /> },
+      { path: '/', element: <Navigate to={PHASE >= 2 ? '/home' : '/market'} replace /> },
       { path: '/home', element: <HomeScreen /> },
       { path: '/wallet', element: <WalletScreen /> },
       { path: '/market', element: <MarketScreen /> },

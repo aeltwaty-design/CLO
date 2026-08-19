@@ -302,9 +302,9 @@ export default function TransactionsScreen() {
   const [month, setMonth] = useState(() => monthKey(new Date()));
   const [monthOpen, setMonthOpen] = useState(false);
 
-  const all = phase === 2 ? [...sections, ...pastSections] : sections;
+  const all = phase >= 2 ? [...sections, ...pastSections] : sections;
   const months = [...new Set(all.map((s) => monthKey(sectionDate(s.dayOffset))))];
-  const visible = phase === 2 ? all.filter((s) => monthKey(sectionDate(s.dayOffset)) === month) : all;
+  const visible = phase >= 2 ? all.filter((s) => monthKey(sectionDate(s.dayOffset)) === month) : all;
 
   return (
     <div className="relative h-full overflow-hidden">
@@ -318,7 +318,7 @@ export default function TransactionsScreen() {
               <div className="relative size-5 shrink-0">
                 <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSearch} />
               </div>
-              {phase === 2 && (
+              {phase >= 2 && (
                 <button
                   type="button"
                   onClick={() => setExportOpen(true)}
@@ -379,7 +379,7 @@ export default function TransactionsScreen() {
             {/* Phase-2 month headline over the list — the month filter moved
                 out of the chip row per user direction: the headline names the
                 month + year, and tapping it still opens «اختر الشهر» */}
-            {phase === 2 && (
+            {phase >= 2 && (
               <button
                 type="button"
                 onClick={() => setMonthOpen(true)}

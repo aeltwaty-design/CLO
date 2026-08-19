@@ -33,7 +33,7 @@ export default function StoreRouter() {
       {variant === 'offers' &&
         (cardLinked ? <StoreOffersAfter onOfferTap={openOffer} /> : <StoreOffersBefore onOfferTap={openOffer} />)}
       {variant === 'vouchers' &&
-        (phase === 2 ? (
+        (phase >= 2 ? (
           <StoreVoucherDetails />
         ) : cardLinked ? (
           <StoreVouchersAfter onOfferTap={openOffer} />

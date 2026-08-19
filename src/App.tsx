@@ -6,7 +6,7 @@ import { VoucherProvider } from './state/VoucherState';
 import { RechargeProvider } from './state/RechargeState';
 import { DonateProvider } from './state/DonateState';
 import { WalaOneProvider } from './state/WalaOneState';
-import { PhaseProvider, usePhase, type Phase } from './state/PhaseState';
+import { PhaseProvider, usePhase, PHASE_LABEL, type Phase } from './state/PhaseState';
 import { router } from './navigation/routes';
 import CommentLayer from './comments/CommentLayer';
 import CommentsPanel from './comments/CommentsPanel';
@@ -33,8 +33,9 @@ function DiffOverlay() {
   );
 }
 
-/** Demo chrome (desktop shell only): switch between the two prototype
-    versions. A switch hard-navigates so each phase starts at scenario 1. */
+/** Demo chrome (desktop shell only): switch between the prototype
+    versions — Temp (the copy-review copy of Phase 2), Phase 2, Phase 1. A
+    switch hard-navigates so each phase starts at scenario 1. */
 function PhaseTabs() {
   const phase = usePhase();
   const go = (p: Phase) => {
@@ -44,9 +45,9 @@ function PhaseTabs() {
   };
   return (
     <div className="phase-tabs" role="tablist" aria-label="Prototype version">
-      {([2, 1] as const).map((p) => (
+      {([3, 2, 1] as const).map((p) => (
         <button key={p} type="button" role="tab" aria-selected={phase === p} onClick={() => go(p)}>
-          Phase {p}
+          {PHASE_LABEL[p]}
         </button>
       ))}
     </div>
@@ -61,9 +62,11 @@ function DemoControls() {
   const { cardLinked, setCardLinked } = useAppState();
 
   // hard navigation so URL-seeded provider state (linked/waccount/wamount/
-  // cards/touchid) is re-read at load; current phase rides along
-  const jump = (url: string, forced?: 2) => {
-    const p = forced ?? phase;
+  // cards/touchid) is re-read at load; the current phase rides along. `min`
+  // is a floor, not a force: a Phase-2-only screen opened from Temp stays
+  // in Temp (Temp is Phase-2 lineage), only Phase 1 gets lifted.
+  const jump = (url: string, min?: 2) => {
+    const p = min && phase < min ? min : phase;
     window.location.href = `${url}${url.includes('?') ? '&' : '?'}phase=${p}`;
   };
 
@@ -140,7 +143,7 @@ function DemoControls() {
           <code>?w1amount=</code>/<code>?w1phone=</code>/<code>?w1v=1</code> WalaOne (OTP <code>00000</code> = wrong,
           number <code>5 0000 0000</code> = unlinked) ·{' '}
           <code>?dcause=</code>/<code>?dcharity=</code>/<code>?damount=</code> donation ·{' '}
-          <code>?phase=1/2</code> version. A reload restarts the demo.
+          <code>?phase=1/2/3</code> version (3 = Temp). A reload restarts the demo.
         </p>
       </details>
     </div>

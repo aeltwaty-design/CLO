@@ -60,7 +60,7 @@ export default function AddCardScreen() {
   // first history entry. In-app entries get the sheet over their origin
   // screen instead, so no double-show here.
   const [introOpen, setIntroOpen] = useState(
-    phase === 2 && !cardLinked && !introSuppressed && location.key === 'default',
+    phase >= 2 && !cardLinked && !introSuppressed && location.key === 'default',
   );
   const dismissIntro = () => setIntroOpen(false);
 

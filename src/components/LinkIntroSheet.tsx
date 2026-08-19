@@ -21,7 +21,7 @@ export function useLinkIntroGate() {
   const { cardLinked, introSuppressed } = useAppState();
   const [introOpen, setIntroOpen] = useState(false);
   const startLinking = () => {
-    if (phase === 2 && !cardLinked && !introSuppressed) {
+    if (phase >= 2 && !cardLinked && !introSuppressed) {
       setIntroOpen(true);
       return;
     }

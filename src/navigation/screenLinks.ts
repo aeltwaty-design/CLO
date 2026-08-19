@@ -1,5 +1,6 @@
-/** Screens quick-jump — labels → seeded deep links. `p: 2` forces Phase 2
-    (screens that only exist there); everything else keeps the current phase.
+/** Screens quick-jump — labels → seeded deep links. `p: 2` marks screens
+    that need the Phase-2 lineage (Phase 2 or Temp — the jump floors the phase
+    to 2, so Temp stays Temp); everything else keeps the current phase.
     Shared by the demo shell's jump menu AND the comments inbox, whose
     jump-to-pin borrows these seeds so guarded screens don't bounce. */
 export const SCREEN_LINKS: { label: string; url: string; p?: 2 }[] = [

@@ -41,10 +41,10 @@ export default function MarketScreen() {
         <MarketContent
           linked={cardLinked}
           onStart={openIntro}
-          tab={phase === 2 ? tab : 'cashback'}
-          tabsAvailable={phase === 2 ? PHASE2_TABS : undefined}
-          tabsOrder={phase === 2 ? PHASE2_TAB_ORDER : undefined}
-          onTabChange={phase === 2 ? setTab : undefined}
+          tab={phase >= 2 ? tab : 'cashback'}
+          tabsAvailable={phase >= 2 ? PHASE2_TABS : undefined}
+          tabsOrder={phase >= 2 ? PHASE2_TAB_ORDER : undefined}
+          onTabChange={phase >= 2 ? setTab : undefined}
         />
       </div>
       <TabBar />
