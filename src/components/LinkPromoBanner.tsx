@@ -2,6 +2,7 @@ import iconShop16 from '../assets/figma/8b46d8c8b043dd24e8af69e3f25d9d115f2171ee
 import iconFlash16 from '../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
 import iconSecurity16 from '../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
+import { IS_TEMP } from '../state/PhaseState';
 
 /** Four-point twinkle, drawn around the origin so it can be placed by transform. */
 function Sparkle({ x, y, scale, className }: { x: number; y: number; scale: number; className: string }) {
@@ -92,7 +93,17 @@ function FiftyPercentArt() {
  * rather than the drawn «اربطها الأن» — the same claim the market banner and
  * the linking intro sheet make.
  */
-export default function LinkPromoBanner({ onLink }: { onLink: () => void }) {
+export default function LinkPromoBanner({
+  onLink,
+  variant = 'home',
+}: {
+  onLink: () => void;
+  /** Temp copy differs per host — the reviewer wrote separate lines for the
+      Home promo (#1–3, #9) and the Points-Wallet banner (#7, #8, #11, #12).
+      Phase 1/2 ignore this and render the shared copy. */
+  variant?: 'home' | 'wallet';
+}) {
+  const wallet = variant === 'wallet';
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
       {/* art first, so it paints behind the copy and the CTA */}
@@ -102,20 +113,49 @@ export default function LinkPromoBanner({ onLink }: { onLink: () => void }) {
       <div className="flex w-full shrink-0 flex-col items-end gap-5">
         <div className="flex w-full shrink-0 flex-col items-end">
           <div className="flex shrink-0 items-center">
-            <p className="whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="rtl">
-              <span className="font-bold text-bravo-500">كاش باك</span>
-              <span className="font-medium text-ink">{' حتى '}</span>
-              <span className="font-en font-bold text-bravo-500">50%</span>
-              <span className="font-medium text-ink">{' بدون حد'}</span>
-            </p>
+            {IS_TEMP && wallet ? (
+              // #7 — the wallet headline
+              <p className="whitespace-nowrap text-right text-sm font-bold not-italic leading-[1.5] text-bravo-500" dir="auto">
+                خل مشترياتك ترجع لك كاش باك
+              </p>
+            ) : (
+              <p className="whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="rtl">
+                <span className="font-bold text-bravo-500">كاش باك</span>
+                <span className="font-medium text-ink">{' حتى '}</span>
+                <span className="font-en font-bold text-bravo-500">50%</span>
+                <span className="font-medium text-ink">{' بدون حد'}</span>
+              </p>
+            )}
           </div>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-2">
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
-            <p className="h-[18px] whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              {'اربح من أكثر من '}
-              <span className="font-en">500</span>
-              {' متجر'}
+            <p className="h-[18px] whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="rtl">
+              {IS_TEMP ? (
+                wallet ? (
+                  // #8
+                  <>
+                    {'حتى '}
+                    <span className="font-en">[X]%</span>
+                    {' عند أكثر من '}
+                    <span className="font-en">500</span>
+                    {' متجر'}
+                  </>
+                ) : (
+                  // #1
+                  <>
+                    {'كاش باك عند أكثر من '}
+                    <span className="font-en">500</span>
+                    {' متجر'}
+                  </>
+                )
+              ) : (
+                <>
+                  {'اربح من أكثر من '}
+                  <span className="font-en">500</span>
+                  {' متجر'}
+                </>
+              )}
             </p>
             <div className="relative size-4 shrink-0">
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconShop16} />
@@ -123,7 +163,8 @@ export default function LinkPromoBanner({ onLink }: { onLink: () => void }) {
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
             <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              استرداد نقدي سريع
+              {/* #11 / #2 */}
+              {IS_TEMP ? (wallet ? 'كاش باك يوصلك لحظتها' : 'زيادة على مكافآت بنكك') : 'استرداد نقدي سريع'}
             </p>
             <div className="relative size-4 shrink-0">
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
@@ -131,7 +172,8 @@ export default function LinkPromoBanner({ onLink }: { onLink: () => void }) {
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
             <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              آمن ومشفّر
+              {/* #3 */}
+              {IS_TEMP && !wallet ? 'كاش باك يوصلك لحظتها' : 'آمن ومشفّر'}
             </p>
             <div className="relative size-4 shrink-0">
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSecurity16} />
@@ -147,7 +189,8 @@ export default function LinkPromoBanner({ onLink }: { onLink: () => void }) {
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft16} />
           </div>
           <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            ابدأ
+            {/* #12 / #9 */}
+            {IS_TEMP ? (wallet ? 'خلها ترجع لك' : 'شوف الكاش باك') : 'ابدأ'}
           </p>
         </button>
       </div>

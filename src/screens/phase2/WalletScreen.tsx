@@ -582,7 +582,7 @@ export default function WalletScreen() {
             </div>
           ) : (
             <>
-              <LinkPromoBanner onLink={startLinking} />
+              <LinkPromoBanner onLink={startLinking} variant="wallet" />
               <div className="flex w-full shrink-0 flex-col items-start">
                 <TransactionsBlock />
               </div>
