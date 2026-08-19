@@ -19,6 +19,7 @@ import iconHeart from '../../assets/figma/aff47a8629f50f4bf7c3cac784df0512d05b0a
 import iconArrowRight from '../../assets/figma/66f0c85afe06c3c9373ce03f89fdb4a4ebdee5ee.svg';
 import iconCards from '../../assets/figma/7829263638c55bcb9dddbbe8eec00ec0e4075ca2.svg';
 import iconCardSmall from '../../assets/figma/2a02a76700bfa721a2d4c7abb3f26abfd1e840c9.svg';
+import iconArrowLeft from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import iconTicketGreen from '../../assets/figma/cab88cb9dbbb1af4fb3b163b08c9cbd0d72ec096.svg';
 import iconDiscountShape from '../../assets/figma/3e588dba78a4fc8affe5c6ad4e81e953e499bed4.svg';
 import inkBar from '../../assets/figma/bab1ce16d7a8ee274f4360fff6cc3b8442c1eb17.svg';
@@ -127,6 +128,45 @@ export default function StoreVoucherHub() {
             </div>
 
             <div className="flex w-full flex-col items-start gap-2.5">
+              {/* Bravo promo — after linking: the +offers page's «استخدم بطاقتك واربح
+                  10% كاش باك» card with «التفاصيل» only (user direction: copied
+                  from /store/ikea after linking onto every vouchers store) */}
+              {cardLinked && (
+                <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3" data-testid="hub-promo-linked">
+                  <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
+                    <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
+                      <p className="shrink-0 whitespace-nowrap text-[0px] font-medium leading-[0] text-ink" dir="auto">
+                        <span className="text-[14px] leading-[1.5]">{'استخدم بطاقتك واربح '}</span>
+                        <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">10%</span>
+                        <span className="text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">{' '}</span>
+                        <span className="text-[14px] leading-[1.5] text-ink">كاش باك</span>
+                      </p>
+                      <p className="w-[min-content] min-w-full shrink-0 text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                        ادفع ببطاقتك واربح الكاش باك مع كل عملية شراء تقوم بها
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
+                      <div className="relative size-5 shrink-0">
+                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex w-full shrink-0 items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      className="flex h-[30px] min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-white px-2 py-1.5"
+                    >
+                      <div className="relative size-4 shrink-0">
+                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
+                      </div>
+                      <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
+                        التفاصيل
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Add-card promo — before linking only (the drawn «Input with label» card) */}
               {!cardLinked && (
                 <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3" data-testid="hub-promo">
