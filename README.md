@@ -164,10 +164,11 @@ device-local (see the comment-layer bullet below).
   (seeds account + 50 ﷼ and lands mid-flow), a **3 cards** cap shortcut, a
   **Jump to screen…** menu of every seeded deep link, a collapsible **Demo
   rules** cheat-sheet (PIN codes + seed params), and **↺ Reset** — a full
-  factory reset (clears the per-tab state and returns to Phase 2, before
+  factory reset (clears the per-tab state and returns to the default tab — Temp, before
   linking, Home).
 - **Phase tabs** — the desktop shell shows a Temp / Phase 2 / Phase 1
-  switcher above the phone frame; **Phase 2 is the default tab**. Screens
+  switcher above the phone frame; **Temp is the default tab** while the copy
+  review runs (Phase 2 was, and becomes again once Temp is promoted). Screens
   branch on `usePhase()` (`src/state/PhaseState.tsx`); Phase 1 stays the
   frozen approved version. `?phase=` deep-links (`1`, `2`, `3` = Temp) and
   the choice sticks per browser tab via sessionStorage; switching restarts
@@ -204,7 +205,7 @@ device-local (see the comment-layer bullet below).
   pick; the frame's cashback-priced sixth row and the older «مبلغ مخصص»
   tile were dropped on review). The jump menu keeps Temp when jumping to
   Phase-2 links (the phase is a floor, not a fixed value); ↺ Reset lands on
-  Phase 2; Temp review pins are keyed `p3|…` and show a "Temp" chip in the
+  the default tab (Temp); Temp review pins are keyed `p3|…` and show a "Temp" chip in the
   inbox. **Promotion recipe**
   (when the user approves Temp into Phase 2): `git grep -n IS_TEMP -- src`
   is the exact change list — at each site keep the `new` arm and delete the
