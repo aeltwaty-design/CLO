@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../state/PhaseState';
 import MarketPromoBanner from './MarketPromoBanner';
 import iconShop from '../assets/figma/b29c8472a920d7f72b3162de749ffef1cc4696df.svg';
 import iconGlobal from '../assets/figma/fbf3e34826645b91917a0aea937094cb92634861.svg';
@@ -19,11 +20,13 @@ type OfferCardData = {
   /** gold «ما يفوتك» ribbon on the card's bottom-left corner */
   featured?: boolean;
   storeId: string;
+  /** Temp: the store the row opens on the +offers design (defaults to storeId) */
+  offerStoreId?: string;
 };
 
 /** Offer rows as drawn in the العروض frame (91:44135). */
 const offers: OfferCardData[] = [
-  { name: 'قهوة إرا', photo: photoEra, offer: 'خصم 15%', earn: true, badges: ['shop', 'global'], storeId: 'namaq' },
+  { name: 'قهوة إرا', photo: photoEra, offer: 'خصم 15%', earn: true, badges: ['shop', 'global'], storeId: 'namaq', offerStoreId: 'era' },
   { name: 'قولدن سنت', photo: photoGolden, offer: 'اشتري 2 و 1 مجانا', badges: ['shop', 'global'], featured: true, storeId: 'golden' },
   { name: 'قهوة نمق', photo: photoNamaq, offer: 'خصم 20%', badges: ['shop', 'global'], storeId: 'namaq' },
   { name: 'مكتبة جرير', photo: photoJarir, offer: 'خصم 10%', earn: true, badges: ['shop', 'global'], storeId: 'jarir' },
@@ -37,7 +40,13 @@ export default function OfferList() {
     <div className="flex w-full shrink-0 flex-col items-start gap-4">
       {offers.map((offer, i) => (
         <div key={`${offer.storeId}-${i}`} className="contents">
-          <OfferCard data={offer} onOpen={() => navigate(`/store/${offer.storeId}`)} />
+          <OfferCard
+            data={offer}
+            // Temp (user direction): every العروض row opens the +offers
+            // Store-details design (the /store/ikea pages), branded as the
+            // tapped store; Phase 2 keeps each store's own variant page.
+            onOpen={() => navigate(IS_TEMP ? `/store/${offer.offerStoreId ?? offer.storeId}?variant=offers` : `/store/${offer.storeId}`)}
+          />
           {i === 0 && <MarketPromoBanner onClick={() => navigate('/market?tab=cashback')} />}
         </div>
       ))}

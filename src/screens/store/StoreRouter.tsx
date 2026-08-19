@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import StoreScreen from '../StoreScreen';
 import StoreCashbackAfter from './StoreCashbackAfter';
 import StoreOffersBefore from './StoreOffersBefore';
@@ -11,6 +11,7 @@ import { usePhase, IS_TEMP } from '../../state/PhaseState';
 import PurchaseOfferSheet from '../../components/PurchaseOfferSheet';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import { merchants } from '../../data/merchants';
+import { offerStoreBrands } from '../../data/offerStores';
 import { useAppState } from '../../state/AppState';
 
 /**
@@ -26,7 +27,12 @@ export default function StoreRouter() {
   const { cardLinked } = useAppState();
   const phase = usePhase();
   const [offerOpen, setOfferOpen] = useState(false);
-  const variant = (id && merchants[id]?.variant) || 'cashback';
+  const [params] = useSearchParams();
+  // ?variant=offers — Temp's العروض rows force the +offers design for any
+  // store; the brand strip then reads as that store (data/offerStores.ts)
+  const forcedOffers = params.get('variant') === 'offers';
+  const variant = forcedOffers ? 'offers' : (id && merchants[id]?.variant) || 'cashback';
+  const brand = variant === 'offers' && id ? offerStoreBrands[id] : undefined;
   const openOffer = () => setOfferOpen(true);
   // Temp (user direction): every «ضفها مرة وحدة» on the store pages — the
   // before-link dock and the offer sheet's CTA — starts the new linking flow
@@ -45,7 +51,11 @@ export default function StoreRouter() {
   return (
     <div className="relative h-full">
       {variant === 'offers' &&
-        (cardLinked ? <StoreOffersAfter onOfferTap={openOffer} /> : <StoreOffersBefore onOfferTap={openOffer} onLink={onLink} />)}
+        (cardLinked ? (
+          <StoreOffersAfter onOfferTap={openOffer} brand={brand} />
+        ) : (
+          <StoreOffersBefore onOfferTap={openOffer} onLink={onLink} brand={brand} />
+        ))}
       {variant === 'vouchers' &&
         (phase >= 2 ? (
           <StoreVoucherDetails />

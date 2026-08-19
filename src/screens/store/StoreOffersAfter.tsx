@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import type { OfferStoreBrand } from '../../data/offerStores';
 import chevronStroke from '../../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -223,7 +224,14 @@ function SimilarStoreCard({
 }
 
 /** Store details — +offers variant, after card link (Figma 1:9807, إيكيا content). */
-export default function StoreOffersAfter({ onOfferTap }: { onOfferTap?: () => void }) {
+export default function StoreOffersAfter({
+  onOfferTap,
+  brand,
+}: {
+  onOfferTap?: () => void;
+  /** brand strip override (name · category · logo); drawn default is إيكيا */
+  brand?: OfferStoreBrand;
+}) {
   const navigate = useNavigate();
 
   return (
@@ -289,15 +297,15 @@ export default function StoreOffersAfter({ onOfferTap }: { onOfferTap?: () => vo
                       <ChevronLeftMini />
                       <div className="flex shrink-0 items-center gap-2">
                         <div className="flex flex-row items-center self-stretch">
-                          <div className="flex h-full w-[76px] shrink-0 flex-col items-start gap-0.5 text-right">
+                          <div className={`flex h-full shrink-0 flex-col items-start gap-0.5 text-right ${brand ? 'min-w-[76px] whitespace-nowrap' : 'w-[76px]'}`}>
                             <div className="flex w-full shrink-0 flex-col justify-center text-base font-medium text-ink">
                               <p className="leading-[1.5]" dir="auto">
-                                إيكيا
+                                {brand?.name ?? 'إيكيا'}
                               </p>
                             </div>
                             <div className="flex w-full shrink-0 flex-col justify-center text-xs font-normal text-ink-secondary">
                               <p className="leading-[1.5]" dir="auto">
-                                المنزل والأثاث
+                                {brand?.category ?? 'المنزل والأثاث'}
                               </p>
                             </div>
                           </div>
@@ -306,7 +314,7 @@ export default function StoreOffersAfter({ onOfferTap }: { onOfferTap?: () => vo
                           <img
                             alt=""
                             className="pointer-events-none absolute inset-0 size-full max-w-none rounded-[12.5px] object-cover"
-                            src={logoIkea}
+                            src={brand?.logo ?? logoIkea}
                           />
                         </div>
                       </div>

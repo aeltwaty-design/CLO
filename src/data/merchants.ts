@@ -79,6 +79,9 @@ export const merchants: Record<string, Merchant> = {
   jahez: { id: 'jahez', name: 'جاهز برايم', variant: 'vouchers', online: true },
   jarir: { id: 'jarir', name: 'مكتبة جرير', variant: 'vouchers', online: true, inBranch: true },
   golden: { id: 'golden', name: 'قولدن سنت', variant: 'vouchers', online: true, inBranch: true },
+  /* العروض tab row that isn't a vouchers store — Temp opens it on the +offers
+     Store-details design (see data/offerStores.ts). */
+  era: { id: 'era', name: 'قهوة إرا', variant: 'offers', online: true, inBranch: true },
 };
 
 /** Grid order exactly as drawn in the before-link Market design (1:7750). */
