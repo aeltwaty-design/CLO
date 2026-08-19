@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppState } from '../state/AppState';
+import { IS_TEMP } from '../state/PhaseState';
 import { priceOf, useVoucher, type PayMethod } from '../state/VoucherState';
 import type { Merchant } from '../data/merchants';
 import InsufficientBalanceSheet from './InsufficientBalanceSheet';
@@ -58,15 +59,19 @@ export default function PurchaseVoucherSheet({
   merchant: Merchant;
 }) {
   const navigate = useNavigate();
-  const { points, cashback } = useAppState();
+  const { points, cashback, cardLinked } = useAppState();
   const { voucher, method, setMethod, cashbackPart, setCashbackPart } = useVoucher();
+  // Temp (user direction): «طريقة الدفع» exists only once a card is linked —
+  // before that there is no cashback to spend, so the drawer bills in points
+  // and hides the chooser. Phase 2 keeps the block in both states.
+  const flexible = !IS_TEMP || cardLinked;
   const [channel, setChannel] = useState<'branch' | 'online'>(merchant.inBranch ? 'branch' : 'online');
   const [shortOpen, setShortOpen] = useState(false);
 
   if (!open || !voucher) return null;
 
   const bothChannels = Boolean(merchant.inBranch && merchant.online);
-  const due = priceOf(voucher, method, cashbackPart);
+  const due = priceOf(voucher, flexible ? method : 'points', cashbackPart);
   const affordable = due.points <= points && due.cashback <= cashback;
   const steps = bothChannels && channel === 'branch' ? HOW_BRANCH : merchant.inBranch && !merchant.online ? HOW_BRANCH : HOW_ONLINE;
 
@@ -147,54 +152,58 @@ export default function PurchaseVoucherSheet({
 
           {/* طريقة الدفع — the flexible-payment block */}
           <div className="flex w-full shrink-0 flex-col gap-3">
-            <p className="w-full text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-              طريقة الدفع
-            </p>
-            <div className="flex w-full flex-row-reverse items-center gap-2">
-              {METHODS.map((m) => (
-                <button
-                  key={m.key}
-                  type="button"
-                  onClick={() => setMethod(m.key)}
-                  data-testid={`pay-${m.key}`}
-                  className={`flex min-w-px flex-[1_0_0] items-center justify-center rounded-2xl border border-solid px-3 py-2 ${
-                    method === m.key ? 'border-brand-400 bg-brand-50' : 'cursor-pointer border-line bg-surface'
-                  }`}
-                >
-                  <p
-                    className={`whitespace-nowrap text-center text-xs leading-[1.5] ${
-                      method === m.key ? 'font-medium text-brand-400' : 'font-normal text-ink'
-                    }`}
-                    dir="auto"
-                  >
-                    {m.label}
-                  </p>
-                </button>
-              ))}
-            </div>
-
-            {method === 'split' && (
-              <div className="flex w-full flex-col gap-2 rounded-2xl border border-solid border-line p-3">
-                <div className="flex w-full items-center justify-between">
-                  <p className="font-en text-xs font-semibold text-brand-400" dir="ltr">
-                    {fmtSar(due.cashback)}
-                  </p>
-                  <p className="text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                    كم تبي تدفع كاش باك؟
-                  </p>
+            {flexible && (
+              <>
+                <p className="w-full text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
+                  طريقة الدفع
+                </p>
+                <div className="flex w-full flex-row-reverse items-center gap-2">
+                  {METHODS.map((m) => (
+                    <button
+                      key={m.key}
+                      type="button"
+                      onClick={() => setMethod(m.key)}
+                      data-testid={`pay-${m.key}`}
+                      className={`flex min-w-px flex-[1_0_0] items-center justify-center rounded-2xl border border-solid px-3 py-2 ${
+                        method === m.key ? 'border-brand-400 bg-brand-50' : 'cursor-pointer border-line bg-surface'
+                      }`}
+                    >
+                      <p
+                        className={`whitespace-nowrap text-center text-xs leading-[1.5] ${
+                          method === m.key ? 'font-medium text-brand-400' : 'font-normal text-ink'
+                        }`}
+                        dir="auto"
+                      >
+                        {m.label}
+                      </p>
+                    </button>
+                  ))}
                 </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={Math.floor(Math.min(voucher.face, cashback))}
-                  step={5}
-                  value={Math.min(cashbackPart, Math.floor(Math.min(voucher.face, cashback)))}
-                  onChange={(e) => setCashbackPart(Number(e.target.value))}
-                  aria-label="المبلغ المدفوع كاش باك"
-                  data-testid="split-slider"
-                  className="w-full accent-brand-400"
-                />
-              </div>
+
+                {method === 'split' && (
+                  <div className="flex w-full flex-col gap-2 rounded-2xl border border-solid border-line p-3">
+                    <div className="flex w-full items-center justify-between">
+                      <p className="font-en text-xs font-semibold text-brand-400" dir="ltr">
+                        {fmtSar(due.cashback)}
+                      </p>
+                      <p className="text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                        كم تبي تدفع كاش باك؟
+                      </p>
+                    </div>
+                    <input
+                      type="range"
+                      min={0}
+                      max={Math.floor(Math.min(voucher.face, cashback))}
+                      step={5}
+                      value={Math.min(cashbackPart, Math.floor(Math.min(voucher.face, cashback)))}
+                      onChange={(e) => setCashbackPart(Number(e.target.value))}
+                      aria-label="المبلغ المدفوع كاش باك"
+                      data-testid="split-slider"
+                      className="w-full accent-brand-400"
+                    />
+                  </div>
+                )}
+              </>
             )}
 
             {/* what this purchase costs */}
