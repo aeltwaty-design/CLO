@@ -7,6 +7,7 @@ import StoreOffersAfter from './StoreOffersAfter';
 import StoreVouchersBefore from './StoreVouchersBefore';
 import StoreVouchersAfter from './StoreVouchersAfter';
 import StoreVoucherDetails from './StoreVoucherDetails';
+import StoreVoucherHub from './StoreVoucherHub';
 import { usePhase, IS_TEMP } from '../../state/PhaseState';
 import PurchaseOfferSheet from '../../components/PurchaseOfferSheet';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
@@ -58,7 +59,12 @@ export default function StoreRouter() {
         ))}
       {variant === 'vouchers' &&
         (phase >= 2 ? (
-          <StoreVoucherDetails />
+          // Temp: the redrawn vouchers page (135:6477); Phase 2 keeps 65:25229
+          IS_TEMP ? (
+            <StoreVoucherHub />
+          ) : (
+            <StoreVoucherDetails />
+          )
         ) : cardLinked ? (
           <StoreVouchersAfter onOfferTap={openOffer} />
         ) : (

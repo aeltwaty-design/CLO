@@ -170,7 +170,7 @@ function CornerBadge({ icon }: { icon: string }) {
   );
 }
 
-function SimilarStoreCard({
+export function SimilarStoreCard({
   photo,
   photoCropped,
   name,

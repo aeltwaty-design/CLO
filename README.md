@@ -190,9 +190,21 @@ device-local (see the comment-layer bullet below).
   the seeded 50 ﷼ figures; #51 is built (the zero-balance wallet's
   «استخدمه» opens the redemption hub in a **preview** state — six inert
   rows under «لما يوصلك أول كاش باك..» and an «اجمع أول كاش باك» CTA to the
-  market). The jump menu keeps Temp when jumping to Phase-2 links (the phase
-  is a floor, not a fixed value); ↺ Reset lands on Phase 2; Temp review pins
-  are keyed `p3|…` and show a "Temp" chip in the inbox. **Promotion recipe**
+  market). Later Temp-only directions from the review sit behind the same
+  flag: the promo banner's «50%» art clears the longer copy and its Home rows
+  carry matching glyphs (bank-plus, flash); the intro sheet's trust chips
+  stack; the market promo's points carry glyphs and lose the cards badge;
+  every store «ضفها مرة وحدة» (dock + offer sheet) starts the linking intro
+  sheet instead of `/cashback/intro`; every العروض row opens the +offers
+  store design branded as that store (`/store/:id?variant=offers`,
+  `data/offerStores.ts`); and every القسائم store opens the redrawn vouchers
+  page **135:6477** (`StoreVoucherHub`: add-card promo before linking,
+  القسائم | العروض tabs, the points ladder plus the drawn cashback-priced
+  row — 500 ﷼ for 300 ﷼ cashback, `CASHBACK_DEAL` — «مبلغ مخصص», «متاجر
+  مشابهة», dock rising on pick). The jump menu keeps Temp when jumping to
+  Phase-2 links (the phase is a floor, not a fixed value); ↺ Reset lands on
+  Phase 2; Temp review pins are keyed `p3|…` and show a "Temp" chip in the
+  inbox. **Promotion recipe**
   (when the user approves Temp into Phase 2): `git grep -n IS_TEMP -- src`
   is the exact change list — at each site keep the `new` arm and delete the
   ternary, then remove the `IS_TEMP`/Phase-3 plumbing (tabs back to two,

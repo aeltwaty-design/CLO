@@ -25,7 +25,7 @@ import photoJarir from '../../assets/figma/93ab5957f0a6c94b2e162254d26692fdd0570
 import photoGolden from '../../assets/figma/cef23dd57b79374c94e78dff0f9021f042b79b3a.png';
 import photoZara from '../../assets/figma/453784f58c394882dae76c32815f4f8dac9abc7e.png';
 
-const LOGOS: Record<string, string> = {
+export const LOGOS: Record<string, string> = {
   namaq: photoNamaq,
   amazon: photoAmazon,
   hunger: photoHunger,
@@ -264,7 +264,7 @@ export default function StoreVoucherDetails() {
 
 /** قسيمة شراء tile — 78px card, price strip pinned to its bottom edge; the
     selected state (green border + mint fill) is drawn on the first tile. */
-function VoucherTile({ tier, selected, onPick }: { tier: Voucher; selected: boolean; onPick: () => void }) {
+export function VoucherTile({ tier, selected, onPick }: { tier: Voucher; selected: boolean; onPick: () => void }) {
   return (
     <button
       type="button"
@@ -330,7 +330,7 @@ function VoucherTile({ tier, selected, onPick }: { tier: Voucher; selected: bool
 }
 
 /** Floating white circle button of the photo top bar (38.168px). */
-function CircleButton({ icon, label, onClick }: { icon: string; label: string; onClick?: () => void }) {
+export function CircleButton({ icon, label, onClick }: { icon: string; label: string; onClick?: () => void }) {
   return (
     <button
       type="button"
@@ -346,7 +346,7 @@ function CircleButton({ icon, label, onClick }: { icon: string; label: string; o
 }
 
 /** chevron-left_mini (20px) used inside the store card. */
-function ChevronLeftMini() {
+export function ChevronLeftMini() {
   return (
     <div className="relative size-5 shrink-0 overflow-clip">
       <div className="absolute bottom-1/4 left-[35%] right-[35%] top-1/4 flex items-center justify-center" style={{ containerType: 'size' }}>
@@ -363,7 +363,7 @@ function ChevronLeftMini() {
 }
 
 /** SAR currency glyph (18px) shown left of a face value. */
-function RiyalGlyph() {
+export function RiyalGlyph() {
   return (
     <div className="relative size-[18px] shrink-0 overflow-clip">
       <div className="absolute inset-[5.15%_11.13%_5.15%_9.6%]">
@@ -374,7 +374,7 @@ function RiyalGlyph() {
 }
 
 /** WO Coin (24px) of a points price. */
-function WoCoin24() {
+export function WoCoin24() {
   return (
     <div className="relative size-6 shrink-0">
       <div className="absolute inset-[12.5%_7.47%_9.69%_8.33%]">
