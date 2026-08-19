@@ -166,13 +166,38 @@ device-local (see the comment-layer bullet below).
   rules** cheat-sheet (PIN codes + seed params), and **↺ Reset** — a full
   factory reset (clears the per-tab state and returns to Phase 2, before
   linking, Home).
-- **Phase tabs** — the desktop shell shows a Phase 2 / Phase 1 switcher above
-  the phone frame; **Phase 2 is the default tab**. Screens branch on
-  `usePhase()` (`src/state/PhaseState.tsx`); Phase 1 stays the frozen
-  approved version. `?phase=` deep-links and the choice sticks per browser
-  tab via sessionStorage; switching restarts the demo. The switcher is hidden
-  at phone-sized viewports, and the QA gate pins itself to Phase 1 via an
-  init script (except the explicitly `?phase=2`-seeded Home capture).
+- **Phase tabs** — the desktop shell shows a Temp / Phase 2 / Phase 1
+  switcher above the phone frame; **Phase 2 is the default tab**. Screens
+  branch on `usePhase()` (`src/state/PhaseState.tsx`); Phase 1 stays the
+  frozen approved version. `?phase=` deep-links (`1`, `2`, `3` = Temp) and
+  the choice sticks per browser tab via sessionStorage; switching restarts
+  the demo. The switcher is hidden at phone-sized viewports, and the QA gate
+  pins itself to Phase 1 via an init script (except the explicitly
+  `?phase=2`-seeded captures).
+- **Temp (Phase 3)** — a review copy of Phase 2 carrying the stakeholder's
+  copy pass (the 80 live review comments of 18 Aug 2026, applied one-for-one)
+  so it can be read **side by side** with Phase 2 before anything is
+  promoted: open `/?phase=3` and `/?phase=2` in two windows. Mechanism: Temp
+  is `Phase = 3` in the phase machinery; every Phase-2 lineage gate reads
+  `phase >= 2` (so Temp inherits Phase 2 wholesale — Home landing, tab bar,
+  market tabs, wallets, flows), and every Temp-only delta branches on the
+  module constant `IS_TEMP` (`src/state/PhaseState.tsx`) as
+  `IS_TEMP ? <new> : <old>` at the smallest node containing the change, the
+  Phase-2 string kept visible in the `old` arm and the site tagged
+  `#N` with the comment number. Phase 1 and Phase 2 both take the `old` arm,
+  so neither can drift (the pixel gate stays byte-identical). The reviewer's
+  `[X]%` placeholders are kept verbatim; #63 applies the wording but keeps
+  the seeded 50 ﷼ figures; #51 is built (the zero-balance wallet's
+  «استخدمه» opens the redemption hub in a **preview** state — six inert
+  rows under «لما يوصلك أول كاش باك..» and an «اجمع أول كاش باك» CTA to the
+  market). The jump menu keeps Temp when jumping to Phase-2 links (the phase
+  is a floor, not a fixed value); ↺ Reset lands on Phase 2; Temp review pins
+  are keyed `p3|…` and show a "Temp" chip in the inbox. **Promotion recipe**
+  (when the user approves Temp into Phase 2): `git grep -n IS_TEMP -- src`
+  is the exact change list — at each site keep the `new` arm and delete the
+  ternary, then remove the `IS_TEMP`/Phase-3 plumbing (tabs back to two,
+  `>= 2` gates can stay), re-key any `p3|` pins to `p2|` if they should
+  survive, re-run the gate and document the moved `?phase=2` rows.
 - **Phase 2: الرئيسية Home** (Figma 47:3538, 375×2443) — Phase 2 lands on
   `/home` (root redirect + the tab bar's الرئيسية tab, which stays inert in
   Phase 1). Full scrolling home: mint hero header (greeting, car-wash promo

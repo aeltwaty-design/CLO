@@ -64,6 +64,8 @@ UX-enhancement layer (renders only with live state, so unseeded captures still m
 | 91:43784 | Market · القسائم tab (updated) | `/market` + `?tab=vouchers` | adds the lilac «ادفع مثل كل مرة» banner under the first row — shared `MarketPromoBanner` with the العروض tab; the 65:23785 gate carries this as a documented deviation (≈2.3%) |
 | 65:23785 | Market · القسائم tab 375×812 | `/market` + `?tab=vouchers` | live tab of the Market hub: voucher grid (8 stores) instead of the merchant grid, no promo banner, extra خصومات filter chip; cards → `/store/:id` (vouchers variant); gate ≈1.7% |
 
+**Temp (Phase 3, `?phase=3`, added 2026-08-19)** — a review copy of Phase 2 carrying the stakeholder's 80-comment copy pass (18 Aug), branched site-by-site on `IS_TEMP` (`src/state/PhaseState.tsx`) so Phase 2 stays untouched and can be read side by side; the one product change is #51 (zero-balance «استخدمه» → redemption hub in preview). No drawn frames — it inherits every Phase-2 gate via `phase >= 2`. See the README's "Temp (Phase 3)" bullet for the convention and the promotion recipe.
+
 ## «أهدِها» gift flow (drawn تحويل النقاط section 73:29323, added 2026-08-13)
 
 The Cashback file's section is a copy whose node ids refuse the MCP metadata/codegen endpoints, so contexts/refs were pulled from the **source frames** on the WalaPlus revamp file's «✈️ Points transfer» page (identical content, section 3196:31366) via the local Dev-Mode toolchain. Adaptation per user direction: the flow moves **cashback** (points → ﷼): Riyal glyphs instead of WO coins, chips ÷100 (5/10/50/100/200/500), كاش باك copy, live 560.50 balance chip; only the زملاء العمل and أفراد العائلة audiences are built (entry: redemption-hub «أهدِها» → in-sheet chooser).
