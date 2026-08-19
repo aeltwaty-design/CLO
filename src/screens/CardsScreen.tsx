@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWithdraw } from '../state/WithdrawState';
 import { useAppState } from '../state/AppState';
+import { IS_TEMP } from '../state/PhaseState';
 import Riyal from '../components/Riyal';
 import RedeemSheet from '../components/RedeemSheet';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
@@ -154,7 +155,8 @@ export default function CardsScreen() {
               >
                 <div className="flex w-full shrink-0 flex-col items-end">
                   <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                    إجمالي الكاش باك
+                    {/* #29 */}
+                    {IS_TEMP ? 'كاش باكك' : 'إجمالي الكاش باك'}
                   </p>
                 </div>
                 <div className="flex w-full shrink-0 items-center justify-end gap-2">
@@ -181,22 +183,37 @@ export default function CardsScreen() {
                   className="flex shrink-0 cursor-pointer items-center justify-center rounded-lg bg-brand-400 px-3 py-2"
                 >
                   <p className="whitespace-nowrap text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                    حوّلها الحين
+                    {/* #32 */}
+                    {IS_TEMP ? 'استخدمها الحين' : 'حوّلها الحين'}
                   </p>
                 </button>
                 <div className="flex min-w-px flex-[1_0_0] items-center justify-end gap-2">
                   <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-0.5 text-right leading-[1.5]">
                     <p className="w-full text-xs font-medium text-ink" dir="rtl">
-                      {'عندك '}
-                      <span className="font-en">50</span>
-                      {' '}
-                      <Riyal />
-                      {' تنتهي '}
-                      <span className="font-en">25</span>
-                      {' ديسمبر'}
+                      {/* #31 */}
+                      {IS_TEMP ? (
+                        <>
+                          <span className="font-en">50</span>
+                          {' '}
+                          <Riyal />
+                          {' من كاش باكك تنتهي '}
+                          <span className="font-en">25</span>
+                          {' ديسمبر'}
+                        </>
+                      ) : (
+                        <>
+                          {'عندك '}
+                          <span className="font-en">50</span>
+                          {' '}
+                          <Riyal />
+                          {' تنتهي '}
+                          <span className="font-en">25</span>
+                          {' ديسمبر'}
+                        </>
+                      )}
                     </p>
                     <p className="w-full text-xs font-normal text-ink-tertiary" dir="auto">
-                      لا تخليها تروح
+                      {IS_TEMP ? 'لا يفوتك استخدامها' : 'لا تخليها تروح'}
                     </p>
                   </div>
                   <div className="relative size-5 shrink-0 overflow-clip">
@@ -212,8 +229,9 @@ export default function CardsScreen() {
                   «استخدمه» (redemption hub, bank transfer included) and
                   «الاعدادات» (cards + accounts, each on its own screen). */}
               <div className="flex w-[343px] shrink-0 items-start gap-2">
-                <ActionTile icon={iconSetting} label="الاعدادات" onClick={() => navigate('/cards/settings')} />
-                <ActionTile icon={iconExport} label="استخدمه" onClick={() => setRedeemOpen(true)} />
+                {/* #39 · #30 */}
+                <ActionTile icon={iconSetting} label={IS_TEMP ? 'إعدادات الكاش باك' : 'الاعدادات'} onClick={() => navigate('/cards/settings')} />
+                <ActionTile icon={iconExport} label={IS_TEMP ? 'استخدم كاش باكك' : 'استخدمه'} onClick={() => setRedeemOpen(true)} />
               </div>
             </div>
 
@@ -221,7 +239,8 @@ export default function CardsScreen() {
             <div className="flex w-full shrink-0 flex-col items-end gap-3 rounded-2xl bg-warning-50 p-4">
               <div className="flex w-full shrink-0 items-center justify-end gap-2">
                 <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-                  كاش باك قيد الإضافة
+                  {/* #33 */}
+                  {IS_TEMP ? 'كاش باك بالطريق' : 'كاش باك قيد الإضافة'}
                 </p>
                 <div className="relative size-5 shrink-0 overflow-clip">
                   <div className="absolute inset-[10%]">
@@ -238,9 +257,12 @@ export default function CardsScreen() {
                     120.00
                   </p>
                 </div>
-                <p className="w-full text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                  سيضاف إلى محفظتك خلال <span className="font-en">30</span> يوم
-                </p>
+                {/* #34 — the reviewer removes this line */}
+                {!IS_TEMP && (
+                  <p className="w-full text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                    سيضاف إلى محفظتك خلال <span className="font-en">30</span> يوم
+                  </p>
+                )}
               </div>
             </div>
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppState } from '../state/AppState';
 import { useWithdraw } from '../state/WithdrawState';
 import Riyal from './Riyal';
+import { IS_TEMP } from '../state/PhaseState';
 import MaskGlyph from './redeem/MaskGlyph';
 import iconBank from '../assets/figma/b0f66261075012027d39e295d75abc4168569e6c.svg';
 import iconSwap from '../assets/figma/deefd6b77894536589cb50f767e7a9c50d68ba82.svg';
@@ -123,7 +124,8 @@ export default function RedeemSheet({
                 <span className="font-en font-medium text-ink">{fmtSar(cashback)}</span> <Riyal />
               </p>
               <p className="text-base font-bold leading-[1.5] text-ink" dir="auto">
-                استخدم كاش باك
+                {/* #35 */}
+                {IS_TEMP ? 'وش ودك تسوي بكاش باكك؟' : 'استخدم كاش باك'}
               </p>
             </div>
             {preview && (
@@ -137,7 +139,7 @@ export default function RedeemSheet({
             )}
             <div className="flex w-full flex-col items-stretch">
               <RedeemRow
-                title="تحويل لحساب بنكي"
+                title={IS_TEMP ? 'حوّله لحسابك البنكي' : 'تحويل لحساب بنكي'} // #36
                 sub={`${fmtSar(cashback)} ﷼ متاحة للسحب`}
                 icon={iconBank}
                 onPick={toBank}
@@ -146,7 +148,7 @@ export default function RedeemSheet({
               />
               <Divider />
               <RedeemRow
-                title="تحويل لنقاط ولاء ون"
+                title={IS_TEMP ? 'حوّله لنقاط ولاء ون' : 'تحويل لنقاط ولاء ون'} // #37
                 sub="حوّل كاش باك لنقاط ولاء ون"
                 icon={iconSwap}
                 onPick={toWalaOne}
@@ -173,7 +175,7 @@ export default function RedeemSheet({
               />
               <Divider />
               <RedeemRow
-                title="شحن رصيد جوال"
+                title={IS_TEMP ? 'اشحن جوالك' : 'شحن رصيد جوال'} // #38
                 sub="عبّي رصيدك بكاش باك"
                 icon={iconMobile}
                 onPick={toRecharge}

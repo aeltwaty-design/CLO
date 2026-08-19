@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../state/PhaseState';
 import MarketTabs, { type MarketTab } from './MarketTabs';
 import VoucherGrid from './VoucherGrid';
 import OfferList from './OfferList';
@@ -112,16 +113,32 @@ export default function MarketContent({
       <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
         <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
           <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
-            <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="auto">
-              <span className="text-[14px] font-medium leading-[1.5]">{'حتى '}</span>
-              <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
-              <span className="text-[14px] font-medium leading-[1.5]">{' '}</span>
-              <span className="text-[14px] font-medium not-italic leading-[1.5] text-ink">كاش باك</span>
-              <span className="text-[14px] font-medium leading-[1.5]">{' .. بدون حد'}</span>
-            </p>
+            {IS_TEMP ? (
+              // #4 — headline
+              <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="rtl">
+                <span className="text-[14px] font-medium leading-[1.5]">{'ادفع مثل كل مرة.. وخذ حتى '}</span>
+                <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
+                <span className="text-[14px] font-medium leading-[1.5]">{' كاش باك'}</span>
+              </p>
+            ) : (
+              <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="auto">
+                <span className="text-[14px] font-medium leading-[1.5]">{'حتى '}</span>
+                <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
+                <span className="text-[14px] font-medium leading-[1.5]">{' '}</span>
+                <span className="text-[14px] font-medium not-italic leading-[1.5] text-ink">كاش باك</span>
+                <span className="text-[14px] font-medium leading-[1.5]">{' .. بدون حد'}</span>
+              </p>
+            )}
             <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              ادفع مثل كل مرة.. وخذ أكثر
+              {/* #5 */}
+              {IS_TEMP ? 'فوق مكافآت بنكك.. وبدون حد' : 'ادفع مثل كل مرة.. وخذ أكثر'}
             </p>
+            {IS_TEMP && (
+              // #10 — the reviewer adds this line
+              <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                ادفع مثل كل مرة.. والكاش باك يرجع لك مباشرة
+              </p>
+            )}
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
             <div className="relative size-5 shrink-0">
@@ -139,7 +156,8 @@ export default function MarketContent({
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
             </div>
             <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-              ابدأ
+              {/* #6 */}
+              {IS_TEMP ? 'فعّل الكاش باك' : 'ابدأ'}
             </p>
           </button>
         </div>

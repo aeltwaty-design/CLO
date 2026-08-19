@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../state/PhaseState';
 import { useWithdraw, REGISTERED_ACCOUNT } from '../state/WithdrawState';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -38,13 +39,14 @@ export function CardsSettingsScreen() {
       <div className="flex w-full flex-col items-end gap-2">
         <SettingsRow
           icon={iconCards}
-          title="البطاقات المضافة"
+          title={IS_TEMP ? 'بطاقاتك اللي عليها كاش باك' : 'البطاقات المضافة'} // #40
           subtitle={
             <>
               <span className="font-en">1</span>
               {' من '}
               <span className="font-en">3</span>
-              {' بطاقات مربوطة'}
+              {/* #41 */}
+              {IS_TEMP ? ' بطاقات مفعّلة' : ' بطاقات مربوطة'}
             </>
           }
           onClick={() => navigate('/cards/manage')}
@@ -55,7 +57,8 @@ export function CardsSettingsScreen() {
           subtitle={
             <>
               <span className="font-en">{accounts}</span>
-              {' حساب للسحب'}
+              {/* #42 */}
+              {IS_TEMP ? ' حساب للتحويل' : ' حساب للسحب'}
             </>
           }
           onClick={() => navigate('/cards/accounts')}
@@ -85,9 +88,16 @@ export function BankAccountsScreen() {
             حساب بنكي جديد
           </p>
           <p className="w-full text-right text-[0px] font-normal text-ink-secondary" dir="auto">
-            <span className="text-[12px] leading-[1.5]">{'تحويل عبر '}</span>
-            <span className="font-en text-[12px] not-italic leading-[1.5]">IBAN</span>
-            <span className="text-[12px] leading-[1.5]">{' او رقم الحساب'}</span>
+            {/* #52 */}
+            {IS_TEMP ? (
+              <span className="text-[12px] leading-[1.5]">باستخدام الآيبان أو رقم الحساب</span>
+            ) : (
+              <>
+                <span className="text-[12px] leading-[1.5]">{'تحويل عبر '}</span>
+                <span className="font-en text-[12px] not-italic leading-[1.5]">IBAN</span>
+                <span className="text-[12px] leading-[1.5]">{' او رقم الحساب'}</span>
+              </>
+            )}
           </p>
         </div>
         <div className="flex shrink-0 items-center justify-center rounded-lg bg-brand-50 p-2.5">

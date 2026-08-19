@@ -53,7 +53,8 @@ export function CardsEmpty() {
       <div className="h-full overflow-y-auto bg-surface pb-[87px]">
         <div className="flex w-full flex-col items-start bg-surface">
           <IosStatusBar />
-          <AppBar title="البطاقات المضافة" />
+          {/* #43 */}
+          <AppBar title={IS_TEMP ? 'بطاقاتك اللي عليها كاش باك' : 'البطاقات المضافة'} />
 
           {/* Content */}
           <div className="flex w-[375px] flex-col items-center gap-3 bg-surface px-4 py-5">
@@ -78,7 +79,8 @@ export function CardsZero() {
       <div className="h-full overflow-y-auto bg-surface">
         <div className="flex w-full flex-col items-start bg-surface">
           <IosStatusBar />
-          <AppBar title="الكاش باك" />
+          {/* #47 */}
+          <AppBar title={IS_TEMP ? 'كاش باكك' : 'الكاش باك'} />
 
           {/* Content */}
           <div className="flex w-[375px] flex-col items-center gap-6 bg-surface px-4 py-5">
@@ -121,11 +123,27 @@ export function CardsZero() {
             {/* كيف تكسب الكاش باك؟ — onboarding promo */}
             <div className="relative flex w-[343px] shrink-0 flex-col items-center gap-2.5 overflow-clip rounded-[20px] bg-brand-50 px-4 py-5">
               <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                كيف تكسب الكاش باك؟
+                {/* #48 */}
+                {IS_TEMP ? 'جاهز لأول كاش باك؟' : 'كيف تكسب الكاش باك؟'}
               </p>
-              <p className="w-[min-content] min-w-full text-center text-[0px] font-normal leading-[0] text-ink-secondary" dir="auto">
+              {/* #50 */}
+              <p className="w-[min-content] min-w-full text-center text-[0px] font-normal leading-[0] text-ink-secondary" dir={IS_TEMP ? 'rtl' : 'auto'}>
+                {IS_TEMP ? (
+                  <>
+                    <span className="text-xs leading-[1.5]">
+                      ادفع مثل كل مرة ببطاقتك أو عبر Apple Pay أو Samsung Pay أو Google Pay عند المتاجر المشاركة
+                    </span>
+                    <br />
+                    <span className="text-xs leading-[1.5]">{'وخذ حتى '}</span>
+                    <span className="font-en text-xs not-italic leading-[1.5]">[X]%</span>
+                    <span className="text-xs leading-[1.5]">{' كاش باك يوصلك لحظتها'}</span>
+                  </>
+                ) : (
+                  <>
                 <span className="text-xs leading-[1.5]">استخدم بطاقاتك المربوطة في الشراء من شركاؤنا واربح كاش باك فوري يصل ل</span>
                 <span className="font-en text-xs not-italic leading-[1.5]">50%</span>
+                  </>
+                )}
               </p>
               {/* CTA → the Market's cashback tab (its default tab, so the
                   plain route lands there in both phases) */}
@@ -206,7 +224,8 @@ export function CardsZero() {
                 <div className="flex w-full flex-col items-end gap-4">
                   <div className="flex shrink-0 flex-col items-end gap-2">
                     <p className="w-[303px] text-right text-xs font-normal leading-[1.5] text-ink-tertiary" dir="auto">
-                      لم تقم بأي عملية حتى الأن
+                      {/* #49 */}
+                      {IS_TEMP ? 'أول كاش باك لك بيظهر هنا' : 'لم تقم بأي عملية حتى الأن'}
                     </p>
                   </div>
                 </div>
@@ -234,7 +253,8 @@ export function CardsThree() {
       <div className="h-full overflow-y-auto bg-surface pb-[87px]">
         <div className="flex w-full flex-col items-start bg-surface">
           <IosStatusBar />
-          <AppBar title="البطاقات المضافة" />
+          {/* #43 */}
+          <AppBar title={IS_TEMP ? 'بطاقاتك اللي عليها كاش باك' : 'البطاقات المضافة'} />
 
           {/* Content */}
           <div className="flex w-[375px] flex-col items-center gap-3 bg-surface px-4 py-5">
@@ -305,7 +325,8 @@ function AddCardsBanner() {
     <div className="flex w-full shrink-0 items-center justify-end gap-2.5 overflow-clip rounded-2xl bg-brand-50 px-4 py-3">
       <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2">
         <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink" dir="auto">
-          {'تقدر تضيف حتى '}
+          {/* #44 */}
+          {IS_TEMP ? 'فعّل الكاش باك على ' : 'تقدر تضيف حتى '}
           <span className="font-en">3</span>
           {' بطاقات ائتمانية'}
         </p>
@@ -381,7 +402,8 @@ function LinkedCardPanel({
         </div>
         <div className="flex shrink-0 flex-col items-end justify-center gap-1">
           <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-            إجمالي الكاش باك
+            {/* #45 */}
+            {IS_TEMP ? 'الكاش باك من هالبطاقة' : 'إجمالي الكاش باك'}
           </p>
           <div className="flex h-[37px] w-full shrink-0 items-center justify-end gap-2">
             <div className="relative h-[29px] w-[19.333px] shrink-0">
@@ -455,7 +477,8 @@ function AddCardDock({ disabled, onAdd }: { disabled?: boolean; onAdd?: () => vo
         {disabled ? (
           <div className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-surface-disabled px-4 py-2.5">
             <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-quadrant" dir="auto">
-              أضف بطاقة جديدة
+              {/* #46 */}
+              {IS_TEMP ? 'فعّل الكاش باك على بطاقة إضافية' : 'أضف بطاقة جديدة'}
             </p>
             <div className="relative size-5 shrink-0 overflow-clip">
               <div className="absolute inset-[20%]">
@@ -472,7 +495,8 @@ function AddCardDock({ disabled, onAdd }: { disabled?: boolean; onAdd?: () => vo
             className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
           >
             <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-              أضف بطاقة جديدة
+              {/* #46 */}
+              {IS_TEMP ? 'فعّل الكاش باك على بطاقة إضافية' : 'أضف بطاقة جديدة'}
             </p>
             <div className="relative size-5 shrink-0 overflow-clip">
               <div className="absolute inset-[20%]">
