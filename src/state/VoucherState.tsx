@@ -5,14 +5,7 @@ import { VOUCHER_LADDER, pointsFor, type Voucher } from '../data/vouchers';
 export type PayMethod = 'points' | 'cashback' | 'split';
 
 /** The voucher being bought: a drawn tier, or a custom («مبلغ مخصص») face. */
-export type PickedVoucher = {
-  face: number;
-  points: number;
-  tier?: Voucher;
-  custom?: boolean;
-  /** cashback price when it isn't the face value 1:1 (the CASHBACK_DEAL row) */
-  cashbackPrice?: number;
-};
+export type PickedVoucher = { face: number; points: number; tier?: Voucher; custom?: boolean };
 
 /**
  * Voucher purchase flow (store details → شراء قسيمة drawer → PIN → success).
@@ -73,10 +66,9 @@ export function useVoucher() {
 /** What a purchase costs, given the picked voucher and payment method. */
 export function priceOf(voucher: PickedVoucher, method: PayMethod, cashbackPart: number) {
   if (method === 'points') return { cashback: 0, points: voucher.points };
-  const full = voucher.cashbackPrice ?? voucher.face;
-  if (method === 'cashback') return { cashback: full, points: 0 };
-  const part = Math.min(Math.max(0, cashbackPart), full);
+  if (method === 'cashback') return { cashback: voucher.face, points: 0 };
+  const part = Math.min(Math.max(0, cashbackPart), voucher.face);
   // the remainder bills in points at this tier's own rate, so a split never
   // costs more than either pure method
-  return { cashback: part, points: Math.round(((full - part) * voucher.points) / full) };
+  return { cashback: part, points: Math.round(((voucher.face - part) * voucher.points) / voucher.face) };
 }

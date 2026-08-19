@@ -26,12 +26,6 @@ export const VOUCHER_LADDER: Voucher[] = [
   { face: 500, points: 2500 },
 ];
 
-/** The sixth row of the redrawn vouchers store page (135:6477): a 500 ﷼
-    voucher priced in **cashback** — 300 ﷼ on the lilac strip — instead of
-    points. Kept apart from the ladder so Phase 2's drawn page (65:25229),
-    which maps VOUCHER_LADDER, is untouched. */
-export const CASHBACK_DEAL: Voucher & { cashbackPrice: number } = { face: 500, points: 2500, cashbackPrice: 300 };
-
 /** Undiscounted rate (200→1,000 · 400→2,000 · 500→2,500) — used to price
     custom amounts, which don't carry a tier discount. */
 export const POINTS_PER_RIYAL = 5;

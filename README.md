@@ -199,9 +199,9 @@ device-local (see the comment-layer bullet below).
   store design branded as that store (`/store/:id?variant=offers`,
   `data/offerStores.ts`); and every القسائم store opens the redrawn vouchers
   page **135:6477** (`StoreVoucherHub`: add-card promo before linking,
-  القسائم | العروض tabs, the points ladder plus the drawn cashback-priced
-  row — 500 ﷼ for 300 ﷼ cashback, `CASHBACK_DEAL` — «مبلغ مخصص», «متاجر
-  مشابهة», dock rising on pick). The jump menu keeps Temp when jumping to
+  القسائم | العروض tabs, the points ladder, «متاجر مشابهة», dock rising on
+  pick; the frame's cashback-priced sixth row and the older «مبلغ مخصص»
+  tile were dropped on review). The jump menu keeps Temp when jumping to
   Phase-2 links (the phase is a floor, not a fixed value); ↺ Reset lands on
   Phase 2; Temp review pins are keyed `p3|…` and show a "Temp" chip in the
   inbox. **Promotion recipe**

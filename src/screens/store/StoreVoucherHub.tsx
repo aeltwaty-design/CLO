@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { merchants } from '../../data/merchants';
 import { offerStoreBrands } from '../../data/offerStores';
-import { CASHBACK_DEAL, CUSTOM_MAX, CUSTOM_MIN, POINTS_PER_RIYAL, VOUCHER_LADDER, pointsFor, type Voucher } from '../../data/vouchers';
+import { VOUCHER_LADDER, type Voucher } from '../../data/vouchers';
 import { useAppState } from '../../state/AppState';
 import { useVoucher } from '../../state/VoucherState';
 import PurchaseVoucherSheet from '../../components/PurchaseVoucherSheet';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
-import { LOGOS, VoucherTile, CircleButton, ChevronLeftMini, RiyalGlyph, WoCoin24 } from './StoreVoucherDetails';
+import { LOGOS, VoucherTile, CircleButton, ChevronLeftMini } from './StoreVoucherDetails';
 import { SimilarStoreCard } from './StoreOffersBefore';
 import iconSignal from '../../assets/figma/98a449519d2cb6b8478d85d07db09bff5760c428.svg';
 import iconWifi from '../../assets/figma/cdc8aed2c9f148d8a793c644a408ff4d4eeeaea2.svg';
@@ -27,9 +27,6 @@ import heroPhoto from '../../assets/figma/27cde6821f1952fa7483f220578eb04c40cae4
 import photoAmazon from '../../assets/figma/9c23031a270d25995df3cc93349eadd584c7bd69.png';
 import photoHunger from '../../assets/figma/4b164b7f5ecaa2aa67b3d72edea0f481e157265b.png';
 import photoNamaq from '../../assets/figma/9058c524c17f20227eae51a2f833010fdbd061c9.png';
-import cashbackCoin from '../../assets/icons/cashback-coin.svg';
-
-const fmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
 
 /**
  * Store details — القسائم stores, redrawn (Figma 135:6477, إيكيا content).
@@ -38,10 +35,10 @@ const fmt = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 
  * page this adds, top to bottom: the before-link **add-card promo card**
  * («أضف بطاقتك واربح 10% كاش باك» — both CTAs start the linking flow),
  * the **القسائم | العروض tabs** (العروض opens this store on the +offers
- * design), the drawn **cashback-deal row** (500 ﷼ for 300 ﷼ cashback, on
- * the lilac strip) after the points ladder, and **«متاجر مشابهة»**. The
- * drawn frame hides the dock, so «بشتريها / برسلها هدية» rises only once a
- * row is picked. The user-directed «مبلغ مخصص» tile is kept after the rows.
+ * design) and **«متاجر مشابهة»** after the points ladder. The drawn frame
+ * hides the dock, so «بشتريها / برسلها هدية» rises only once a row is picked.
+ * The frame's sixth (cashback-priced) row and the older «مبلغ مخصص» tile
+ * were removed on review (user direction).
  */
 export default function StoreVoucherHub() {
   const navigate = useNavigate();
@@ -49,35 +46,13 @@ export default function StoreVoucherHub() {
   const merchant = (id && merchants[id]) || merchants.amazon;
   const brand = offerStoreBrands[merchant.id];
   const { cardLinked } = useAppState();
-  const { voucher, setVoucher, setStoreId, setMethod } = useVoucher();
+  const { voucher, setVoucher, setStoreId } = useVoucher();
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
-  const [custom, setCustom] = useState('');
   const [sheetOpen, setSheetOpen] = useState(false);
-
-  const customFace = Number(custom) || 0;
-  const customValid = customFace >= CUSTOM_MIN && customFace <= CUSTOM_MAX;
-  const dealPicked = !!voucher && !voucher.custom && voucher.cashbackPrice === CASHBACK_DEAL.cashbackPrice;
 
   const pickTier = (tier: Voucher) => {
     setStoreId(merchant.id);
     setVoucher({ face: tier.face, points: tier.points, tier });
-    setMethod('points');
-    setCustom('');
-  };
-
-  // the cashback-priced row — pays from cashback by default
-  const pickDeal = () => {
-    setStoreId(merchant.id);
-    setVoucher({ face: CASHBACK_DEAL.face, points: CASHBACK_DEAL.points, tier: CASHBACK_DEAL, cashbackPrice: CASHBACK_DEAL.cashbackPrice });
-    setMethod('cashback');
-    setCustom('');
-  };
-
-  const pickCustom = (value: string) => {
-    setCustom(value);
-    const face = Number(value) || 0;
-    setStoreId(merchant.id);
-    setVoucher(face >= CUSTOM_MIN && face <= CUSTOM_MAX ? { face, points: pointsFor(face), custom: true } : null);
   };
 
   const buy = () => {
@@ -250,64 +225,16 @@ export default function StoreVoucherHub() {
               </p>
             </div>
 
-            {/* Rows — the points ladder, then the drawn cashback-priced row */}
+            {/* Rows — the points ladder */}
             <div className="flex w-full flex-col items-start gap-5">
               {VOUCHER_LADDER.map((tier) => (
                 <VoucherTile
                   key={tier.face}
                   tier={tier}
-                  selected={!!voucher && !voucher.custom && !voucher.cashbackPrice && voucher.face === tier.face}
+                  selected={!!voucher && voucher.face === tier.face}
                   onPick={() => pickTier(tier)}
                 />
               ))}
-              <CashbackDealTile selected={dealPicked} onPick={pickDeal} />
-
-              {/* «مبلغ مخصص» — user direction: any face value, base rate */}
-              <div
-                className={`flex w-full shrink-0 flex-col gap-2.5 rounded-2xl border border-solid p-3 ${
-                  voucher?.custom ? 'border-brand-400 bg-brand-50' : 'border-line bg-white'
-                }`}
-                data-testid="custom-voucher"
-              >
-                <div className="flex w-full items-center justify-between">
-                  <div className="flex shrink-0 items-center justify-center rounded-md bg-surface-neutral px-2 py-0.5">
-                    <p className="whitespace-nowrap text-center text-[10px] font-medium leading-[1.5] text-ink-secondary" dir="auto">
-                      جديد
-                    </p>
-                  </div>
-                  <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-                    مبلغ مخصص
-                  </p>
-                </div>
-                <div className="flex w-full items-center gap-2">
-                  <div className="flex min-w-px flex-[1_0_0] items-center gap-1.5 rounded-lg border border-solid border-[#ccd2e0] bg-white px-3 py-2">
-                    <RiyalGlyph />
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      dir="ltr"
-                      value={custom}
-                      onChange={(e) => pickCustom(e.target.value.replace(/[^\d]/g, ''))}
-                      placeholder={`${CUSTOM_MIN}–${CUSTOM_MAX}`}
-                      aria-label="مبلغ مخصص"
-                      className="font-en min-w-px flex-[1_0_0] bg-transparent text-right text-sm font-semibold leading-[1.5] text-ink outline-none placeholder:font-normal placeholder:text-ink-quadrant"
-                    />
-                  </div>
-                  <div className="flex shrink-0 items-center gap-1 rounded-lg bg-brand-50 px-3 py-2">
-                    <WoCoin24 />
-                    <p className="font-en whitespace-nowrap text-right text-sm font-semibold leading-[1.5] text-ink" dir="auto">
-                      {customValid ? fmt(pointsFor(customFace)) : '—'}
-                    </p>
-                  </div>
-                </div>
-                <p className="w-full text-right text-[10px] font-normal leading-[1.5] text-ink-tertiary" dir="rtl">
-                  {'كل '}
-                  <span className="font-en">1</span>
-                  {' ﷼ = '}
-                  <span className="font-en">{POINTS_PER_RIYAL}</span>
-                  {' نقاط · تقدر تدفعها كاش باك بعد'}
-                </p>
-              </div>
             </div>
 
             {/* متاجر مشابهة — drawn parked below the rows; flows after them here */}
@@ -381,41 +308,3 @@ export default function StoreVoucherHub() {
   );
 }
 
-/** The drawn sixth row: a 500 ﷼ voucher priced in cashback — lilac strip
-    (viola-50, 27px), the violet cashback coin and «300». */
-function CashbackDealTile({ selected, onPick }: { selected: boolean; onPick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onPick}
-      data-testid="voucher-cashback-deal"
-      className={`relative flex h-[78px] w-full shrink-0 cursor-pointer flex-col items-center gap-4 overflow-clip rounded-2xl border border-solid px-3 pt-3.5 ${
-        selected ? 'border-viola-500 bg-viola-50/60' : 'border-line bg-white'
-      }`}
-    >
-      <div className="flex w-full shrink-0 items-center justify-end gap-[5px]">
-        <div className="flex shrink-0 items-center">
-          <RiyalGlyph />
-          <p className="font-en whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            {` ${CASHBACK_DEAL.face}`}
-          </p>
-        </div>
-        <p className="whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-          قسيمة شراء بقيمة
-        </p>
-      </div>
-      <div
-        className={`absolute left-0 top-[45px] flex h-[27px] w-full items-center justify-center gap-1 rounded-bl-[10px] rounded-br-[10px] ${
-          selected ? 'bg-viola-100/70' : 'bg-viola-50'
-        }`}
-      >
-        <div className="relative h-4 w-[18px] shrink-0">
-          <img alt="" className="absolute inset-0 block size-full max-w-none" src={cashbackCoin} />
-        </div>
-        <p className="font-en whitespace-nowrap text-right text-sm font-semibold leading-[1.5] text-ink" dir="auto">
-          {fmt(CASHBACK_DEAL.cashbackPrice)}
-        </p>
-      </div>
-    </button>
-  );
-}

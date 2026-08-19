@@ -68,7 +68,7 @@ UX-enhancement layer (renders only with live state, so unseeded captures still m
 
 | Node | Frame | Route | Notes |
 | --- | --- | --- | --- |
-| 135:6477 | Store details · القسائم (redrawn) 375×968 | `/store/:id` for every vouchers merchant, Temp only | `StoreVoucherHub`: hero + identity card, before-link add-card promo («أضف بطاقتك واربح 10% كاش باك» → intro sheet), القسائم \| العروض tabs (العروض → `?variant=offers`), «اختر القسيمة اللي تبيها» + «كيف تستخدمها؟», the 78px rows (VOUCHER_LADDER + the drawn cashback-priced row `CASHBACK_DEAL` 500→300 on the viola-50 strip, cashback coin glyph `assets/icons/cashback-coin.svg`), «مبلغ مخصص», «متاجر مشابهة»; the drawn frame hides the dock, so «بشتريها / برسلها هدية» rises once a row is picked; Phase 2 keeps 65:25229 |
+| 135:6477 | Store details · القسائم (redrawn) 375×968 | `/store/:id` for every vouchers merchant, Temp only | `StoreVoucherHub`: hero + identity card, before-link add-card promo («أضف بطاقتك واربح 10% كاش باك» → intro sheet), القسائم \| العروض tabs (العروض → `?variant=offers`), «اختر القسيمة اللي تبيها» + «كيف تستخدمها؟», the 78px rows (VOUCHER_LADDER; the frame's cashback-priced sixth row and the older «مبلغ مخصص» tile were dropped on review), «متاجر مشابهة»; the drawn frame hides the dock, so «بشتريها / برسلها هدية» rises once a row is picked; Phase 2 keeps 65:25229 |
 
 ## «أهدِها» gift flow (drawn تحويل النقاط section 73:29323, added 2026-08-13)
 
