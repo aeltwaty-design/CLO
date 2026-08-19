@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../../state/PhaseState';
 import Riyal from '../../components/Riyal';
 import iconBack from '../../assets/figma/fd6f26534a87f4d8bbe62b710db8bf509383bda4.svg';
 import iconEdit from '../../assets/figma/30a8a7af34a2a4266156e3e7d5cbeb76da909206.svg';
@@ -81,7 +82,8 @@ export default function WithdrawAmountScreen() {
             </div>
             <div className="flex w-[204px] shrink-0 items-center justify-end gap-4">
               <p className="whitespace-nowrap text-center text-lg font-medium leading-[1.5] text-ink" dir="auto">
-                ادخل المبلغ
+                {/* #61 */}
+                {IS_TEMP ? 'كم تبي تحول؟' : 'ادخل المبلغ'}
               </p>
               <button type="button" onClick={() => navigate(-1)} className="relative block size-5 shrink-0 cursor-pointer overflow-clip">
                 <div className="absolute inset-[17.71%_14.58%]">
@@ -97,7 +99,8 @@ export default function WithdrawAmountScreen() {
             <div className="flex w-[343px] shrink-0 flex-col items-center gap-[18px] rounded-2xl border border-solid border-line bg-surface p-4">
               <div className="flex w-full shrink-0 items-center justify-end gap-1">
                 <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                  المرسل إليه
+                  {/* #60 */}
+                  {IS_TEMP ? 'إلى' : 'المرسل إليه'}
                 </p>
               </div>
               {/* selected account chip — tap anywhere (edit glyph) to switch accounts */}
@@ -144,7 +147,8 @@ export default function WithdrawAmountScreen() {
                   <div className="flex w-full shrink-0 flex-col items-start gap-2.5">
                     <div className="flex w-full shrink-0 flex-col items-end gap-0.5">
                       <p className="h-6 w-[253px] shrink-0 text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                        أدخل مبلغ السحب
+                        {/* #59 */}
+                        {IS_TEMP ? 'مبلغ التحويل' : 'أدخل مبلغ السحب'}
                       </p>
                       <div className="flex shrink-0 items-center justify-center gap-0.5">
                         <div className="relative h-4 w-[10.667px] shrink-0">
@@ -193,7 +197,8 @@ export default function WithdrawAmountScreen() {
                           }`}
                         >
                           <p className={`whitespace-nowrap text-right text-sm font-medium leading-[1.5] ${isMax ? 'text-brand-400' : 'text-ink'}`} dir="auto">
-                            أقصى مبلغ
+                            {/* #62 */}
+                            {IS_TEMP ? 'حوّل أقصى مبلغ' : 'أقصى مبلغ'}
                           </p>
                           <div className="relative size-3.5 shrink-0 overflow-clip">
                             <div className="absolute inset-[15%_20%] flex items-center justify-center" style={{ containerType: 'size' }}>
@@ -222,11 +227,20 @@ export default function WithdrawAmountScreen() {
                   dir="rtl"
                   data-testid="fee-line"
                 >
-                  {'المخصوم من رصيدك: '}
+                  {/* #63 — wording only; the seeded figure stays */}
+                  {IS_TEMP ? 'الإجمالي المخصوم من رصيدك: ' : 'المخصوم من رصيدك: '}
                   <span className="font-en font-medium text-ink">{fmt(amount + WITHDRAW_FEE + WITHDRAW_VAT)}</span>
                   {' '}
                   <Riyal />
-                  {' (رسوم التحويل + الضريبة)'}
+                  {IS_TEMP ? (
+                    <>
+                      <br />
+                      {'يشمل رسوم التحويل + ضريبة القيمة المضافة '}
+                      <span className="font-en">15%</span>
+                    </>
+                  ) : (
+                    ' (رسوم التحويل + الضريبة)'
+                  )}
                 </p>
               )}
             </div>
@@ -246,7 +260,8 @@ export default function WithdrawAmountScreen() {
                     </p>
                   </div>
                   <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                    {'الحد اليومي للسحب = '}
+                    {/* #64 */}
+                    {IS_TEMP ? 'الحد اليومي للتحويل = ' : 'الحد اليومي للسحب = '}
                   </p>
                 </div>
               </div>
@@ -273,7 +288,8 @@ export default function WithdrawAmountScreen() {
               }`}
             >
               <p className={`shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] ${valid ? 'text-ink-inverse' : 'text-ink-quadrant'}`} dir="auto">
-                اللي بعده
+                {/* #65 */}
+                {IS_TEMP ? 'راجع التحويل' : 'اللي بعده'}
               </p>
             </button>
           </div>

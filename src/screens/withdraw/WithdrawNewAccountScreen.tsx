@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../../state/PhaseState';
 import { useWithdraw, REGISTERED_ACCOUNT } from '../../state/WithdrawState';
 import AccountPickerSheet, { BankLogo, WITHDRAW_BANKS, type WithdrawBank } from '../../components/withdraw/AccountPickerSheet';
 import coinWo from '../../assets/figma/1fc63f5f61f3f22b61f4543f37dec854ea9f0818.svg';
@@ -119,7 +120,8 @@ export default function WithdrawNewAccountScreen() {
           <div className="flex w-[204px] shrink-0 items-center justify-end gap-4">
             <div className="relative flex shrink-0 flex-col justify-center whitespace-nowrap text-center text-lg font-medium text-ink">
               <p className="leading-[1.5]" dir="auto">
-                حساب جديد
+                {/* #53 */}
+                {IS_TEMP ? 'حساب بنكي جديد' : 'حساب جديد'}
               </p>
             </div>
             <button
@@ -139,7 +141,8 @@ export default function WithdrawNewAccountScreen() {
         <div className="mx-auto flex w-[352px] flex-col items-center gap-6 bg-surface px-4 py-5">
           <div className="flex w-full shrink-0 flex-col items-end justify-center">
             <p className="w-full text-right text-sm font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              برجاءا ادخال البيانات المطلوبة
+              {/* #54 */}
+              {IS_TEMP ? 'أدخل بيانات الحساب' : 'برجاءا ادخال البيانات المطلوبة'}
             </p>
           </div>
 
@@ -208,7 +211,8 @@ export default function WithdrawNewAccountScreen() {
                   >
                     {'الآيبان يبدأ بـ '}
                     <span className="font-en">SA</span>
-                    {' ويتبعها '}
+                    {/* #58 */}
+                    {IS_TEMP ? ' وبعدها ' : ' ويتبعها '}
                     <span className="font-en">22</span>
                     {' رقم'}
                   </p>
@@ -260,7 +264,8 @@ export default function WithdrawNewAccountScreen() {
             {/* 🎹 Beneficiary name */}
             <div className="flex w-full shrink-0 flex-col items-end gap-2">
               <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                اسم المستفيد
+                {/* #55 */}
+                {IS_TEMP ? 'اسم صاحب الحساب' : 'اسم المستفيد'}
               </p>
               <div className="flex w-full shrink-0 items-center justify-end gap-2 rounded-xl border border-solid border-[#ccd2e0] bg-surface px-4 py-3">
                 <input
@@ -278,7 +283,8 @@ export default function WithdrawNewAccountScreen() {
             <button type="button" onClick={() => setSave(!save)} className="flex w-full shrink-0 cursor-pointer items-center justify-end gap-3">
               <div className="flex min-w-px flex-[1_0_0] flex-col items-end">
                 <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink" dir="auto">
-                  حفظ هذا الحساب
+                  {/* #56 */}
+                  {IS_TEMP ? 'حفظ الحساب' : 'حفظ هذا الحساب'}
                 </p>
               </div>
               {save ? (
@@ -313,7 +319,8 @@ export default function WithdrawNewAccountScreen() {
             }`}
             dir="auto"
           >
-            اللي بعده
+            {/* #57 */}
+            {IS_TEMP ? 'التالي' : 'اللي بعده'}
           </p>
         </button>
         <div className="relative h-[34px] w-full shrink-0">

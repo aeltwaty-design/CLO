@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { IS_TEMP } from '../../state/PhaseState';
 import statusBattery from '../../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import statusBatteryCap from '../../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import statusBatteryFill from '../../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -135,10 +136,12 @@ export default function WithdrawPinScreen() {
           {/* Label */}
           <div className="absolute left-6 top-20 flex w-[327px] flex-col items-center justify-center gap-1 text-center">
             <p className="w-full text-lg font-bold leading-[1.5] text-ink" dir="auto">
-              تأكيد السحب
+              {/* #72 — reviewer «التحويل»; kept in the «تأكيد …» form to match #66 */}
+              {IS_TEMP ? 'تأكيد التحويل' : 'تأكيد السحب'}
             </p>
             <p className="w-full text-sm font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              قم بكتابة الرقم السري لإتمام العملية
+              {/* #73 */}
+              {IS_TEMP ? 'اكتب الرقم السري لتأكيد التحويل' : 'قم بكتابة الرقم السري لإتمام العملية'}
             </p>
           </div>
 
@@ -148,7 +151,8 @@ export default function WithdrawPinScreen() {
               className="absolute left-1/2 top-[150px] -translate-x-1/2 whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-tertiary"
               dir="auto"
             >
-              {'سحب '}
+              {/* #74 — wording only; the seeded amount stays */}
+              {IS_TEMP ? 'تحويل ' : 'سحب '}
               <span className="font-en">{amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
               {' '}
               <Riyal />
@@ -203,7 +207,8 @@ export default function WithdrawPinScreen() {
                   className="absolute left-1/2 top-[calc(50%-10px)] -translate-x-1/2 whitespace-nowrap text-center text-sm font-medium leading-[1.5] text-brand-400"
                   dir="auto"
                 >
-                  نسيته؟
+                  {/* #75 */}
+                  {IS_TEMP ? 'نسيت الرقم السري؟' : 'نسيته؟'}
                 </p>
               </button>
               <DigitKey digit={0} onPress={append} />

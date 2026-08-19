@@ -1,4 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { IS_TEMP } from '../../state/PhaseState';
 import {
   useWithdraw,
   REGISTERED_ACCOUNT,
@@ -167,7 +168,8 @@ export default function WithdrawStatusScreen() {
           <div className="flex w-full shrink-0 flex-col items-center justify-center gap-2.5 py-5 text-center">
             <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-lg font-bold not-italic leading-[0] text-ink">
               <p className="leading-[1.5]" dir="auto">
-                {failed ? 'ما ضبطت' : 'تم سحب المبلغ بنجاح'}
+                {/* #76 */}
+                {failed ? 'ما ضبطت' : IS_TEMP ? 'تم! تحويلك بالطريق' : 'تم سحب المبلغ بنجاح'}
               </p>
             </div>
             <p className="w-[min-content] min-w-full shrink-0 text-[0px] font-medium leading-[0] text-ink" dir="auto">
@@ -178,7 +180,8 @@ export default function WithdrawStatusScreen() {
             </p>
             {showReceipt ? (
               <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-tertiary" dir="rtl" data-testid="receipt-line">
-                {'تم سحب '}
+                {/* #77 — wording only; the seeded amount stays */}
+                {IS_TEMP ? 'حوّلنا ' : 'تم سحب '}
                 <span className="font-en font-medium text-ink">{fmt(amount)}</span>
                 {' '}
                 <Riyal />
@@ -208,7 +211,8 @@ export default function WithdrawStatusScreen() {
                       <MaskIcon src={iconExport} size={18} />
                     </div>
                     <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
-                      سحبت اليوم
+                      {/* #78 */}
+                      {IS_TEMP ? 'تم التحويل اليوم' : 'سحبت اليوم'}
                     </p>
                   </div>
                   <div className="relative mx-1 mt-[17px] h-0.5 min-w-px flex-1">
@@ -243,7 +247,8 @@ export default function WithdrawStatusScreen() {
                 dir="rtl"
                 data-testid="balance-after"
               >
-                {'رصيدك بعد السحب: '}
+                {/* #79 */}
+                {IS_TEMP ? 'رصيد كاش باكك بعد التحويل: ' : 'رصيدك بعد السحب: '}
                 <span className="font-en font-medium text-ink">{fmt(remaining)}</span>
                 {' '}
                 <Riyal />
@@ -259,7 +264,8 @@ export default function WithdrawStatusScreen() {
               className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
             >
               <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                {failed ? 'حاول مره ثانية' : 'كمل'}
+                {/* #80 */}
+                {failed ? 'حاول مره ثانية' : IS_TEMP ? 'رجوع للكاش باك' : 'كمل'}
               </p>
             </button>
             <button

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IS_TEMP } from '../../state/PhaseState';
 import iconBack from '../../assets/figma/fd6f26534a87f4d8bbe62b710db8bf509383bda4.svg';
 import iconEdit from '../../assets/figma/30a8a7af34a2a4266156e3e7d5cbeb76da909206.svg';
 import iconInfoSmall from '../../assets/figma/60e86b53328378fe6e2eaac39925383a1427b8b4.svg';
@@ -38,7 +39,8 @@ export default function WithdrawSummaryScreen() {
           <div className="flex w-full flex-col items-end gap-4 border-b border-solid border-line-subtle px-4 pb-3.5 pt-6">
             <div className="flex w-[204px] shrink-0 items-center justify-end gap-4">
               <p className="whitespace-nowrap text-center text-lg font-medium leading-[1.5] text-ink" dir="auto">
-                تأكيد السحب
+                {/* #66 */}
+                {IS_TEMP ? 'تأكيد التحويل' : 'تأكيد السحب'}
               </p>
               <button type="button" onClick={() => navigate(-1)} className="relative block size-5 shrink-0 cursor-pointer overflow-clip">
                 <div className="absolute inset-[17.71%_14.58%]">
@@ -54,7 +56,8 @@ export default function WithdrawSummaryScreen() {
             <div className="flex w-[343px] shrink-0 flex-col items-center gap-[18px] rounded-2xl border border-solid border-line bg-surface p-4">
               <div className="flex w-full shrink-0 items-center justify-end gap-1">
                 <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                  المرسل إليه
+                  {/* #67 */}
+                  {IS_TEMP ? 'إلى' : 'المرسل إليه'}
                 </p>
               </div>
               <div className="flex h-16 w-full shrink-0 items-center justify-end gap-3 rounded-2xl border border-solid border-brand-400 bg-brand-50 px-4">
@@ -93,10 +96,12 @@ export default function WithdrawSummaryScreen() {
             <div className="flex w-[343px] shrink-0 flex-col items-center gap-[18px] rounded-2xl border border-solid border-line bg-surface p-4">
               <div className="flex w-full shrink-0 items-center justify-end gap-1">
                 <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-                  ملخص العملية
+                  {/* #68 */}
+                  {IS_TEMP ? 'ملخص التحويل' : 'ملخص العملية'}
                 </p>
               </div>
-              <SummaryRow label="المبلغ المُدخل" value={fmt(amount)} />
+              {/* #69 */}
+              <SummaryRow label={IS_TEMP ? 'المبلغ' : 'المبلغ المُدخل'} value={fmt(amount)} />
               <SummaryRow label="رسوم التحويل" value={String(WITHDRAW_FEE)} onInfo={() => setInfo('fee')} />
               <SummaryRow label="ضريبة قيمة مضافة" value={String(WITHDRAW_VAT)} onInfo={() => setInfo('vat')} />
               <div className="flex w-full shrink-0 flex-col items-start">
@@ -116,7 +121,8 @@ export default function WithdrawSummaryScreen() {
                 </div>
                 <div className="flex min-w-px flex-[1_0_0] flex-col items-end">
                   <p className="w-full text-right text-sm font-normal leading-[1.5] text-ink" dir="auto">
-                    إجمالي المبلغ
+                    {/* #70 */}
+                    {IS_TEMP ? 'الإجمالي' : 'إجمالي المبلغ'}
                   </p>
                 </div>
               </div>
@@ -143,7 +149,8 @@ export default function WithdrawSummaryScreen() {
               className="flex w-[343px] shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
             >
               <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                تمم السحب
+                {/* #71 */}
+                {IS_TEMP ? 'تمم التحويل' : 'تمم السحب'}
               </p>
             </button>
           </div>
