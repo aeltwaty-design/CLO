@@ -280,7 +280,14 @@ export default function MarketContent({
           {rows.map((row, i) => (
             <div key={i} className="flex w-full shrink-0 items-start justify-between">
               {row.map((card, j) => (
-                <MerchantCard key={`${card.storeId}-${i}-${j}`} data={card} onOpen={() => navigate(`/store/${card.storeId}`)} />
+                <MerchantCard
+                  key={`${card.storeId}-${i}-${j}`}
+                  data={card}
+                  // Temp (user direction): every الكاش باك card opens the cashback
+                  // Store-details design (the /store/hm pages), branded as the
+                  // tapped store; Phase 1/2 keep each store's own variant page.
+                  onOpen={() => navigate(IS_TEMP ? `/store/${card.storeId}?variant=cashback` : `/store/${card.storeId}`)}
+                />
               ))}
             </div>
           ))}

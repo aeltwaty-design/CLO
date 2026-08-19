@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import type { OfferStoreBrand } from '../../data/offerStores';
+import type { StoreBrand } from '../../data/storeBrands';
 import chevronStroke from '../../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -231,7 +231,7 @@ export default function StoreOffersBefore({
 }: {
   onOfferTap?: () => void;
   /** brand strip override (name · category · logo); drawn default is إيكيا */
-  brand?: OfferStoreBrand;
+  brand?: StoreBrand;
   /** Temp: «ضفها مرة وحدة» starts the new linking flow (intro sheet over
       this screen) instead of the drawn full-screen intro. */
   onLink?: () => void;

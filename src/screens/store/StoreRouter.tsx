@@ -12,7 +12,7 @@ import { usePhase, IS_TEMP } from '../../state/PhaseState';
 import PurchaseOfferSheet from '../../components/PurchaseOfferSheet';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
 import { merchants } from '../../data/merchants';
-import { offerStoreBrands } from '../../data/offerStores';
+import { storeBrands } from '../../data/storeBrands';
 import { useAppState } from '../../state/AppState';
 
 /**
@@ -29,11 +29,12 @@ export default function StoreRouter() {
   const phase = usePhase();
   const [offerOpen, setOfferOpen] = useState(false);
   const [params] = useSearchParams();
-  // ?variant=offers — Temp's العروض rows force the +offers design for any
-  // store; the brand strip then reads as that store (data/offerStores.ts)
-  const forcedOffers = params.get('variant') === 'offers';
-  const variant = forcedOffers ? 'offers' : (id && merchants[id]?.variant) || 'cashback';
-  const brand = variant === 'offers' && id ? offerStoreBrands[id] : undefined;
+  // ?variant=offers|cashback — Temp's Market tabs force the design of the tab
+  // a card was tapped in (العروض rows → +offers, الكاش باك grid → cashback);
+  // the brand strip then reads as that store (data/storeBrands.ts)
+  const forced = params.get('variant');
+  const variant = forced === 'offers' || forced === 'cashback' ? forced : (id && merchants[id]?.variant) || 'cashback';
+  const brand = forced && id ? storeBrands[id] : undefined;
   const openOffer = () => setOfferOpen(true);
   // Temp (user direction): every «ضفها مرة وحدة» on the store pages — the
   // before-link dock and the offer sheet's CTA — starts the new linking flow
@@ -70,7 +71,7 @@ export default function StoreRouter() {
         ) : (
           <StoreVouchersBefore onOfferTap={openOffer} />
         ))}
-      {variant === 'cashback' && (cardLinked ? <StoreCashbackAfter /> : <StoreScreen onLink={onLink} />)}
+      {variant === 'cashback' && (cardLinked ? <StoreCashbackAfter brand={brand} /> : <StoreScreen onLink={onLink} brand={brand} />)}
       <PurchaseOfferSheet open={offerOpen} onClose={() => setOfferOpen(false)} onCta={offerCta} />
       <LinkIntroSheet open={introOpen} onClose={closeIntro} />
     </div>

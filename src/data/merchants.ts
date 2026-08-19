@@ -80,7 +80,7 @@ export const merchants: Record<string, Merchant> = {
   jarir: { id: 'jarir', name: 'مكتبة جرير', variant: 'vouchers', online: true, inBranch: true },
   golden: { id: 'golden', name: 'قولدن سنت', variant: 'vouchers', online: true, inBranch: true },
   /* العروض tab row that isn't a vouchers store — Temp opens it on the +offers
-     Store-details design (see data/offerStores.ts). */
+     Store-details design (see data/storeBrands.ts). */
   era: { id: 'era', name: 'قهوة إرا', variant: 'offers', online: true, inBranch: true },
 };
 

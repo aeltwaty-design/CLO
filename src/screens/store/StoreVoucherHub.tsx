@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { merchants } from '../../data/merchants';
-import { offerStoreBrands } from '../../data/offerStores';
+import { storeBrands } from '../../data/storeBrands';
 import { VOUCHER_LADDER, type Voucher } from '../../data/vouchers';
 import { useAppState } from '../../state/AppState';
 import { useVoucher } from '../../state/VoucherState';
@@ -45,7 +45,7 @@ export default function StoreVoucherHub() {
   const navigate = useNavigate();
   const { id } = useParams();
   const merchant = (id && merchants[id]) || merchants.amazon;
-  const brand = offerStoreBrands[merchant.id];
+  const brand = storeBrands[merchant.id];
   const { cardLinked } = useAppState();
   const { voucher, setVoucher, setStoreId } = useVoucher();
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();

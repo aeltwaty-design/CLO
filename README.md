@@ -196,8 +196,9 @@ device-local (see the comment-layer bullet below).
   stack; the market promo's points carry glyphs and lose the cards badge;
   every store «ضفها مرة وحدة» (dock + offer sheet) starts the linking intro
   sheet instead of `/cashback/intro`; every العروض row opens the +offers
-  store design branded as that store (`/store/:id?variant=offers`,
-  `data/offerStores.ts`); and every القسائم store opens the redrawn vouchers
+  store design and every الكاش باك card the cashback store design, each
+  branded as the tapped store (`/store/:id?variant=offers|cashback`,
+  `data/storeBrands.ts`); and every القسائم store opens the redrawn vouchers
   page **135:6477** (`StoreVoucherHub`: add-card promo before linking,
   القسائم | العروض tabs, the points ladder, «متاجر مشابهة», dock rising on
   pick; the frame's cashback-priced sixth row and the older «مبلغ مخصص»
