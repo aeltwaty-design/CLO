@@ -24,9 +24,23 @@ type View = 'list' | 'gift';
     أفراد العائلة per user direction), and «شحن رصيد جوال» / «تبرع فيها» open
     the two derived flows (operator/cause pickers of their own, so no extra
     in-sheet view). Internal views — no sheet stacking. */
-export default function RedeemSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function RedeemSheet({
+  open,
+  onClose,
+  preview = false,
+}: {
+  open: boolean;
+  onClose: () => void;
+  /** Zero-balance preview (stakeholder #51, Temp): the same six ways to use
+      cashback, shown but inert, under «لما يوصلك أول كاش باك..» and above an
+      «اجمع أول كاش باك» CTA to the participating merchants. Explicit prop —
+      the seeded balance is 560.50 even on the zero-balance wallet, so the
+      sheet can't infer it. */
+  preview?: boolean;
+}) {
   const navigate = useNavigate();
-  const { cashback } = useAppState();
+  const { cashback: liveCashback } = useAppState();
+  const cashback = preview ? 0 : liveCashback;
   const { account } = useWithdraw();
 
   const [view, setView] = useState<View>('list');
@@ -112,12 +126,22 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 استخدم كاش باك
               </p>
             </div>
+            {preview && (
+              <p
+                className="w-full rounded-xl bg-brand-50 px-3 py-2 text-right text-xs font-medium leading-[1.5] text-brand-800"
+                dir="auto"
+                data-testid="redeem-preview-line"
+              >
+                لما يوصلك أول كاش باك.. تقدر تستخدمه بالطريقة اللي تناسبك
+              </p>
+            )}
             <div className="flex w-full flex-col items-stretch">
               <RedeemRow
                 title="تحويل لحساب بنكي"
                 sub={`${fmtSar(cashback)} ﷼ متاحة للسحب`}
                 icon={iconBank}
                 onPick={toBank}
+                disabled={preview}
                 testid="redeem-bank"
               />
               <Divider />
@@ -126,6 +150,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 sub="حوّل كاش باك لنقاط ولاء ون"
                 icon={iconSwap}
                 onPick={toWalaOne}
+                disabled={preview}
                 testid="redeem-walaone"
               />
               <Divider />
@@ -134,6 +159,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 sub="تصفّح قسائم المتاجر في السوق"
                 icon={iconTicket}
                 onPick={toVouchers}
+                disabled={preview}
                 testid="redeem-vouchers"
               />
               <Divider />
@@ -142,6 +168,7 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 sub="لزملائك في العمل أو أفراد عائلتك"
                 icon={iconPeople}
                 onPick={() => setView('gift')}
+                disabled={preview}
                 testid="redeem-gift"
               />
               <Divider />
@@ -150,11 +177,34 @@ export default function RedeemSheet({ open, onClose }: { open: boolean; onClose:
                 sub="عبّي رصيدك بكاش باك"
                 icon={iconMobile}
                 onPick={toRecharge}
+                disabled={preview}
                 testid="redeem-recharge"
               />
               <Divider />
-              <RedeemRow title="تبرع فيها" sub="خلها صدقة بضغطة" icon={iconHeart} onPick={toDonate} testid="redeem-donate" />
+              <RedeemRow
+                title="تبرع فيها"
+                sub="خلها صدقة بضغطة"
+                icon={iconHeart}
+                onPick={toDonate}
+                disabled={preview}
+                testid="redeem-donate"
+              />
             </div>
+            {preview && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  navigate('/market');
+                }}
+                data-testid="redeem-preview-cta"
+                className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
+              >
+                <p className="whitespace-nowrap text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+                  اجمع أول كاش باك
+                </p>
+              </button>
+            )}
           </>
         )}
 
@@ -195,6 +245,7 @@ function RedeemRow({
   icon,
   onPick,
   soon,
+  disabled,
   testid,
 }: {
   title: string;
@@ -203,16 +254,20 @@ function RedeemRow({
   icon?: string;
   onPick?: () => void;
   soon?: boolean;
+  /** inert but drawn as a real row (the zero-balance preview) — unlike
+      `soon`, the chevron stays and no «قريباً» chip appears */
+  disabled?: boolean;
   testid?: string;
 }) {
+  const inert = soon || disabled;
   return (
     <button
       type="button"
-      disabled={soon}
+      disabled={inert}
       onClick={onPick}
       data-testid={testid}
-      aria-disabled={soon}
-      className={`flex w-full items-center justify-between gap-3 rounded-xl px-2 py-3 ${soon ? 'opacity-50' : 'cursor-pointer'}`}
+      aria-disabled={inert}
+      className={`flex w-full items-center justify-between gap-3 rounded-xl px-2 py-3 ${inert ? 'opacity-50' : 'cursor-pointer'}`}
     >
       {soon ? (
         <span className="shrink-0 rounded-full bg-surface-neutral px-2.5 py-0.5 text-[10px] font-medium leading-[1.5] text-ink-tertiary" dir="auto">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Riyal from '../components/Riyal';
 import LinkIntroSheet, { useLinkIntroGate } from '../components/LinkIntroSheet';
 import RedeemSheet from '../components/RedeemSheet';
+import { IS_TEMP } from '../state/PhaseState';
 import { ActionTile } from './CardsScreen';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -107,11 +108,13 @@ export function CardsZero() {
 
               {/* Action tiles — same pair as the populated wallet (user
                   direction): «استخدمه» (redemption hub) + «الاعدادات».
-                  Before linking the balance is 0.00, so there is nothing to
-                  redeem and «استخدمه» stays muted. */}
+                  Before linking the balance is 0.00: in Phase 1/2 «استخدمه»
+                  stays muted; in Temp (stakeholder #51) it opens the hub as
+                  a preview — the six ways shown but inert, plus «اجمع أول
+                  كاش باك» to the merchants. */}
               <div className="flex w-[343px] shrink-0 items-start gap-2">
                 <ActionTile icon={iconSetting} label="الاعدادات" onClick={() => navigate('/cards/settings')} />
-                <ActionTile icon={iconExport} label="استخدمه" onClick={() => setRedeemOpen(true)} muted />
+                <ActionTile icon={iconExport} label="استخدمه" onClick={() => setRedeemOpen(true)} muted={!IS_TEMP} />
               </div>
             </div>
 
@@ -218,7 +221,7 @@ export function CardsZero() {
         <HomeIndicator />
       </div>
 
-      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} />
+      <RedeemSheet open={redeemOpen} onClose={() => setRedeemOpen(false)} preview />
     </div>
   );
 }
