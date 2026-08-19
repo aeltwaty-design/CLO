@@ -149,7 +149,13 @@ function SimilarStoreCard({
 }
 
 /** Store details — cashback-only, before card link (Figma 1:8525, هنقرسيتشن/إيكيا content). */
-export default function StoreScreen() {
+export default function StoreScreen({
+  onLink,
+}: {
+  /** Temp: «ضفها مرة وحدة» starts the new linking flow (intro sheet over
+      this screen) instead of the drawn full-screen intro. */
+  onLink?: () => void;
+} = {}) {
   const navigate = useNavigate();
   // Variant/link-state routing lives in StoreRouter; this screen is always the
   // cashback-only before-link design. Tiers card (1:8525 ⇄ 1:8748 expanded)
@@ -325,7 +331,7 @@ export default function StoreScreen() {
           <div className="flex w-full shrink-0 items-center justify-center gap-3">
             <button
               type="button"
-              onClick={() => navigate('/cashback/intro')}
+              onClick={() => (onLink ? onLink() : navigate('/cashback/intro'))}
               className="flex min-w-px flex-[1_0_0] items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
             >
               <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">

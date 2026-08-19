@@ -223,7 +223,15 @@ function SimilarStoreCard({
 }
 
 /** Store details — +offers variant, before card link (Figma 1:9221, إيكيا content). */
-export default function StoreOffersBefore({ onOfferTap }: { onOfferTap?: () => void }) {
+export default function StoreOffersBefore({
+  onOfferTap,
+  onLink,
+}: {
+  onOfferTap?: () => void;
+  /** Temp: «ضفها مرة وحدة» starts the new linking flow (intro sheet over
+      this screen) instead of the drawn full-screen intro. */
+  onLink?: () => void;
+}) {
   const navigate = useNavigate();
 
   return (
@@ -338,7 +346,7 @@ export default function StoreOffersBefore({ onOfferTap }: { onOfferTap?: () => v
                 <div className="flex w-full shrink-0 items-center justify-center gap-3">
                   <button
                     type="button"
-                    onClick={() => navigate('/cashback/intro')}
+                    onClick={() => (onLink ? onLink() : navigate('/cashback/intro'))}
                     className="flex min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg bg-brand-400 px-2 py-1.5"
                   >
                     <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
