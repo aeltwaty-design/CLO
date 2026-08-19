@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppState } from '../state/AppState';
-import { usePhase } from '../state/PhaseState';
+import { usePhase, IS_TEMP } from '../state/PhaseState';
 import iconClose from '../assets/figma/77832851b14d0014584c317e4f6da6aaba991b57.svg';
 import heroCards from '../assets/figma/b4ee0f8753c19b40ccfa4d1d2ab5f3fd3d853273.svg';
 import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.svg';
@@ -30,11 +30,18 @@ export function useLinkIntroGate() {
   return { introOpen, startLinking, closeIntro: () => setIntroOpen(false) };
 }
 
-const STEPS = [
-  { title: 'ضفها مرة وحدة', desc: 'إضافة آمنة لبطاقتك' },
-  { title: 'ادفع مثل كل مرة', desc: 'بالبطاقة أو من جوالك (أبل باي، سامسونج باي، جوجل باي) عند أي متجر مشارك' },
-  { title: 'خذ الكاش باك في محفظة ولاء بلس', desc: 'يوصلك خلال وقت قصير جدا' },
-];
+const STEPS = IS_TEMP
+  ? [
+      // #16 desc · #15 title (reviewer: «ادفع مثل كل مرة» → «فعّل الكاش باك»)
+      { title: 'ضفها مرة وحدة', desc: 'مرة وحدة فقط' },
+      { title: 'فعّل الكاش باك', desc: 'ببطاقتك أو عبر Apple Pay أو Samsung Pay أو Google Pay عند المتاجر المشاركة' }, // #17
+      { title: 'الكاش باك يوصلك لحظتها', desc: 'يوصلك خلال وقت قصير جدا' }, // #18
+    ]
+  : [
+      { title: 'ضفها مرة وحدة', desc: 'إضافة آمنة لبطاقتك' },
+      { title: 'ادفع مثل كل مرة', desc: 'بالبطاقة أو من جوالك (أبل باي، سامسونج باي، جوجل باي) عند أي متجر مشارك' },
+      { title: 'خذ الكاش باك في محفظة ولاء بلس', desc: 'يوصلك خلال وقت قصير جدا' },
+    ];
 
 type TipId = 'safe' | 'rewards';
 
@@ -188,13 +195,29 @@ export default function LinkIntroSheet({
         {/* 💳 Mint hero — compact echo of the full-screen intro's hero */}
         <div className="relative min-h-[122px] w-full shrink-0 overflow-clip rounded-2xl bg-brand-50 px-4 py-4">
           <div className="flex w-full flex-col items-end gap-1.5 pl-[128px]">
-            <p className="w-full text-right text-[0px] font-bold leading-none text-ink" dir="auto">
-              <span className="text-[18px] leading-[1.5]">{'كاش باك حتى '}</span>
-              <span className="font-en text-[18px] font-bold not-italic leading-[1.5]">[X]%</span>
-              <span className="text-[18px] leading-[1.5]">{' بدون حد'}</span>
-            </p>
-            <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              مرة وحدة تضيف بطاقتك.. وبعدها ادفع وبس
+            {IS_TEMP ? (
+              // #13 — headline
+              <p className="w-full text-right text-[18px] font-bold leading-[1.5] text-ink" dir="auto">
+                مرة وحدة.. وبعدها ادفع وبس
+              </p>
+            ) : (
+              <p className="w-full text-right text-[0px] font-bold leading-none text-ink" dir="auto">
+                <span className="text-[18px] leading-[1.5]">{'كاش باك حتى '}</span>
+                <span className="font-en text-[18px] font-bold not-italic leading-[1.5]">[X]%</span>
+                <span className="text-[18px] leading-[1.5]">{' بدون حد'}</span>
+              </p>
+            )}
+            <p className="w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir={IS_TEMP ? 'rtl' : 'auto'}>
+              {IS_TEMP ? (
+                // #14 — sub-line (rtl: it embeds the [X]% run)
+                <>
+                  {'خذ حتى '}
+                  <span className="font-en">[X]%</span>
+                  {' كاش باك على مشترياتك'}
+                </>
+              ) : (
+                'مرة وحدة تضيف بطاقتك.. وبعدها ادفع وبس'
+              )}
             </p>
           </div>
           <div className="pointer-events-none absolute bottom-[-14px] left-[-6px] h-[86px] w-[134px]">
@@ -249,7 +272,7 @@ export default function LinkIntroSheet({
         <div className="flex w-full items-center justify-end gap-2">
           <TrustChip
             id="safe"
-            label="بياناتك في أمان"
+            label={IS_TEMP ? 'بطاقتك وبياناتك بأمان' : 'بياناتك في أمان'} // #19
             icon={iconShieldTick}
             align="left"
             tipText="بيانات بطاقتك مشفرة بأعلى معايير الأمان وما نشاركها مع أحد.. نقرأ العمليات فقط عشان نحسب لك الكاش باك"
@@ -286,7 +309,8 @@ export default function LinkIntroSheet({
         >
           {/* icon BEFORE the text in RTL reading order = physically right of the label */}
           <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-            أضف بطاقتك الأولى
+            {/* #20 */}
+            {IS_TEMP ? 'فعّل الكاش باك' : 'أضف بطاقتك الأولى'}
           </p>
           <div className="relative size-5 shrink-0 overflow-clip">
             <div className="absolute inset-[20.83%]">

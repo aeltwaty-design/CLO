@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppState } from '../state/AppState';
+import { IS_TEMP } from '../state/PhaseState';
 import statusBattery from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import statusBatteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
 import statusBatteryFill from '../assets/figma/4cdee40e45ca5410a8730fa3ec4b39097fe560e7.svg';
@@ -137,11 +138,13 @@ export default function LinkSuccessScreen() {
           <div className="flex w-full shrink-0 flex-col items-center justify-center gap-2.5 py-5 text-center">
             <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-lg font-bold not-italic text-ink">
               <p className="leading-[1.5]" dir="auto">
-                تم! بطاقتك جاهزة
+                {/* #25 */}
+                {IS_TEMP ? 'تم! الكاش باك مفعّل' : 'تم! بطاقتك جاهزة'}
               </p>
             </div>
             <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              من الحين.. ادفع مثل كل مرة، والكاش باك يرجع لك
+              {/* #26 */}
+              {IS_TEMP ? 'من الحين.. ادفع مثل كل مرة، والكاش باك يوصلك لحظتها' : 'من الحين.. ادفع مثل كل مرة، والكاش باك يرجع لك'}
             </p>
           </div>
 
@@ -154,7 +157,8 @@ export default function LinkSuccessScreen() {
               <div className="flex shrink-0 items-start">
                 <div className="flex shrink-0 items-center justify-center gap-1 rounded-2xl bg-brand-400 py-0.5 pl-2 pr-1.5">
                   <p className="shrink-0 whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
-                    مفعلة
+                    {/* #27 */}
+                    {IS_TEMP ? 'الكاش باك مفعّل' : 'مفعلة'}
                   </p>
                   <div className="relative size-3 shrink-0 overflow-clip">
                     <div className="absolute inset-[18.75%_15.62%_18.75%_15.63%]">
@@ -275,7 +279,8 @@ export default function LinkSuccessScreen() {
             className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl border border-solid border-line bg-surface px-4 py-2.5"
           >
             <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
-              روح لمحفظتك
+              {/* #28 */}
+              {IS_TEMP ? 'شوف كيف تستخدم كاش باكك' : 'روح لمحفظتك'}
             </p>
           </button>
         </div>

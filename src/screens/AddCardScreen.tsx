@@ -22,7 +22,7 @@ import mcRight from '../assets/figma/0b6592b92012268404532c0c0c7429b794e1a004.sv
 import scanGlyph from '../assets/icons/nav-scan.svg';
 import LinkIntroSheet from '../components/LinkIntroSheet';
 import { useAppState } from '../state/AppState';
-import { usePhase } from '../state/PhaseState';
+import { usePhase, IS_TEMP } from '../state/PhaseState';
 
 /**
  * إضافة بطاقة — card-linking form (Figma 1:10416 "linking card", 375×812),
@@ -151,7 +151,8 @@ export default function AddCardScreen() {
             <div className="relative flex shrink-0 flex-col items-end gap-0.5">
               <div className="relative flex shrink-0 flex-col justify-center whitespace-nowrap text-center text-lg font-medium text-ink">
                 <p className="leading-[1.5]" dir="auto">
-                  إضافة بطاقة
+                  {/* #21 */}
+                  {IS_TEMP ? 'فعّل الكاش باك' : 'إضافة بطاقة'}
                 </p>
               </div>
             </div>
@@ -180,10 +181,17 @@ export default function AddCardScreen() {
           <div className="flex w-full shrink-0 items-start justify-end gap-2.5 overflow-clip rounded-2xl bg-brand-50 px-4 py-3">
             <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2 leading-[1.5]">
               <p className="shrink-0 whitespace-nowrap text-center text-sm font-medium text-ink" dir="auto">
-                معلوماتك محمية
+                {/* #22 */}
+                {IS_TEMP ? 'بيانات بطاقتك محمية' : 'معلوماتك محمية'}
               </p>
-              <p className="h-10 w-[min-content] min-w-full shrink-0 text-right text-xs font-normal text-ink-secondary" dir="auto">
-                بياناتك مشفرة بأعلى معايير الأمان.. وما نشاركها مع أحد
+              {/* #23 — the Temp line runs three rows, so the drawn 2-line box (h-10) opens up */}
+              <p
+                className={`w-[min-content] min-w-full shrink-0 text-right text-xs font-normal text-ink-secondary ${IS_TEMP ? '' : 'h-10'}`}
+                dir="auto"
+              >
+                {IS_TEMP
+                  ? 'بيانات بطاقتك مشفّرة ومحمية عبر Visa من لحظة إدخالها، وما نشوفها أو نحفظها أو نشاركها مع أي جهة'
+                  : 'بياناتك مشفرة بأعلى معايير الأمان.. وما نشاركها مع أحد'}
               </p>
             </div>
             <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-brand-400 p-2 shadow-xs">
@@ -374,7 +382,8 @@ export default function AddCardScreen() {
             className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-2.5"
           >
             <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-              أضف البطاقة
+              {/* #24 */}
+              {IS_TEMP ? 'فعّل الكاش باك' : 'أضف البطاقة'}
             </p>
           </button>
         </div>
