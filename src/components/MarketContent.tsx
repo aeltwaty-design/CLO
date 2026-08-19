@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { IS_TEMP } from '../state/PhaseState';
+import { BankPlusIcon } from './LinkPromoBanner';
+import iconFlash16 from '../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
 import MarketTabs, { type MarketTab } from './MarketTabs';
 import VoucherGrid from './VoucherGrid';
 import OfferList from './OfferList';
@@ -129,22 +131,45 @@ export default function MarketContent({
                 <span className="text-[14px] font-medium leading-[1.5]">{' .. بدون حد'}</span>
               </p>
             )}
-            <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              {/* #5 */}
-              {IS_TEMP ? 'فوق مكافآت بنكك.. وبدون حد' : 'ادفع مثل كل مرة.. وخذ أكثر'}
-            </p>
-            {IS_TEMP && (
-              // #10 — the reviewer adds this line
+            {IS_TEMP ? (
+              // Temp (user direction): the two points carry a glyph each, like
+              // the Home promo's rows — the bank-plus glyph for «فوق مكافآت
+              // بنكك», the flash glyph for «يرجع لك مباشرة» — and the violet
+              // cards badge on the left goes.
+              <>
+                <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
+                  <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                    {/* #5 */}
+                    فوق مكافآت بنكك.. وبدون حد
+                  </p>
+                  <div className="relative size-4 shrink-0">
+                    <BankPlusIcon />
+                  </div>
+                </div>
+                <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
+                  <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+                    {/* #10 — the reviewer adds this line */}
+                    ادفع مثل كل مرة.. والكاش باك يرجع لك مباشرة
+                  </p>
+                  <div className="relative size-4 shrink-0">
+                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
+                  </div>
+                </div>
+              </>
+            ) : (
               <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                ادفع مثل كل مرة.. والكاش باك يرجع لك مباشرة
+                {/* #5 */}
+                ادفع مثل كل مرة.. وخذ أكثر
               </p>
             )}
           </div>
-          <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
-            <div className="relative size-5 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
+          {!IS_TEMP && (
+            <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
+              <div className="relative size-5 shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="flex w-full shrink-0 items-center justify-center gap-3">
           <button

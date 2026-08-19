@@ -269,12 +269,17 @@ export default function LinkIntroSheet({
 
         {/* trust chips — each carries an ⓘ whose hover/tap opens a tooltip
             with the longer story behind the claim (user direction) */}
-        <div className="flex w-full items-center justify-end gap-2">
+        {/* Temp: the longer #19 label leaves the pair no breathing room in
+            one row, so the chips stack — «فوق مكافآت بنكك» on top, «بطاقتك
+            وبياناتك بأمان» beneath it (user direction), right-aligned, both
+            bubbles hugging the right edge. Same DOM order, so the tooltip
+            ids and tests don't move. */}
+        <div className={IS_TEMP ? 'flex w-full flex-col-reverse items-end gap-2' : 'flex w-full items-center justify-end gap-2'}>
           <TrustChip
             id="safe"
             label={IS_TEMP ? 'بطاقتك وبياناتك بأمان' : 'بياناتك في أمان'} // #19
             icon={iconShieldTick}
-            align="left"
+            align={IS_TEMP ? 'right' : 'left'}
             tipText="بيانات بطاقتك مشفرة بأعلى معايير الأمان وما نشاركها مع أحد.. نقرأ العمليات فقط عشان نحسب لك الكاش باك"
             openTip={tip}
             setTip={setTip}

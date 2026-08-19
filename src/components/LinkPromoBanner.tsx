@@ -97,7 +97,7 @@ function FiftyPercentArt({ clear = false }: { clear?: boolean }) {
  * longer fits (that glyph moves down to «كاش باك يوصلك لحظتها»). Inline, like
  * the art above, so both colours stay theme tokens.
  */
-function BankPlusIcon() {
+export function BankPlusIcon() {
   return (
     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
       <g strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
