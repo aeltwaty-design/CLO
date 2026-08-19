@@ -23,7 +23,15 @@ function Sparkle({ x, y, scale, className }: { x: number; y: number; scale: numb
  * Poppins and every colour stays a theme token via Tailwind's fill/stroke
  * utilities; the tilted card behind keeps a nod to the art it replaces.
  */
-function FiftyPercentArt() {
+function FiftyPercentArt({ clear = false }: { clear?: boolean }) {
+  // Temp (`clear`): the reviewer's first bullet is longer («… عند أكثر من 500
+  // متجر» starts ~135px in), so the «%», its sparkle and the orbit's right
+  // arc are pulled left/down out of that band — nothing paints past x≈130
+  // where the copy runs. Phase 2 keeps the drawn composition byte-for-byte.
+  const halo = clear ? 74 : 77;
+  const orbit = clear ? { cx: 70, r: 69 } : { cx: 77, r: 76 };
+  const pct = clear ? { x: 131, y: 88 } : { x: 130, y: 76 };
+  const twinkle = clear ? { x: 120, y: 22 } : { x: 140, y: 34 };
   return (
     <svg
       viewBox="0 0 160 164"
@@ -33,12 +41,12 @@ function FiftyPercentArt() {
       aria-hidden
     >
       {/* soft halo + dashed orbit */}
-      <circle cx="77" cy="81" r="66" className="fill-viola-100" opacity="0.5" />
-      <circle cx="77" cy="81" r="47" className="fill-viola-100" opacity="0.55" />
+      <circle cx={halo} cy="81" r="66" className="fill-viola-100" opacity="0.5" />
+      <circle cx={halo} cy="81" r="47" className="fill-viola-100" opacity="0.55" />
       <circle
-        cx="77"
+        cx={orbit.cx}
         cy="81"
-        r="76"
+        r={orbit.r}
         fill="none"
         strokeWidth="2"
         strokeDasharray="4 10"
@@ -65,19 +73,42 @@ function FiftyPercentArt() {
       >
         50
       </text>
-      <text x="130" y="76" textAnchor="middle" fontSize="46" fontWeight="700" className="font-en fill-brand-400">
+      <text x={pct.x} y={pct.y} textAnchor="middle" fontSize="46" fontWeight="700" className="font-en fill-brand-400">
         %
       </text>
 
       {/* artistic touches */}
       <Sparkle x={20} y={30} scale={1.5} className="fill-brand-400" />
       <Sparkle x={140} y={126} scale={1.2} className="fill-gold-600" />
-      <Sparkle x={140} y={34} scale={0.9} className="fill-viola-500" />
+      <Sparkle x={twinkle.x} y={twinkle.y} scale={0.9} className="fill-viola-500" />
       <Sparkle x={16} y={132} scale={0.8} className="fill-brand-400" />
       <circle cx="44" cy="150" r="4" className="fill-viola-300" />
       <circle cx="150" cy="108" r="3.5" className="fill-brand-400" />
       <circle cx="6" cy="72" r="3" className="fill-gold-600" />
       <circle cx="100" cy="10" r="3.5" className="fill-viola-300" />
+    </svg>
+  );
+}
+
+/**
+ * Vuesax-linear «bank» redrawn at 16px in the banner icons' duotone (ink
+ * body, bravo-500 details) with a «+» emblem on the roof — the Temp copy's
+ * second Home bullet reads «زيادة على مكافآت بنكك», which the flash glyph no
+ * longer fits (that glyph moves down to «كاش باك يوصلك لحظتها»). Inline, like
+ * the art above, so both colours stay theme tokens.
+ */
+function BankPlusIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
+      <g strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path
+          className="stroke-ink"
+          d="M8.25 1.43l6 2.4c.23.09.42.37.42.62v2.22c0 .37-.3.66-.67.66H2c-.37 0-.67-.3-.67-.66V4.45c0-.25.19-.53.42-.62l6-2.4c.13-.05.36-.05.5 0Z"
+        />
+        <path className="stroke-ink" d="M14.67 14.67H1.33v-2c0-.37.3-.67.67-.67h12c.37 0 .67.3.67.67v2Z" />
+        <path className="stroke-bravo-500" d="M2.67 12V7.33M5.33 12V7.33M8 12V7.33M10.67 12V7.33M13.33 12V7.33" />
+        <path className="stroke-bravo-500" d="M8 3v2.4M6.8 4.2h2.4" />
+      </g>
     </svg>
   );
 }
@@ -108,7 +139,7 @@ export default function LinkPromoBanner({
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
       {/* art first, so it paints behind the copy and the CTA */}
       <div className="pointer-events-none absolute left-0 top-[30px] h-[164px] w-[160px]">
-        <FiftyPercentArt />
+        <FiftyPercentArt clear={IS_TEMP} />
       </div>
       <div className="flex w-full shrink-0 flex-col items-end gap-5">
         <div className="flex w-full shrink-0 flex-col items-end">
@@ -167,7 +198,11 @@ export default function LinkPromoBanner({
               {IS_TEMP ? (wallet ? 'كاش باك يوصلك لحظتها' : 'زيادة على مكافآت بنكك') : 'استرداد نقدي سريع'}
             </p>
             <div className="relative size-4 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
+              {IS_TEMP && !wallet ? (
+                <BankPlusIcon />
+              ) : (
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
+              )}
             </div>
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
@@ -176,7 +211,11 @@ export default function LinkPromoBanner({
               {IS_TEMP && !wallet ? 'كاش باك يوصلك لحظتها' : 'آمن ومشفّر'}
             </p>
             <div className="relative size-4 shrink-0">
-              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSecurity16} />
+              <img
+                alt=""
+                className="absolute inset-0 block size-full max-w-none"
+                src={IS_TEMP && !wallet ? iconFlash16 : iconSecurity16}
+              />
             </div>
           </div>
         </div>
