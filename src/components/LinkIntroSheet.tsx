@@ -8,6 +8,8 @@ import iconCoin from '../assets/figma/49b2ad063a16e501dd1724af42efd55bad984f01.s
 import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
 import iconPlus from '../assets/figma/1782ca329908717a3751d66c5fff07ae32e411f5.svg';
 import iconInfoSmall from '../assets/figma/60e86b53328378fe6e2eaac39925383a1427b8b4.svg';
+import sarSymbol from '../assets/icons/sar-symbol.svg';
+import MaskGlyph from './redeem/MaskGlyph';
 
 /** Entry-point gate: in Phase 2, EVERY «add card» tap opens the intro sheet
     over the screen it was tapped on for as long as no card has been added
@@ -151,17 +153,11 @@ function TempHeroArt() {
           1234
         </text>
       </g>
-      {/* SAR coin badge over the card's lower corner */}
-      <circle cx="97" cy="86" r="17" className="fill-brand-100" />
-      <circle cx="97" cy="86" r="13.5" className="fill-brand-400" />
-      <g className="stroke-white" strokeWidth="2" strokeLinecap="round" fill="none">
-        <path d="M93.5 92.5v-11l4 2v7" />
-        <path d="M90.5 90l13-3" />
-        <path d="M90.5 94l13-3" />
-      </g>
-      {/* curved return arrow */}
-      <path d="M116 74c6-12 2-26-11-32" className="stroke-brand-400" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <path d="M100 45l6-4.5.5 8z" className="fill-brand-400" />
+      {/* curved return arrow — head aligned to the arc's end tangent
+          (the SAR coin badge is an HTML overlay in TempIntroBody, so the
+          real sar-symbol asset can be used) */}
+      <path d="M115 78c8-13 4-28-8-34" className="stroke-brand-400" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+      <path d="M103.5 42.5l10.5.2-4 9.2Z" className="fill-brand-400" />
       <Spark x={14} y={20} scale={1.1} className="fill-brand-400" />
       <Spark x={118} y={14} scale={0.8} className="fill-brand-400" />
     </svg>
@@ -320,6 +316,13 @@ function TempIntroBody() {
       <div className="flex w-full shrink-0 items-center justify-between gap-2">
         <div className="pointer-events-none relative h-[118px] w-[126px] shrink-0">
           <TempHeroArt />
+          {/* SAR coin badge over the card's lower corner — the real symbol,
+              painted white through its own mask */}
+          <div className="absolute left-[79px] top-[68px] flex size-[34px] items-center justify-center rounded-full bg-brand-100">
+            <div className="flex size-[27px] items-center justify-center rounded-full bg-brand-400">
+              <MaskGlyph src={sarSymbol} size={14} className="bg-white" />
+            </div>
+          </div>
         </div>
         <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1">
           <p className="w-full text-right text-[19px] font-bold leading-[1.45] text-ink" dir="auto">
