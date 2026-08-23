@@ -2,6 +2,8 @@ import iconShop16 from '../assets/figma/8b46d8c8b043dd24e8af69e3f25d9d115f2171ee
 import iconFlash16 from '../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
 import iconSecurity16 from '../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
+import iconCard16 from '../assets/figma/2a02a76700bfa721a2d4c7abb3f26abfd1e840c9.svg';
+import MaskGlyph from './redeem/MaskGlyph';
 import { IS_TEMP } from '../state/PhaseState';
 
 /** Four-point twinkle, drawn around the origin so it can be placed by transform. */
@@ -113,6 +115,116 @@ export function BankPlusIcon() {
   );
 }
 
+/** Green «50%» art of the Temp Home banner (attached design): gradient
+    numerals, a tilted «حتى» badge at their top right, gold coins bottom-left,
+    sparkles over a soft mint blob. Inline so the numerals render in Poppins
+    and every colour stays a theme token (gradient stops via CSS vars). */
+function FiftyPercentArtGreen() {
+  return (
+    <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
+      <defs>
+        <linearGradient id="tp-fifty" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style={{ stopColor: 'var(--color-brand-400)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-brand-800)' }} />
+        </linearGradient>
+      </defs>
+
+      {/* soft mint blob */}
+      <circle cx="66" cy="74" r="58" className="fill-brand-100" opacity="0.45" />
+      <circle cx="66" cy="74" r="40" className="fill-brand-100" opacity="0.5" />
+
+      {/* the claim — slight tilt, as attached */}
+      <g transform="rotate(-8 66 78)">
+        <text x="52" y="108" textAnchor="middle" fontSize="78" fontWeight="700" letterSpacing="-3" className="font-en" fill="url(#tp-fifty)">
+          50
+        </text>
+        <text x="113" y="76" textAnchor="middle" fontSize="40" fontWeight="700" className="font-en" fill="url(#tp-fifty)">
+          %
+        </text>
+      </g>
+
+      {/* «حتى» badge, tilted over the top-right of the numerals */}
+      <g transform="rotate(12 112 34)">
+        <rect x="92" y="22" width="40" height="22" rx="11" className="fill-brand-400" />
+        <text x="112" y="37" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-white">
+          حتى
+        </text>
+      </g>
+
+      {/* gold coins, bottom-left */}
+      <g>
+        <circle cx="24" cy="118" r="11" className="fill-gold-600" />
+        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.85" />
+        <circle cx="42" cy="128" r="8" className="fill-gold-600" opacity="0.9" />
+        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.4" className="stroke-white" opacity="0.85" />
+      </g>
+
+      {/* sparkles */}
+      <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
+      <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
+      <Sparkle x={10} y={78} scale={0.7} className="fill-brand-400" />
+      <circle cx="126" cy="10" r="3" className="fill-brand-100" />
+      <circle cx="6" cy="118" r="2.5" className="fill-brand-400" />
+    </svg>
+  );
+}
+
+/**
+ * Temp-only Home promo (user-attached design, 2026-08-19): green card —
+ * headline «كاش باك حتى 50% بدون قيود», three bullet rows with plain ink
+ * glyphs, the green «50%» art on the left, and a full-width brand pill CTA
+ * «ابدأ تستفيد» that starts the linking flow. The rows column and the art
+ * are flex siblings, so the copy can never run under the art. Rendered by
+ * LinkPromoBanner instead of the shared markup when IS_TEMP && home; the
+ * wallet keeps the violet Temp banner and Phase 1/2 keep the shared card.
+ */
+function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
+  const rows: { text: string; icon: string }[] = [
+    { text: 'كاش باك عند أكثر من 500 متجر', icon: iconShop16 },
+    // plain hyphen: FF Shamel has no em-dash glyph (it renders as a blank)
+    { text: 'ادفع ببطاقتك البنكية المعتادة عند المتاجر المشاركة - بدون أي خطوات أو إجراءات إضافية', icon: iconCard16 },
+    { text: 'وخذ كاش باك إضافي يرجع لمحفظة ولاء بلس لحظتها!', icon: iconFlash16 },
+  ];
+  return (
+    <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-brand-50 p-4">
+      <p className="w-full whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="rtl">
+        <span className="font-bold text-brand-800">{'كاش باك حتى '}</span>
+        <span className="font-en font-bold text-brand-800">50%</span>
+        <span className="font-bold text-brand-800">{' بدون قيود'}</span>
+      </p>
+      <div className="flex w-full shrink-0 items-center justify-between gap-2">
+        <div className="pointer-events-none relative h-[130px] w-[124px] shrink-0">
+          <FiftyPercentArtGreen />
+        </div>
+        <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2.5">
+          {rows.map(({ text, icon }) => (
+            <div key={text} className="flex w-full shrink-0 items-start justify-end gap-2">
+              <p className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="rtl">
+                {text}
+              </p>
+              <div className="mt-px shrink-0">
+                <MaskGlyph src={icon} size={16} className="bg-ink" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={onLink}
+        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-brand-400 px-4"
+      >
+        <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+          ابدأ تستفيد
+        </p>
+        <svg viewBox="-8 -8 16 16" className="size-4 shrink-0" aria-hidden>
+          <Sparkle x={0} y={0} scale={1.1} className="fill-white" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
 /**
  * BEFORE linking — the shared card promo (drawn 54:10300 in the Points
  * Wallet). One component in **both** Phase-2 before-link slots — the Points
@@ -135,6 +247,9 @@ export default function LinkPromoBanner({
   variant?: 'home' | 'wallet';
 }) {
   const wallet = variant === 'wallet';
+  // Temp Home takes the green attached design wholesale; the shared markup
+  // below keeps serving Phase 1/2 (both hosts) and the Temp wallet.
+  if (IS_TEMP && !wallet) return <TempHomePromoBanner onLink={onLink} />;
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
       {/* art first, so it paints behind the copy and the CTA */}
@@ -163,23 +278,14 @@ export default function LinkPromoBanner({
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
             <p className="h-[18px] whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="rtl">
               {IS_TEMP ? (
-                wallet ? (
-                  // #8
-                  <>
-                    {'حتى '}
-                    <span className="font-en">[X]%</span>
-                    {' عند أكثر من '}
-                    <span className="font-en">500</span>
-                    {' متجر'}
-                  </>
-                ) : (
-                  // #1
-                  <>
-                    {'كاش باك عند أكثر من '}
-                    <span className="font-en">500</span>
-                    {' متجر'}
-                  </>
-                )
+                // #8 — wallet only; Temp Home returns the green banner above
+                <>
+                  {'حتى '}
+                  <span className="font-en">[X]%</span>
+                  {' عند أكثر من '}
+                  <span className="font-en">500</span>
+                  {' متجر'}
+                </>
               ) : (
                 <>
                   {'اربح من أكثر من '}
@@ -194,28 +300,19 @@ export default function LinkPromoBanner({
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
             <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              {/* #11 / #2 */}
-              {IS_TEMP ? (wallet ? 'كاش باك يوصلك لحظتها' : 'زيادة على مكافآت بنكك') : 'استرداد نقدي سريع'}
+              {/* #11 */}
+              {IS_TEMP ? 'كاش باك يوصلك لحظتها' : 'استرداد نقدي سريع'}
             </p>
             <div className="relative size-4 shrink-0">
-              {IS_TEMP && !wallet ? (
-                <BankPlusIcon />
-              ) : (
-                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
-              )}
+              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
             </div>
           </div>
           <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
             <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-              {/* #3 */}
-              {IS_TEMP && !wallet ? 'كاش باك يوصلك لحظتها' : 'آمن ومشفّر'}
+              آمن ومشفّر
             </p>
             <div className="relative size-4 shrink-0">
-              <img
-                alt=""
-                className="absolute inset-0 block size-full max-w-none"
-                src={IS_TEMP && !wallet ? iconFlash16 : iconSecurity16}
-              />
+              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconSecurity16} />
             </div>
           </div>
         </div>
@@ -228,8 +325,8 @@ export default function LinkPromoBanner({
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft16} />
           </div>
           <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-            {/* #12 / #9 */}
-            {IS_TEMP ? (wallet ? 'خلها ترجع لك' : 'شوف الكاش باك') : 'ابدأ'}
+            {/* #12 */}
+            {IS_TEMP ? 'خلها ترجع لك' : 'ابدأ'}
           </p>
         </button>
       </div>
