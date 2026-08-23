@@ -396,7 +396,6 @@ function TempIntroBody() {
 
       {/* security note */}
       <div className="flex w-full shrink-0 items-center gap-3 rounded-2xl bg-brand-50 px-4 py-3">
-        <ArtShieldLock />
         <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-0.5">
           <p className="w-full text-right text-[13px] font-bold leading-[1.5] text-ink" dir="auto">
             بيانات بطاقتك محمية
@@ -407,6 +406,8 @@ function TempIntroBody() {
             {' من لحظة إدخالها، وما نشوفها أو نحفظها أو نشاركها مع أي جهة.'}
           </p>
         </div>
+        {/* leading side in RTL — the illustration sits right of the content */}
+        <ArtShieldLock />
       </div>
 
     </>
