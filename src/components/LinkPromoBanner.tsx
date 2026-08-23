@@ -127,15 +127,15 @@ function FiftyPercentArtTemp() {
       <defs>
         {/* numeral face: lit top-left → deep bottom-right */}
         <linearGradient id="tp-num" x1="0" y1="0" x2="0.9" y2="1">
-          <stop offset="0" style={{ stopColor: 'var(--color-viola-300)' }} />
-          <stop offset="0.45" style={{ stopColor: 'var(--color-viola-500)' }} />
+          <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
+          <stop offset="0.55" style={{ stopColor: 'var(--color-viola-500)' }} />
           <stop offset="1" style={{ stopColor: 'var(--color-bravo-500)' }} />
         </linearGradient>
         {/* glossy sheen over the top half of the numerals */}
         <linearGradient id="tp-sheen" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.55" />
-          <stop offset="0.4" stopColor="#fff" stopOpacity="0.12" />
-          <stop offset="0.55" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0" stopColor="#fff" stopOpacity="0.32" />
+          <stop offset="0.3" stopColor="#fff" stopOpacity="0.08" />
+          <stop offset="0.45" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
         {/* badge: lit top → deep bottom */}
         <linearGradient id="tp-badge" x1="0" y1="0" x2="0" y2="1">
@@ -161,52 +161,67 @@ function FiftyPercentArtTemp() {
         </filter>
       </defs>
 
-      {/* soft ground */}
-      <circle cx="66" cy="74" r="62" fill="url(#tp-blob)" />
+      {/* soft ground + contact shadow, so the piece sits on something */}
+      <circle cx="66" cy="72" r="63" fill="url(#tp-blob)" />
+      <ellipse cx="64" cy="124" rx="46" ry="8" fill="#5446b3" opacity="0.14" />
 
-      {/* the claim — slight tilt; extrusion behind, gradient face, sheen on top */}
+      {/* the claim — slight tilt; stacked extrusion wall (smooth bevel),
+          stroked faces for the reference's chunky weight, sheen on top */}
       <g transform="rotate(-8 66 78)" filter="url(#tp-drop)">
         <g className="font-en" fontWeight="700">
-          <text x="54.5" y="111.5" textAnchor="middle" fontSize="78" letterSpacing="-3" className="fill-viola-700">
-            50
-          </text>
-          <text x="115" y="79.5" textAnchor="middle" fontSize="40" className="fill-viola-700">
-            %
-          </text>
-          <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3" fill="url(#tp-num)">
-            50
-          </text>
-          <text x="113" y="76" textAnchor="middle" fontSize="40" fill="url(#tp-num)">
-            %
-          </text>
-          <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3" fill="url(#tp-sheen)">
-            50
-          </text>
-          <text x="113" y="76" textAnchor="middle" fontSize="40" fill="url(#tp-sheen)">
-            %
-          </text>
+          {[5, 4, 3, 2, 1].map((o) => (
+            <g key={o} className="fill-viola-700" stroke="var(--color-viola-700)" strokeWidth="3">
+              <text x={52 + o * 0.9} y={108 + o * 1.1} textAnchor="middle" fontSize="78" letterSpacing="-3">
+                50
+              </text>
+              <text x={113 + o * 0.9} y={76 + o * 1.1} textAnchor="middle" fontSize="40">
+                %
+              </text>
+            </g>
+          ))}
+          <g fill="url(#tp-num)" stroke="url(#tp-num)" strokeWidth="3">
+            <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3">
+              50
+            </text>
+            <text x="113" y="76" textAnchor="middle" fontSize="40">
+              %
+            </text>
+          </g>
+          <g fill="url(#tp-sheen)" stroke="url(#tp-sheen)" strokeWidth="3">
+            <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3">
+              50
+            </text>
+            <text x="113" y="76" textAnchor="middle" fontSize="40">
+              %
+            </text>
+          </g>
         </g>
       </g>
 
-      {/* «حتى» badge — gradient pill with a top highlight, tilted */}
+      {/* «حتى» ribbon — extruded gradient pill with a top highlight, tilted */}
       <g transform="rotate(12 112 34)" filter="url(#tp-drop-soft)">
+        <rect x="93" y="24.5" width="40" height="22" rx="11" className="fill-viola-700" />
         <rect x="92" y="22" width="40" height="22" rx="11" fill="url(#tp-badge)" />
-        <rect x="94.5" y="24" width="35" height="9" rx="4.5" fill="#fff" opacity="0.28" />
+        <rect x="94.5" y="23.8" width="35" height="10" rx="5" fill="#fff" opacity="0.3" />
         <text x="112" y="37" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-white">
           حتى
         </text>
       </g>
 
-      {/* polished gold coins, bottom-left */}
+      {/* polished gold coins — stacked bodies, rims, faces and glints */}
       <g filter="url(#tp-drop-soft)">
+        <circle cx="24.8" cy="120" r="11" style={{ fill: 'var(--color-gold-700)' }} />
         <circle cx="24" cy="118" r="11" fill="url(#tp-coin)" />
-        <circle cx="24" cy="118" r="10.4" fill="none" strokeWidth="1" className="stroke-gold-700" opacity="0.55" />
-        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.9" />
-        <ellipse cx="20.5" cy="113.5" rx="4" ry="2.4" fill="#fff" opacity="0.55" transform="rotate(-32 20.5 113.5)" />
+        <circle cx="24" cy="118" r="8.2" fill="none" strokeWidth="0.8" style={{ stroke: 'var(--color-gold-700)' }} opacity="0.6" />
+        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.8" className="stroke-white" opacity="0.95" />
+        <circle cx="24" cy="118" r="5.4" fill="url(#tp-coin)" />
+        <ellipse cx="20.2" cy="113.2" rx="4.2" ry="2.3" fill="#fff" opacity="0.6" transform="rotate(-32 20.2 113.2)" />
+        <circle cx="42.6" cy="129.5" r="8" style={{ fill: 'var(--color-gold-700)' }} />
         <circle cx="42" cy="128" r="8" fill="url(#tp-coin)" />
-        <circle cx="42" cy="128" r="7.5" fill="none" strokeWidth="0.9" className="stroke-gold-700" opacity="0.55" />
-        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.4" className="stroke-white" opacity="0.9" />
-        <ellipse cx="39.6" cy="124.9" rx="2.8" ry="1.7" fill="#fff" opacity="0.55" transform="rotate(-32 39.6 124.9)" />
+        <circle cx="42" cy="128" r="5.9" fill="none" strokeWidth="0.7" style={{ stroke: 'var(--color-gold-700)' }} opacity="0.6" />
+        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.5" className="stroke-white" opacity="0.95" />
+        <circle cx="42" cy="128" r="3.6" fill="url(#tp-coin)" />
+        <ellipse cx="39.4" cy="124.7" rx="2.9" ry="1.6" fill="#fff" opacity="0.6" transform="rotate(-32 39.4 124.7)" />
       </g>
 
       {/* sparkles — a white core keeps them glinting */}
