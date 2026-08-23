@@ -211,10 +211,13 @@ function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
         <span className="font-en font-bold text-bravo-500">50%</span>
         <span className="font-bold text-bravo-500">{' بدون قيود'}</span>
       </p>
+      {/* art in the same slot as the wallet banner: flush to the card's left
+          edge, 38px down (absolute; the spacer below keeps the rows clear) */}
+      <div className="pointer-events-none absolute left-0 top-[38px] h-[130px] w-[124px]">
+        <FiftyPercentArtTemp />
+      </div>
       <div className="flex w-full shrink-0 items-center justify-between gap-2">
-        <div className="pointer-events-none relative h-[130px] w-[124px] shrink-0">
-          <FiftyPercentArtTemp />
-        </div>
+        <div className="h-[130px] w-[108px] shrink-0" />
         <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2.5">
           {rows.map(({ text, icon }) => (
             <div key={text} className="flex w-full shrink-0 items-start justify-end gap-2">
