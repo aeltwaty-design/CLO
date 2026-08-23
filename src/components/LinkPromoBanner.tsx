@@ -115,23 +115,24 @@ export function BankPlusIcon() {
   );
 }
 
-/** Green «50%» art of the Temp Home banner (attached design): gradient
+/** «50%» art of the Temp Home banner (attached design, reverted to the
+    banner's violet scheme per user direction): gradient
     numerals, a tilted «حتى» badge at their top right, gold coins bottom-left,
     sparkles over a soft mint blob. Inline so the numerals render in Poppins
     and every colour stays a theme token (gradient stops via CSS vars). */
-function FiftyPercentArtGreen() {
+function FiftyPercentArtTemp() {
   return (
     <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
       <defs>
         <linearGradient id="tp-fifty" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" style={{ stopColor: 'var(--color-brand-400)' }} />
-          <stop offset="1" style={{ stopColor: 'var(--color-brand-800)' }} />
+          <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-bravo-500)' }} />
         </linearGradient>
       </defs>
 
-      {/* soft mint blob */}
-      <circle cx="66" cy="74" r="58" className="fill-brand-100" opacity="0.45" />
-      <circle cx="66" cy="74" r="40" className="fill-brand-100" opacity="0.5" />
+      {/* soft lilac blob */}
+      <circle cx="66" cy="74" r="58" className="fill-viola-100" opacity="0.45" />
+      <circle cx="66" cy="74" r="40" className="fill-viola-100" opacity="0.5" />
 
       {/* the claim — slight tilt, as attached */}
       <g transform="rotate(-8 66 78)">
@@ -145,7 +146,7 @@ function FiftyPercentArtGreen() {
 
       {/* «حتى» badge, tilted over the top-right of the numerals */}
       <g transform="rotate(12 112 34)">
-        <rect x="92" y="22" width="40" height="22" rx="11" className="fill-brand-400" />
+        <rect x="92" y="22" width="40" height="22" rx="11" className="fill-bravo-500" />
         <text x="112" y="37" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-white">
           حتى
         </text>
@@ -162,15 +163,16 @@ function FiftyPercentArtGreen() {
       {/* sparkles */}
       <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
       <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
-      <Sparkle x={10} y={78} scale={0.7} className="fill-brand-400" />
-      <circle cx="126" cy="10" r="3" className="fill-brand-100" />
+      <Sparkle x={10} y={78} scale={0.7} className="fill-viola-500" />
+      <circle cx="126" cy="10" r="3" className="fill-viola-300" />
       <circle cx="6" cy="118" r="2.5" className="fill-brand-400" />
     </svg>
   );
 }
 
 /**
- * Temp-only Home promo (user-attached design, 2026-08-19): green card —
+ * Temp-only Home promo (user-attached design, 2026-08-19, violet scheme
+ * per follow-up direction): bravo card —
  * headline «كاش باك حتى 50% بدون قيود», three bullet rows with plain ink
  * glyphs, the green «50%» art on the left, and a full-width brand pill CTA
  * «ابدأ تستفيد» that starts the linking flow. The rows column and the art
@@ -186,15 +188,15 @@ function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
     { text: 'وخذ كاش باك إضافي يرجع لمحفظة ولاء بلس لحظتها!', icon: iconFlash16 },
   ];
   return (
-    <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-brand-50 p-4">
+    <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
       <p className="w-full whitespace-nowrap text-right text-sm not-italic leading-[1.5]" dir="rtl">
-        <span className="font-bold text-brand-800">{'كاش باك حتى '}</span>
-        <span className="font-en font-bold text-brand-800">50%</span>
-        <span className="font-bold text-brand-800">{' بدون قيود'}</span>
+        <span className="font-bold text-bravo-500">{'كاش باك حتى '}</span>
+        <span className="font-en font-bold text-bravo-500">50%</span>
+        <span className="font-bold text-bravo-500">{' بدون قيود'}</span>
       </p>
       <div className="flex w-full shrink-0 items-center justify-between gap-2">
         <div className="pointer-events-none relative h-[130px] w-[124px] shrink-0">
-          <FiftyPercentArtGreen />
+          <FiftyPercentArtTemp />
         </div>
         <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2.5">
           {rows.map(({ text, icon }) => (
@@ -212,7 +214,7 @@ function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
       <button
         type="button"
         onClick={onLink}
-        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-brand-400 px-4"
+        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-bravo-500 px-4"
       >
         <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
           ابدأ تستفيد
