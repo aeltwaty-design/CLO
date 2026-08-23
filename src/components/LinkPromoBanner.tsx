@@ -114,55 +114,109 @@ export function BankPlusIcon() {
   );
 }
 
-/** «50%» art of the Temp Home banner (attached design, reverted to the
-    banner's violet scheme per user direction): gradient
-    numerals, a tilted «حتى» badge at their top right, gold coins bottom-left,
-    sparkles over a soft mint blob. Inline so the numerals render in Poppins
-    and every colour stays a theme token (gradient stops via CSS vars). */
+/** «50%» art of the Temp Home banner (attached design, violet scheme) —
+    rendered as **3D polished shapes** per user direction: the numerals get a
+    dark-violet extrusion, a light-to-dark gradient face and a glossy sheen;
+    the «حتى» badge and the coins get vertical/radial gradients, rims and
+    specular highlights; everything casts a soft violet drop shadow. Inline
+    so the numerals render in Poppins and every colour stays a theme token
+    (gradient stops via CSS vars); shadow colours are literal by design. */
 function FiftyPercentArtTemp() {
   return (
     <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
       <defs>
-        <linearGradient id="tp-fifty" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
+        {/* numeral face: lit top-left → deep bottom-right */}
+        <linearGradient id="tp-num" x1="0" y1="0" x2="0.9" y2="1">
+          <stop offset="0" style={{ stopColor: 'var(--color-viola-300)' }} />
+          <stop offset="0.45" style={{ stopColor: 'var(--color-viola-500)' }} />
           <stop offset="1" style={{ stopColor: 'var(--color-bravo-500)' }} />
         </linearGradient>
+        {/* glossy sheen over the top half of the numerals */}
+        <linearGradient id="tp-sheen" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0.55" />
+          <stop offset="0.4" stopColor="#fff" stopOpacity="0.12" />
+          <stop offset="0.55" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        {/* badge: lit top → deep bottom */}
+        <linearGradient id="tp-badge" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-viola-700)' }} />
+        </linearGradient>
+        {/* coin: polished gold, highlight off-centre */}
+        <radialGradient id="tp-coin" cx="0.35" cy="0.3" r="0.85">
+          <stop offset="0" stopColor="#f6d97c" />
+          <stop offset="0.55" style={{ stopColor: 'var(--color-gold-600)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-gold-700)' }} />
+        </radialGradient>
+        {/* soft ground blob */}
+        <radialGradient id="tp-blob" cx="0.5" cy="0.45" r="0.6">
+          <stop offset="0" style={{ stopColor: 'var(--color-viola-100)' }} stopOpacity="0.9" />
+          <stop offset="1" style={{ stopColor: 'var(--color-viola-100)' }} stopOpacity="0" />
+        </radialGradient>
+        <filter id="tp-drop" x="-30%" y="-30%" width="160%" height="170%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#5446b3" floodOpacity="0.32" />
+        </filter>
+        <filter id="tp-drop-soft" x="-40%" y="-40%" width="180%" height="190%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#5446b3" floodOpacity="0.3" />
+        </filter>
       </defs>
 
-      {/* soft lilac blob */}
-      <circle cx="66" cy="74" r="58" className="fill-viola-100" opacity="0.45" />
-      <circle cx="66" cy="74" r="40" className="fill-viola-100" opacity="0.5" />
+      {/* soft ground */}
+      <circle cx="66" cy="74" r="62" fill="url(#tp-blob)" />
 
-      {/* the claim — slight tilt, as attached */}
-      <g transform="rotate(-8 66 78)">
-        <text x="52" y="108" textAnchor="middle" fontSize="78" fontWeight="700" letterSpacing="-3" className="font-en" fill="url(#tp-fifty)">
-          50
-        </text>
-        <text x="113" y="76" textAnchor="middle" fontSize="40" fontWeight="700" className="font-en" fill="url(#tp-fifty)">
-          %
-        </text>
+      {/* the claim — slight tilt; extrusion behind, gradient face, sheen on top */}
+      <g transform="rotate(-8 66 78)" filter="url(#tp-drop)">
+        <g className="font-en" fontWeight="700">
+          <text x="54.5" y="111.5" textAnchor="middle" fontSize="78" letterSpacing="-3" className="fill-viola-700">
+            50
+          </text>
+          <text x="115" y="79.5" textAnchor="middle" fontSize="40" className="fill-viola-700">
+            %
+          </text>
+          <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3" fill="url(#tp-num)">
+            50
+          </text>
+          <text x="113" y="76" textAnchor="middle" fontSize="40" fill="url(#tp-num)">
+            %
+          </text>
+          <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3" fill="url(#tp-sheen)">
+            50
+          </text>
+          <text x="113" y="76" textAnchor="middle" fontSize="40" fill="url(#tp-sheen)">
+            %
+          </text>
+        </g>
       </g>
 
-      {/* «حتى» badge, tilted over the top-right of the numerals */}
-      <g transform="rotate(12 112 34)">
-        <rect x="92" y="22" width="40" height="22" rx="11" className="fill-bravo-500" />
+      {/* «حتى» badge — gradient pill with a top highlight, tilted */}
+      <g transform="rotate(12 112 34)" filter="url(#tp-drop-soft)">
+        <rect x="92" y="22" width="40" height="22" rx="11" fill="url(#tp-badge)" />
+        <rect x="94.5" y="24" width="35" height="9" rx="4.5" fill="#fff" opacity="0.28" />
         <text x="112" y="37" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-white">
           حتى
         </text>
       </g>
 
-      {/* gold coins, bottom-left */}
-      <g>
-        <circle cx="24" cy="118" r="11" className="fill-gold-600" />
-        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.85" />
-        <circle cx="42" cy="128" r="8" className="fill-gold-600" opacity="0.9" />
-        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.4" className="stroke-white" opacity="0.85" />
+      {/* polished gold coins, bottom-left */}
+      <g filter="url(#tp-drop-soft)">
+        <circle cx="24" cy="118" r="11" fill="url(#tp-coin)" />
+        <circle cx="24" cy="118" r="10.4" fill="none" strokeWidth="1" className="stroke-gold-700" opacity="0.55" />
+        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.9" />
+        <ellipse cx="20.5" cy="113.5" rx="4" ry="2.4" fill="#fff" opacity="0.55" transform="rotate(-32 20.5 113.5)" />
+        <circle cx="42" cy="128" r="8" fill="url(#tp-coin)" />
+        <circle cx="42" cy="128" r="7.5" fill="none" strokeWidth="0.9" className="stroke-gold-700" opacity="0.55" />
+        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.4" className="stroke-white" opacity="0.9" />
+        <ellipse cx="39.6" cy="124.9" rx="2.8" ry="1.7" fill="#fff" opacity="0.55" transform="rotate(-32 39.6 124.9)" />
       </g>
 
-      {/* sparkles */}
-      <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
-      <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
-      <Sparkle x={10} y={78} scale={0.7} className="fill-viola-500" />
+      {/* sparkles — a white core keeps them glinting */}
+      <g filter="url(#tp-drop-soft)">
+        <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
+        <Sparkle x={16} y={26} scale={0.55} className="fill-white" />
+        <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
+        <Sparkle x={132} y={110} scale={0.45} className="fill-white" />
+        <Sparkle x={10} y={78} scale={0.7} className="fill-viola-500" />
+      </g>
       <circle cx="126" cy="10" r="3" className="fill-viola-300" />
       <circle cx="6" cy="118" r="2.5" className="fill-brand-400" />
     </svg>
