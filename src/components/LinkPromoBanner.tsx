@@ -205,7 +205,7 @@ function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
                 {text}
               </p>
               <div className="mt-px shrink-0">
-                <MaskGlyph src={icon} size={16} className="bg-ink" />
+                <MaskGlyph src={icon} size={16} className="bg-bravo-500" />
               </div>
             </div>
           ))}
