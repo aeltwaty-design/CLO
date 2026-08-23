@@ -245,7 +245,6 @@ const TEMP_BENEFITS = [
     art: <ArtShieldCheck />,
     body: 'نحتاج بطاقتك عشان نتعرف على مشترياتك المؤهلة ونستمر في إرجاع الكاش باك.',
     note: 'إذا شلتها، يتوقف الكاش باك على مشترياتها القادمة.',
-    warm: true,
   },
   {
     title: 'زيادة على مكافأت بطاقتك',
@@ -348,12 +347,7 @@ function TempIntroBody() {
       </p>
       <div dir="rtl" className="grid w-full shrink-0 grid-cols-2 gap-2" data-testid="intro-benefits">
           {TEMP_BENEFITS.map((c) => (
-            <div
-              key={c.title}
-              className={`flex flex-col items-center gap-2 rounded-2xl p-3 ${
-                c.warm ? 'bg-warning-50' : 'bg-brand-50'
-              }`}
-            >
+            <div key={c.title} className="flex flex-col items-center gap-2 rounded-2xl bg-surface-neutral p-3">
               <p className="w-full text-center text-[13px] font-bold leading-[1.5] text-ink" dir="auto">
                 {c.title}
               </p>
