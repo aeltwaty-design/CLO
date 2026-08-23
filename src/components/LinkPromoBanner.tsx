@@ -114,124 +114,55 @@ export function BankPlusIcon() {
   );
 }
 
-/** «50%» art of the Temp Home banner (attached design, violet scheme) —
-    rendered as **3D polished shapes** per user direction: the numerals get a
-    dark-violet extrusion, a light-to-dark gradient face and a glossy sheen;
-    the «حتى» badge and the coins get vertical/radial gradients, rims and
-    specular highlights; everything casts a soft violet drop shadow. Inline
-    so the numerals render in Poppins and every colour stays a theme token
-    (gradient stops via CSS vars); shadow colours are literal by design. */
+/** «50%» art of the Temp Home banner (attached design, reverted to the
+    banner's violet scheme per user direction): gradient
+    numerals, a tilted «حتى» badge at their top right, gold coins bottom-left,
+    sparkles over a soft mint blob. Inline so the numerals render in Poppins
+    and every colour stays a theme token (gradient stops via CSS vars). */
 function FiftyPercentArtTemp() {
   return (
     <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
       <defs>
-        {/* numeral face: lit top-left → deep bottom-right */}
-        <linearGradient id="tp-num" x1="0" y1="0" x2="0.9" y2="1">
+        <linearGradient id="tp-fifty" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
-          <stop offset="0.55" style={{ stopColor: 'var(--color-viola-500)' }} />
           <stop offset="1" style={{ stopColor: 'var(--color-bravo-500)' }} />
         </linearGradient>
-        {/* glossy sheen over the top half of the numerals */}
-        <linearGradient id="tp-sheen" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.32" />
-          <stop offset="0.3" stopColor="#fff" stopOpacity="0.08" />
-          <stop offset="0.45" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        {/* badge: lit top → deep bottom */}
-        <linearGradient id="tp-badge" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: 'var(--color-viola-500)' }} />
-          <stop offset="1" style={{ stopColor: 'var(--color-viola-700)' }} />
-        </linearGradient>
-        {/* coin: polished gold, highlight off-centre */}
-        <radialGradient id="tp-coin" cx="0.35" cy="0.3" r="0.85">
-          <stop offset="0" stopColor="#f6d97c" />
-          <stop offset="0.55" style={{ stopColor: 'var(--color-gold-600)' }} />
-          <stop offset="1" style={{ stopColor: 'var(--color-gold-700)' }} />
-        </radialGradient>
-        {/* soft ground blob */}
-        <radialGradient id="tp-blob" cx="0.5" cy="0.45" r="0.6">
-          <stop offset="0" style={{ stopColor: 'var(--color-viola-100)' }} stopOpacity="0.9" />
-          <stop offset="1" style={{ stopColor: 'var(--color-viola-100)' }} stopOpacity="0" />
-        </radialGradient>
-        <filter id="tp-drop" x="-30%" y="-30%" width="160%" height="170%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#5446b3" floodOpacity="0.32" />
-        </filter>
-        <filter id="tp-drop-soft" x="-40%" y="-40%" width="180%" height="190%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#5446b3" floodOpacity="0.3" />
-        </filter>
       </defs>
 
-      {/* soft ground + contact shadow, so the piece sits on something */}
-      <circle cx="66" cy="72" r="63" fill="url(#tp-blob)" />
-      <ellipse cx="64" cy="124" rx="46" ry="8" fill="#5446b3" opacity="0.14" />
+      {/* soft lilac blob */}
+      <circle cx="66" cy="74" r="58" className="fill-viola-100" opacity="0.45" />
+      <circle cx="66" cy="74" r="40" className="fill-viola-100" opacity="0.5" />
 
-      {/* the claim — slight tilt; stacked extrusion wall (smooth bevel),
-          stroked faces for the reference's chunky weight, sheen on top */}
-      <g transform="rotate(-8 66 78)" filter="url(#tp-drop)">
-        <g className="font-en" fontWeight="700">
-          {[5, 4, 3, 2, 1].map((o) => (
-            <g key={o} className="fill-viola-700" stroke="var(--color-viola-700)" strokeWidth="3">
-              <text x={52 + o * 0.9} y={108 + o * 1.1} textAnchor="middle" fontSize="78" letterSpacing="-3">
-                50
-              </text>
-              <text x={113 + o * 0.9} y={76 + o * 1.1} textAnchor="middle" fontSize="40">
-                %
-              </text>
-            </g>
-          ))}
-          <g fill="url(#tp-num)" stroke="url(#tp-num)" strokeWidth="3">
-            <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3">
-              50
-            </text>
-            <text x="113" y="76" textAnchor="middle" fontSize="40">
-              %
-            </text>
-          </g>
-          <g fill="url(#tp-sheen)" stroke="url(#tp-sheen)" strokeWidth="3">
-            <text x="52" y="108" textAnchor="middle" fontSize="78" letterSpacing="-3">
-              50
-            </text>
-            <text x="113" y="76" textAnchor="middle" fontSize="40">
-              %
-            </text>
-          </g>
-        </g>
+      {/* the claim — slight tilt, as attached */}
+      <g transform="rotate(-8 66 78)">
+        <text x="52" y="108" textAnchor="middle" fontSize="78" fontWeight="700" letterSpacing="-3" className="font-en" fill="url(#tp-fifty)">
+          50
+        </text>
+        <text x="113" y="76" textAnchor="middle" fontSize="40" fontWeight="700" className="font-en" fill="url(#tp-fifty)">
+          %
+        </text>
       </g>
 
-      {/* «حتى» ribbon — extruded gradient pill with a top highlight, tilted */}
-      <g transform="rotate(12 112 34)" filter="url(#tp-drop-soft)">
-        <rect x="93" y="24.5" width="40" height="22" rx="11" className="fill-viola-700" />
-        <rect x="92" y="22" width="40" height="22" rx="11" fill="url(#tp-badge)" />
-        <rect x="94.5" y="23.8" width="35" height="10" rx="5" fill="#fff" opacity="0.3" />
+      {/* «حتى» badge, tilted over the top-right of the numerals */}
+      <g transform="rotate(12 112 34)">
+        <rect x="92" y="22" width="40" height="22" rx="11" className="fill-bravo-500" />
         <text x="112" y="37" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-white">
           حتى
         </text>
       </g>
 
-      {/* polished gold coins — stacked bodies, rims, faces and glints */}
-      <g filter="url(#tp-drop-soft)">
-        <circle cx="24.8" cy="120" r="11" style={{ fill: 'var(--color-gold-700)' }} />
-        <circle cx="24" cy="118" r="11" fill="url(#tp-coin)" />
-        <circle cx="24" cy="118" r="8.2" fill="none" strokeWidth="0.8" style={{ stroke: 'var(--color-gold-700)' }} opacity="0.6" />
-        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.8" className="stroke-white" opacity="0.95" />
-        <circle cx="24" cy="118" r="5.4" fill="url(#tp-coin)" />
-        <ellipse cx="20.2" cy="113.2" rx="4.2" ry="2.3" fill="#fff" opacity="0.6" transform="rotate(-32 20.2 113.2)" />
-        <circle cx="42.6" cy="129.5" r="8" style={{ fill: 'var(--color-gold-700)' }} />
-        <circle cx="42" cy="128" r="8" fill="url(#tp-coin)" />
-        <circle cx="42" cy="128" r="5.9" fill="none" strokeWidth="0.7" style={{ stroke: 'var(--color-gold-700)' }} opacity="0.6" />
-        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.5" className="stroke-white" opacity="0.95" />
-        <circle cx="42" cy="128" r="3.6" fill="url(#tp-coin)" />
-        <ellipse cx="39.4" cy="124.7" rx="2.9" ry="1.6" fill="#fff" opacity="0.6" transform="rotate(-32 39.4 124.7)" />
+      {/* gold coins, bottom-left */}
+      <g>
+        <circle cx="24" cy="118" r="11" className="fill-gold-600" />
+        <circle cx="24" cy="118" r="7" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.85" />
+        <circle cx="42" cy="128" r="8" className="fill-gold-600" opacity="0.9" />
+        <circle cx="42" cy="128" r="4.8" fill="none" strokeWidth="1.4" className="stroke-white" opacity="0.85" />
       </g>
 
-      {/* sparkles — a white core keeps them glinting */}
-      <g filter="url(#tp-drop-soft)">
-        <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
-        <Sparkle x={16} y={26} scale={0.55} className="fill-white" />
-        <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
-        <Sparkle x={132} y={110} scale={0.45} className="fill-white" />
-        <Sparkle x={10} y={78} scale={0.7} className="fill-viola-500" />
-      </g>
+      {/* sparkles */}
+      <Sparkle x={16} y={26} scale={1.3} className="fill-brand-400" />
+      <Sparkle x={132} y={110} scale={1} className="fill-gold-600" />
+      <Sparkle x={10} y={78} scale={0.7} className="fill-viola-500" />
       <circle cx="126" cy="10" r="3" className="fill-viola-300" />
       <circle cx="6" cy="118" r="2.5" className="fill-brand-400" />
     </svg>
