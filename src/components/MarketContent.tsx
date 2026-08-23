@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { IS_TEMP } from '../state/PhaseState';
-import { BankPlusIcon } from './LinkPromoBanner';
-import iconFlash16 from '../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
+import MaskGlyph from './redeem/MaskGlyph';
+import sarSymbol from '../assets/icons/sar-symbol.svg';
 import MarketTabs, { type MarketTab } from './MarketTabs';
 import VoucherGrid from './VoucherGrid';
 import OfferList from './OfferList';
@@ -84,6 +84,72 @@ const afterGrid: CardData[] = [
  * 1:8238 after card link) and القسائم tab (65:23785). Tabs, category chips
  * and filter chips are shared; only the banner and the grid switch.
  */
+/** Temp market promo (user-attached design, 2026-08-19) — cashback tab
+    before linking: ink «ادفع مثل كل مرة..» over a green «وخد حتى [X]% كاش
+    باك», an explainer, the violet-card + coins + bag illustration on the
+    left, and a green pill CTA «ابدأ تستفيد» that starts the linking flow.
+    The [X]% placeholder stays in the app's bracket style. */
+function TempMarketPromo({ onStart }: { onStart: () => void }) {
+  return (
+    <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-brand-50 p-3" data-testid="market-promo-temp">
+      <div className="flex w-full shrink-0 items-center justify-between gap-2">
+        <div className="pointer-events-none relative h-[104px] w-[104px] shrink-0">
+          <svg viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
+            {/* violet card */}
+            <g transform="rotate(-14 46 40)">
+              <rect x="10" y="14" width="66" height="46" rx="8" className="fill-viola-500" />
+              <rect x="10" y="14" width="66" height="46" rx="8" fill="#fff" opacity="0.06" />
+              <rect x="18" y="26" width="12" height="9" rx="2" className="fill-gold-600" />
+              <path d="M62 22l2.2 4.6 4.6 2.2-4.6 2.2-2.2 4.6-2.2-4.6-4.6-2.2 4.6-2.2Z" fill="#fff" opacity="0.5" />
+            </g>
+            {/* gold coins */}
+            <circle cx="72" cy="46" r="12" className="fill-gold-600" />
+            <circle cx="72" cy="46" r="8" fill="none" strokeWidth="1.8" className="stroke-white" opacity="0.85" />
+            <circle cx="80" cy="66" r="10" className="fill-gold-600" />
+            <circle cx="80" cy="66" r="6.5" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.85" />
+            {/* sparkles */}
+            <path transform="translate(90 20) scale(0.8)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-viola-300" />
+            <path transform="translate(8 66) scale(0.7)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-brand-400" />
+            {/* green shopping bag */}
+            <path d="M22 64h34l-4 34H26l-4-34Z" className="fill-brand-400" />
+            <path d="M22 64h34l-1 8H23l-1-8Z" className="fill-brand-500" />
+            <path d="M31 64v-5a8 8 0 0 1 16 0v5" className="stroke-brand-800" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          </svg>
+          {/* the bag's SAR mark — the real symbol through its mask */}
+          <div className="absolute left-[30px] top-[76px]">
+            <MaskGlyph src={sarSymbol} size={14} className="bg-white" />
+          </div>
+        </div>
+        <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1">
+          <p className="w-full text-right text-[15px] font-bold leading-[1.5] text-ink" dir="auto">
+            ادفع مثل كل مرة..
+          </p>
+          <p className="w-full whitespace-nowrap text-right text-[15px] font-bold leading-[1.5]" dir="rtl">
+            <span className="text-brand-500">{'وخد حتى '}</span>
+            <span className="font-en text-brand-500">[X]%</span>
+            <span className="text-brand-500">{' كاش باك'}</span>
+          </p>
+          <p className="w-full text-right text-xs font-normal leading-[1.6] text-ink-secondary" dir="rtl">
+            استخدم بطاقتك المعتادة عند المتاجر المشاركة. ويرجع لك كاش باك إضافي لمحفظة ولاء بلس لحظتها.
+          </p>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={onStart}
+        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-brand-400 px-4"
+      >
+        <svg viewBox="0 0 16 16" fill="none" className="size-4 shrink-0" aria-hidden>
+          <path d="M13.5 8H3M6.5 4.5L3 8l3.5 3.5" className="stroke-white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+          ابدأ تستفيد
+        </p>
+      </button>
+    </div>
+  );
+}
+
 export default function MarketContent({
   linked = false,
   onStart,
@@ -110,66 +176,31 @@ export default function MarketContent({
     <div className="flex w-full flex-col items-center justify-center gap-6 bg-surface px-4 py-2.5">
       <MarketTabs active={tab} available={tabsAvailable} order={tabsOrder} onChange={onTabChange} />
 
-      {/* Promo banner — cashback tab, before-link only */}
-      {!linked && !vouchers && !offers && (
+      {/* Promo banner — cashback tab, before-link only. Temp renders the
+          attached green design (2026-08-19) wholesale below. */}
+      {!linked && !vouchers && !offers && IS_TEMP && (
+        <TempMarketPromo onStart={() => (onStart ? onStart() : navigate('/cashback/intro'))} />
+      )}
+      {!linked && !vouchers && !offers && !IS_TEMP && (
       <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
         <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
           <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
-            {IS_TEMP ? (
-              // #4 — headline
-              <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="rtl">
-                <span className="text-[14px] font-medium leading-[1.5]">{'ادفع مثل كل مرة.. وخذ حتى '}</span>
-                <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
-                <span className="text-[14px] font-medium leading-[1.5]">{' كاش باك'}</span>
-              </p>
-            ) : (
-              <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="auto">
-                <span className="text-[14px] font-medium leading-[1.5]">{'حتى '}</span>
-                <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
-                <span className="text-[14px] font-medium leading-[1.5]">{' '}</span>
-                <span className="text-[14px] font-medium not-italic leading-[1.5] text-ink">كاش باك</span>
-                <span className="text-[14px] font-medium leading-[1.5]">{' .. بدون حد'}</span>
-              </p>
-            )}
-            {IS_TEMP ? (
-              // Temp (user direction): the two points carry a glyph each, like
-              // the Home promo's rows — the bank-plus glyph for «فوق مكافآت
-              // بنكك», the flash glyph for «يرجع لك مباشرة» — and the violet
-              // cards badge on the left goes.
-              <>
-                <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
-                  <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                    {/* #5 */}
-                    فوق مكافآت بنكك.. وبدون حد
-                  </p>
-                  <div className="relative size-4 shrink-0">
-                    <BankPlusIcon />
-                  </div>
-                </div>
-                <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip">
-                  <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                    {/* #10 — the reviewer adds this line */}
-                    ادفع مثل كل مرة.. والكاش باك يرجع لك مباشرة
-                  </p>
-                  <div className="relative size-4 shrink-0">
-                    <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                {/* #5 */}
-                ادفع مثل كل مرة.. وخذ أكثر
-              </p>
-            )}
+            <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="auto">
+              <span className="text-[14px] font-medium leading-[1.5]">{'حتى '}</span>
+              <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">[X]%</span>
+              <span className="text-[14px] font-medium leading-[1.5]">{' '}</span>
+              <span className="text-[14px] font-medium not-italic leading-[1.5] text-ink">كاش باك</span>
+              <span className="text-[14px] font-medium leading-[1.5]">{' .. بدون حد'}</span>
+            </p>
+            <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
+              ادفع مثل كل مرة.. وخذ أكثر
+            </p>
           </div>
-          {!IS_TEMP && (
-            <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
-              <div className="relative size-5 shrink-0">
-                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-              </div>
+          <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
+            <div className="relative size-5 shrink-0">
+              <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
             </div>
-          )}
+          </div>
         </div>
         <div className="flex w-full shrink-0 items-center justify-center gap-3">
           <button
@@ -181,8 +212,7 @@ export default function MarketContent({
               <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
             </div>
             <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-              {/* #6 */}
-              {IS_TEMP ? 'فعّل الكاش باك' : 'ابدأ'}
+              ابدأ
             </p>
           </button>
         </div>
