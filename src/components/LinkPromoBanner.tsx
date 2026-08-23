@@ -2,8 +2,7 @@ import iconShop16 from '../assets/figma/8b46d8c8b043dd24e8af69e3f25d9d115f2171ee
 import iconFlash16 from '../assets/figma/bf3d51654507f65ce1374cd093eb5832aaa8bc1f.svg';
 import iconSecurity16 from '../assets/figma/6d6ef4e974b62e59ac6b41ef2c8589c78266e702.svg';
 import iconArrowLeft16 from '../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
-import iconCard16 from '../assets/figma/2a02a76700bfa721a2d4c7abb3f26abfd1e840c9.svg';
-import MaskGlyph from './redeem/MaskGlyph';
+import type { ReactNode } from 'react';
 import { IS_TEMP } from '../state/PhaseState';
 
 /** Four-point twinkle, drawn around the origin so it can be placed by transform. */
@@ -180,12 +179,31 @@ function FiftyPercentArtTemp() {
  * LinkPromoBanner instead of the shared markup when IS_TEMP && home; the
  * wallet keeps the violet Temp banner and Phase 1/2 keep the shared card.
  */
+/** Vuesax-linear card at 16px in the banner icons' duotone (ink outline,
+    bravo-500 stripe + digits) — the 16px card asset is baked white-only, so
+    the middle bullet draws its own to match the shop/flash duotones. */
+function CardDuoIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
+      <g strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path
+          className="stroke-ink"
+          d="M4.29333 2.33664H11.7C14.0733 2.33664 14.6667 2.92331 14.6667 5.26331V10.7366C14.6667 13.0766 14.0733 13.6633 11.7067 13.6633H4.29333C1.92667 13.67 1.33333 13.0833 1.33333 10.7433V5.26331C1.33333 2.92331 1.92667 2.33664 4.29333 2.33664Z"
+        />
+        <path className="stroke-bravo-500" d="M1.33333 5.66997H14.6667" />
+        <path className="stroke-bravo-500" d="M4 11.0033H5.33333M7 11.0033H9.66667" />
+      </g>
+    </svg>
+  );
+}
+
 function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
-  const rows: { text: string; icon: string }[] = [
-    { text: 'كاش باك عند أكثر من 500 متجر', icon: iconShop16 },
+  // the drawn duotone assets where they exist (ink + bravo strokes baked in)
+  const rows: { text: string; icon: ReactNode }[] = [
+    { text: 'كاش باك عند أكثر من 500 متجر', icon: <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconShop16} /> },
     // plain hyphen: FF Shamel has no em-dash glyph (it renders as a blank)
-    { text: 'ادفع ببطاقتك البنكية المعتادة عند المتاجر المشاركة - بدون أي خطوات أو إجراءات إضافية', icon: iconCard16 },
-    { text: 'وخذ كاش باك إضافي يرجع لمحفظة ولاء بلس لحظتها!', icon: iconFlash16 },
+    { text: 'ادفع ببطاقتك البنكية المعتادة عند المتاجر المشاركة - بدون أي خطوات أو إجراءات إضافية', icon: <CardDuoIcon /> },
+    { text: 'وخذ كاش باك إضافي يرجع لمحفظة ولاء بلس لحظتها!', icon: <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconFlash16} /> },
   ];
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
@@ -204,9 +222,7 @@ function TempHomePromoBanner({ onLink }: { onLink: () => void }) {
               <p className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="rtl">
                 {text}
               </p>
-              <div className="mt-px shrink-0">
-                <MaskGlyph src={icon} size={16} className="bg-bravo-500" />
-              </div>
+              <div className="relative mt-px size-4 shrink-0">{icon}</div>
             </div>
           ))}
         </div>
