@@ -24,15 +24,14 @@ function Sparkle({ x, y, scale, className }: { x: number; y: number; scale: numb
  * Poppins and every colour stays a theme token via Tailwind's fill/stroke
  * utilities; the tilted card behind keeps a nod to the art it replaces.
  */
-function FiftyPercentArt({ clear = false }: { clear?: boolean }) {
-  // Temp (`clear`): the reviewer's first bullet is longer («… عند أكثر من 500
-  // متجر» starts ~135px in), so the «%», its sparkle and the orbit's right
-  // arc are pulled left/down out of that band — nothing paints past x≈130
-  // where the copy runs. Phase 2 keeps the drawn composition byte-for-byte.
-  const halo = clear ? 74 : 77;
-  const orbit = clear ? { cx: 70, r: 69 } : { cx: 77, r: 76 };
-  const pct = clear ? { x: 131, y: 88 } : { x: 130, y: 76 };
-  const twinkle = clear ? { x: 120, y: 22 } : { x: 140, y: 34 };
+function FiftyPercentArt() {
+  // Temp no longer renders this composition (both hosts use
+  // FiftyPercentArtTemp), so the old Temp-only `clear` recomposition is gone;
+  // these are the Phase-1/2 values, byte-for-byte.
+  const halo = 77;
+  const orbit = { cx: 77, r: 76 };
+  const pct = { x: 130, y: 76 };
+  const twinkle = { x: 140, y: 34 };
   return (
     <svg
       viewBox="0 0 160 164"
@@ -114,8 +113,8 @@ export function BankPlusIcon() {
   );
 }
 
-/** «50%» art of the Temp Home banner (attached design, reverted to the
-    banner's violet scheme per user direction): gradient
+/** «50%» art of the Temp banners — Home and (per user direction) the
+    Points-Wallet host too (attached design, violet scheme): gradient
     numerals, a tilted «حتى» badge at their top right, gold coins bottom-left,
     sparkles over a soft mint blob. Inline so the numerals render in Poppins
     and every colour stays a theme token (gradient stops via CSS vars). */
@@ -270,10 +269,19 @@ export default function LinkPromoBanner({
   if (IS_TEMP && !wallet) return <TempHomePromoBanner onLink={onLink} />;
   return (
     <div className="relative flex w-full shrink-0 flex-col items-end gap-4 overflow-clip rounded-2xl bg-bravo-50 p-4">
-      {/* art first, so it paints behind the copy and the CTA */}
-      <div className="pointer-events-none absolute left-0 top-[30px] h-[164px] w-[160px]">
-        <FiftyPercentArt clear={IS_TEMP} />
-      </div>
+      {/* art first, so it paints behind the copy and the CTA — Temp (the
+          wallet; Temp Home early-returns above) carries the same artwork as
+          the Temp Home banner, in the same 124px slot so it stays clear of
+          the copy, which starts ~135px in */}
+      {IS_TEMP ? (
+        <div className="pointer-events-none absolute left-0 top-[38px] h-[130px] w-[124px]">
+          <FiftyPercentArtTemp />
+        </div>
+      ) : (
+        <div className="pointer-events-none absolute left-0 top-[30px] h-[164px] w-[160px]">
+          <FiftyPercentArt />
+        </div>
+      )}
       <div className="flex w-full shrink-0 flex-col items-end gap-5">
         <div className="flex w-full shrink-0 flex-col items-end">
           <div className="flex shrink-0 items-center">
