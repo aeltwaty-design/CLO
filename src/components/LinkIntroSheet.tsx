@@ -371,17 +371,9 @@ function TempIntroBody() {
 
       {/* كيف يشتغل؟ — 3 steps, dotted separators, numbered badges */}
       <div className="w-full shrink-0 rounded-2xl bg-white">
-        <div className="flex w-full items-center justify-center gap-1.5">
-          <svg viewBox="0 0 16 16" fill="none" className="size-4" aria-hidden>
-            <g className="stroke-ink" strokeWidth="1.3" fill="none" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="8" cy="8" r="2.2" />
-              <path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M12.4 3.6L11 5M5 11l-1.4 1.4" />
-            </g>
-          </svg>
-          <p className="text-center text-[15px] font-bold leading-[1.5] text-ink" dir="auto">
-            كيف يشتغل؟
-          </p>
-        </div>
+        <p className="w-full text-center text-[15px] font-bold leading-[1.5] text-ink" dir="auto">
+          كيف يشتغل؟
+        </p>
         <div className="mt-3 flex w-full flex-row-reverse items-stretch justify-between">
           {TEMP_STEPS.map((s, i) => (
             <div key={s.n} className="contents">
