@@ -87,11 +87,12 @@ const afterGrid: CardData[] = [
 /** Temp market promo (user-attached design, 2026-08-19) — cashback tab
     before linking: ink «ادفع مثل كل مرة..» over a green «وخد حتى [X]% كاش
     باك», an explainer, the violet-card + coins + bag illustration on the
-    left, and a green pill CTA «ابدأ تستفيد» that starts the linking flow.
+    left, and a pill CTA «ابدأ تستفيد» that starts the linking flow —
+    reverted to the banner's violet scheme per follow-up direction.
     The [X]% placeholder stays in the app's bracket style. */
 function TempMarketPromo({ onStart }: { onStart: () => void }) {
   return (
-    <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-brand-50 p-3" data-testid="market-promo-temp">
+    <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3" data-testid="market-promo-temp">
       <div className="flex w-full shrink-0 items-center justify-between gap-2">
         <div className="pointer-events-none relative h-[104px] w-[104px] shrink-0">
           <svg viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
@@ -125,9 +126,9 @@ function TempMarketPromo({ onStart }: { onStart: () => void }) {
             ادفع مثل كل مرة..
           </p>
           <p className="w-full whitespace-nowrap text-right text-[15px] font-bold leading-[1.5]" dir="rtl">
-            <span className="text-brand-500">{'وخد حتى '}</span>
-            <span className="font-en text-brand-500">[X]%</span>
-            <span className="text-brand-500">{' كاش باك'}</span>
+            <span className="text-bravo-500">{'وخد حتى '}</span>
+            <span className="font-en text-bravo-500">[X]%</span>
+            <span className="text-bravo-500">{' كاش باك'}</span>
           </p>
           <p className="w-full text-right text-xs font-normal leading-[1.6] text-ink-secondary" dir="rtl">
             استخدم بطاقتك المعتادة عند المتاجر المشاركة. ويرجع لك كاش باك إضافي لمحفظة ولاء بلس لحظتها.
@@ -137,7 +138,7 @@ function TempMarketPromo({ onStart }: { onStart: () => void }) {
       <button
         type="button"
         onClick={onStart}
-        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-brand-400 px-4"
+        className="flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-full bg-bravo-500 px-4"
       >
         <svg viewBox="0 0 16 16" fill="none" className="size-4 shrink-0" aria-hidden>
           <path d="M13.5 8H3M6.5 4.5L3 8l3.5 3.5" className="stroke-white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
