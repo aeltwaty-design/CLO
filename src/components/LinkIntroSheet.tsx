@@ -310,11 +310,10 @@ function TempStepIcon({ kind }: { kind: 'card' | 'shop' | 'wallet' }) {
   );
 }
 
-/** Body of the Temp intro sheet — the attached design's six blocks; the
-    parent sheet supplies the chrome (backdrop, grabber, X) and the scroll
-    container. Old stepper/chips/terms don't exist in this design. */
-function TempIntroBody({ onCta }: { onCta: () => void }) {
-  const [slide, setSlide] = useState(0);
+/** Body of the Temp intro sheet — the attached design's blocks; the parent
+    sheet supplies the chrome (backdrop, grabber, X), the scroll container
+    and the pinned CTA. Old stepper/chips/terms don't exist in this design. */
+function TempIntroBody() {
   return (
     <>
       {/* hero — text right, illustration left */}
@@ -344,20 +343,11 @@ function TempIntroBody({ onCta }: { onCta: () => void }) {
       <p className="w-full shrink-0 text-center text-[15px] font-bold leading-[1.5] text-ink" dir="auto">
         أسهل كاش باك يجيك
       </p>
-      <div className="w-full shrink-0">
-        <div
-          dir="rtl"
-          className="scrollbar-none flex w-full snap-x snap-mandatory gap-2 overflow-x-auto pb-1"
-          data-testid="intro-benefits"
-          onScroll={(e) => {
-            const el = e.currentTarget;
-            setSlide(Math.max(0, Math.min(TEMP_BENEFITS.length - 1, Math.round(Math.abs(el.scrollLeft) / 176))));
-          }}
-        >
+      <div dir="rtl" className="grid w-full shrink-0 grid-cols-2 gap-2" data-testid="intro-benefits">
           {TEMP_BENEFITS.map((c) => (
             <div
               key={c.title}
-              className={`flex w-[168px] shrink-0 snap-start flex-col items-center gap-2 rounded-2xl p-3 ${
+              className={`flex flex-col items-center gap-2 rounded-2xl p-3 ${
                 c.warm ? 'bg-warning-50' : 'bg-brand-50'
               }`}
             >
@@ -380,17 +370,6 @@ function TempIntroBody({ onCta }: { onCta: () => void }) {
               )}
             </div>
           ))}
-        </div>
-        <div dir="rtl" className="mt-2 flex w-full items-center justify-center gap-1.5" aria-hidden>
-          {TEMP_BENEFITS.map((c, i) => (
-            <div
-              key={c.title}
-              className={`rounded-full transition-all duration-200 ${
-                i === slide ? 'h-1.5 w-4 bg-brand-400' : 'size-1.5 bg-line'
-              }`}
-            />
-          ))}
-        </div>
       </div>
 
       {/* كيف يشتغل؟ — 3 steps, dotted separators, numbered badges */}
@@ -441,19 +420,6 @@ function TempIntroBody({ onCta }: { onCta: () => void }) {
         </div>
       </div>
 
-      {/* CTA — arrow at the reading end (physically leftmost = first in DOM) */}
-      <button
-        type="button"
-        onClick={onCta}
-        className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-3"
-      >
-        <svg viewBox="0 0 16 16" fill="none" className="size-4 shrink-0" aria-hidden>
-          <path d="M13.5 8H3M6.5 4.5L3 8l3.5 3.5" className="stroke-white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
-          أضف بطاقتك المعتادة الآن
-        </p>
-      </button>
     </>
   );
 }
@@ -533,9 +499,14 @@ export default function LinkIntroSheet({
         {IS_TEMP ? (
           // Temp: the redesigned content (attached design) inside a scroll
           // area, so the tall sheet stays within the frame
-          <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-4 overflow-y-auto">
-            <TempIntroBody
-              onCta={() => {
+          <>
+            <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-4 overflow-y-auto">
+              <TempIntroBody />
+            </div>
+            {/* CTA pinned below the scroll area — always visible */}
+            <button
+              type="button"
+              onClick={() => {
                 if (onStart) {
                   onStart();
                   return;
@@ -543,8 +514,16 @@ export default function LinkIntroSheet({
                 onClose();
                 navigate('/cashback/add-card');
               }}
-            />
-          </div>
+              className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-brand-400 px-4 py-3"
+            >
+              <svg viewBox="0 0 16 16" fill="none" className="size-4 shrink-0" aria-hidden>
+                <path d="M13.5 8H3M6.5 4.5L3 8l3.5 3.5" className="stroke-white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+                أضف بطاقتك المعتادة الآن
+              </p>
+            </button>
+          </>
         ) : (
           <>
         {/* 💳 Mint hero — compact echo of the full-screen intro's hero */}
