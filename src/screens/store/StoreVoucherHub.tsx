@@ -7,6 +7,7 @@ import { useAppState } from '../../state/AppState';
 import { useVoucher } from '../../state/VoucherState';
 import PurchaseVoucherSheet from '../../components/PurchaseVoucherSheet';
 import LinkIntroSheet, { useLinkIntroGate } from '../../components/LinkIntroSheet';
+import CashbackOfferPromo from '../../components/CashbackOfferPromo';
 import { LOGOS, VoucherTile, CircleButton, ChevronLeftMini } from './StoreVoucherDetails';
 import { SimilarStoreCard } from './StoreOffersBefore';
 import iconSignal from '../../assets/figma/98a449519d2cb6b8478d85d07db09bff5760c428.svg';
@@ -17,9 +18,6 @@ import batteryFill from '../../assets/figma/043aeae53215903321ce9d08058402508a4b
 import iconExport from '../../assets/figma/42fc667f1604268ed3acfe8ba20382facf76c168.svg';
 import iconHeart from '../../assets/figma/aff47a8629f50f4bf7c3cac784df0512d05b0a9d.svg';
 import iconArrowRight from '../../assets/figma/66f0c85afe06c3c9373ce03f89fdb4a4ebdee5ee.svg';
-import iconCards from '../../assets/figma/7829263638c55bcb9dddbbe8eec00ec0e4075ca2.svg';
-import iconCardSmall from '../../assets/figma/2a02a76700bfa721a2d4c7abb3f26abfd1e840c9.svg';
-import iconArrowLeft from '../../assets/figma/b48fe1cd7576b56f97cc1cf5e90b0ed15aaa67fb.svg';
 import iconTicketGreen from '../../assets/figma/cab88cb9dbbb1af4fb3b163b08c9cbd0d72ec096.svg';
 import iconDiscountShape from '../../assets/figma/3e588dba78a4fc8affe5c6ad4e81e953e499bed4.svg';
 import inkBar from '../../assets/figma/bab1ce16d7a8ee274f4360fff6cc3b8442c1eb17.svg';
@@ -128,91 +126,11 @@ export default function StoreVoucherHub() {
             </div>
 
             <div className="flex w-full flex-col items-start gap-2.5">
-              {/* Bravo promo — after linking: the +offers page's «استخدم بطاقتك واربح
-                  10% كاش باك» card with «التفاصيل» only (user direction: copied
-                  from /store/ikea after linking onto every vouchers store) */}
-              {cardLinked && (
-                <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3" data-testid="hub-promo-linked">
-                  <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
-                    <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
-                      <p className="shrink-0 whitespace-nowrap text-[0px] font-medium leading-[0] text-ink" dir="auto">
-                        <span className="text-[14px] leading-[1.5]">{'استخدم بطاقتك واربح '}</span>
-                        <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">10%</span>
-                        <span className="text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">{' '}</span>
-                        <span className="text-[14px] leading-[1.5] text-ink">كاش باك</span>
-                      </p>
-                      <p className="w-[min-content] min-w-full shrink-0 text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                        ادفع ببطاقتك واربح الكاش باك مع كل عملية شراء تقوم بها
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
-                      <div className="relative size-5 shrink-0">
-                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex w-full shrink-0 items-center justify-center gap-3">
-                    <button
-                      type="button"
-                      className="flex h-[30px] min-w-px flex-[1_0_0] items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-white px-2 py-1.5"
-                    >
-                      <div className="relative size-4 shrink-0">
-                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconArrowLeft} />
-                      </div>
-                      <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-                        التفاصيل
-                      </p>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Add-card promo — before linking only (the drawn «Input with label» card) */}
-              {!cardLinked && (
-                <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3" data-testid="hub-promo">
-                  <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
-                    <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5">
-                      <p className="whitespace-nowrap text-[0px] leading-none text-ink" dir="rtl">
-                        <span className="text-[14px] font-medium leading-[1.5]">{'أضف بطاقتك واربح '}</span>
-                        <span className="font-en text-[14px] font-bold not-italic leading-[1.5] text-bravo-500">10%</span>
-                        <span className="text-[14px] font-medium leading-[1.5]">{' كاش باك'}</span>
-                      </p>
-                      <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
-                        ادفع ببطاقتك واربح الكاش باك مع كل عملية شراء تقوم بها
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-full bg-bravo-500 p-2 shadow-xs">
-                      <div className="relative size-5 shrink-0">
-                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCards} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex w-full shrink-0 items-center justify-center gap-3">
-                    <button
-                      type="button"
-                      onClick={startLinking}
-                      data-testid="hub-add-card"
-                      className="flex h-[30px] min-w-px flex-[1_0_0] cursor-pointer items-center justify-center gap-1 overflow-clip rounded-lg bg-brand-400 px-2 py-1.5"
-                    >
-                      <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink-inverse" dir="auto">
-                        أضف بطاقتك
-                      </p>
-                      <div className="relative size-4 shrink-0">
-                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconCardSmall} />
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={startLinking}
-                      className="flex h-[30px] min-w-px flex-[1_0_0] cursor-pointer items-center justify-center gap-1 overflow-clip rounded-lg border border-solid border-line bg-white px-2 py-1.5"
-                    >
-                      <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink" dir="auto">
-                        التفاصيل
-                      </p>
-                    </button>
-                  </div>
-                </div>
-              )}
+              {/* Store promo — the shared Temp card (attached design,
+                  2026-08-19) in both link states; before linking «شوف كيف»
+                  starts the linking flow */}
+              {cardLinked && <CashbackOfferPromo testid="hub-promo-linked" />}
+              {!cardLinked && <CashbackOfferPromo testid="hub-promo" onHow={startLinking} />}
 
               {/* 🗂️ القسائم | العروض — full-bleed tabs, القسائم selected */}
               <div className="-mx-4 flex h-[45px] w-[375px] items-end justify-between border-b border-solid border-line bg-surface" role="tablist">

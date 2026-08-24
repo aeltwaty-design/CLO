@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { StoreBrand } from '../../data/storeBrands';
+import { IS_TEMP } from '../../state/PhaseState';
+import CashbackOfferPromo from '../../components/CashbackOfferPromo';
 import chevronStroke from '../../assets/figma/799e69f6bf3b072fd575e5ef3e7a3f09fc624b98.svg';
 import heroPhoto from '../../assets/figma/27cde6821f1952fa7483f220578eb04c40cae482.png';
 import cardBackdrop from '../../assets/figma/58e3869470fd0495474bbabbcb93a479dbba9ed3.png';
@@ -327,7 +329,11 @@ export default function StoreOffersBefore({
                 </div>
               </div>
 
-              {/* Bravo promo banner — add-card CTA + details */}
+              {/* Bravo promo banner — add-card CTA + details; Temp renders
+                  the shared attached-design card instead */}
+              {IS_TEMP ? (
+                <CashbackOfferPromo onHow={() => (onLink ? onLink() : navigate('/cashback/intro'))} />
+              ) : (
               <div className="flex w-full shrink-0 flex-col items-end gap-3 overflow-clip rounded-2xl bg-bravo-50 p-3">
                 <div className="flex w-full shrink-0 items-center justify-end gap-2.5">
                   <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-1.5 text-right">
@@ -370,6 +376,7 @@ export default function StoreOffersBefore({
                   </button>
                 </div>
               </div>
+              )}
 
               {/* العروض المتاحة */}
               <div className="flex w-full shrink-0 flex-col items-end gap-5">
