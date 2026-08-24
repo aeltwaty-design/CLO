@@ -147,6 +147,42 @@ function RemoveCardSheet({ open, onClose, onRemove }: { open: boolean; onClose: 
         data-testid="remove-card-sheet"
       >
         <div className="h-1 w-9 rounded-full bg-line" />
+        {/* the attached illustration: shield + tucked card + alert */}
+        <div className="pointer-events-none relative h-[118px] w-[150px] shrink-0">
+          <svg viewBox="0 0 150 118" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 size-full" aria-hidden>
+            {/* shield */}
+            <path d="M62 8l34 12v24c0 22-14 37.5-34 45C42 81.5 28 66 28 44V20L62 8Z" className="fill-brand-100" />
+            <path d="M62 16l26 9v20c0 17.5-11 30-26 36-15-6-26-18.5-26-36V25l26-9Z" className="fill-brand-400" />
+            <path d="M62 16l26 9v20c0 17.5-11 30-26 36V16Z" className="fill-brand-500" opacity="0.6" />
+            {/* tucked dark card */}
+            <g transform="rotate(-14 78 62)">
+              <rect x="42" y="48" width="74" height="42" rx="6" className="fill-ink" />
+              <rect x="50" y="58" width="13" height="9" rx="2" className="fill-gold-600" />
+              <g className="fill-white" opacity="0.9">
+                <circle cx="52" cy="80" r="1.7" />
+                <circle cx="58" cy="80" r="1.7" />
+                <circle cx="64" cy="80" r="1.7" />
+                <circle cx="70" cy="80" r="1.7" />
+              </g>
+              <text x="90" y="83.5" fontSize="8" className="font-en fill-white" opacity="0.9">
+                1234
+              </text>
+            </g>
+            {/* alert badge */}
+            <circle cx="112" cy="34" r="20" className="fill-danger-400" />
+            <g className="stroke-white" strokeWidth="4" strokeLinecap="round">
+              <path d="M112 24v13" />
+            </g>
+            <circle cx="112" cy="44.5" r="2.4" fill="#fff" />
+            {/* green plus marks + sparkles */}
+            <g className="stroke-brand-400" strokeWidth="2.4" strokeLinecap="round">
+              <path d="M22 12v8M18 16h8" />
+              <path d="M136 66v7M132.5 69.5h7" />
+            </g>
+            <path transform="translate(12 58) scale(0.7)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-brand-400" />
+            <path transform="translate(140 12) scale(0.6)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-brand-400" />
+          </svg>
+        </div>
         <p className="w-full text-center text-lg font-bold leading-[1.5] text-ink" dir="auto">
           متأكد تبغي تشيل البطاقة؟
         </p>
