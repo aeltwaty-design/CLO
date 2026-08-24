@@ -14,6 +14,7 @@ import dotSolid from '../assets/figma/7e65c380a64eaec19c1f1c52a80bb0eb63554bb5.s
 import dotOutline from '../assets/figma/f03d734b6e7962a9e2eb50e6a4ac6fe82d6975cc.svg';
 import sparkleX from '../assets/figma/5fb6b6aa9f0da4e3c65ce176dd4b57f6dda4d039.svg';
 import iconCheckSmall from '../assets/figma/13630e13d14a434e57428d6290c8a96611dffb48.svg';
+import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
 import visaMask from '../assets/figma/8c19cdc6c340655ee715e5c0e021047e5e537124.svg';
 import visaLogo from '../assets/figma/7cde00b8a4c1cec2de1c941b422f78393310b2b5.svg';
 import iconCardGlyph from '../assets/figma/f118aa45e9460e6771ffbe8564d9b17f5ed465b3.svg';
@@ -139,12 +140,14 @@ export default function LinkSuccessScreen() {
             <div className="relative flex w-[min-content] min-w-full shrink-0 flex-col justify-center text-lg font-bold not-italic text-ink">
               <p className="leading-[1.5]" dir="auto">
                 {/* #25 */}
-                {IS_TEMP ? 'تم! الكاش باك مفعّل' : 'تم! بطاقتك جاهزة'}
+                {IS_TEMP ? 'تم! بطاقتك صارت ترجع لك كاش باك' : 'تم! بطاقتك جاهزة'}
               </p>
             </div>
             <p className="w-[303px] shrink-0 text-sm font-normal leading-[1.5] text-ink-secondary" dir="auto">
               {/* #26 */}
-              {IS_TEMP ? 'من الحين.. ادفع مثل كل مرة، والكاش باك يوصلك لحظتها' : 'من الحين.. ادفع مثل كل مرة، والكاش باك يرجع لك'}
+              {IS_TEMP
+                ? 'من الحين استخدم هالبطاقة كالمعتاد عند المتاجر المشاركة، والكاش باك يرجع لمحفظة ولاء بلس لحظتها'
+                : 'من الحين.. ادفع مثل كل مرة، والكاش باك يرجع لك'}
             </p>
           </div>
 
@@ -158,7 +161,7 @@ export default function LinkSuccessScreen() {
                 <div className="flex shrink-0 items-center justify-center gap-1 rounded-2xl bg-brand-400 py-0.5 pl-2 pr-1.5">
                   <p className="shrink-0 whitespace-nowrap text-center text-xs font-normal leading-[1.5] text-ink-inverse" dir="auto">
                     {/* #27 */}
-                    {IS_TEMP ? 'الكاش باك مفعّل' : 'مفعلة'}
+                    {IS_TEMP ? 'ترجع لك كاش باك' : 'مفعلة'}
                   </p>
                   <div className="relative size-3 shrink-0 overflow-clip">
                     <div className="absolute inset-[18.75%_15.62%_18.75%_15.63%]">
@@ -197,6 +200,21 @@ export default function LinkSuccessScreen() {
             </div>
           </div>
 
+          {/* 🛡️ keep-the-card note (attached design, Temp only) */}
+          {IS_TEMP && (
+            <div
+              className="flex w-full shrink-0 items-center justify-end gap-2 px-1 py-1"
+              style={{ animation: 'rise-in 300ms ease-out 580ms both' }}
+            >
+              <p className="text-right text-xs font-normal leading-[1.5] text-ink" dir="auto">
+                خل بطاقتك مضافة عشان يستمر الكاش باك على مشترياتك
+              </p>
+              <div className="relative size-5 shrink-0">
+                <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconShieldTick} />
+              </div>
+            </div>
+          )}
+
           {/* ⏱️ Cashback journey timeline — card → (15 days) → wallet, flowing right→left */}
           <div
             className="flex w-[343px] shrink-0 flex-col rounded-2xl border border-solid border-line bg-white px-4 pb-3 pt-4"
@@ -205,12 +223,28 @@ export default function LinkSuccessScreen() {
           >
             <div className="relative flex w-full flex-row-reverse items-start justify-between">
               <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
-                <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                <div className="relative flex size-9 items-center justify-center rounded-full bg-brand-50">
                   <MaskIcon src={iconCardGlyph} size={18} />
+                  {IS_TEMP && (
+                    <span className="font-en absolute -right-1.5 -top-1.5 flex size-[18px] items-center justify-center rounded-full bg-brand-400 text-[10px] font-bold leading-none text-ink-inverse">
+                      1
+                    </span>
+                  )}
                 </div>
-                <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
-                  ادفع بالبطاقة
-                </p>
+                {IS_TEMP ? (
+                  <>
+                    <p className="w-full text-center text-xs font-bold leading-[1.4] text-ink" dir="auto">
+                      ادفع كالمعتاد
+                    </p>
+                    <p className="-mt-1 w-full text-center text-[10px] font-normal leading-[1.4] text-ink-tertiary" dir="auto">
+                      عند المتاجر المشاركة
+                    </p>
+                  </>
+                ) : (
+                  <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                    ادفع بالبطاقة
+                  </p>
+                )}
               </div>
               {/* forward arrows, card → wallet (RTL forward = leftward): a
                   chase pulse travels right-to-left over chevrons cycling the
@@ -243,12 +277,28 @@ export default function LinkSuccessScreen() {
                 ))}
               </div>
               <div className="flex w-[86px] shrink-0 flex-col items-center gap-1.5">
-                <div className="flex size-9 items-center justify-center rounded-full bg-brand-50">
+                <div className="relative flex size-9 items-center justify-center rounded-full bg-brand-50">
                   <MaskIcon src={iconWalletGlyph} size={18} />
+                  {IS_TEMP && (
+                    <span className="font-en absolute -right-1.5 -top-1.5 flex size-[18px] items-center justify-center rounded-full bg-brand-400 text-[10px] font-bold leading-none text-ink-inverse">
+                      2
+                    </span>
+                  )}
                 </div>
-                <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
-                  الكاش باك في محفظتك
-                </p>
+                {IS_TEMP ? (
+                  <>
+                    <p className="w-full text-center text-xs font-bold leading-[1.4] text-ink" dir="auto">
+                      يرجع لك كاش باك
+                    </p>
+                    <p className="-mt-1 w-full text-center text-[10px] font-normal leading-[1.4] text-ink-tertiary" dir="auto">
+                      في محفظتك
+                    </p>
+                  </>
+                ) : (
+                  <p className="w-full text-center text-[10px] font-medium leading-[1.4] text-ink" dir="auto">
+                    الكاش باك في محفظتك
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -280,7 +330,7 @@ export default function LinkSuccessScreen() {
           >
             <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
               {/* #28 */}
-              {IS_TEMP ? 'شوف كيف تستخدم كاش باكك' : 'روح لمحفظتك'}
+              {IS_TEMP ? 'شوف كيف تستخدم الكاش باك' : 'روح لمحفظتك'}
             </p>
           </button>
         </div>
