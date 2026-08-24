@@ -178,11 +178,6 @@ function RemoveCardSheet({ open, onClose, onRemove }: { open: boolean; onClose: 
             خلي البطاقة
           </p>
         </button>
-        <button type="button" onClick={onClose} className="cursor-pointer py-1">
-          <p className="text-center text-sm font-medium leading-[1.5] text-ink-secondary" dir="auto">
-            إلغاء
-          </p>
-        </button>
       </div>
     </div>
   );
