@@ -65,6 +65,7 @@
   /* status */
   --color-red-500: #d12030;
   --color-danger-50: #fae9ea; /* bg/danger/light */
+  --color-danger-400: #e0442f; /* bg/danger — Temp remove-card CTA */
   --color-warning-300: #ffbe62;
   --color-warning-50: #fff0e6; /* bg/warning/Light + Orange/50 */
 

@@ -4,6 +4,7 @@ import Riyal from '../components/Riyal';
 import LinkIntroSheet, { useLinkIntroGate } from '../components/LinkIntroSheet';
 import RedeemSheet from '../components/RedeemSheet';
 import { IS_TEMP } from '../state/PhaseState';
+import { useAppState } from '../state/AppState';
 import { ActionTile } from './CardsScreen';
 import batteryOutline from '../assets/figma/788edad32bb1dc3a825015b2d5158bcce7bbf0da.svg';
 import batteryCap from '../assets/figma/a7c637c279075077d68a57f58de59394cee4cb79.svg';
@@ -29,6 +30,8 @@ import iconSetting from '../assets/figma/56f665cc37df1dc4bd8183e41b481c8e896e1df
 import iconArrowLeftMini from '../assets/figma/9d26d5f8332ff3f5f0f39a2a066bc6a3e9b9d038.svg';
 import iconChevronLeft from '../assets/figma/ea1e744f0dba38ca037f977b4d23eb336ff91694.svg';
 import iconShieldTick from '../assets/figma/4e3beabd9f625112a6c0d14a542cd1ab55f1d317.svg';
+import iconLock from '../assets/figma/bfb1520ddc4c6ae04b6d2745b97951abb1225429.svg';
+import MaskGlyph from '../components/redeem/MaskGlyph';
 import promoCoinsRight from '../assets/figma/c133d46124697695c166c9121006e44e2859cf63.svg';
 import promoShoppingBag from '../assets/figma/92edbd53e8d39116bfe70874bd8ffe4bd6c915f5.svg';
 import promoRiyal from '../assets/figma/275c5abc488fae59a1077c0ac5c7a4c5ec643087.svg';
@@ -45,9 +48,15 @@ import promoCoinLeft from '../assets/figma/60106800a3373f468a41e5dcae3c98300cd4f
 
 /** البطاقات المضافة — one linked card, no cashback yet (Figma 1:10520). */
 export function CardsEmpty() {
+  const navigate = useNavigate();
+  const { setCardLinked } = useAppState();
   // Phase 1 keeps the direct-to-form behavior (user direction); Phase 2 gates
   // the first tap behind the intro sheet over this screen
   const { introOpen, startLinking, closeIntro } = useLinkIntroGate();
+  // Temp (attached design): «شوف كيف» reuses the intro sheet; «إزالة البطاقة»
+  // opens a confirm sheet whose remove actually unlinks the demo card
+  const [howOpen, setHowOpen] = useState(false);
+  const [removeOpen, setRemoveOpen] = useState(false);
   return (
     <div className="relative h-full overflow-hidden">
       {/* pb = dock block (12 + 41 CTA + 34 indicator) so content can scroll clear */}
@@ -60,13 +69,121 @@ export function CardsEmpty() {
           {/* Content */}
           <div className="flex w-[375px] flex-col items-center gap-3 bg-surface px-4 py-5">
             <AddCardsBanner />
-            <LinkedCardPanel title="البطاقة الرئيسية" logo={<MastercardLogo />} amount="0.00" />
+            <LinkedCardPanel
+              title="البطاقة الرئيسية"
+              logo={<MastercardLogo />}
+              amount="0.00"
+              usageNote={IS_TEMP}
+              removeLabel={IS_TEMP}
+              onRemove={IS_TEMP ? () => setRemoveOpen(true) : undefined}
+            />
+            {IS_TEMP && (
+              <>
+                {/* lock note + «شوف كيف تستخدم الكاش باك» (attached design) */}
+                <div className="flex w-full shrink-0 items-center justify-end gap-2.5 rounded-2xl bg-surface-neutral px-4 py-3">
+                  <p className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.6] text-ink" dir="auto">
+                    خلك تستخدم نفس بطاقتك عشان يستمر الكاش باك على مشترياتك.
+                  </p>
+                  <div className="shrink-0">
+                    <MaskGlyph src={iconLock} size={20} className="bg-ink" />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setHowOpen(true)}
+                  className="flex h-11 w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl border border-solid border-brand-400 bg-surface px-4"
+                >
+                  <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-brand-500" dir="auto">
+                    شوف كيف تستخدم الكاش باك
+                  </p>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       <AddCardDock onAdd={startLinking} />
-      <LinkIntroSheet open={introOpen} onClose={closeIntro} />
+      <LinkIntroSheet
+        open={introOpen || howOpen}
+        onClose={() => {
+          closeIntro();
+          setHowOpen(false);
+        }}
+      />
+      {IS_TEMP && (
+        <RemoveCardSheet
+          open={removeOpen}
+          onClose={() => setRemoveOpen(false)}
+          onRemove={() => {
+            setRemoveOpen(false);
+            setCardLinked(false);
+            navigate('/cards');
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+/** Temp confirm sheet for «إزالة البطاقة» (attached design; no illustration —
+    content only per user direction): warning title, the consequences line,
+    the re-add reassurance, then remove / keep / cancel. */
+function RemoveCardSheet({ open, onClose, onRemove }: { open: boolean; onClose: () => void; onRemove: () => void }) {
+  if (!open) return null;
+  return (
+    <div className="absolute inset-0 z-50">
+      <style>{'@keyframes rm-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes rm-fade{from{opacity:0}to{opacity:1}}'}</style>
+      <button
+        type="button"
+        aria-label="إغلاق"
+        onClick={onClose}
+        className="absolute inset-0 block w-full cursor-pointer bg-black/40"
+        style={{ animation: 'rm-fade 200ms ease-out both' }}
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 rounded-t-2xl bg-white px-4 pb-8 pt-2"
+        style={{ animation: 'rm-rise 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both' }}
+        data-testid="remove-card-sheet"
+      >
+        <div className="h-1 w-9 rounded-full bg-line" />
+        <p className="w-full text-center text-lg font-bold leading-[1.5] text-ink" dir="auto">
+          متأكد تبغي تشيل البطاقة؟
+        </p>
+        <p className="w-[300px] text-center text-sm font-normal leading-[1.6] text-ink-secondary" dir="auto">
+          إذا شلتها، ما راح يرجع لك كاش باك على مشترياتك بهالبطاقة.
+        </p>
+        <div className="flex w-full shrink-0 items-center justify-center rounded-2xl bg-brand-50 px-4 py-3">
+          <p className="text-center text-xs font-medium leading-[1.6] text-brand-800" dir="auto">
+            تقدر تضيفها مرة ثانية بأي وقت.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onRemove}
+          data-testid="confirm-remove-card"
+          className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl bg-danger-400 px-4 py-2.5"
+        >
+          <MaskGlyph src={iconTrash} size={18} className="bg-white" />
+          <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
+            إزالة البطاقة
+          </p>
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 overflow-clip rounded-xl border border-solid border-line bg-surface px-4 py-2.5"
+        >
+          <p className="shrink-0 whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink" dir="auto">
+            خلي البطاقة
+          </p>
+        </button>
+        <button type="button" onClick={onClose} className="cursor-pointer py-1">
+          <p className="text-center text-sm font-medium leading-[1.5] text-ink-secondary" dir="auto">
+            إلغاء
+          </p>
+        </button>
+      </div>
     </div>
   );
 }
@@ -379,11 +496,25 @@ function AddCardsBanner() {
   return (
     <div className="flex w-full shrink-0 items-center justify-end gap-2.5 overflow-clip rounded-2xl bg-brand-50 px-4 py-3">
       <div className="flex min-w-px flex-[1_0_0] flex-col items-end gap-2">
-        <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink" dir="auto">
-          {/* #44 */}
-          {IS_TEMP ? 'فعّل الكاش باك على ' : 'تقدر تضيف حتى '}
-          <span className="font-en">3</span>
-          {' بطاقات ائتمانية'}
+        <p className="w-[min-content] min-w-full text-right text-xs font-normal leading-[1.5] text-ink" dir="rtl">
+          {IS_TEMP ? (
+            // attached wording — the cap line reads green
+            <>
+              {'تقدر تخلي الكاش باك يرجع لك'}
+              <br />
+              <span className="font-medium text-brand-500">
+                {'على حتى '}
+                <span className="font-en">3</span>
+                {' بطاقات ائتمانية'}
+              </span>
+            </>
+          ) : (
+            <>
+              {'تقدر تضيف حتى '}
+              <span className="font-en">3</span>
+              {' بطاقات ائتمانية'}
+            </>
+          )}
         </p>
       </div>
       <div className="relative size-6 shrink-0 overflow-clip">
@@ -408,11 +539,19 @@ function LinkedCardPanel({
   titleHidden,
   logo,
   amount,
+  usageNote,
+  removeLabel,
+  onRemove,
 }: {
   title: string;
   titleHidden?: boolean;
   logo: ReactNode;
   amount: string;
+  /** Temp manage screen (attached design): the pay-as-usual note inside the panel */
+  usageNote?: boolean;
+  /** Temp manage screen: the trash button carries the «إزالة البطاقة» label */
+  removeLabel?: boolean;
+  onRemove?: () => void;
 }) {
   return (
     <div className="flex w-full shrink-0 flex-col items-end gap-3 rounded-2xl border border-solid border-line p-4">
@@ -449,12 +588,31 @@ function LinkedCardPanel({
           <img alt="" className="block size-full max-w-none" src={lineDivider} />
         </div>
       </div>
+      {usageNote && (
+        <div className="flex w-full shrink-0 items-center justify-end gap-2.5 rounded-xl bg-brand-50 px-3 py-2.5">
+          <p className="min-w-px flex-[1_0_0] text-right text-xs font-normal leading-[1.6] text-brand-800" dir="auto">
+            استخدم هالبطاقة كالمعتاد عند المتاجر المشاركة، والكاش باك يرجع لك لحظتها.
+          </p>
+          <div className="relative size-6 shrink-0">
+            <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconShieldTick} />
+          </div>
+        </div>
+      )}
       <div className="flex w-full items-center justify-between">
-        <div className="flex shrink-0 items-center justify-center gap-2 overflow-clip rounded-lg border border-solid border-danger-50 bg-danger-50 p-2 shadow-xs">
+        <button
+          type="button"
+          onClick={onRemove}
+          className={`flex shrink-0 ${onRemove ? 'cursor-pointer ' : ''}items-center justify-center gap-2 overflow-clip rounded-lg border border-solid border-danger-50 bg-danger-50 p-2 shadow-xs`}
+        >
           <div className="relative size-5 shrink-0">
             <img alt="" className="absolute inset-0 block size-full max-w-none" src={iconTrash} />
           </div>
-        </div>
+          {removeLabel && (
+            <p className="whitespace-nowrap text-right text-xs font-medium leading-[1.5] text-ink-danger" dir="auto">
+              إزالة البطاقة
+            </p>
+          )}
+        </button>
         <div className="flex shrink-0 flex-col items-end justify-center gap-1">
           <p className="whitespace-nowrap text-right text-xs font-normal leading-[1.5] text-ink-secondary" dir="auto">
             {/* #45 */}
@@ -533,7 +691,7 @@ function AddCardDock({ disabled, onAdd }: { disabled?: boolean; onAdd?: () => vo
           <div className="flex w-full shrink-0 items-center justify-center gap-2 overflow-clip rounded-xl bg-surface-disabled px-4 py-2.5">
             <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-quadrant" dir="auto">
               {/* #46 */}
-              {IS_TEMP ? 'فعّل الكاش باك على بطاقة إضافية' : 'أضف بطاقة جديدة'}
+              {IS_TEMP ? 'خل بطاقة إضافية ترجع لك كاش باك' : 'أضف بطاقة جديدة'}
             </p>
             <div className="relative size-5 shrink-0 overflow-clip">
               <div className="absolute inset-[20%]">
@@ -551,7 +709,7 @@ function AddCardDock({ disabled, onAdd }: { disabled?: boolean; onAdd?: () => vo
           >
             <p className="whitespace-nowrap text-right text-sm font-medium leading-[1.5] text-ink-inverse" dir="auto">
               {/* #46 */}
-              {IS_TEMP ? 'فعّل الكاش باك على بطاقة إضافية' : 'أضف بطاقة جديدة'}
+              {IS_TEMP ? 'خل بطاقة إضافية ترجع لك كاش باك' : 'أضف بطاقة جديدة'}
             </p>
             <div className="relative size-5 shrink-0 overflow-clip">
               <div className="absolute inset-[20%]">
