@@ -125,71 +125,13 @@ export function CardsZero() {
                 Phase 1/2 keep the drawn onboarding card below */}
             {IS_TEMP ? (
               <div
-                className="relative flex w-[343px] shrink-0 flex-col items-end gap-3 overflow-clip rounded-[20px] bg-brand-50 px-4 py-5"
+                className="relative flex w-[343px] shrink-0 flex-col items-center gap-2.5 overflow-clip rounded-[20px] bg-brand-50 px-4 py-5"
                 data-testid="zero-promo-temp"
               >
-                {/* decorative layer — % bubble, coins, wallet + card, stacks, contactless */}
-                <svg viewBox="0 0 343 330" fill="none" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute inset-0 h-[330px] w-full" aria-hidden>
-                  {/* % speech bubble, top-left */}
-                  <g transform="rotate(-8 44 44)">
-                    <rect x="22" y="24" width="46" height="40" rx="14" className="fill-brand-100" />
-                    <path d="M34 62l-4 12 14-8Z" className="fill-brand-100" />
-                    <g className="stroke-white" strokeWidth="3" strokeLinecap="round">
-                      <path d="M35 54l20-20" />
-                    </g>
-                    <circle cx="37" cy="37" r="4" fill="none" strokeWidth="2.6" className="stroke-white" />
-                    <circle cx="53" cy="51" r="4" fill="none" strokeWidth="2.6" className="stroke-white" />
-                  </g>
-                  <path transform="translate(84 16) scale(0.9)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-gold-600" />
-                  <path transform="translate(16 96) scale(0.7)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-brand-400" />
-                  {/* coins, top-right */}
-                  <circle cx="308" cy="42" r="15" className="fill-gold-700" />
-                  <circle cx="306" cy="40" r="14" className="fill-gold-600" />
-                  <circle cx="306" cy="40" r="9" fill="none" strokeWidth="1.8" className="stroke-white" opacity="0.9" />
-                  <circle cx="316" cy="86" r="10" className="fill-gold-600" />
-                  <circle cx="316" cy="86" r="6.4" fill="none" strokeWidth="1.5" className="stroke-white" opacity="0.9" />
-                  {/* wallet + tucked card + dropping coin, left */}
-                  <g>
-                    <g transform="rotate(-14 60 150)">
-                      <rect x="26" y="118" width="64" height="42" rx="6" className="fill-brand-800" />
-                      <rect x="32" y="126" width="12" height="9" rx="2" className="fill-gold-600" />
-                      <g className="stroke-white" strokeWidth="1.4" strokeLinecap="round" fill="none" opacity="0.85">
-                        <path d="M78 126a5 5 0 0 1 0 8" />
-                        <path d="M81.5 123.5a9 9 0 0 1 0 13" />
-                      </g>
-                    </g>
-                    <circle cx="86" cy="162" r="13" className="fill-gold-600" />
-                    <circle cx="86" cy="162" r="8.4" fill="none" strokeWidth="1.7" className="stroke-white" opacity="0.9" />
-                    <rect x="14" y="158" width="104" height="70" rx="12" className="fill-brand-500" />
-                    <rect x="14" y="168" width="104" height="60" rx="12" className="fill-brand-400" />
-                    <rect x="76" y="182" width="42" height="26" rx="8" className="fill-brand-100" />
-                    <circle cx="92" cy="195" r="5.5" className="fill-gold-600" />
-                    <rect x="24" y="176" width="52" height="4" rx="2" fill="#fff" opacity="0.25" />
-                  </g>
-                  {/* contactless squircle, bottom-left */}
-                  <rect x="22" y="236" width="40" height="40" rx="13" className="fill-brand-100" />
-                  <g className="stroke-brand-500" strokeWidth="2.4" strokeLinecap="round" fill="none">
-                    <path d="M36 262a8 8 0 0 0 0-12" />
-                    <path d="M41 266a14 14 0 0 0 0-20" />
-                    <path d="M46 270a20 20 0 0 0 0-28" />
-                  </g>
-                  {/* coin stacks, bottom-right */}
-                  <g>
-                    <ellipse cx="308" cy="272" rx="20" ry="8" className="fill-gold-700" />
-                    <ellipse cx="308" cy="266" rx="20" ry="8" className="fill-gold-600" />
-                    <ellipse cx="308" cy="258" rx="20" ry="8" className="fill-gold-700" />
-                    <ellipse cx="308" cy="252" rx="20" ry="8" className="fill-gold-600" />
-                    <ellipse cx="308" cy="252" rx="12" ry="4.4" fill="#fff" opacity="0.3" />
-                    <ellipse cx="264" cy="278" rx="16" ry="6.5" className="fill-gold-700" />
-                    <ellipse cx="264" cy="273" rx="16" ry="6.5" className="fill-gold-600" />
-                    <ellipse cx="264" cy="273" rx="9.5" ry="3.6" fill="#fff" opacity="0.3" />
-                  </g>
-                </svg>
-
-                <p className="relative w-full text-right text-[17px] font-bold leading-[1.5] text-brand-800" dir="auto">
+                <p className="relative text-center text-[17px] font-bold leading-[1.5] text-brand-800" dir="auto">
                   أسهل كاش باك يجيك
                 </p>
-                <p className="relative w-[208px] text-right text-xs font-normal leading-[1.8] text-ink-secondary" dir="rtl">
+                <p className="relative w-[256px] text-center text-xs font-normal leading-[1.8] text-ink-secondary" dir="rtl">
                   {'استخدم بطاقتك المعتادة أو '}
                   <span className="font-en">Apple Pay</span>
                   {' أو '}
@@ -200,8 +142,8 @@ export function CardsZero() {
                   <span className="font-en">[X]%</span>
                   {' كاش باك يرجع لمحفظة ولاء بلس لحظتها.'}
                 </p>
-                <div className="relative flex w-[230px] items-center justify-end gap-2">
-                  <p className="text-right text-xs font-medium leading-[1.6] text-brand-800" dir="auto">
+                <div className="relative flex w-[280px] items-center justify-center gap-2">
+                  <p className="text-center text-xs font-medium leading-[1.6] text-brand-800" dir="auto">
                     خلك تستخدم نفس بطاقتك عشان يستمر الكاش باك على مشترياتك.
                   </p>
                   <div className="relative size-6 shrink-0">
@@ -212,7 +154,7 @@ export function CardsZero() {
                   type="button"
                   onClick={() => navigate('/market')}
                   data-testid="discover-stores"
-                  className="relative mx-auto flex h-10 w-[190px] shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-xl bg-white px-4"
+                  className="relative flex h-10 w-[190px] shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-clip rounded-xl bg-white px-4"
                 >
                   <svg viewBox="0 0 16 16" fill="none" className="size-4 shrink-0" aria-hidden>
                     <path d="M13.5 8H3M6.5 4.5L3 8l3.5 3.5" className="stroke-brand-800" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -221,6 +163,32 @@ export function CardsZero() {
                     اكتشف المتاجر
                   </p>
                 </button>
+                {/* the drawn decorations of the original card — bag + coins
+                    top-right, coin at the left edge, clear of the centred copy */}
+                <div className="pointer-events-none absolute left-[256.53px] top-[-0.04px] h-[52px] w-[83.474px]">
+                  <div className="absolute left-0 top-0 h-[52px] w-[83.474px]">
+                    <div className="absolute inset-[11.28%_-4.93%_-2.63%_48.03%]">
+                      <img alt="" className="absolute inset-0 block size-full max-w-none" src={promoCoinsRight} />
+                    </div>
+                    <div className="absolute flex inset-[1.33%_57.05%_56.04%_16.39%] items-center justify-center" style={{ containerType: 'size' }}>
+                      <div className="h-[hypot(-23.9734cqw,105.572cqh)] w-[hypot(105.572cqw,23.9734cqh)] flex-none rotate-[12.79deg]">
+                        <div className="relative size-full">
+                          <img alt="" className="absolute inset-0 block size-full max-w-none" src={promoShoppingBag} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute left-[52px] top-[16.42px] flex h-[27.629px] w-[25.423px] items-center justify-center">
+                    <div className="flex-none rotate-[-33.16deg]">
+                      <div className="relative h-[22.965px] w-[15.364px]">
+                        <img alt="" className="absolute inset-0 block size-full max-w-none" src={promoRiyal} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="pointer-events-none absolute left-[5px] top-[118px] h-[17px] w-[34px]">
+                  <img alt="" className="absolute inset-0 block size-full max-w-none" src={promoCoinLeft} />
+                </div>
               </div>
             ) : (
               <div className="relative flex w-[343px] shrink-0 flex-col items-center gap-2.5 overflow-clip rounded-[20px] bg-brand-50 px-4 py-5">
