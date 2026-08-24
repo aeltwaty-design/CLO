@@ -103,11 +103,16 @@ function TempMarketPromo({ onStart }: { onStart: () => void }) {
               <rect x="18" y="26" width="12" height="9" rx="2" className="fill-gold-600" />
               <path d="M62 22l2.2 4.6 4.6 2.2-4.6 2.2-2.2 4.6-2.2-4.6-4.6-2.2 4.6-2.2Z" fill="#fff" opacity="0.5" />
             </g>
-            {/* gold coins */}
-            <circle cx="72" cy="46" r="12" className="fill-gold-600" />
-            <circle cx="72" cy="46" r="8" fill="none" strokeWidth="1.8" className="stroke-white" opacity="0.85" />
-            <circle cx="80" cy="66" r="10" className="fill-gold-600" />
-            <circle cx="80" cy="66" r="6.5" fill="none" strokeWidth="1.6" className="stroke-white" opacity="0.85" />
+            {/* gold coins — the drawn banner's winking smiley coins: darker
+                rim, lighter face, white smile arc */}
+            <circle cx="72" cy="46" r="12" className="fill-gold-700" />
+            <circle cx="72" cy="46" r="10.4" className="fill-gold-600" />
+            <circle cx="72" cy="46" r="7.6" fill="#fff" opacity="0.3" />
+            <path d="M67.5 45.5q4.5 5.2 9 0" className="stroke-white" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+            <circle cx="80" cy="66" r="10" className="fill-gold-700" />
+            <circle cx="80" cy="66" r="8.6" className="fill-gold-600" />
+            <circle cx="80" cy="66" r="6.2" fill="#fff" opacity="0.3" />
+            <path d="M76.4 65.6q3.6 4.2 7.2 0" className="stroke-white" strokeWidth="2.1" strokeLinecap="round" fill="none" />
             {/* sparkles */}
             <path transform="translate(90 20) scale(0.8)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-viola-300" />
             <path transform="translate(8 66) scale(0.7)" d="M0-6C.6-2.2 2.2-.6 6 0 2.2.6.6 2.2 0 6-.6 2.2-2.2.6-6 0-2.2-.6-.6-2.2 0-6Z" className="fill-brand-400" />
